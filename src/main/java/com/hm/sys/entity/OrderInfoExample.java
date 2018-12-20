@@ -475,63 +475,63 @@ public class OrderInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andStausIsNull() {
-            addCriterion("staus is null");
+        public Criteria andOrderStatIdIsNull() {
+            addCriterion("order_stat_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andStausIsNotNull() {
-            addCriterion("staus is not null");
+        public Criteria andOrderStatIdIsNotNull() {
+            addCriterion("order_stat_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStausEqualTo(Integer value) {
-            addCriterion("staus =", value, "staus");
+        public Criteria andOrderStatIdEqualTo(Integer value) {
+            addCriterion("order_stat_id =", value, "orderStatId");
             return (Criteria) this;
         }
 
-        public Criteria andStausNotEqualTo(Integer value) {
-            addCriterion("staus <>", value, "staus");
+        public Criteria andOrderStatIdNotEqualTo(Integer value) {
+            addCriterion("order_stat_id <>", value, "orderStatId");
             return (Criteria) this;
         }
 
-        public Criteria andStausGreaterThan(Integer value) {
-            addCriterion("staus >", value, "staus");
+        public Criteria andOrderStatIdGreaterThan(Integer value) {
+            addCriterion("order_stat_id >", value, "orderStatId");
             return (Criteria) this;
         }
 
-        public Criteria andStausGreaterThanOrEqualTo(Integer value) {
-            addCriterion("staus >=", value, "staus");
+        public Criteria andOrderStatIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("order_stat_id >=", value, "orderStatId");
             return (Criteria) this;
         }
 
-        public Criteria andStausLessThan(Integer value) {
-            addCriterion("staus <", value, "staus");
+        public Criteria andOrderStatIdLessThan(Integer value) {
+            addCriterion("order_stat_id <", value, "orderStatId");
             return (Criteria) this;
         }
 
-        public Criteria andStausLessThanOrEqualTo(Integer value) {
-            addCriterion("staus <=", value, "staus");
+        public Criteria andOrderStatIdLessThanOrEqualTo(Integer value) {
+            addCriterion("order_stat_id <=", value, "orderStatId");
             return (Criteria) this;
         }
 
-        public Criteria andStausIn(List<Integer> values) {
-            addCriterion("staus in", values, "staus");
+        public Criteria andOrderStatIdIn(List<Integer> values) {
+            addCriterion("order_stat_id in", values, "orderStatId");
             return (Criteria) this;
         }
 
-        public Criteria andStausNotIn(List<Integer> values) {
-            addCriterion("staus not in", values, "staus");
+        public Criteria andOrderStatIdNotIn(List<Integer> values) {
+            addCriterion("order_stat_id not in", values, "orderStatId");
             return (Criteria) this;
         }
 
-        public Criteria andStausBetween(Integer value1, Integer value2) {
-            addCriterion("staus between", value1, value2, "staus");
+        public Criteria andOrderStatIdBetween(Integer value1, Integer value2) {
+            addCriterion("order_stat_id between", value1, value2, "orderStatId");
             return (Criteria) this;
         }
 
-        public Criteria andStausNotBetween(Integer value1, Integer value2) {
-            addCriterion("staus not between", value1, value2, "staus");
+        public Criteria andOrderStatIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("order_stat_id not between", value1, value2, "orderStatId");
             return (Criteria) this;
         }
 

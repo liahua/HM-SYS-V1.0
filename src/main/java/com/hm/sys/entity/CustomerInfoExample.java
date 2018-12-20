@@ -585,73 +585,73 @@ public class CustomerInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andOpratorIsNull() {
-            addCriterion("oprator is null");
+        public Criteria andOperatorIsNull() {
+            addCriterion("operator is null");
             return (Criteria) this;
         }
 
-        public Criteria andOpratorIsNotNull() {
-            addCriterion("oprator is not null");
+        public Criteria andOperatorIsNotNull() {
+            addCriterion("operator is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOpratorEqualTo(String value) {
-            addCriterion("oprator =", value, "oprator");
+        public Criteria andOperatorEqualTo(String value) {
+            addCriterion("operator =", value, "operator");
             return (Criteria) this;
         }
 
-        public Criteria andOpratorNotEqualTo(String value) {
-            addCriterion("oprator <>", value, "oprator");
+        public Criteria andOperatorNotEqualTo(String value) {
+            addCriterion("operator <>", value, "operator");
             return (Criteria) this;
         }
 
-        public Criteria andOpratorGreaterThan(String value) {
-            addCriterion("oprator >", value, "oprator");
+        public Criteria andOperatorGreaterThan(String value) {
+            addCriterion("operator >", value, "operator");
             return (Criteria) this;
         }
 
-        public Criteria andOpratorGreaterThanOrEqualTo(String value) {
-            addCriterion("oprator >=", value, "oprator");
+        public Criteria andOperatorGreaterThanOrEqualTo(String value) {
+            addCriterion("operator >=", value, "operator");
             return (Criteria) this;
         }
 
-        public Criteria andOpratorLessThan(String value) {
-            addCriterion("oprator <", value, "oprator");
+        public Criteria andOperatorLessThan(String value) {
+            addCriterion("operator <", value, "operator");
             return (Criteria) this;
         }
 
-        public Criteria andOpratorLessThanOrEqualTo(String value) {
-            addCriterion("oprator <=", value, "oprator");
+        public Criteria andOperatorLessThanOrEqualTo(String value) {
+            addCriterion("operator <=", value, "operator");
             return (Criteria) this;
         }
 
-        public Criteria andOpratorLike(String value) {
-            addCriterion("oprator like", value, "oprator");
+        public Criteria andOperatorLike(String value) {
+            addCriterion("operator like", value, "operator");
             return (Criteria) this;
         }
 
-        public Criteria andOpratorNotLike(String value) {
-            addCriterion("oprator not like", value, "oprator");
+        public Criteria andOperatorNotLike(String value) {
+            addCriterion("operator not like", value, "operator");
             return (Criteria) this;
         }
 
-        public Criteria andOpratorIn(List<String> values) {
-            addCriterion("oprator in", values, "oprator");
+        public Criteria andOperatorIn(List<String> values) {
+            addCriterion("operator in", values, "operator");
             return (Criteria) this;
         }
 
-        public Criteria andOpratorNotIn(List<String> values) {
-            addCriterion("oprator not in", values, "oprator");
+        public Criteria andOperatorNotIn(List<String> values) {
+            addCriterion("operator not in", values, "operator");
             return (Criteria) this;
         }
 
-        public Criteria andOpratorBetween(String value1, String value2) {
-            addCriterion("oprator between", value1, value2, "oprator");
+        public Criteria andOperatorBetween(String value1, String value2) {
+            addCriterion("operator between", value1, value2, "operator");
             return (Criteria) this;
         }
 
-        public Criteria andOpratorNotBetween(String value1, String value2) {
-            addCriterion("oprator not between", value1, value2, "oprator");
+        public Criteria andOperatorNotBetween(String value1, String value2) {
+            addCriterion("operator not between", value1, value2, "operator");
             return (Criteria) this;
         }
 

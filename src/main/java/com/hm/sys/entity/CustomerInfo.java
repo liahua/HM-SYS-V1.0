@@ -17,7 +17,7 @@ public class CustomerInfo {
 
     private String cardNum;
 
-    private String oprator;
+    private String operator;
 
     private Date createdtime;
 
@@ -79,12 +79,12 @@ public class CustomerInfo {
         this.cardNum = cardNum == null ? null : cardNum.trim();
     }
 
-    public String getOprator() {
-        return oprator;
+    public String getOperator() {
+        return operator;
     }
 
-    public void setOprator(String oprator) {
-        this.oprator = oprator == null ? null : oprator.trim();
+    public void setOperator(String operator) {
+        this.operator = operator == null ? null : operator.trim();
     }
 
     public Date getCreatedtime() {

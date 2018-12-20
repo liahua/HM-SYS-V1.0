@@ -9,7 +9,7 @@
     <result column="telephone" property="telephone" jdbcType="VARCHAR" />
     <result column="card_type" property="cardType" jdbcType="VARCHAR" />
     <result column="card_num" property="cardNum" jdbcType="VARCHAR" />
-    <result column="oprator" property="oprator" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
     <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
     <result column="modifiedTime" property="modifiedtime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -72,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, customer_name, gender, country, telephone, card_type, card_num, oprator, createdTime, 
+    id, customer_name, gender, country, telephone, card_type, card_num, operator, createdTime, 
     modifiedTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.CustomerInfoExample" >
@@ -108,11 +108,11 @@
   <insert id="insert" parameterType="com.hm.sys.entity.CustomerInfo" >
     insert into customer_info (id, customer_name, gender, 
       country, telephone, card_type, 
-      card_num, oprator, createdTime, 
+      card_num, operator, createdTime, 
       modifiedTime)
     values (#{id,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, 
       #{country,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
-      #{cardNum,jdbcType=VARCHAR}, #{oprator,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, 
+      #{cardNum,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, 
       #{modifiedtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hm.sys.entity.CustomerInfo" >
@@ -139,8 +139,8 @@
       <if test="cardNum != null" >
         card_num,
       </if>
-      <if test="oprator != null" >
-        oprator,
+      <if test="operator != null" >
+        operator,
       </if>
       <if test="createdtime != null" >
         createdTime,
@@ -171,8 +171,8 @@
       <if test="cardNum != null" >
         #{cardNum,jdbcType=VARCHAR},
       </if>
-      <if test="oprator != null" >
-        #{oprator,jdbcType=VARCHAR},
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
       </if>
       <if test="createdtime != null" >
         #{createdtime,jdbcType=TIMESTAMP},
@@ -212,8 +212,8 @@
       <if test="record.cardNum != null" >
         card_num = #{record.cardNum,jdbcType=VARCHAR},
       </if>
-      <if test="record.oprator != null" >
-        oprator = #{record.oprator,jdbcType=VARCHAR},
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=VARCHAR},
       </if>
       <if test="record.createdtime != null" >
         createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
@@ -235,7 +235,7 @@
       telephone = #{record.telephone,jdbcType=VARCHAR},
       card_type = #{record.cardType,jdbcType=VARCHAR},
       card_num = #{record.cardNum,jdbcType=VARCHAR},
-      oprator = #{record.oprator,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
       createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
       modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -263,8 +263,8 @@
       <if test="cardNum != null" >
         card_num = #{cardNum,jdbcType=VARCHAR},
       </if>
-      <if test="oprator != null" >
-        oprator = #{oprator,jdbcType=VARCHAR},
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
       </if>
       <if test="createdtime != null" >
         createdTime = #{createdtime,jdbcType=TIMESTAMP},
@@ -283,7 +283,7 @@
       telephone = #{telephone,jdbcType=VARCHAR},
       card_type = #{cardType,jdbcType=VARCHAR},
       card_num = #{cardNum,jdbcType=VARCHAR},
-      oprator = #{oprator,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
       createdTime = #{createdtime,jdbcType=TIMESTAMP},
       modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

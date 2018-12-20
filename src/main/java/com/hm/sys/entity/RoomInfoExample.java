@@ -424,63 +424,63 @@ public class RoomInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatuIdIsNull() {
-            addCriterion("statu_id is null");
+        public Criteria andStatIdIsNull() {
+            addCriterion("stat_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andStatuIdIsNotNull() {
-            addCriterion("statu_id is not null");
+        public Criteria andStatIdIsNotNull() {
+            addCriterion("stat_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStatuIdEqualTo(Integer value) {
-            addCriterion("statu_id =", value, "statuId");
+        public Criteria andStatIdEqualTo(Integer value) {
+            addCriterion("stat_id =", value, "statId");
             return (Criteria) this;
         }
 
-        public Criteria andStatuIdNotEqualTo(Integer value) {
-            addCriterion("statu_id <>", value, "statuId");
+        public Criteria andStatIdNotEqualTo(Integer value) {
+            addCriterion("stat_id <>", value, "statId");
             return (Criteria) this;
         }
 
-        public Criteria andStatuIdGreaterThan(Integer value) {
-            addCriterion("statu_id >", value, "statuId");
+        public Criteria andStatIdGreaterThan(Integer value) {
+            addCriterion("stat_id >", value, "statId");
             return (Criteria) this;
         }
 
-        public Criteria andStatuIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("statu_id >=", value, "statuId");
+        public Criteria andStatIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("stat_id >=", value, "statId");
             return (Criteria) this;
         }
 
-        public Criteria andStatuIdLessThan(Integer value) {
-            addCriterion("statu_id <", value, "statuId");
+        public Criteria andStatIdLessThan(Integer value) {
+            addCriterion("stat_id <", value, "statId");
             return (Criteria) this;
         }
 
-        public Criteria andStatuIdLessThanOrEqualTo(Integer value) {
-            addCriterion("statu_id <=", value, "statuId");
+        public Criteria andStatIdLessThanOrEqualTo(Integer value) {
+            addCriterion("stat_id <=", value, "statId");
             return (Criteria) this;
         }
 
-        public Criteria andStatuIdIn(List<Integer> values) {
-            addCriterion("statu_id in", values, "statuId");
+        public Criteria andStatIdIn(List<Integer> values) {
+            addCriterion("stat_id in", values, "statId");
             return (Criteria) this;
         }
 
-        public Criteria andStatuIdNotIn(List<Integer> values) {
-            addCriterion("statu_id not in", values, "statuId");
+        public Criteria andStatIdNotIn(List<Integer> values) {
+            addCriterion("stat_id not in", values, "statId");
             return (Criteria) this;
         }
 
-        public Criteria andStatuIdBetween(Integer value1, Integer value2) {
-            addCriterion("statu_id between", value1, value2, "statuId");
+        public Criteria andStatIdBetween(Integer value1, Integer value2) {
+            addCriterion("stat_id between", value1, value2, "statId");
             return (Criteria) this;
         }
 
-        public Criteria andStatuIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("statu_id not between", value1, value2, "statuId");
+        public Criteria andStatIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("stat_id not between", value1, value2, "statId");
             return (Criteria) this;
         }
     }

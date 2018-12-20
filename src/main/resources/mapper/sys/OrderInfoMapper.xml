@@ -8,7 +8,7 @@
     <result column="checkin_date" property="checkinDate" jdbcType="TIMESTAMP" />
     <result column="checkout_date" property="checkoutDate" jdbcType="TIMESTAMP" />
     <result column="customer_type" property="customerType" jdbcType="VARCHAR" />
-    <result column="staus" property="staus" jdbcType="INTEGER" />
+    <result column="order_stat_id" property="orderStatId" jdbcType="INTEGER" />
     <result column="order_money" property="orderMoney" jdbcType="REAL" />
     <result column="operator" property="operator" jdbcType="VARCHAR" />
     <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
@@ -73,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, room_id, customer_id, checkin_date, checkout_date, customer_type, staus, order_money, 
-    operator, createdTime, modifiedTime
+    id, room_id, customer_id, checkin_date, checkout_date, customer_type, order_stat_id, 
+    order_money, operator, createdTime, modifiedTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.OrderInfoExample" >
     select
@@ -109,11 +109,11 @@
   <insert id="insert" parameterType="com.hm.sys.entity.OrderInfo" >
     insert into order_info (id, room_id, customer_id, 
       checkin_date, checkout_date, customer_type, 
-      staus, order_money, operator, 
+      order_stat_id, order_money, operator, 
       createdTime, modifiedTime)
     values (#{id,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, 
       #{checkinDate,jdbcType=TIMESTAMP}, #{checkoutDate,jdbcType=TIMESTAMP}, #{customerType,jdbcType=VARCHAR}, 
-      #{staus,jdbcType=INTEGER}, #{orderMoney,jdbcType=REAL}, #{operator,jdbcType=VARCHAR}, 
+      #{orderStatId,jdbcType=INTEGER}, #{orderMoney,jdbcType=REAL}, #{operator,jdbcType=VARCHAR}, 
       #{createdtime,jdbcType=TIMESTAMP}, #{modifiedtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hm.sys.entity.OrderInfo" >
@@ -137,8 +137,8 @@
       <if test="customerType != null" >
         customer_type,
       </if>
-      <if test="staus != null" >
-        staus,
+      <if test="orderStatId != null" >
+        order_stat_id,
       </if>
       <if test="orderMoney != null" >
         order_money,
@@ -172,8 +172,8 @@
       <if test="customerType != null" >
         #{customerType,jdbcType=VARCHAR},
       </if>
-      <if test="staus != null" >
-        #{staus,jdbcType=INTEGER},
+      <if test="orderStatId != null" >
+        #{orderStatId,jdbcType=INTEGER},
       </if>
       <if test="orderMoney != null" >
         #{orderMoney,jdbcType=REAL},
@@ -216,8 +216,8 @@
       <if test="record.customerType != null" >
         customer_type = #{record.customerType,jdbcType=VARCHAR},
       </if>
-      <if test="record.staus != null" >
-        staus = #{record.staus,jdbcType=INTEGER},
+      <if test="record.orderStatId != null" >
+        order_stat_id = #{record.orderStatId,jdbcType=INTEGER},
       </if>
       <if test="record.orderMoney != null" >
         order_money = #{record.orderMoney,jdbcType=REAL},
@@ -244,7 +244,7 @@
       checkin_date = #{record.checkinDate,jdbcType=TIMESTAMP},
       checkout_date = #{record.checkoutDate,jdbcType=TIMESTAMP},
       customer_type = #{record.customerType,jdbcType=VARCHAR},
-      staus = #{record.staus,jdbcType=INTEGER},
+      order_stat_id = #{record.orderStatId,jdbcType=INTEGER},
       order_money = #{record.orderMoney,jdbcType=REAL},
       operator = #{record.operator,jdbcType=VARCHAR},
       createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
@@ -271,8 +271,8 @@
       <if test="customerType != null" >
         customer_type = #{customerType,jdbcType=VARCHAR},
       </if>
-      <if test="staus != null" >
-        staus = #{staus,jdbcType=INTEGER},
+      <if test="orderStatId != null" >
+        order_stat_id = #{orderStatId,jdbcType=INTEGER},
       </if>
       <if test="orderMoney != null" >
         order_money = #{orderMoney,jdbcType=REAL},
@@ -296,7 +296,7 @@
       checkin_date = #{checkinDate,jdbcType=TIMESTAMP},
       checkout_date = #{checkoutDate,jdbcType=TIMESTAMP},
       customer_type = #{customerType,jdbcType=VARCHAR},
-      staus = #{staus,jdbcType=INTEGER},
+      order_stat_id = #{orderStatId,jdbcType=INTEGER},
       order_money = #{orderMoney,jdbcType=REAL},
       operator = #{operator,jdbcType=VARCHAR},
       createdTime = #{createdtime,jdbcType=TIMESTAMP},

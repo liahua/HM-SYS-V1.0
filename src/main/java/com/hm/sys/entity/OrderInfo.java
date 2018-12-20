@@ -15,7 +15,7 @@ public class OrderInfo {
 
     private String customerType;
 
-    private Integer staus;
+    private Integer orderStatId;
 
     private Float orderMoney;
 
@@ -73,12 +73,12 @@ public class OrderInfo {
         this.customerType = customerType == null ? null : customerType.trim();
     }
 
-    public Integer getStaus() {
-        return staus;
+    public Integer getOrderStatId() {
+        return orderStatId;
     }
 
-    public void setStaus(Integer staus) {
-        this.staus = staus;
+    public void setOrderStatId(Integer orderStatId) {
+        this.orderStatId = orderStatId;
     }
 
     public Float getOrderMoney() {

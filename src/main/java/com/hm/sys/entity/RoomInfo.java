@@ -11,7 +11,7 @@ public class RoomInfo {
 
     private Integer bedNum;
 
-    private Integer statuId;
+    private Integer statId;
 
     public Integer getId() {
         return id;
@@ -53,11 +53,11 @@ public class RoomInfo {
         this.bedNum = bedNum;
     }
 
-    public Integer getStatuId() {
-        return statuId;
+    public Integer getStatId() {
+        return statId;
     }
 
-    public void setStatuId(Integer statuId) {
-        this.statuId = statuId;
+    public void setStatId(Integer statId) {
+        this.statId = statId;
     }
 }

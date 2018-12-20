@@ -23,10 +23,10 @@ public class SysCheckOutController {
 	 * @param roomId 房间的id
 	 * @return 房客需支付的价格
 	 */
-	@RequestMapping("depencyRoomId")
+	@RequestMapping("checkOutDepencyRoomId")
 	@ResponseBody
-	public JsonResult checkOut(Integer roomId) {
-		CheckOutVoDetails checkOutVoDetails=sysCheckOutService.checkOutOrder(roomId);
+	public JsonResult checkOutDepencyRoomId(Integer roomNameId) {
+		CheckOutVoDetails checkOutVoDetails=sysCheckOutService.checkOutDepencyRoomId(roomNameId);
 		return new JsonResult(checkOutVoDetails);
 	}
 }

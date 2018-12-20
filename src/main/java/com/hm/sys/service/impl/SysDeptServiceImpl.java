@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 import com.alibaba.druid.util.StringUtils;
 
 import com.hm.common.exception.ClassExceptionTest;
-
+import com.hm.common.exception.ServiceException;
+import com.hm.common.utils.IntegerUtil;
 import com.hm.sys.dao.SysDeptsMapper;
 
 import com.hm.sys.dao.SysUsersMapper;
@@ -44,28 +45,28 @@ public class SysDeptServiceImpl implements SysDeptService {
 	public int updateObject(SysDepts entity) {
 		//验证
 		if(entity==null)
-			throw new ClassExceptionTest("保存对象不能为空");
+			throw new ServiceException("保存对象不能为空");
 		if(StringUtils.isEmpty(entity.getName()))
-			throw new ClassExceptionTest("部门名称不能为空");
+			throw new ServiceException("部门名称不能为空");
 		//更新数据
 		int row = sysDeptsMapper.updateByPrimaryKey(entity);
 		if(row==0)
-			throw new ClassExceptionTest("记录可能已经不存在");
+			throw new ServiceException("记录可能已经不存在");
 		return row;
 	}
 
 	@Override
 	public int insertObject(SysDepts entity) {
 		if(entity==null)
-			throw new ClassExceptionTest("保存对象不能为空");
+			throw new ServiceException("保存对象不能为空");
 		if(StringUtils.isEmpty(entity.getName()))
-			throw new ClassExceptionTest("部门名称不能为空");
+			throw new ServiceException("部门名称不能为空");
 		int row;
 		try {
 			row = sysDeptsMapper.insert(entity);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new  ClassExceptionTest("保存失败");
+			throw new  ServiceException("保存失败");
 		}
 
 		return row;
@@ -77,17 +78,17 @@ public class SysDeptServiceImpl implements SysDeptService {
 	 */
 	public int deleteObject(Integer id) {
 		//检测id是否正确
-		if(id==null||id<0) 
-			throw new ClassExceptionTest("id不合法");
+		if(IntegerUtil.isIllegality(id)) 
+			throw new ServiceException("id不合法");
 		int cCount = sysDeptsMapper.getChildCount(id);
 		if(cCount>0)
-			throw new ClassExceptionTest("存在子部门，不能删除");
+			throw new ServiceException("存在子部门，不能删除");
 		int userCount = sysUsersMapper.getCountByDeptId(id);
 		if(userCount>0)
-			throw new ClassExceptionTest("该部门还有"+userCount+"个员工，请妥善处理");
+			throw new ServiceException("该部门还有"+userCount+"个员工，请妥善处理");
 		int row = sysDeptsMapper.deleteByPrimaryKey(id);
 		if(row==0)
-			throw new ClassExceptionTest("不存在该部门");
+			throw new ServiceException("不存在该部门");
 		return row;
 	}
 

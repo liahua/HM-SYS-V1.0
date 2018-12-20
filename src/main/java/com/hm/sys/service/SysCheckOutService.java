@@ -4,6 +4,8 @@ import com.hm.common.vo.CheckOutVoDetails;
 
 public interface SysCheckOutService {
 
-	CheckOutVoDetails checkOutOrder(Integer roomId);
+	
+
+	CheckOutVoDetails checkOutDepencyRoomId(Integer roomNameId);
 
 }

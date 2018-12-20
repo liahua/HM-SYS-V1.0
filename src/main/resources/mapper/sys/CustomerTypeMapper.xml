@@ -81,6 +81,7 @@
       order by ${orderByClause}
     </if>
   </select>
+ 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -178,4 +179,5 @@
       discount_per = #{discountPer,jdbcType=REAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
+ 
 </mapper>

@@ -1,7 +1,9 @@
 package com.hm.sys.service;
 
+import com.hm.common.vo.CheckOutVoDetails;
+
 public interface SysCheckOutService {
 
-	int checkOutOrder(Integer roomId);
+	CheckOutVoDetails checkOutOrder(Integer roomId);
 
 }

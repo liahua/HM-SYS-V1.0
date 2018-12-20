@@ -30,10 +30,8 @@ public interface RoomInfoMapper {
     int updateByPrimaryKeySelective(RoomInfo record);
 
     int updateByPrimaryKey(RoomInfo record);
-    
-    
-  //客房信息浏览
-    List<Map<String,Object>> findRoomInfo();
 
 	List<DynamicRoomInfo> findObjects();
+
+	List<Map<String, Object>> findRoomInfo();
 }

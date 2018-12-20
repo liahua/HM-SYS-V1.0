@@ -225,16 +225,4 @@
       stat_id = #{statId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  
-  
-  
-   
-  <!-- 客房信息浏览 -->
-  <select id="findRoomInfo"
-             resultType="map">
-         
-          select * from room_info
-         
-  </select>
-  
 </mapper>

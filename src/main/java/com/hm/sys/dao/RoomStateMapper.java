@@ -3,6 +3,8 @@ package com.hm.sys.dao;
 import com.hm.sys.entity.RoomState;
 import com.hm.sys.entity.RoomStateExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface RoomStateMapper {
@@ -27,4 +29,8 @@ public interface RoomStateMapper {
     int updateByPrimaryKeySelective(RoomState record);
 
     int updateByPrimaryKey(RoomState record);
+    
+    
+  //客房状态浏览
+    List<Map<String,Object>> findRoomState();
 }

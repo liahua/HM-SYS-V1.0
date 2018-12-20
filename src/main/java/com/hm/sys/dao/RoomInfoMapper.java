@@ -4,6 +4,8 @@ import com.hm.common.vo.DynamicRoomInfo;
 import com.hm.sys.entity.RoomInfo;
 import com.hm.sys.entity.RoomInfoExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface RoomInfoMapper {
@@ -29,5 +31,9 @@ public interface RoomInfoMapper {
 
     int updateByPrimaryKey(RoomInfo record);
     
-    List<DynamicRoomInfo> findObjects();
+    
+  //客房信息浏览
+    List<Map<String,Object>> findRoomInfo();
+
+	List<DynamicRoomInfo> findObjects();
 }

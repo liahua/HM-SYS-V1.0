@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hm.sys.dao.SysDeptsMapper" >
+  <resultMap id="BaseResultMap" type="com.hm.sys.entity.SysDepts" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
+    <result column="modifiedTime" property="modifiedtime" jdbcType="TIMESTAMP" />
+    <result column="createdUser" property="createduser" jdbcType="VARCHAR" />
+    <result column="modifiedUser" property="modifieduser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, parentId, sort, note, createdTime, modifiedTime, createdUser, modifiedUser
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.SysDeptsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_depts
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_depts
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_depts
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hm.sys.entity.SysDeptsExample" >
+    delete from sys_depts
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hm.sys.entity.SysDepts" >
+    insert into sys_depts (id, name, parentId, 
+      sort, note, createdTime, 
+      modifiedTime, createdUser, modifiedUser
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, 
+      #{modifiedtime,jdbcType=TIMESTAMP}, #{createduser,jdbcType=VARCHAR}, #{modifieduser,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hm.sys.entity.SysDepts" >
+    insert into sys_depts
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="modifiedtime != null" >
+        modifiedTime,
+      </if>
+      <if test="createduser != null" >
+        createdUser,
+      </if>
+      <if test="modifieduser != null" >
+        modifiedUser,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedtime != null" >
+        #{modifiedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createduser != null" >
+        #{createduser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieduser != null" >
+        #{modifieduser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hm.sys.entity.SysDeptsExample" resultType="java.lang.Integer" >
+    select count(*) from sys_depts
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_depts
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentid != null" >
+        parentId = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifiedtime != null" >
+        modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createduser != null" >
+        createdUser = #{record.createduser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifieduser != null" >
+        modifiedUser = #{record.modifieduser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_depts
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      parentId = #{record.parentid,jdbcType=INTEGER},
+      sort = #{record.sort,jdbcType=INTEGER},
+      note = #{record.note,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP},
+      createdUser = #{record.createduser,jdbcType=VARCHAR},
+      modifiedUser = #{record.modifieduser,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hm.sys.entity.SysDepts" >
+    update sys_depts
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedtime != null" >
+        modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createduser != null" >
+        createdUser = #{createduser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieduser != null" >
+        modifiedUser = #{modifieduser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hm.sys.entity.SysDepts" >
+    update sys_depts
+    set name = #{name,jdbcType=VARCHAR},
+      parentId = #{parentid,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP},
+      createdUser = #{createduser,jdbcType=VARCHAR},
+      modifiedUser = #{modifieduser,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

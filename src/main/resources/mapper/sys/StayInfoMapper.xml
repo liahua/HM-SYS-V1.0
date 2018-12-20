@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hm.sys.dao.StayInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.hm.sys.entity.StayInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="room_id" property="roomId" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="stay_date" property="stayDate" jdbcType="TIMESTAMP" />
+    <result column="stay_day_count" property="stayDayCount" jdbcType="INTEGER" />
+    <result column="stay_man_count" property="stayManCount" jdbcType="INTEGER" />
+    <result column="cash" property="cash" jdbcType="REAL" />
+    <result column="leave_date" property="leaveDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
+    <result column="modifiedTime" property="modifiedtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, order_id, room_id, customer_id, stay_date, stay_day_count, stay_man_count, cash, 
+    leave_date, status, operator, createdTime, modifiedTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.StayInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stay_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from stay_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from stay_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hm.sys.entity.StayInfoExample" >
+    delete from stay_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hm.sys.entity.StayInfo" >
+    insert into stay_info (id, order_id, room_id, 
+      customer_id, stay_date, stay_day_count, 
+      stay_man_count, cash, leave_date, 
+      status, operator, createdTime, 
+      modifiedTime)
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, 
+      #{customerId,jdbcType=INTEGER}, #{stayDate,jdbcType=TIMESTAMP}, #{stayDayCount,jdbcType=INTEGER}, 
+      #{stayManCount,jdbcType=INTEGER}, #{cash,jdbcType=REAL}, #{leaveDate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{operator,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, 
+      #{modifiedtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hm.sys.entity.StayInfo" >
+    insert into stay_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="roomId != null" >
+        room_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="stayDate != null" >
+        stay_date,
+      </if>
+      <if test="stayDayCount != null" >
+        stay_day_count,
+      </if>
+      <if test="stayManCount != null" >
+        stay_man_count,
+      </if>
+      <if test="cash != null" >
+        cash,
+      </if>
+      <if test="leaveDate != null" >
+        leave_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="modifiedtime != null" >
+        modifiedTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null" >
+        #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="stayDate != null" >
+        #{stayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stayDayCount != null" >
+        #{stayDayCount,jdbcType=INTEGER},
+      </if>
+      <if test="stayManCount != null" >
+        #{stayManCount,jdbcType=INTEGER},
+      </if>
+      <if test="cash != null" >
+        #{cash,jdbcType=REAL},
+      </if>
+      <if test="leaveDate != null" >
+        #{leaveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedtime != null" >
+        #{modifiedtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hm.sys.entity.StayInfoExample" resultType="java.lang.Integer" >
+    select count(*) from stay_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update stay_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.roomId != null" >
+        room_id = #{record.roomId,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stayDate != null" >
+        stay_date = #{record.stayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stayDayCount != null" >
+        stay_day_count = #{record.stayDayCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.stayManCount != null" >
+        stay_man_count = #{record.stayManCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.cash != null" >
+        cash = #{record.cash,jdbcType=REAL},
+      </if>
+      <if test="record.leaveDate != null" >
+        leave_date = #{record.leaveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifiedtime != null" >
+        modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update stay_info
+    set id = #{record.id,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      room_id = #{record.roomId,jdbcType=INTEGER},
+      customer_id = #{record.customerId,jdbcType=INTEGER},
+      stay_date = #{record.stayDate,jdbcType=TIMESTAMP},
+      stay_day_count = #{record.stayDayCount,jdbcType=INTEGER},
+      stay_man_count = #{record.stayManCount,jdbcType=INTEGER},
+      cash = #{record.cash,jdbcType=REAL},
+      leave_date = #{record.leaveDate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hm.sys.entity.StayInfo" >
+    update stay_info
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null" >
+        room_id = #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="stayDate != null" >
+        stay_date = #{stayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stayDayCount != null" >
+        stay_day_count = #{stayDayCount,jdbcType=INTEGER},
+      </if>
+      <if test="stayManCount != null" >
+        stay_man_count = #{stayManCount,jdbcType=INTEGER},
+      </if>
+      <if test="cash != null" >
+        cash = #{cash,jdbcType=REAL},
+      </if>
+      <if test="leaveDate != null" >
+        leave_date = #{leaveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedtime != null" >
+        modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hm.sys.entity.StayInfo" >
+    update stay_info
+    set order_id = #{orderId,jdbcType=INTEGER},
+      room_id = #{roomId,jdbcType=INTEGER},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      stay_date = #{stayDate,jdbcType=TIMESTAMP},
+      stay_day_count = #{stayDayCount,jdbcType=INTEGER},
+      stay_man_count = #{stayManCount,jdbcType=INTEGER},
+      cash = #{cash,jdbcType=REAL},
+      leave_date = #{leaveDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      operator = #{operator,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

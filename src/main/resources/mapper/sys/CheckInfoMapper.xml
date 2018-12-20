@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hm.sys.dao.CheckInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.hm.sys.entity.CheckInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="stay_id" property="stayId" jdbcType="INTEGER" />
+    <result column="due_money" property="dueMoney" jdbcType="REAL" />
+    <result column="order_money" property="orderMoney" jdbcType="REAL" />
+    <result column="discount_rate" property="discountRate" jdbcType="REAL" />
+    <result column="discount_price" property="discountPrice" jdbcType="REAL" />
+    <result column="paid_up_money" property="paidUpMoney" jdbcType="REAL" />
+    <result column="check_date" property="checkDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
+    <result column="modifiedTime" property="modifiedtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, stay_id, due_money, order_money, discount_rate, discount_price, paid_up_money, 
+    check_date, status, operator, createdTime, modifiedTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.CheckInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from check_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from check_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from check_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hm.sys.entity.CheckInfoExample" >
+    delete from check_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hm.sys.entity.CheckInfo" >
+    insert into check_info (id, stay_id, due_money, 
+      order_money, discount_rate, discount_price, 
+      paid_up_money, check_date, status, 
+      operator, createdTime, modifiedTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{stayId,jdbcType=INTEGER}, #{dueMoney,jdbcType=REAL}, 
+      #{orderMoney,jdbcType=REAL}, #{discountRate,jdbcType=REAL}, #{discountPrice,jdbcType=REAL}, 
+      #{paidUpMoney,jdbcType=REAL}, #{checkDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{operator,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, #{modifiedtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hm.sys.entity.CheckInfo" >
+    insert into check_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stayId != null" >
+        stay_id,
+      </if>
+      <if test="dueMoney != null" >
+        due_money,
+      </if>
+      <if test="orderMoney != null" >
+        order_money,
+      </if>
+      <if test="discountRate != null" >
+        discount_rate,
+      </if>
+      <if test="discountPrice != null" >
+        discount_price,
+      </if>
+      <if test="paidUpMoney != null" >
+        paid_up_money,
+      </if>
+      <if test="checkDate != null" >
+        check_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="modifiedtime != null" >
+        modifiedTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stayId != null" >
+        #{stayId,jdbcType=INTEGER},
+      </if>
+      <if test="dueMoney != null" >
+        #{dueMoney,jdbcType=REAL},
+      </if>
+      <if test="orderMoney != null" >
+        #{orderMoney,jdbcType=REAL},
+      </if>
+      <if test="discountRate != null" >
+        #{discountRate,jdbcType=REAL},
+      </if>
+      <if test="discountPrice != null" >
+        #{discountPrice,jdbcType=REAL},
+      </if>
+      <if test="paidUpMoney != null" >
+        #{paidUpMoney,jdbcType=REAL},
+      </if>
+      <if test="checkDate != null" >
+        #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedtime != null" >
+        #{modifiedtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hm.sys.entity.CheckInfoExample" resultType="java.lang.Integer" >
+    select count(*) from check_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update check_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.stayId != null" >
+        stay_id = #{record.stayId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dueMoney != null" >
+        due_money = #{record.dueMoney,jdbcType=REAL},
+      </if>
+      <if test="record.orderMoney != null" >
+        order_money = #{record.orderMoney,jdbcType=REAL},
+      </if>
+      <if test="record.discountRate != null" >
+        discount_rate = #{record.discountRate,jdbcType=REAL},
+      </if>
+      <if test="record.discountPrice != null" >
+        discount_price = #{record.discountPrice,jdbcType=REAL},
+      </if>
+      <if test="record.paidUpMoney != null" >
+        paid_up_money = #{record.paidUpMoney,jdbcType=REAL},
+      </if>
+      <if test="record.checkDate != null" >
+        check_date = #{record.checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifiedtime != null" >
+        modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update check_info
+    set id = #{record.id,jdbcType=INTEGER},
+      stay_id = #{record.stayId,jdbcType=INTEGER},
+      due_money = #{record.dueMoney,jdbcType=REAL},
+      order_money = #{record.orderMoney,jdbcType=REAL},
+      discount_rate = #{record.discountRate,jdbcType=REAL},
+      discount_price = #{record.discountPrice,jdbcType=REAL},
+      paid_up_money = #{record.paidUpMoney,jdbcType=REAL},
+      check_date = #{record.checkDate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hm.sys.entity.CheckInfo" >
+    update check_info
+    <set >
+      <if test="stayId != null" >
+        stay_id = #{stayId,jdbcType=INTEGER},
+      </if>
+      <if test="dueMoney != null" >
+        due_money = #{dueMoney,jdbcType=REAL},
+      </if>
+      <if test="orderMoney != null" >
+        order_money = #{orderMoney,jdbcType=REAL},
+      </if>
+      <if test="discountRate != null" >
+        discount_rate = #{discountRate,jdbcType=REAL},
+      </if>
+      <if test="discountPrice != null" >
+        discount_price = #{discountPrice,jdbcType=REAL},
+      </if>
+      <if test="paidUpMoney != null" >
+        paid_up_money = #{paidUpMoney,jdbcType=REAL},
+      </if>
+      <if test="checkDate != null" >
+        check_date = #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedtime != null" >
+        modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hm.sys.entity.CheckInfo" >
+    update check_info
+    set stay_id = #{stayId,jdbcType=INTEGER},
+      due_money = #{dueMoney,jdbcType=REAL},
+      order_money = #{orderMoney,jdbcType=REAL},
+      discount_rate = #{discountRate,jdbcType=REAL},
+      discount_price = #{discountPrice,jdbcType=REAL},
+      paid_up_money = #{paidUpMoney,jdbcType=REAL},
+      check_date = #{checkDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      operator = #{operator,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

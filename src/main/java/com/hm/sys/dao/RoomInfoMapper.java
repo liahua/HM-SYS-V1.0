@@ -1,5 +1,6 @@
 package com.hm.sys.dao;
 
+import com.hm.common.vo.DynamicRoomInfo;
 import com.hm.sys.entity.RoomInfo;
 import com.hm.sys.entity.RoomInfoExample;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface RoomInfoMapper {
     int updateByPrimaryKeySelective(RoomInfo record);
 
     int updateByPrimaryKey(RoomInfo record);
+    
+    List<DynamicRoomInfo> findObjects();
 }

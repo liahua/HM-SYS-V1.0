@@ -6,6 +6,6 @@ public interface SysCheckOutService {
 
 	
 
-	CheckOutVoDetails checkOutDepencyRoomId(Integer roomNameId);
+	CheckOutVoDetails checkOutDepencyRoomId(String roomNameId);
 
 }

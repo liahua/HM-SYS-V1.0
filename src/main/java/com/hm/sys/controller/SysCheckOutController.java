@@ -25,7 +25,7 @@ public class SysCheckOutController {
 	 */
 	@RequestMapping("checkOutDepencyRoomId")
 	@ResponseBody
-	public JsonResult checkOutDepencyRoomId(Integer roomNameId) {
+	public JsonResult checkOutDepencyRoomId(String roomNameId) {
 		CheckOutVoDetails checkOutVoDetails=sysCheckOutService.checkOutDepencyRoomId(roomNameId);
 		return new JsonResult(checkOutVoDetails);
 	}

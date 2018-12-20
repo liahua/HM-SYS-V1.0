@@ -9,17 +9,13 @@ import org.junit.Test;
 import com.hm.sys.dao.OrderInfoMapper;
 import com.hm.sys.entity.OrderInfo;
 import com.hm.sys.entity.OrderInfoExample;
+import com.hm.sys.service.impl.SysCheckOutServiceImpl;
 
 public class TestDao extends TestBase {
 	@Test
 	public void doTestDao() {
-		OrderInfoMapper orderInfoMapper = ctx.getBean(OrderInfoMapper.class);
-		OrderInfoExample orderInfoExample = new OrderInfoExample();
-		com.hm.sys.entity.OrderInfoExample.Criteria criteria = orderInfoExample.createCriteria();
-		criteria.andCreatedtimeBetween(initDate(0), initDate(24));
-		List<OrderInfo> orderInfolist = orderInfoMapper.selectByExample(orderInfoExample);
-
-		System.out.println(orderInfolist);
+		SysCheckOutServiceImpl bean = ctx.getBean("sysCheckOutServiceImpl",SysCheckOutServiceImpl.class);
+		bean.checkOutDepencyRoomId("1101");
 	}
 	
 	private Date initDate(Integer hour) {
@@ -30,4 +26,6 @@ public class TestDao extends TestBase {
 		System.out.println(calendar.getTime());
 		return calendar.getTime();
 	}
+	
+	
 }

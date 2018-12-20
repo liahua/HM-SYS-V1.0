@@ -45,61 +45,109 @@ public class SysAccountServiceImpl implements SysAccountService {
 	public DayAccount doDayCheck() {
 		// 各种房间状态统计
 		HashMap<String, Integer> statMap = new HashMap<>();
-		statAmount(statMap);
+		statAccount(statMap);
 
 		// 入住人数统计
-		Integer manCount = 0;
-		Integer stayCount = 0;
-		stayAmount(manCount,stayCount);
-		
+		Integer manCount = stayManAccount();
+
+		// 押金统计
+		Double cashCount = cashAccount();
+
 		// 订单统计
+		Integer orderCount = 0;
+		Double orderMoney = 0d;
+		orderAccount(orderCount, orderMoney);
+
+		//结算统计
+		
+		
+		return null;
+	}
+
+	private Double cashAccount() {
+		// 当天入住的入住信息
+		StayInfoExample stayInfoExample = new StayInfoExample();
+		Criteria criteria = stayInfoExample.createCriteria();
+		criteria.andStayDateBetween(initDate(0), initDate(24));
+
+		double cashCount = 0d;
+		List<StayInfo> stayList = stayInfoMapper.selectByExample(stayInfoExample);
+
+		if (stayList.size() == 0) {
+			return cashCount;
+		}
+		for(StayInfo si : stayList) {
+			cashCount += si.getCash();
+		}
+		
+		return cashCount;
+	}
+
+	private void orderAccount(Integer orderCount, Double orderMoney) {
 		OrderInfoExample orderInfoExample = new OrderInfoExample();
 		com.hm.sys.entity.OrderInfoExample.Criteria criteria = orderInfoExample.createCriteria();
 		criteria.andCreatedtimeBetween(initDate(0), initDate(24));
-		List<OrderInfo> orderInfolist = orderInfoMapper.selectByExample(orderInfoExample);
+		List<OrderInfo> orderInfoList = orderInfoMapper.selectByExample(orderInfoExample);
+		if (orderInfoList.size() == 0) {
+			return;
+		}
 
-		return null;
+		for (OrderInfo oi : orderInfoList) {
+			orderMoney += oi.getOrderMoney();
+		}
+		orderCount = orderInfoList.size();
 	}
-	
+
 	/**
 	 * 得到指定的时间对象
+	 * 
 	 * @param hour 小时数
 	 */
 	private Date initDate(Integer hour) {
-		Date now = new Date();
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(now);
-		calendar.set(Calendar.HOUR, hour);
+		calendar.set(Calendar.HOUR_OF_DAY, hour);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		return calendar.getTime();
 	}
 
-	private void stayAmount(Integer manCount, Integer stayCount) {
+	private Integer stayManAccount() {
+		// 未支付的入住信息
 		StayInfoExample stayInfoExample = new StayInfoExample();
 		Criteria criteria = stayInfoExample.createCriteria();
-		criteria.andIsCheckoutEqualTo(1);
+		criteria.andIsCheckoutEqualTo(0);
 
+		int manCount = 0;
 		List<StayInfo> stayList = stayInfoMapper.selectByExample(stayInfoExample);
+		if (stayList.size() == 0) {
+			return manCount;
+		}
+
 		Long now = System.currentTimeMillis();
 		for (StayInfo si : stayList) {
 			if (now > si.getStayDate().getTime() && now < si.getLeaveDate().getTime()) {
-				stayCount++;
 				manCount += si.getStayManCount();
 			}
 		}
+		return manCount;
 	}
 
-	private void statAmount(HashMap<String, Integer> statMap) {
+	private void statAccount(HashMap<String, Integer> statMap) {
 		List<DynamicRoomInfo> roomList = roomInfoMapper.findObjects();
+		if (roomList.size() == 0) {
+			return;
+		}
 
 		for (DynamicRoomInfo dri : roomList) {
 			String stat = dri.getStat();
-			Integer count = statMap.get(stat);
-			if (count == null) {
-				statMap.put(stat, 1);
+			String rtName = dri.getRtName();
+
+			if ("已入住".equals(stat)) {
+				Integer count = statMap.get(rtName);
+				statMap.put(rtName, count == null ? 1 : count + 1);
 			} else {
-				statMap.put(stat, count + 1);
+				Integer count = statMap.get(rtName + "&");
+				statMap.put(rtName + "&", count == null ? 1 : count + 1);
 			}
 		}
 

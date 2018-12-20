@@ -23,10 +23,8 @@ public class TestDao extends TestBase {
 	}
 	
 	private Date initDate(Integer hour) {
-		Date now = new Date();
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(now);
-		calendar.set(Calendar.HOUR, hour);
+		calendar.set(Calendar.HOUR_OF_DAY, hour);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		System.out.println(calendar.getTime());

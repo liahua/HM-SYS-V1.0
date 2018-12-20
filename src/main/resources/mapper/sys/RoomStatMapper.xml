@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hm.sys.dao.RoomTypeMapper" >
-  <resultMap id="BaseResultMap" type="com.hm.sys.entity.RoomType" >
+<mapper namespace="com.hm.sys.dao.RoomStatMapper" >
+  <resultMap id="BaseResultMap" type="com.hm.sys.entity.RoomStat" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="rt_name" property="rtName" jdbcType="VARCHAR" />
-    <result column="price_up" property="priceUp" jdbcType="REAL" />
+    <result column="stat" property="stat" jdbcType="VARCHAR" />
+    <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
+    <result column="modifiedTime" property="modifiedtime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,15 +66,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, rt_name, price_up
+    id, stat, createdTime, modifiedTime
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.RoomTypeExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.RoomStatExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from room_type
+    from room_stat
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,67 +85,76 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from room_type
+    from room_stat
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from room_type
+    delete from room_stat
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.hm.sys.entity.RoomTypeExample" >
-    delete from room_type
+  <delete id="deleteByExample" parameterType="com.hm.sys.entity.RoomStatExample" >
+    delete from room_stat
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.hm.sys.entity.RoomType" >
-    insert into room_type (id, rt_name, price_up
-      )
-    values (#{id,jdbcType=INTEGER}, #{rtName,jdbcType=VARCHAR}, #{priceUp,jdbcType=REAL}
-      )
+  <insert id="insert" parameterType="com.hm.sys.entity.RoomStat" >
+    insert into room_stat (id, stat, createdTime, 
+      modifiedTime)
+    values (#{id,jdbcType=INTEGER}, #{stat,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, 
+      #{modifiedtime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.hm.sys.entity.RoomType" >
-    insert into room_type
+  <insert id="insertSelective" parameterType="com.hm.sys.entity.RoomStat" >
+    insert into room_stat
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="rtName != null" >
-        rt_name,
+      <if test="stat != null" >
+        stat,
       </if>
-      <if test="priceUp != null" >
-        price_up,
+      <if test="createdtime != null" >
+        createdTime,
+      </if>
+      <if test="modifiedtime != null" >
+        modifiedTime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="rtName != null" >
-        #{rtName,jdbcType=VARCHAR},
+      <if test="stat != null" >
+        #{stat,jdbcType=VARCHAR},
       </if>
-      <if test="priceUp != null" >
-        #{priceUp,jdbcType=REAL},
+      <if test="createdtime != null" >
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedtime != null" >
+        #{modifiedtime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.hm.sys.entity.RoomTypeExample" resultType="java.lang.Integer" >
-    select count(*) from room_type
+  <select id="countByExample" parameterType="com.hm.sys.entity.RoomStatExample" resultType="java.lang.Integer" >
+    select count(*) from room_stat
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update room_type
+    update room_stat
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.rtName != null" >
-        rt_name = #{record.rtName,jdbcType=VARCHAR},
+      <if test="record.stat != null" >
+        stat = #{record.stat,jdbcType=VARCHAR},
       </if>
-      <if test="record.priceUp != null" >
-        price_up = #{record.priceUp,jdbcType=REAL},
+      <if test="record.createdtime != null" >
+        createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifiedtime != null" >
+        modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -152,30 +162,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update room_type
+    update room_stat
     set id = #{record.id,jdbcType=INTEGER},
-      rt_name = #{record.rtName,jdbcType=VARCHAR},
-      price_up = #{record.priceUp,jdbcType=REAL}
+      stat = #{record.stat,jdbcType=VARCHAR},
+      createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hm.sys.entity.RoomType" >
-    update room_type
+  <update id="updateByPrimaryKeySelective" parameterType="com.hm.sys.entity.RoomStat" >
+    update room_stat
     <set >
-      <if test="rtName != null" >
-        rt_name = #{rtName,jdbcType=VARCHAR},
+      <if test="stat != null" >
+        stat = #{stat,jdbcType=VARCHAR},
       </if>
-      <if test="priceUp != null" >
-        price_up = #{priceUp,jdbcType=REAL},
+      <if test="createdtime != null" >
+        createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedtime != null" >
+        modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hm.sys.entity.RoomType" >
-    update room_type
-    set rt_name = #{rtName,jdbcType=VARCHAR},
-      price_up = #{priceUp,jdbcType=REAL}
+  <update id="updateByPrimaryKey" parameterType="com.hm.sys.entity.RoomStat" >
+    update room_stat
+    set stat = #{stat,jdbcType=VARCHAR},
+      createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

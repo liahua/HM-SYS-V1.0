@@ -11,6 +11,12 @@ public interface SysRoleMenusMapper {
     int deleteByExample(SysRoleMenusExample example);
 
     int deleteByPrimaryKey(Integer id);
+    /**
+     * 根据MenuId进行删除菜单关系数据
+     * @param id
+     * @return
+     */
+    int deleteObjectByMenuId(Integer id);
 
     int insert(SysRoleMenus record);
 

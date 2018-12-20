@@ -318,4 +318,16 @@
       modifiedUser = #{modifieduser,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!-- 根据id查询子菜单数量 -->
+  <select id="getChildCount" resultType="int">
+	
+	select count(*) from sys_menus where parentId=#{id}
+	
+	</select>
+	<!-- 定义一个Node对象,借助此对象封装从数据库查询到的数据 -->
+	<select id="findZtreeMenuNodes"
+            resultType="com.hm.sys.vo.Node">
+        select id,name,parentId
+        from sys_menus        
+    </select>
 </mapper>

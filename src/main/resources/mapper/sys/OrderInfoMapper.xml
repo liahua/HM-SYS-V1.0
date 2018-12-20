@@ -4,8 +4,7 @@
   <resultMap id="BaseResultMap" type="com.hm.sys.entity.OrderInfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="room_id" property="roomId" jdbcType="INTEGER" />
-    <result column="customer_name" property="customerName" jdbcType="INTEGER" />
-    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
     <result column="checkin_date" property="checkinDate" jdbcType="TIMESTAMP" />
     <result column="checkout_date" property="checkoutDate" jdbcType="TIMESTAMP" />
     <result column="customer_type" property="customerType" jdbcType="VARCHAR" />
@@ -74,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, room_id, customer_name, telephone, checkin_date, checkout_date, customer_type, 
-    staus, order_money, operator, createdTime, modifiedTime
+    id, room_id, customer_id, checkin_date, checkout_date, customer_type, staus, order_money, 
+    operator, createdTime, modifiedTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.OrderInfoExample" >
     select
@@ -108,16 +107,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.hm.sys.entity.OrderInfo" >
-    insert into order_info (id, room_id, customer_name, 
-      telephone, checkin_date, checkout_date, 
-      customer_type, staus, order_money, 
-      operator, createdTime, modifiedTime
-      )
-    values (#{id,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, #{customerName,jdbcType=INTEGER}, 
-      #{telephone,jdbcType=VARCHAR}, #{checkinDate,jdbcType=TIMESTAMP}, #{checkoutDate,jdbcType=TIMESTAMP}, 
-      #{customerType,jdbcType=VARCHAR}, #{staus,jdbcType=INTEGER}, #{orderMoney,jdbcType=REAL}, 
-      #{operator,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, #{modifiedtime,jdbcType=TIMESTAMP}
-      )
+    insert into order_info (id, room_id, customer_id, 
+      checkin_date, checkout_date, customer_type, 
+      staus, order_money, operator, 
+      createdTime, modifiedTime)
+    values (#{id,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, 
+      #{checkinDate,jdbcType=TIMESTAMP}, #{checkoutDate,jdbcType=TIMESTAMP}, #{customerType,jdbcType=VARCHAR}, 
+      #{staus,jdbcType=INTEGER}, #{orderMoney,jdbcType=REAL}, #{operator,jdbcType=VARCHAR}, 
+      #{createdtime,jdbcType=TIMESTAMP}, #{modifiedtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hm.sys.entity.OrderInfo" >
     insert into order_info
@@ -128,11 +125,8 @@
       <if test="roomId != null" >
         room_id,
       </if>
-      <if test="customerName != null" >
-        customer_name,
-      </if>
-      <if test="telephone != null" >
-        telephone,
+      <if test="customerId != null" >
+        customer_id,
       </if>
       <if test="checkinDate != null" >
         checkin_date,
@@ -166,11 +160,8 @@
       <if test="roomId != null" >
         #{roomId,jdbcType=INTEGER},
       </if>
-      <if test="customerName != null" >
-        #{customerName,jdbcType=INTEGER},
-      </if>
-      <if test="telephone != null" >
-        #{telephone,jdbcType=VARCHAR},
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
       </if>
       <if test="checkinDate != null" >
         #{checkinDate,jdbcType=TIMESTAMP},
@@ -213,11 +204,8 @@
       <if test="record.roomId != null" >
         room_id = #{record.roomId,jdbcType=INTEGER},
       </if>
-      <if test="record.customerName != null" >
-        customer_name = #{record.customerName,jdbcType=INTEGER},
-      </if>
-      <if test="record.telephone != null" >
-        telephone = #{record.telephone,jdbcType=VARCHAR},
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=INTEGER},
       </if>
       <if test="record.checkinDate != null" >
         checkin_date = #{record.checkinDate,jdbcType=TIMESTAMP},
@@ -252,8 +240,7 @@
     update order_info
     set id = #{record.id,jdbcType=INTEGER},
       room_id = #{record.roomId,jdbcType=INTEGER},
-      customer_name = #{record.customerName,jdbcType=INTEGER},
-      telephone = #{record.telephone,jdbcType=VARCHAR},
+      customer_id = #{record.customerId,jdbcType=INTEGER},
       checkin_date = #{record.checkinDate,jdbcType=TIMESTAMP},
       checkout_date = #{record.checkoutDate,jdbcType=TIMESTAMP},
       customer_type = #{record.customerType,jdbcType=VARCHAR},
@@ -272,11 +259,8 @@
       <if test="roomId != null" >
         room_id = #{roomId,jdbcType=INTEGER},
       </if>
-      <if test="customerName != null" >
-        customer_name = #{customerName,jdbcType=INTEGER},
-      </if>
-      <if test="telephone != null" >
-        telephone = #{telephone,jdbcType=VARCHAR},
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
       </if>
       <if test="checkinDate != null" >
         checkin_date = #{checkinDate,jdbcType=TIMESTAMP},
@@ -308,8 +292,7 @@
   <update id="updateByPrimaryKey" parameterType="com.hm.sys.entity.OrderInfo" >
     update order_info
     set room_id = #{roomId,jdbcType=INTEGER},
-      customer_name = #{customerName,jdbcType=INTEGER},
-      telephone = #{telephone,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=INTEGER},
       checkin_date = #{checkinDate,jdbcType=TIMESTAMP},
       checkout_date = #{checkoutDate,jdbcType=TIMESTAMP},
       customer_type = #{customerType,jdbcType=VARCHAR},

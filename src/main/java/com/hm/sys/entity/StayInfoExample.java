@@ -645,63 +645,63 @@ public class StayInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNull() {
-            addCriterion("status is null");
+        public Criteria andIsCheckoutIsNull() {
+            addCriterion("is_checkout is null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNotNull() {
-            addCriterion("status is not null");
+        public Criteria andIsCheckoutIsNotNull() {
+            addCriterion("is_checkout is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(Integer value) {
-            addCriterion("status =", value, "status");
+        public Criteria andIsCheckoutEqualTo(Integer value) {
+            addCriterion("is_checkout =", value, "isCheckout");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(Integer value) {
-            addCriterion("status <>", value, "status");
+        public Criteria andIsCheckoutNotEqualTo(Integer value) {
+            addCriterion("is_checkout <>", value, "isCheckout");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(Integer value) {
-            addCriterion("status >", value, "status");
+        public Criteria andIsCheckoutGreaterThan(Integer value) {
+            addCriterion("is_checkout >", value, "isCheckout");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("status >=", value, "status");
+        public Criteria andIsCheckoutGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_checkout >=", value, "isCheckout");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(Integer value) {
-            addCriterion("status <", value, "status");
+        public Criteria andIsCheckoutLessThan(Integer value) {
+            addCriterion("is_checkout <", value, "isCheckout");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("status <=", value, "status");
+        public Criteria andIsCheckoutLessThanOrEqualTo(Integer value) {
+            addCriterion("is_checkout <=", value, "isCheckout");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<Integer> values) {
-            addCriterion("status in", values, "status");
+        public Criteria andIsCheckoutIn(List<Integer> values) {
+            addCriterion("is_checkout in", values, "isCheckout");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<Integer> values) {
-            addCriterion("status not in", values, "status");
+        public Criteria andIsCheckoutNotIn(List<Integer> values) {
+            addCriterion("is_checkout not in", values, "isCheckout");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(Integer value1, Integer value2) {
-            addCriterion("status between", value1, value2, "status");
+        public Criteria andIsCheckoutBetween(Integer value1, Integer value2) {
+            addCriterion("is_checkout between", value1, value2, "isCheckout");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("status not between", value1, value2, "status");
+        public Criteria andIsCheckoutNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_checkout not between", value1, value2, "isCheckout");
             return (Criteria) this;
         }
 

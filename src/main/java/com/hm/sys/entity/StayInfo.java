@@ -21,7 +21,7 @@ public class StayInfo {
 
     private Date leaveDate;
 
-    private Integer status;
+    private Integer isCheckout;
 
     private String operator;
 
@@ -101,12 +101,12 @@ public class StayInfo {
         this.leaveDate = leaveDate;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getIsCheckout() {
+        return isCheckout;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setIsCheckout(Integer isCheckout) {
+        this.isCheckout = isCheckout;
     }
 
     public String getOperator() {

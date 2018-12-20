@@ -7,9 +7,7 @@ public class OrderInfo {
 
     private Integer roomId;
 
-    private Integer customerName;
-
-    private String telephone;
+    private Integer customerId;
 
     private Date checkinDate;
 
@@ -43,20 +41,12 @@ public class OrderInfo {
         this.roomId = roomId;
     }
 
-    public Integer getCustomerName() {
-        return customerName;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerName(Integer customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone == null ? null : telephone.trim();
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     public Date getCheckinDate() {

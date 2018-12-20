@@ -11,15 +11,13 @@ public class CheckInfo {
 
     private Float orderMoney;
 
-    private Float discountRate;
+    private String discountType;
 
-    private Float discountPrice;
+    private Float discountRate;
 
     private Float paidUpMoney;
 
     private Date checkDate;
-
-    private Integer status;
 
     private String operator;
 
@@ -59,20 +57,20 @@ public class CheckInfo {
         this.orderMoney = orderMoney;
     }
 
+    public String getDiscountType() {
+        return discountType;
+    }
+
+    public void setDiscountType(String discountType) {
+        this.discountType = discountType == null ? null : discountType.trim();
+    }
+
     public Float getDiscountRate() {
         return discountRate;
     }
 
     public void setDiscountRate(Float discountRate) {
         this.discountRate = discountRate;
-    }
-
-    public Float getDiscountPrice() {
-        return discountPrice;
-    }
-
-    public void setDiscountPrice(Float discountPrice) {
-        this.discountPrice = discountPrice;
     }
 
     public Float getPaidUpMoney() {
@@ -89,14 +87,6 @@ public class CheckInfo {
 
     public void setCheckDate(Date checkDate) {
         this.checkDate = checkDate;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public String getOperator() {

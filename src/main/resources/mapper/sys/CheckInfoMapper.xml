@@ -6,11 +6,10 @@
     <result column="stay_id" property="stayId" jdbcType="INTEGER" />
     <result column="due_money" property="dueMoney" jdbcType="REAL" />
     <result column="order_money" property="orderMoney" jdbcType="REAL" />
+    <result column="discount_type" property="discountType" jdbcType="VARCHAR" />
     <result column="discount_rate" property="discountRate" jdbcType="REAL" />
-    <result column="discount_price" property="discountPrice" jdbcType="REAL" />
     <result column="paid_up_money" property="paidUpMoney" jdbcType="REAL" />
     <result column="check_date" property="checkDate" jdbcType="TIMESTAMP" />
-    <result column="status" property="status" jdbcType="INTEGER" />
     <result column="operator" property="operator" jdbcType="VARCHAR" />
     <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
     <result column="modifiedTime" property="modifiedtime" jdbcType="TIMESTAMP" />
@@ -74,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, stay_id, due_money, order_money, discount_rate, discount_price, paid_up_money, 
-    check_date, status, operator, createdTime, modifiedTime
+    id, stay_id, due_money, order_money, discount_type, discount_rate, paid_up_money, 
+    check_date, operator, createdTime, modifiedTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.CheckInfoExample" >
     select
@@ -109,15 +108,13 @@
   </delete>
   <insert id="insert" parameterType="com.hm.sys.entity.CheckInfo" >
     insert into check_info (id, stay_id, due_money, 
-      order_money, discount_rate, discount_price, 
-      paid_up_money, check_date, status, 
-      operator, createdTime, modifiedTime
-      )
+      order_money, discount_type, discount_rate, 
+      paid_up_money, check_date, operator, 
+      createdTime, modifiedTime)
     values (#{id,jdbcType=INTEGER}, #{stayId,jdbcType=INTEGER}, #{dueMoney,jdbcType=REAL}, 
-      #{orderMoney,jdbcType=REAL}, #{discountRate,jdbcType=REAL}, #{discountPrice,jdbcType=REAL}, 
-      #{paidUpMoney,jdbcType=REAL}, #{checkDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
-      #{operator,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, #{modifiedtime,jdbcType=TIMESTAMP}
-      )
+      #{orderMoney,jdbcType=REAL}, #{discountType,jdbcType=VARCHAR}, #{discountRate,jdbcType=REAL}, 
+      #{paidUpMoney,jdbcType=REAL}, #{checkDate,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, 
+      #{createdtime,jdbcType=TIMESTAMP}, #{modifiedtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hm.sys.entity.CheckInfo" >
     insert into check_info
@@ -134,20 +131,17 @@
       <if test="orderMoney != null" >
         order_money,
       </if>
+      <if test="discountType != null" >
+        discount_type,
+      </if>
       <if test="discountRate != null" >
         discount_rate,
-      </if>
-      <if test="discountPrice != null" >
-        discount_price,
       </if>
       <if test="paidUpMoney != null" >
         paid_up_money,
       </if>
       <if test="checkDate != null" >
         check_date,
-      </if>
-      <if test="status != null" >
-        status,
       </if>
       <if test="operator != null" >
         operator,
@@ -172,20 +166,17 @@
       <if test="orderMoney != null" >
         #{orderMoney,jdbcType=REAL},
       </if>
+      <if test="discountType != null" >
+        #{discountType,jdbcType=VARCHAR},
+      </if>
       <if test="discountRate != null" >
         #{discountRate,jdbcType=REAL},
-      </if>
-      <if test="discountPrice != null" >
-        #{discountPrice,jdbcType=REAL},
       </if>
       <if test="paidUpMoney != null" >
         #{paidUpMoney,jdbcType=REAL},
       </if>
       <if test="checkDate != null" >
         #{checkDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
       </if>
       <if test="operator != null" >
         #{operator,jdbcType=VARCHAR},
@@ -219,20 +210,17 @@
       <if test="record.orderMoney != null" >
         order_money = #{record.orderMoney,jdbcType=REAL},
       </if>
+      <if test="record.discountType != null" >
+        discount_type = #{record.discountType,jdbcType=VARCHAR},
+      </if>
       <if test="record.discountRate != null" >
         discount_rate = #{record.discountRate,jdbcType=REAL},
-      </if>
-      <if test="record.discountPrice != null" >
-        discount_price = #{record.discountPrice,jdbcType=REAL},
       </if>
       <if test="record.paidUpMoney != null" >
         paid_up_money = #{record.paidUpMoney,jdbcType=REAL},
       </if>
       <if test="record.checkDate != null" >
         check_date = #{record.checkDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.operator != null" >
         operator = #{record.operator,jdbcType=VARCHAR},
@@ -254,11 +242,10 @@
       stay_id = #{record.stayId,jdbcType=INTEGER},
       due_money = #{record.dueMoney,jdbcType=REAL},
       order_money = #{record.orderMoney,jdbcType=REAL},
+      discount_type = #{record.discountType,jdbcType=VARCHAR},
       discount_rate = #{record.discountRate,jdbcType=REAL},
-      discount_price = #{record.discountPrice,jdbcType=REAL},
       paid_up_money = #{record.paidUpMoney,jdbcType=REAL},
       check_date = #{record.checkDate,jdbcType=TIMESTAMP},
-      status = #{record.status,jdbcType=INTEGER},
       operator = #{record.operator,jdbcType=VARCHAR},
       createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
       modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP}
@@ -278,20 +265,17 @@
       <if test="orderMoney != null" >
         order_money = #{orderMoney,jdbcType=REAL},
       </if>
+      <if test="discountType != null" >
+        discount_type = #{discountType,jdbcType=VARCHAR},
+      </if>
       <if test="discountRate != null" >
         discount_rate = #{discountRate,jdbcType=REAL},
-      </if>
-      <if test="discountPrice != null" >
-        discount_price = #{discountPrice,jdbcType=REAL},
       </if>
       <if test="paidUpMoney != null" >
         paid_up_money = #{paidUpMoney,jdbcType=REAL},
       </if>
       <if test="checkDate != null" >
         check_date = #{checkDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="operator != null" >
         operator = #{operator,jdbcType=VARCHAR},
@@ -310,11 +294,10 @@
     set stay_id = #{stayId,jdbcType=INTEGER},
       due_money = #{dueMoney,jdbcType=REAL},
       order_money = #{orderMoney,jdbcType=REAL},
+      discount_type = #{discountType,jdbcType=VARCHAR},
       discount_rate = #{discountRate,jdbcType=REAL},
-      discount_price = #{discountPrice,jdbcType=REAL},
       paid_up_money = #{paidUpMoney,jdbcType=REAL},
       check_date = #{checkDate,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=INTEGER},
       operator = #{operator,jdbcType=VARCHAR},
       createdTime = #{createdtime,jdbcType=TIMESTAMP},
       modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP}

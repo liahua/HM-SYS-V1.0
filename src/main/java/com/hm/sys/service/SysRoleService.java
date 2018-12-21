@@ -21,5 +21,18 @@ public interface SysRoleService {
 	PageObject<SysRoles> findPageObjects(
 			String name,
 			Integer pageCurrent);
+	
+	int deleteObject(Integer id);
+	
+	int insert(SysRoles record,Integer[] menuIds);
+	/**
+	 * 获取选中角色信息
+	 * @param id
+	 * @return
+	 */
+	Map<String,Object> getObjectById(Integer id) ;
+	
+	int update(SysRoles record,Integer[] menuIds);
+
 
 }

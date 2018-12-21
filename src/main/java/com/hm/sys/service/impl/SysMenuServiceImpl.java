@@ -81,7 +81,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 		int row = sysMenusMapper.updateByPrimaryKey(record);
 		if (row == 0)
 			throw new ServiceException("该选项可能已经不存在了");
-		return 0;
+		return row;
 	}
 
 }

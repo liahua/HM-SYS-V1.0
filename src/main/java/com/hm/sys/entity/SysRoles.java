@@ -3,7 +3,7 @@ package com.hm.sys.entity;
 import java.util.Date;
 
 public class SysRoles {
-    private Long id;
+    private Integer id;
 
     private String name;
 
@@ -17,11 +17,11 @@ public class SysRoles {
 
     private String modifieduser;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

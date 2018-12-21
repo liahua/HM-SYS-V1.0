@@ -42,6 +42,37 @@ public class SysRoleController {
 		return new JsonResult(findPageObjects);
 		
 	}
+	@RequestMapping("doDeleteObject")
+	@ResponseBody
+	public JsonResult doDeleteObject(Integer id) {
+		sysRoleService.deleteObject(id);
+		return new JsonResult("delete is ok");
+	}
+	@RequestMapping("doInsertObject")
+	@ResponseBody
+	public JsonResult doInsertObject(SysRoles record, Integer[] menuIds) {
+		sysRoleService.insert(record, menuIds);
+		return new JsonResult("insert is ok");
+	}
+	/**
+	 * 通过角色id获取角色信息
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("dogetObjectById")
+	@ResponseBody
+	public JsonResult dogetObjectById(Integer id) {
+		Map<String, Object> objectById = sysRoleService.getObjectById(id);
+		return new JsonResult(objectById);
+	}
+	
+	@RequestMapping("doupdateObject")
+	@ResponseBody
+	public JsonResult doupdateObject(SysRoles record, Integer[] menuIds) {
+		sysRoleService.update(record, menuIds);
+		return new JsonResult("update is ok");
+		
+	}
 	
 	
 }

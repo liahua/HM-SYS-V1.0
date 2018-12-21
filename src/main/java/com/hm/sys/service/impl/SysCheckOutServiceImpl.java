@@ -51,7 +51,7 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 
 		CustomerInfo customerInfo = findCustomerInfo(checkOutVoDetail.getCustomerInfo());
 
-//		通过CardTypeCardNum查找CustomerInfo
+//		通过CardTypeIdCardNum查找CustomerInfo
 //		通过CustomerNameTelephone查找CustomerInfo
 //		通过id查找CustomerInfo
 
@@ -101,12 +101,12 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 		return null;
 	}
 
-	public CustomerInfo findCustomerInfo(int cardType, String cardNum) {
+	public CustomerInfo findCustomerInfo(int cardTypeId, String cardNum) {
 		CustomerInfoExample customerInfoExample = new CustomerInfoExample();
 		List<com.hm.sys.entity.CustomerInfoExample.Criteria> oredCriteria = customerInfoExample.getOredCriteria();
 
 		com.hm.sys.entity.CustomerInfoExample.Criteria criteria = customerInfoExample.createCriteria();
-		criteria.andCardTypeIdEqualTo(cardType);
+		criteria.andCardTypeIdEqualTo(cardTypeId);
 		criteria.andCardNumEqualTo(cardNum);
 		oredCriteria.add(criteria);
 		List<CustomerInfo> customerInfo = customerInfoMapper.selectByExample(customerInfoExample);

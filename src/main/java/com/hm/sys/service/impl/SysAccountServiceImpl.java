@@ -8,11 +8,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hm.common.utils.ListUtil;
 import com.hm.common.vo.DayAccount;
 import com.hm.common.vo.DynamicRoomInfo;
+import com.hm.sys.dao.CheckInfoMapper;
 import com.hm.sys.dao.OrderInfoMapper;
 import com.hm.sys.dao.RoomInfoMapper;
 import com.hm.sys.dao.StayInfoMapper;
+import com.hm.sys.entity.CheckInfo;
+import com.hm.sys.entity.CheckInfoExample;
 import com.hm.sys.entity.OrderInfo;
 import com.hm.sys.entity.OrderInfoExample;
 import com.hm.sys.entity.StayInfo;
@@ -37,16 +41,24 @@ public class SysAccountServiceImpl implements SysAccountService {
 
 	@Autowired
 	private OrderInfoMapper orderInfoMapper;
-
+	
+	@Autowired
+	private CheckInfoMapper checkInfoMapper;
+	
+	private Date startTime = null;
+	
+	private Date endTime= null;
+	
 	/**
 	 * 日明细
 	 */
 	@Override
 	public DayAccount doDayCheck() {
+		resetTime();
 		// 各种房间状态统计
 		HashMap<String, Integer> statMap = new HashMap<>();
 		statAccount(statMap);
-
+		
 		// 入住人数统计
 		Integer manCount = stayManAccount();
 
@@ -59,21 +71,49 @@ public class SysAccountServiceImpl implements SysAccountService {
 		orderAccount(orderCount, orderMoney);
 
 		//结算统计
+		Double checkinCount = checkinAccount();
 		
 		
 		return null;
+	}
+	
+	private void resetTime() {
+		startTime = initDate(0);
+		endTime = initDate(24);
+	}
+
+	private Double checkinAccount() {
+		CheckInfoExample checkInfoExample = new CheckInfoExample();
+		com.hm.sys.entity.CheckInfoExample.Criteria criteria = checkInfoExample.createCriteria();
+		criteria.andCheckDateBetween(startTime, endTime);
+		
+		List<CheckInfo> checkList = checkInfoMapper.selectByExample(checkInfoExample);
+		double checkinCount = 0d;
+		
+		if(ListUtil.isEmpty(checkList)) {
+			return checkinCount;
+		}
+		
+		for(CheckInfo ci : checkList) {
+			Float checkinMoney = ci.getPaidUpMoney();
+			
+			if(checkinMoney!=null)
+			checkinCount += checkinMoney;
+		}
+		return checkinCount;
 	}
 
 	private Double cashAccount() {
 		// 当天入住的入住信息
 		StayInfoExample stayInfoExample = new StayInfoExample();
 		Criteria criteria = stayInfoExample.createCriteria();
-		criteria.andStayDateBetween(initDate(0), initDate(24));
-
+		criteria.andStayDateBetween(startTime, endTime);
+		
+		
 		double cashCount = 0d;
 		List<StayInfo> stayList = stayInfoMapper.selectByExample(stayInfoExample);
 
-		if (stayList.size() == 0) {
+		if (ListUtil.isEmpty(stayList)) {
 			return cashCount;
 		}
 		for(StayInfo si : stayList) {
@@ -86,9 +126,9 @@ public class SysAccountServiceImpl implements SysAccountService {
 	private void orderAccount(Integer orderCount, Double orderMoney) {
 		OrderInfoExample orderInfoExample = new OrderInfoExample();
 		com.hm.sys.entity.OrderInfoExample.Criteria criteria = orderInfoExample.createCriteria();
-		criteria.andCreatedtimeBetween(initDate(0), initDate(24));
+		criteria.andCreatedtimeBetween(startTime, endTime);
 		List<OrderInfo> orderInfoList = orderInfoMapper.selectByExample(orderInfoExample);
-		if (orderInfoList.size() == 0) {
+		if (ListUtil.isEmpty(orderInfoList)) {
 			return;
 		}
 
@@ -119,7 +159,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 
 		int manCount = 0;
 		List<StayInfo> stayList = stayInfoMapper.selectByExample(stayInfoExample);
-		if (stayList.size() == 0) {
+		if (ListUtil.isEmpty(stayList)) {
 			return manCount;
 		}
 
@@ -133,8 +173,10 @@ public class SysAccountServiceImpl implements SysAccountService {
 	}
 
 	private void statAccount(HashMap<String, Integer> statMap) {
+		//key=高级大床房        value=入住房间数
+		//key=高级大床房&      value=未入住房间数
 		List<DynamicRoomInfo> roomList = roomInfoMapper.findObjects();
-		if (roomList.size() == 0) {
+		if (ListUtil.isEmpty(roomList)) {
 			return;
 		}
 

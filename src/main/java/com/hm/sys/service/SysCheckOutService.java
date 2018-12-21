@@ -6,6 +6,12 @@ public interface SysCheckOutService {
 
 	
 
-	CheckOutVoDetails checkOutDepencyRoomId(String roomNameId);
+	/**
+	 * 
+	 * @param CheckOutVoDetails 应包含RooNameId以及CustomerInfo
+	 * @return
+	 */
+	CheckOutVoDetails checkOutDepencyRoomNameIdCustomerInfo(CheckOutVoDetails CheckOutVoDetails);
+	CheckOutVoDetails checkOutDepencyOrderInfo(CheckOutVoDetails CheckOutVoDetails);
 
 }

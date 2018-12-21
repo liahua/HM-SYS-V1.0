@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hm.sys.dao.AccountRoomMapper" >
+  <resultMap id="BaseResultMap" type="com.hm.sys.entity.AccountRoom" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="room_type_id" property="roomTypeId" jdbcType="INTEGER" />
+    <result column="day" property="day" jdbcType="DATE" />
+    <result column="filled_num" property="filledNum" jdbcType="INTEGER" />
+    <result column="unfilled_num" property="unfilledNum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, room_type_id, day, filled_num, unfilled_num
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.AccountRoomExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from account_room
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from account_room
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from account_room
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hm.sys.entity.AccountRoomExample" >
+    delete from account_room
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hm.sys.entity.AccountRoom" >
+    insert into account_room (id, room_type_id, day, 
+      filled_num, unfilled_num)
+    values (#{id,jdbcType=INTEGER}, #{roomTypeId,jdbcType=INTEGER}, #{day,jdbcType=DATE}, 
+      #{filledNum,jdbcType=INTEGER}, #{unfilledNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hm.sys.entity.AccountRoom" >
+    insert into account_room
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roomTypeId != null" >
+        room_type_id,
+      </if>
+      <if test="day != null" >
+        day,
+      </if>
+      <if test="filledNum != null" >
+        filled_num,
+      </if>
+      <if test="unfilledNum != null" >
+        unfilled_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roomTypeId != null" >
+        #{roomTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="day != null" >
+        #{day,jdbcType=DATE},
+      </if>
+      <if test="filledNum != null" >
+        #{filledNum,jdbcType=INTEGER},
+      </if>
+      <if test="unfilledNum != null" >
+        #{unfilledNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hm.sys.entity.AccountRoomExample" resultType="java.lang.Integer" >
+    select count(*) from account_room
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update account_room
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.roomTypeId != null" >
+        room_type_id = #{record.roomTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.day != null" >
+        day = #{record.day,jdbcType=DATE},
+      </if>
+      <if test="record.filledNum != null" >
+        filled_num = #{record.filledNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.unfilledNum != null" >
+        unfilled_num = #{record.unfilledNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update account_room
+    set id = #{record.id,jdbcType=INTEGER},
+      room_type_id = #{record.roomTypeId,jdbcType=INTEGER},
+      day = #{record.day,jdbcType=DATE},
+      filled_num = #{record.filledNum,jdbcType=INTEGER},
+      unfilled_num = #{record.unfilledNum,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hm.sys.entity.AccountRoom" >
+    update account_room
+    <set >
+      <if test="roomTypeId != null" >
+        room_type_id = #{roomTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="day != null" >
+        day = #{day,jdbcType=DATE},
+      </if>
+      <if test="filledNum != null" >
+        filled_num = #{filledNum,jdbcType=INTEGER},
+      </if>
+      <if test="unfilledNum != null" >
+        unfilled_num = #{unfilledNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hm.sys.entity.AccountRoom" >
+    update account_room
+    set room_type_id = #{roomTypeId,jdbcType=INTEGER},
+      day = #{day,jdbcType=DATE},
+      filled_num = #{filledNum,jdbcType=INTEGER},
+      unfilled_num = #{unfilledNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

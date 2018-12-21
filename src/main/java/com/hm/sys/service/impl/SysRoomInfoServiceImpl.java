@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hm.common.exception.ServiceException;
+import com.hm.common.utils.ListUtil;
 import com.hm.common.vo.PageObject;
 import com.hm.sys.dao.RoomInfoMapper;
 import com.hm.sys.entity.RoomInfo;
@@ -89,5 +90,22 @@ public class SysRoomInfoServiceImpl implements SysRoomInfoService{
 	@Override
 	public List<RoomInfo> findObjectsInfo(RoomInfoExample example) {
 		return roomInfoMapper.findObjectsInfo(example);
+	}
+
+	
+	@Override
+	public RoomInfo findRoomFromRoomInfo(String roomNameId) {
+		RoomInfoExample roomInfoExample = new RoomInfoExample();
+		roomInfoExample.or().andRoomNameEqualTo(roomNameId);
+		List<RoomInfo> roomsInfo = roomInfoMapper.selectByExample(roomInfoExample);
+
+		if (ListUtil.isEmpty(roomsInfo)) {
+			throw new ServiceException("无此房间");
+		} else if (ListUtil.count(roomsInfo) > 1) {
+			throw new ServiceException("房间名重复,联系管理员查改");
+		}
+		RoomInfo roomInfo = roomsInfo.get(0);
+
+		return roomInfo;
 	}
 }

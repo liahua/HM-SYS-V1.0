@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hm.sys.dao.RoomTypeMapper" >
+<mapper namespace="com.hm.sys.dao.RTM01" >
   <resultMap id="BRM" type="com.hm.sys.entity.RoomType" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="rt_name" property="rtName" jdbcType="VARCHAR" />

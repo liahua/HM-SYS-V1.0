@@ -11,7 +11,7 @@ import java.util.List;
 public class ListUtil {
 
 	public static <T> boolean isEmpty(List<T> list) {
-		return list.isEmpty()||list==null;
+		return list==null||list.isEmpty();
 	}
 
 	public static <T> int count(List<T> list) {

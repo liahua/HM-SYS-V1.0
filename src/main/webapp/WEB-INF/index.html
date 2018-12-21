@@ -331,7 +331,9 @@
 	<script type="text/javascript">
 //说明，在此位置添加js，使用load函数加载页面
 $(function(){//页面加载完成执行
-	doLoadUI("load-room-id","room/doRoomViewUI.do")
+	//房间预览
+	doLoadUI("load-room-id","view/doRoomViewUI.do")
+	
 	doLoadUI("load-rType-id","room/doRoomTypeUI.do")
 	doLoadUI("load-rState-id","room/doRoomStateUI.do")
 	doLoadUI("load-rInfo-id","room/doRoomInfoUI.do")

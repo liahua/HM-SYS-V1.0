@@ -67,9 +67,4 @@ public class SysRoomInfoController {
 	public JsonResult doFindObjectsInfo(RoomInfoExample example){
 		return new JsonResult(sysRoomInfoService.findObjectsInfo(example));
 	}
-	@RequestMapping("doRoomViewUI")
-	public String doRoomViewUI(){
-		return "room/room_view";
-	}
-
 }

@@ -49,13 +49,14 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 		// 查找符合roomNameId的房间的信息
 		RoomInfo roomInfo = findRoomFromRoomInfo(roomNameId);
 
-		CustomerInfo customerInfo = findCustomerInfo(checkOutVoDetail.getCustomerInfo());
-
 //		通过CardTypeIdCardNum查找CustomerInfo
 //		通过CustomerNameTelephone查找CustomerInfo
 //		通过id查找CustomerInfo
+		CustomerInfo customerInfo = findCustomerInfo(checkOutVoDetail.getCustomerInfo());
+		// 通过customerInfo,roomInfo查找入住且未支付信息
 
 		checkOutVoDetail.setRoomInfo(roomInfo);
+		checkOutVoDetail.setCustomerInfo(customerInfo);
 		return null;
 	}
 
@@ -92,41 +93,53 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 			}
 
 		}
-
-		return null;
+		// TODO
+		throw new ServiceException("无法找到客户信息,请重新输入");
 	}
-
-	private CustomerInfo findCustomerInfo(String customerName, String telephone) {
+/**
+ * 查找CustomerInfo
+ * @param customerName
+ * @param telephone
+ * @return
+ */
+	public CustomerInfo findCustomerInfo(String customerName, String telephone) {
 		CustomerInfoExample customerInfoExample = new CustomerInfoExample();
-		List<com.hm.sys.entity.CustomerInfoExample.Criteria> oredCriteria = customerInfoExample.getOredCriteria();
-
-		com.hm.sys.entity.CustomerInfoExample.Criteria criteria = customerInfoExample.createCriteria();
-		criteria.andCustomerNameEqualTo(customerName);
-		criteria.andTelephoneEqualTo(telephone);
-		oredCriteria.add(criteria);
+		customerInfoExample.or().andCustomerNameEqualTo(customerName).andTelephoneEqualTo(telephone);
 		List<CustomerInfo> customerInfo = customerInfoMapper.selectByExample(customerInfoExample);
-		System.out.println("customerInfo"+customerInfo);
-		
-		
-		return null;
+		if (ListUtil.isEmpty(customerInfo)) {
+			throw new ServiceException("无此客户信息");
+		} else if (ListUtil.count(customerInfo) > 1) {
+			throw new ServiceException("存在两个或两个以上客户姓名与电话号码相同状况");
+		}
+		return customerInfo.get(1);
 	}
-
+/**
+ * 查找CustomerInfo
+ * @param cardTypeId
+ * @param cardNum
+ * @return
+ */
 	public CustomerInfo findCustomerInfo(int cardTypeId, String cardNum) {
 		CustomerInfoExample customerInfoExample = new CustomerInfoExample();
 		customerInfoExample.or().andCardTypeIdEqualTo(cardTypeId).andCardNumEqualTo(cardNum);
-		
 		List<CustomerInfo> customerInfo = customerInfoMapper.selectByExample(customerInfoExample);
-		System.out.println("customerInfo"+customerInfo);
-		
-		
-		
-		
-		return null;
+		if (ListUtil.isEmpty(customerInfo)) {
+			throw new ServiceException("无此客户信息");
+		} else if (ListUtil.count(customerInfo) > 1) {
+			throw new ServiceException("存在两个或两个以上客户信息证件号证件密码一致情况");
+		}
+		return customerInfo.get(1);
 	}
-
+/**
+ * 查找CustomerInfo
+ * @param id
+ * @return
+ */
 	private CustomerInfo findCustomerInfo(Integer id) {
 		CustomerInfo CustomerInfo = customerInfoMapper.selectByPrimaryKey(id);
-		
+		if (ObjectUtil.isEmpty(CustomerInfo)) {
+			throw new ServiceException("无此客户id");
+		}
 		return CustomerInfo;
 	}
 
@@ -137,18 +150,16 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 	 */
 	public RoomInfo findRoomFromRoomInfo(String roomNameId) {
 		RoomInfoExample roomInfoExample = new RoomInfoExample();
-		
 		roomInfoExample.or().andRoomNameEqualTo(roomNameId);
 		List<RoomInfo> roomsInfo = roomInfoMapper.selectByExample(roomInfoExample);
-		
-		
+
 		if (ListUtil.isEmpty(roomsInfo)) {
 			throw new ServiceException("无此房间");
 		} else if (ListUtil.count(roomsInfo) > 1) {
 			throw new ServiceException("房间名重复,联系管理员查改");
 		}
 		RoomInfo roomInfo = roomsInfo.get(1);
-		System.out.println(roomInfo);
+
 		return roomInfo;
 	}
 

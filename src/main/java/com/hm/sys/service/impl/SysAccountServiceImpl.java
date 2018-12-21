@@ -45,73 +45,69 @@ public class SysAccountServiceImpl implements SysAccountService {
 
 	@Autowired
 	private OrderInfoMapper orderInfoMapper;
-	
+
 	@Autowired
 	private CheckInfoMapper checkInfoMapper;
-	
+
 	@Autowired
 	private AccountRoomMapper accountRoomMapper;
-	
+
 	@Autowired
 	private AccountInfoMapper accountInfoMapper;
-	
+
 	private Date startTime = null;
-	
-	private Date endTime= null;
-	
+
+	private Date endTime = null;
+
 	/**
 	 * 日明细
 	 */
 	@Override
-	public int  doDayCheck() {
+	public int doDayCheck() {
 		resetTime();
 		// 各种房间状态统计
 		HashMap<Integer, Integer> filledMap = new HashMap<>();
-		HashMap<Integer , Integer> unFilledMap = new HashMap<>();
-		statAccount(filledMap,unFilledMap);
-		
-		//写入数据库
-		for(int i =1 ; i<=Math.max(filledMap.size(),unFilledMap.size());i++) {
+		HashMap<Integer, Integer> unFilledMap = new HashMap<>();
+		statAccount(filledMap, unFilledMap);
+
+		// 写入数据库
+		for (int i = 1; i <= 4; i++) {
 			AccountRoom ar = new AccountRoom();
-			ar.setDay(endTime);
+			ar.setDay(new Date());
 			ar.setRoomTypeId(i);
-			
+
 			Integer fillNum = filledMap.get(i);
-			if(fillNum!=null)
-			ar.setFilledNum(fillNum);
+			System.out.println("fillNum"+fillNum);
+			ar.setFilledNum(fillNum != null ? fillNum : 0);
 			
 			Integer unFilledNum = unFilledMap.get(i);
-			if(unFilledNum!=null)
-			ar.setUnfilledNum(unFilledNum);
-			
+			System.out.println("unFilledNum"+unFilledNum);
+			ar.setUnfilledNum(unFilledNum != null ? unFilledNum : 0);
+
 			accountRoomMapper.insert(ar);
 		}
-		
-		//日账单统计
+
+		// 日账单统计
 		AccountInfo accountInfo = new AccountInfo();
 		
+		accountInfo.setDay(new Date());
 		// 入住人数统计
-		accountInfo.setManCount( stayManAccount());
+		accountInfo.setManCount(stayManAccount());
 
 		// 押金统计
 		accountInfo.setCashCount(cashAccount());
 
 		// 订单统计
-		Integer orderCount = 0;
-		Double orderMoney = 0d;
-		orderAccount(orderCount, orderMoney);
-		
-		accountInfo.setOrderCount(orderCount);
-		accountInfo.setOrderMoney(orderMoney);
-		
-		//结算统计
+		orderAccount(accountInfo);
+
+		// 结算统计
 		accountInfo.setCheckinCount(checkinAccount());
-		
+
 		int row = accountInfoMapper.insert(accountInfo);
-		
+
 		return row;
 	}
-	
+
 	private void resetTime() {
 		startTime = initDate(0);
 		endTime = initDate(24);
@@ -121,19 +117,19 @@ public class SysAccountServiceImpl implements SysAccountService {
 		CheckInfoExample checkInfoExample = new CheckInfoExample();
 		com.hm.sys.entity.CheckInfoExample.Criteria criteria = checkInfoExample.createCriteria();
 		criteria.andCheckDateBetween(startTime, endTime);
-		
+
 		List<CheckInfo> checkList = checkInfoMapper.selectByExample(checkInfoExample);
 		double checkinCount = 0d;
-		
-		if(ListUtil.isEmpty(checkList)) {
+
+		if (ListUtil.isEmpty(checkList)) {
 			return checkinCount;
 		}
-		
-		for(CheckInfo ci : checkList) {
+
+		for (CheckInfo ci : checkList) {
 			Float checkinMoney = ci.getPaidUpMoney();
-			
-			if(checkinMoney!=null)
-			checkinCount += checkinMoney;
+
+			if (checkinMoney != null)
+				checkinCount += checkinMoney;
 		}
 		return checkinCount;
 	}
@@ -143,22 +139,22 @@ public class SysAccountServiceImpl implements SysAccountService {
 		StayInfoExample stayInfoExample = new StayInfoExample();
 		Criteria criteria = stayInfoExample.createCriteria();
 		criteria.andStayDateBetween(startTime, endTime);
-		
-		
+
 		double cashCount = 0d;
 		List<StayInfo> stayList = stayInfoMapper.selectByExample(stayInfoExample);
 
 		if (ListUtil.isEmpty(stayList)) {
 			return cashCount;
 		}
-		for(StayInfo si : stayList) {
-			cashCount += si.getCash();
+		for (StayInfo si : stayList) {
+			Float cash = si.getCash();
+			if (cash != null)
+				cashCount += cash;
 		}
-		
 		return cashCount;
 	}
 
-	private void orderAccount(Integer orderCount, Double orderMoney) {
+	private void orderAccount(AccountInfo accountInfo) {
 		OrderInfoExample orderInfoExample = new OrderInfoExample();
 		com.hm.sys.entity.OrderInfoExample.Criteria criteria = orderInfoExample.createCriteria();
 		criteria.andCreatedtimeBetween(startTime, endTime);
@@ -166,11 +162,18 @@ public class SysAccountServiceImpl implements SysAccountService {
 		if (ListUtil.isEmpty(orderInfoList)) {
 			return;
 		}
-
+		
+		Integer orderCount = 0;
+		Double orderMoney = 0d;
 		for (OrderInfo oi : orderInfoList) {
-			orderMoney += oi.getOrderMoney();
+			Float om = oi.getOrderMoney();
+			if (om != null)
+				orderMoney += om;
 		}
 		orderCount = orderInfoList.size();
+		
+		accountInfo.setOrderCount(orderCount);
+		accountInfo.setOrderMoney(orderMoney);
 	}
 
 	/**
@@ -201,24 +204,25 @@ public class SysAccountServiceImpl implements SysAccountService {
 		Long now = System.currentTimeMillis();
 		for (StayInfo si : stayList) {
 			if (now > si.getStayDate().getTime() && now < si.getLeaveDate().getTime()) {
-				manCount += si.getStayManCount();
+				Integer stayManCount = si.getStayManCount();
+				if (stayManCount != null)
+					manCount += stayManCount;
 			}
 		}
+		//System.out.println("manCount" + manCount);
 		return manCount;
 	}
 
-	private void statAccount(Map<Integer, Integer> filledMap,Map<Integer , Integer> unFilledMap) {
-		//key=高级大床房        value=入住房间数
-		//key=高级大床房&      value=未入住房间数
+	private void statAccount(Map<Integer, Integer> filledMap, Map<Integer, Integer> unFilledMap) {
 		List<DynamicRoomInfo> roomList = roomInfoMapper.findObjects();
 		if (ListUtil.isEmpty(roomList)) {
 			return;
 		}
 
+		System.out.println("房间数："+roomList.size());
 		for (DynamicRoomInfo dri : roomList) {
 			String stat = dri.getStat();
 			Integer rtId = dri.getRtId();
-
 			if ("已入住".equals(stat)) {
 				Integer count = filledMap.get(rtId);
 				filledMap.put(rtId, count == null ? 1 : count + 1);

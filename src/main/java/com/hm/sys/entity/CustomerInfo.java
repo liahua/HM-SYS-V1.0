@@ -102,4 +102,12 @@ public class CustomerInfo {
     public void setModifiedtime(Date modifiedtime) {
         this.modifiedtime = modifiedtime;
     }
+
+	@Override
+	public String toString() {
+		return "CustomerInfo [id=" + id + ", customerName=" + customerName + ", gender=" + gender + ", country="
+				+ country + ", telephone=" + telephone + ", cardTypeId=" + cardTypeId + ", cardNum=" + cardNum
+				+ ", operator=" + operator + ", createdtime=" + createdtime + ", modifiedtime=" + modifiedtime + "]";
+	}
+    
 }

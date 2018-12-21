@@ -97,18 +97,24 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 	}
 
 	private CustomerInfo findCustomerInfo(String customerName, String telephone) {
-		// TODO Auto-generated method stub
+		CustomerInfoExample customerInfoExample = new CustomerInfoExample();
+		List<com.hm.sys.entity.CustomerInfoExample.Criteria> oredCriteria = customerInfoExample.getOredCriteria();
+
+		com.hm.sys.entity.CustomerInfoExample.Criteria criteria = customerInfoExample.createCriteria();
+		criteria.andCustomerNameEqualTo(customerName);
+		criteria.andTelephoneEqualTo(telephone);
+		oredCriteria.add(criteria);
+		List<CustomerInfo> customerInfo = customerInfoMapper.selectByExample(customerInfoExample);
+		System.out.println("customerInfo"+customerInfo);
+		
+		
 		return null;
 	}
 
 	public CustomerInfo findCustomerInfo(int cardTypeId, String cardNum) {
 		CustomerInfoExample customerInfoExample = new CustomerInfoExample();
-		List<com.hm.sys.entity.CustomerInfoExample.Criteria> oredCriteria = customerInfoExample.getOredCriteria();
-
-		com.hm.sys.entity.CustomerInfoExample.Criteria criteria = customerInfoExample.createCriteria();
-		criteria.andCardTypeIdEqualTo(cardTypeId);
-		criteria.andCardNumEqualTo(cardNum);
-		oredCriteria.add(criteria);
+		customerInfoExample.or().andCardTypeIdEqualTo(cardTypeId).andCardNumEqualTo(cardNum);
+		
 		List<CustomerInfo> customerInfo = customerInfoMapper.selectByExample(customerInfoExample);
 		System.out.println("customerInfo"+customerInfo);
 		
@@ -120,6 +126,7 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 
 	private CustomerInfo findCustomerInfo(Integer id) {
 		CustomerInfo CustomerInfo = customerInfoMapper.selectByPrimaryKey(id);
+		
 		return CustomerInfo;
 	}
 
@@ -130,17 +137,18 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 	 */
 	public RoomInfo findRoomFromRoomInfo(String roomNameId) {
 		RoomInfoExample roomInfoExample = new RoomInfoExample();
-		Criteria criteria = roomInfoExample.createCriteria();
-		criteria.andRoomNameEqualTo(roomNameId);
-		List<Criteria> oredCriteria = roomInfoExample.getOredCriteria();
-		oredCriteria.add(criteria);
+		
+		roomInfoExample.or().andRoomNameEqualTo(roomNameId);
 		List<RoomInfo> roomsInfo = roomInfoMapper.selectByExample(roomInfoExample);
+		
+		
 		if (ListUtil.isEmpty(roomsInfo)) {
 			throw new ServiceException("无此房间");
 		} else if (ListUtil.count(roomsInfo) > 1) {
 			throw new ServiceException("房间名重复,联系管理员查改");
 		}
 		RoomInfo roomInfo = roomsInfo.get(1);
+		System.out.println(roomInfo);
 		return roomInfo;
 	}
 

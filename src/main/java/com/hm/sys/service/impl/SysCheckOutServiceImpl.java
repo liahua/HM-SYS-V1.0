@@ -11,9 +11,12 @@ import com.hm.common.utils.IntegerUtil;
 import com.hm.common.utils.ListUtil;
 import com.hm.common.vo.CheckOutVoDetails;
 import com.hm.sys.dao.RoomInfoMapper;
+import com.hm.sys.dao.StayInfoMapper;
 import com.hm.sys.entity.RoomInfo;
 import com.hm.sys.entity.RoomInfoExample;
 import com.hm.sys.entity.RoomInfoExample.Criteria;
+import com.hm.sys.entity.StayInfo;
+import com.hm.sys.entity.StayInfoExample;
 import com.hm.sys.service.SysCheckOutService;
 
 @Service
@@ -22,6 +25,8 @@ public class SysCheckOutServiceImpl implements SysCheckOutService{
 
 	@Autowired
 	private RoomInfoMapper roomInfoMapper;
+	@Autowired
+	private StayInfoMapper stayInfoMapper;
 
 	@Override
 	public CheckOutVoDetails checkOutDepencyRoomId(String roomNameId) {
@@ -34,10 +39,18 @@ public class SysCheckOutServiceImpl implements SysCheckOutService{
 			throw new ServiceException("房间号不正确");
 		}
 		//查找符合roomNameId的房间的信息
-		RoomInfo roomInfo = findRoom(roomNameId);
+		RoomInfo roomInfo = findRoomFromRoomInfo(roomNameId);
 		Integer roomId = roomInfo.getId();
+		List<StayInfo> stayInfos=findStayInfoFromRoomId(roomId);
+		
+		
+		
 		
 	
+		return null;
+	}
+	private List<StayInfo> findStayInfoFromRoomId(Integer roomId) {
+		
 		return null;
 	}
 	/**
@@ -45,7 +58,7 @@ public class SysCheckOutServiceImpl implements SysCheckOutService{
 	 * @param roomNameId
 	 * @return 返回所有拥有roomNameId的房间信息 
 	 */
-	public RoomInfo findRoom(String roomNameId){
+	public RoomInfo findRoomFromRoomInfo(String roomNameId){
 		RoomInfoExample roomInfoExample = new RoomInfoExample();
 		Criteria criteria = roomInfoExample.createCriteria();
 		criteria.andRoomNameEqualTo(roomNameId);

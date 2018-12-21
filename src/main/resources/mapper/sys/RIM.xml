@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hm.sys.dao.RoomInfoMapper">
+	<resultMap id="BaseResultMap"
+		type="com.hm.sys.entity.RoomInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="rt_id" property="rtId" jdbcType="INTEGER" />
+		<result column="room_name" property="roomName"
+			jdbcType="VARCHAR" />
+		<result column="room_add" property="roomAdd" jdbcType="VARCHAR" />
+		<result column="bed_num" property="bedNum" jdbcType="INTEGER" />
+		<result column="stat_id" property="statId" jdbcType="INTEGER" />
+	</resultMap>
+
+	
+	
+	<!-- 借助此元素对共性数据进行提取 -->
+	<sql id="queryWhereId">
+		<where>
+			<if test="roomName!=null and roomName!=''">
+				roomName like concat("%",#{roomName},"%")
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 基于日志记录好人删除操作 -->
+	<delete id="deleteRoomInfo">
+		delete from room_info
+		where id in
+		<foreach collection="ids" open="(" close=")" separator=","
+			item="item">
+			#{item}
+		</foreach>
+	</delete>
+	
+
+	<select id="getRowCount" resultType="int">
+
+		select count(*) from room_info
+		<include refid="queryWhereId" />
+	</select>
+
+
+	<select id="findPageObjects" resultType="com.hm.sys.entity.RoomInfo">
+
+		select * from room_info
+		<include refid="queryWhereId" />
+		order by createdTime desc
+		limit #{startIndex},#{pageSize}
+	</select>
+
+	<insert id="insertRoomInfo">
+		insert into room_info
+		(rt_name,price_up)
+		values
+		(#{rt_name},#{price_up})
+	</insert>
+	
+	<select id="findObjectsInfo" resultType="com.hm.sys.entity.RoomInfo">
+
+		select * from room_info
+		
+	</select>
+</mapper>

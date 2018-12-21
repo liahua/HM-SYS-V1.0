@@ -42,7 +42,7 @@ public class SysRoomTypeController {
 	}
 	  
 	  
-	  //../log/doFindPageObjects.do?pageCurrent=1
+	  //在SysRoomTypeController中定义请求处理方法
 	  @RequestMapping("doFindPageObjectsType")
 	  @ResponseBody
 	  public JsonResult doFindPageObjectsType(   
@@ -54,9 +54,7 @@ public class SysRoomTypeController {
 		  return new JsonResult(pageObject);		  
 }
 	  
-	  //将方法返回值转换为json格式的字符串返回
-	  //在将对象转换为json格式字符串时会调用对象的get方法获取值
-	  
+	  //异常类中方法定义(处理参数异常的方法)
 	  @ExceptionHandler(IllegalArgumentException.class)
 	  @ResponseBody
 	  public JsonResult doHandleException(

@@ -13,7 +13,7 @@ public class CustomerInfo {
 
     private String telephone;
 
-    private String cardType;
+    private Integer cardTypeId;
 
     private String cardNum;
 
@@ -63,12 +63,12 @@ public class CustomerInfo {
         this.telephone = telephone == null ? null : telephone.trim();
     }
 
-    public String getCardType() {
-        return cardType;
+    public Integer getCardTypeId() {
+        return cardTypeId;
     }
 
-    public void setCardType(String cardType) {
-        this.cardType = cardType == null ? null : cardType.trim();
+    public void setCardTypeId(Integer cardTypeId) {
+        this.cardTypeId = cardTypeId;
     }
 
     public String getCardNum() {

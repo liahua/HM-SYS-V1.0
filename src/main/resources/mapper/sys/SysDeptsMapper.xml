@@ -272,18 +272,4 @@
       modifiedUser = #{modifieduser,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <!-- 查询子部门数量 -->
-  <select id="getChildCount" parameterType="int" resultType="int">
-	
-	select count(*) from sys_depts where parentId=#{id}
-
-	</select>
-	
-	<!-- 定义一个Node对象,借助此对象封装从数据库查询到的数据 -->
-	 <select id="findZtreeDeptNodes"
-            resultType="com.hm.sys.vo.Node">
-        select id,name,parentId
-        from sys_depts        
-    </select>
-	
 </mapper>

@@ -1,7 +1,10 @@
 package com.hm.sys.service;
 
+import java.util.List;
+
 import com.hm.common.vo.PageObject;
 import com.hm.sys.entity.RoomType;
+import com.hm.sys.entity.RoomTypeExample;
 
 public interface SysRoomTypeService {
 	/**
@@ -22,5 +25,8 @@ public interface SysRoomTypeService {
 	 PageObject<RoomType> findPageObjects(
 			 String rtName,
 			 Integer pageCurrent);
+
+	 
+	 List<RoomType> findObjectsType(RoomTypeExample example);
 
 }

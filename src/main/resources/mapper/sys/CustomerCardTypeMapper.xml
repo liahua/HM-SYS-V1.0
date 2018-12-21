@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hm.sys.dao.RoomStateMapper" >
-  <resultMap id="BaseResultMap" type="com.hm.sys.entity.RoomState" >
+<mapper namespace="com.hm.sys.dao.CustomerCardTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.hm.sys.entity.CustomerCardType" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="stat" property="stat" jdbcType="VARCHAR" />
-    <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
-    <result column="modifiedTime" property="modifiedtime" jdbcType="TIMESTAMP" />
+    <result column="card_type" property="cardType" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,15 +64,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, stat, createdTime, modifiedTime
+    id, card_type
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.RoomStateExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.CustomerCardTypeExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from room_state
+    from customer_card_type
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,76 +83,56 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from room_state
+    from customer_card_type
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from room_state
+    delete from customer_card_type
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.hm.sys.entity.RoomStateExample" >
-    delete from room_state
+  <delete id="deleteByExample" parameterType="com.hm.sys.entity.CustomerCardTypeExample" >
+    delete from customer_card_type
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.hm.sys.entity.RoomState" >
-    insert into room_state (id, stat, createdTime, 
-      modifiedTime)
-    values (#{id,jdbcType=INTEGER}, #{stat,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, 
-      #{modifiedtime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.hm.sys.entity.CustomerCardType" >
+    insert into customer_card_type (id, card_type)
+    values (#{id,jdbcType=INTEGER}, #{cardType,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.hm.sys.entity.RoomState" >
-    insert into room_state
+  <insert id="insertSelective" parameterType="com.hm.sys.entity.CustomerCardType" >
+    insert into customer_card_type
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="stat != null" >
-        stat,
-      </if>
-      <if test="createdtime != null" >
-        createdTime,
-      </if>
-      <if test="modifiedtime != null" >
-        modifiedTime,
+      <if test="cardType != null" >
+        card_type,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="stat != null" >
-        #{stat,jdbcType=VARCHAR},
-      </if>
-      <if test="createdtime != null" >
-        #{createdtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifiedtime != null" >
-        #{modifiedtime,jdbcType=TIMESTAMP},
+      <if test="cardType != null" >
+        #{cardType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.hm.sys.entity.RoomStateExample" resultType="java.lang.Integer" >
-    select count(*) from room_state
+  <select id="countByExample" parameterType="com.hm.sys.entity.CustomerCardTypeExample" resultType="java.lang.Integer" >
+    select count(*) from customer_card_type
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update room_state
+    update customer_card_type
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.stat != null" >
-        stat = #{record.stat,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createdtime != null" >
-        createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.modifiedtime != null" >
-        modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP},
+      <if test="record.cardType != null" >
+        card_type = #{record.cardType,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -162,92 +140,25 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update room_state
+    update customer_card_type
     set id = #{record.id,jdbcType=INTEGER},
-      stat = #{record.stat,jdbcType=VARCHAR},
-      createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
-      modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP}
+      card_type = #{record.cardType,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hm.sys.entity.RoomState" >
-    update room_state
+  <update id="updateByPrimaryKeySelective" parameterType="com.hm.sys.entity.CustomerCardType" >
+    update customer_card_type
     <set >
-      <if test="stat != null" >
-        stat = #{stat,jdbcType=VARCHAR},
-      </if>
-      <if test="createdtime != null" >
-        createdTime = #{createdtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifiedtime != null" >
-        modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP},
+      <if test="cardType != null" >
+        card_type = #{cardType,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hm.sys.entity.RoomState" >
-    update room_state
-    set stat = #{stat,jdbcType=VARCHAR},
-      createdTime = #{createdtime,jdbcType=TIMESTAMP},
-      modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP}
+  <update id="updateByPrimaryKey" parameterType="com.hm.sys.entity.CustomerCardType" >
+    update customer_card_type
+    set card_type = #{cardType,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  
-  
-  
-  
-  
-  
-	<!-- 借助此元素对共性数据进行提取 -->
-	<sql id="queryWhereId">
-		<where>
-			<if test="stat!=null and stat!=''">
-				stat like concat("%",#{stat},"%")
-			</if>
-		</where>
-	</sql>
-	
-	<!-- 基于日志记录好人删除操作 -->
-	<delete id="deleteRoomState">
-		delete from room_Stat
-		where id in
-		<foreach collection="ids" open="(" close=")" separator=","
-			item="item">
-			#{item}
-		</foreach>
-	</delete>
-	
-
-	<select id="getRowCount" resultType="int">
-
-		select count(*) from room_Stat
-		<include refid="queryWhereId" />
-	</select>
-
-
-	<select id="findPageObjects" resultType="com.hm.sys.entity.RoomState">
-
-		select * from room_Stat
-		<include refid="queryWhereId" />
-		order by createdTime desc
-		limit #{startIndex},#{pageSize}
-	</select>
-
-	<insert id="insertRoomState">
-		insert into room_Stat
-		(rt_name,price_up)
-		values
-		(#{rt_name},#{price_up})
-	</insert>
-	
-	<select id="findObjectsState" resultType="com.hm.sys.entity.RoomState">
-
-		select * from room_stat
-		
-	</select>
-  
-  
-  
-  
 </mapper>

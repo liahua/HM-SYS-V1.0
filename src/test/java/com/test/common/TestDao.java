@@ -7,29 +7,28 @@ import java.util.List;
 import org.junit.Test;
 
 import com.hm.sys.dao.OrderInfoMapper;
+import com.hm.sys.entity.CustomerInfo;
 import com.hm.sys.entity.OrderInfo;
 import com.hm.sys.entity.OrderInfoExample;
+import com.hm.sys.service.impl.SysCheckOutServiceImpl;
 
 public class TestDao extends TestBase {
 	@Test
 	public void doTestDao() {
-		OrderInfoMapper orderInfoMapper = ctx.getBean(OrderInfoMapper.class);
-		OrderInfoExample orderInfoExample = new OrderInfoExample();
-		com.hm.sys.entity.OrderInfoExample.Criteria criteria = orderInfoExample.createCriteria();
-		criteria.andCreatedtimeBetween(initDate(0), initDate(24));
-		List<OrderInfo> orderInfolist = orderInfoMapper.selectByExample(orderInfoExample);
-
-		System.out.println(orderInfolist);
+		
+		SysCheckOutServiceImpl bean = ctx.getBean("sysCheckOutServiceImpl",SysCheckOutServiceImpl.class);
+		CustomerInfo findCustomerInfo = bean.findCustomerInfo(1, "4566887992545");
+		
 	}
 	
 	private Date initDate(Integer hour) {
-		Date now = new Date();
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(now);
-		calendar.set(Calendar.HOUR, hour);
+		calendar.set(Calendar.HOUR_OF_DAY, hour);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		System.out.println(calendar.getTime());
 		return calendar.getTime();
 	}
+	
+	
 }

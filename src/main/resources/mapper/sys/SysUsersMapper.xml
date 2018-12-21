@@ -320,10 +320,4 @@
       modifiedUser = #{modifieduser,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <!-- 根据deptId查询部门人数 -->
-  <select id="getCountByDeptId" parameterType="int" resultType="int">
-	
-	select count(*) from sys_users where deptId=#{id}
-	
-	</select>
 </mapper>

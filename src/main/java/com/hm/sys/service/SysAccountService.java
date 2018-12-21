@@ -1,5 +1,7 @@
 package com.hm.sys.service;
 
+import com.hm.common.vo.DayAccount;
+
 /**
  * 
  * @author 邹文豪
@@ -7,7 +9,13 @@ package com.hm.sys.service;
  */
 public interface SysAccountService {
 	/**
-	 * 日明细 
+	 * 日明细统计
 	 */
-	public int doDayCheck();
+	int doDayCheck();
+	
+	/**
+	 * 日明细查询 
+	 */
+
+	DayAccount doFindDayAccount(String date);
 }

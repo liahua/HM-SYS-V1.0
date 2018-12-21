@@ -9,7 +9,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.StringUtil;
+import com.hm.common.exception.ServiceException;
 import com.hm.common.utils.ListUtil;
+import com.hm.common.vo.DayAccount;
 import com.hm.common.vo.DynamicRoomInfo;
 import com.hm.sys.dao.AccountInfoMapper;
 import com.hm.sys.dao.AccountRoomMapper;
@@ -18,6 +21,7 @@ import com.hm.sys.dao.DynamicRoomMapper;
 import com.hm.sys.dao.OrderInfoMapper;
 import com.hm.sys.dao.StayInfoMapper;
 import com.hm.sys.entity.AccountInfo;
+import com.hm.sys.entity.AccountInfoExample;
 import com.hm.sys.entity.AccountRoom;
 import com.hm.sys.entity.CheckInfo;
 import com.hm.sys.entity.CheckInfoExample;
@@ -59,8 +63,21 @@ public class SysAccountServiceImpl implements SysAccountService {
 
 	private Date endTime = null;
 
+	@Override
+	public DayAccount doFindDayAccount(String date) {
+		if(StringUtil.isEmpty(date)) {
+			throw new ServiceException("日期不能为空");
+		}
+		
+		AccountInfoExample infoExample = new AccountInfoExample();
+		
+		
+		return null;
+	}
+	
+	
 	/**
-	 * 日明细
+	 * 日明细统计
 	 */
 	@Override
 	public int doDayCheck() {

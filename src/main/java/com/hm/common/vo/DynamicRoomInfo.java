@@ -34,6 +34,11 @@ public class DynamicRoomInfo implements Serializable{
 	private String rtName;
 	
 	/**
+	 * 房间类型id
+	 */
+	private Integer rtId;
+	
+	/**
 	 * 房间价格率
 	 */
 	private Float priceUp;
@@ -97,6 +102,14 @@ public class DynamicRoomInfo implements Serializable{
 
 	public void setStat(String stat) {
 		this.stat = stat;
+	}
+	
+	public Integer getRtId() {
+		return rtId;
+	}
+
+	public void setRtId(Integer rtId) {
+		this.rtId = rtId;
 	}
 
 	public static long getSerialversionuid() {

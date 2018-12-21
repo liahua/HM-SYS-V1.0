@@ -4,17 +4,21 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hm.common.utils.ListUtil;
-import com.hm.common.vo.DayAccount;
 import com.hm.common.vo.DynamicRoomInfo;
+import com.hm.sys.dao.AccountInfoMapper;
+import com.hm.sys.dao.AccountRoomMapper;
 import com.hm.sys.dao.CheckInfoMapper;
 import com.hm.sys.dao.DynamicRoomMapper;
 import com.hm.sys.dao.OrderInfoMapper;
 import com.hm.sys.dao.StayInfoMapper;
+import com.hm.sys.entity.AccountInfo;
+import com.hm.sys.entity.AccountRoom;
 import com.hm.sys.entity.CheckInfo;
 import com.hm.sys.entity.CheckInfoExample;
 import com.hm.sys.entity.OrderInfo;
@@ -45,6 +49,12 @@ public class SysAccountServiceImpl implements SysAccountService {
 	@Autowired
 	private CheckInfoMapper checkInfoMapper;
 	
+	@Autowired
+	private AccountRoomMapper accountRoomMapper;
+	
+	@Autowired
+	private AccountInfoMapper accountInfoMapper;
+	
 	private Date startTime = null;
 	
 	private Date endTime= null;
@@ -53,28 +63,53 @@ public class SysAccountServiceImpl implements SysAccountService {
 	 * 日明细
 	 */
 	@Override
-	public DayAccount doDayCheck() {
+	public int  doDayCheck() {
 		resetTime();
 		// 各种房间状态统计
-		HashMap<String, Integer> statMap = new HashMap<>();
-		statAccount(statMap);
+		HashMap<Integer, Integer> filledMap = new HashMap<>();
+		HashMap<Integer , Integer> unFilledMap = new HashMap<>();
+		statAccount(filledMap,unFilledMap);
+		
+		//写入数据库
+		for(int i =1 ; i<=Math.max(filledMap.size(),unFilledMap.size());i++) {
+			AccountRoom ar = new AccountRoom();
+			ar.setDay(endTime);
+			ar.setRoomTypeId(i);
+			
+			Integer fillNum = filledMap.get(i);
+			if(fillNum!=null)
+			ar.setFilledNum(fillNum);
+			
+			Integer unFilledNum = unFilledMap.get(i);
+			if(unFilledNum!=null)
+			ar.setUnfilledNum(unFilledNum);
+			
+			accountRoomMapper.insert(ar);
+		}
+		
+		//日账单统计
+		AccountInfo accountInfo = new AccountInfo();
 		
 		// 入住人数统计
-		Integer manCount = stayManAccount();
+		accountInfo.setManCount( stayManAccount());
 
 		// 押金统计
-		Double cashCount = cashAccount();
+		accountInfo.setCashCount(cashAccount());
 
 		// 订单统计
 		Integer orderCount = 0;
 		Double orderMoney = 0d;
 		orderAccount(orderCount, orderMoney);
-
+		
+		accountInfo.setOrderCount(orderCount);
+		accountInfo.setOrderMoney(orderMoney);
+		
 		//结算统计
-		Double checkinCount = checkinAccount();
+		accountInfo.setCheckinCount(checkinAccount());
 		
+		int row = accountInfoMapper.insert(accountInfo);
 		
-		return null;
+		return row;
 	}
 	
 	private void resetTime() {
@@ -172,7 +207,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 		return manCount;
 	}
 
-	private void statAccount(HashMap<String, Integer> statMap) {
+	private void statAccount(Map<Integer, Integer> filledMap,Map<Integer , Integer> unFilledMap) {
 		//key=高级大床房        value=入住房间数
 		//key=高级大床房&      value=未入住房间数
 		List<DynamicRoomInfo> roomList = roomInfoMapper.findObjects();
@@ -182,14 +217,14 @@ public class SysAccountServiceImpl implements SysAccountService {
 
 		for (DynamicRoomInfo dri : roomList) {
 			String stat = dri.getStat();
-			String rtName = dri.getRtName();
+			Integer rtId = dri.getRtId();
 
 			if ("已入住".equals(stat)) {
-				Integer count = statMap.get(rtName);
-				statMap.put(rtName, count == null ? 1 : count + 1);
+				Integer count = filledMap.get(rtId);
+				filledMap.put(rtId, count == null ? 1 : count + 1);
 			} else {
-				Integer count = statMap.get(rtName + "&");
-				statMap.put(rtName + "&", count == null ? 1 : count + 1);
+				Integer count = unFilledMap.get(rtId);
+				unFilledMap.put(rtId, count == null ? 1 : count + 1);
 			}
 		}
 

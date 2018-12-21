@@ -3,7 +3,7 @@
 <mapper namespace="com.hm.sys.dao.DynamicRoomMapper" >
 	<select id="findObjects" resultType="com.hm.common.vo.DynamicRoomInfo">
 	SELECT 
-		i.id, t.rt_name, room_name, room_add, bed_num, stat,price_up 
+		i.id, t.rt_name, rt_id , room_name, room_add, bed_num, stat,price_up 
 	FROM 
 		room_info i
 	LEFT JOIN 

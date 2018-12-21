@@ -11,5 +11,5 @@ public interface SysAccountService {
 	/**
 	 * 日明细 
 	 */
-	public DayAccount doDayCheck();
+	public int doDayCheck();
 }

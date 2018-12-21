@@ -2,6 +2,7 @@ package com.hm.sys.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,14 +40,26 @@ public class SysRoomTypeController {
 		return new JsonResult("delete ok");
 	}
 	  //../log/doFindPageObjects.do?pageCurrent=1
-	  @RequestMapping("doFindPageObjects")
+	  @RequestMapping("doFindPageObjectsType")
 	  @ResponseBody
-	  public JsonResult doFindPageObjects(   
+	  public JsonResult doFindPageObjectsType(   
 			  String rtName,
 			  Integer pageCurrent){
 		  PageObject<RoomType> pageObject=
 				  sysRoomTypeService.findPageObjects(rtName,
 							 pageCurrent);
-		  return new JsonResult(pageObject);
+		  return new JsonResult(pageObject);		  
 }
+	  
+	  //将方法返回值转换为json格式的字符串返回
+	  //在将对象转换为json格式字符串时会调用对象的get方法获取值
+	  
+	  @ExceptionHandler(IllegalArgumentException.class)
+	  @ResponseBody
+	  public JsonResult doHandleException(
+			  IllegalArgumentException e){
+		  System.out.println("SysRoomTypeController.doHandleException");
+		  e.printStackTrace();
+		  return new JsonResult(e);
+	  }
 }

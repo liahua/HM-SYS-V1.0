@@ -197,13 +197,51 @@
   
   
   
-  <!-- 客房状态浏览 -->
-  <select id="findRoomType"
-             resultType="map">
-         
-          select * from room_state
-         
-  </select>
+  
+  
+	<!-- 借助此元素对共性数据进行提取 -->
+	<sql id="queryWhereId">
+		<where>
+			<if test="stat!=null and stat!=''">
+				stat like concat("%",#{stat},"%")
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 基于日志记录好人删除操作 -->
+	<delete id="deleteRoomState">
+		delete from room_Stat
+		where id in
+		<foreach collection="ids" open="(" close=")" separator=","
+			item="item">
+			#{item}
+		</foreach>
+	</delete>
+	
+
+	<select id="getRowCount" resultType="int">
+
+		select count(*) from room_Stat
+		<include refid="queryWhereId" />
+	</select>
+
+
+	<select id="findPageObjects" resultType="com.hm.sys.entity.RoomState">
+
+		select * from room_Stat
+		<include refid="queryWhereId" />
+		order by createdTime desc
+		limit #{startIndex},#{pageSize}
+	</select>
+
+	<insert id="insertRoomState">
+		insert into room_Stat
+		(rt_name,price_up)
+		values
+		(#{rt_name},#{price_up})
+	</insert>
+  
+  
   
   
 </mapper>

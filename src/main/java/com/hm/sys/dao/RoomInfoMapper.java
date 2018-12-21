@@ -34,4 +34,17 @@ public interface RoomInfoMapper {
 	List<DynamicRoomInfo> findObjects();
 
 	List<Map<String, Object>> findRoomInfo();
+	
+
+		int deleteRoomInfo(@Param("ids")Integer... ids);
+		
+
+		 int getRowCount(@Param("roomName")String roomName);
+	
+		 List<RoomInfo> findPageObjects(
+				 @Param("roomName")String roomName,
+				 @Param("startIndex")Integer startIndex,
+				 @Param("pageSize")Integer pageSize);
+		 
+		 int insertRoomInfo(RoomInfo entity);
 }

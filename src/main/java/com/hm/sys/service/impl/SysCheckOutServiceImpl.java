@@ -16,11 +16,10 @@ import com.hm.sys.dao.CustomerInfoMapper;
 import com.hm.sys.dao.RoomInfoMapper;
 import com.hm.sys.dao.StayInfoMapper;
 import com.hm.sys.entity.CustomerInfo;
+import com.hm.sys.entity.CustomerInfoExample;
 import com.hm.sys.entity.RoomInfo;
 import com.hm.sys.entity.RoomInfoExample;
 import com.hm.sys.entity.RoomInfoExample.Criteria;
-import com.hm.sys.entity.StayInfo;
-import com.hm.sys.entity.StayInfoExample;
 import com.hm.sys.service.SysCheckOutService;
 
 @Service
@@ -52,7 +51,7 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 
 		CustomerInfo customerInfo = findCustomerInfo(checkOutVoDetail.getCustomerInfo());
 
-//		通过CardTypeCardNum查找CustomerInfo
+//		通过CardTypeIdCardNum查找CustomerInfo
 //		通过CustomerNameTelephone查找CustomerInfo
 //		通过id查找CustomerInfo
 
@@ -72,12 +71,12 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 				return customerInfoReal;
 			}
 		}
-		String cardType = customerInfo.getCardType();
+		int cardType = customerInfo.getCardTypeId();
 		String cardNum = customerInfo.getCardNum();
 		/**
 		 * cardType||cardNum为空
 		 */
-		if ((!StringUtils.isEmpty(cardType)) && (!StringUtils.isEmpty(cardNum))) {
+		if ((!IntegerUtil.isIllegality(cardType)) && (!StringUtils.isEmpty(cardNum))) {
 			customerInfoReal = findCustomerInfo(cardType, cardNum);
 			if (!ObjectUtil.isEmpty(customerInfoReal)) {
 				return customerInfoReal;
@@ -97,7 +96,24 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 		return null;
 	}
 
-	private CustomerInfo findCustomerInfo(String cardType, String cardNum) {
+	private CustomerInfo findCustomerInfo(String customerName, String telephone) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public CustomerInfo findCustomerInfo(int cardTypeId, String cardNum) {
+		CustomerInfoExample customerInfoExample = new CustomerInfoExample();
+		List<com.hm.sys.entity.CustomerInfoExample.Criteria> oredCriteria = customerInfoExample.getOredCriteria();
+
+		com.hm.sys.entity.CustomerInfoExample.Criteria criteria = customerInfoExample.createCriteria();
+		criteria.andCardTypeIdEqualTo(cardTypeId);
+		criteria.andCardNumEqualTo(cardNum);
+		oredCriteria.add(criteria);
+		List<CustomerInfo> customerInfo = customerInfoMapper.selectByExample(customerInfoExample);
+		System.out.println("customerInfo"+customerInfo);
+		
+		
+		
 		
 		return null;
 	}

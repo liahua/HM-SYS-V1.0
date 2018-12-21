@@ -445,73 +445,63 @@ public class CustomerInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeIsNull() {
-            addCriterion("card_type is null");
+        public Criteria andCardTypeIdIsNull() {
+            addCriterion("card_type_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeIsNotNull() {
-            addCriterion("card_type is not null");
+        public Criteria andCardTypeIdIsNotNull() {
+            addCriterion("card_type_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeEqualTo(String value) {
-            addCriterion("card_type =", value, "cardType");
+        public Criteria andCardTypeIdEqualTo(Integer value) {
+            addCriterion("card_type_id =", value, "cardTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeNotEqualTo(String value) {
-            addCriterion("card_type <>", value, "cardType");
+        public Criteria andCardTypeIdNotEqualTo(Integer value) {
+            addCriterion("card_type_id <>", value, "cardTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeGreaterThan(String value) {
-            addCriterion("card_type >", value, "cardType");
+        public Criteria andCardTypeIdGreaterThan(Integer value) {
+            addCriterion("card_type_id >", value, "cardTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("card_type >=", value, "cardType");
+        public Criteria andCardTypeIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("card_type_id >=", value, "cardTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeLessThan(String value) {
-            addCriterion("card_type <", value, "cardType");
+        public Criteria andCardTypeIdLessThan(Integer value) {
+            addCriterion("card_type_id <", value, "cardTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeLessThanOrEqualTo(String value) {
-            addCriterion("card_type <=", value, "cardType");
+        public Criteria andCardTypeIdLessThanOrEqualTo(Integer value) {
+            addCriterion("card_type_id <=", value, "cardTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeLike(String value) {
-            addCriterion("card_type like", value, "cardType");
+        public Criteria andCardTypeIdIn(List<Integer> values) {
+            addCriterion("card_type_id in", values, "cardTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeNotLike(String value) {
-            addCriterion("card_type not like", value, "cardType");
+        public Criteria andCardTypeIdNotIn(List<Integer> values) {
+            addCriterion("card_type_id not in", values, "cardTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeIn(List<String> values) {
-            addCriterion("card_type in", values, "cardType");
+        public Criteria andCardTypeIdBetween(Integer value1, Integer value2) {
+            addCriterion("card_type_id between", value1, value2, "cardTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andCardTypeNotIn(List<String> values) {
-            addCriterion("card_type not in", values, "cardType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCardTypeBetween(String value1, String value2) {
-            addCriterion("card_type between", value1, value2, "cardType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCardTypeNotBetween(String value1, String value2) {
-            addCriterion("card_type not between", value1, value2, "cardType");
+        public Criteria andCardTypeIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("card_type_id not between", value1, value2, "cardTypeId");
             return (Criteria) this;
         }
 

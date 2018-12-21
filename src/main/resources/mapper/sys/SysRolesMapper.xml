@@ -240,26 +240,4 @@
       modifiedUser = #{modifieduser,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <!-- 分页查询 -->
-    <select id="findPageObjects"
-            resultType="com.hm.sys.entity.SysRoles">
-          select *
-          from sys_roles
-          <include refid="queryWhereId"/>
-          order by createdTime desc
-limit #{startIndex},#{pageSize}
-    </select>
-    <select id="getRowCount"
-            resultType="int">
-          select count(*)
-          from sys_roles
-          <include refid="queryWhereId"/>
-</select>
- <sql id="queryWhereId">
-          <where>
-            <if test="name!=null and name!=''">
-               name like concat("%",#{name},"%")
-            </if>
-          </where>
-    </sql>
 </mapper>

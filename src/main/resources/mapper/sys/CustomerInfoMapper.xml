@@ -7,7 +7,7 @@
     <result column="gender" property="gender" jdbcType="CHAR" />
     <result column="country" property="country" jdbcType="VARCHAR" />
     <result column="telephone" property="telephone" jdbcType="VARCHAR" />
-    <result column="card_type" property="cardType" jdbcType="VARCHAR" />
+    <result column="card_type_id" property="cardTypeId" jdbcType="INTEGER" />
     <result column="card_num" property="cardNum" jdbcType="VARCHAR" />
     <result column="operator" property="operator" jdbcType="VARCHAR" />
     <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
@@ -72,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, customer_name, gender, country, telephone, card_type, card_num, operator, createdTime, 
-    modifiedTime
+    id, customer_name, gender, country, telephone, card_type_id, card_num, operator, 
+    createdTime, modifiedTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.CustomerInfoExample" >
     select
@@ -107,11 +107,11 @@
   </delete>
   <insert id="insert" parameterType="com.hm.sys.entity.CustomerInfo" >
     insert into customer_info (id, customer_name, gender, 
-      country, telephone, card_type, 
+      country, telephone, card_type_id, 
       card_num, operator, createdTime, 
       modifiedTime)
     values (#{id,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, 
-      #{country,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{cardTypeId,jdbcType=INTEGER}, 
       #{cardNum,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, 
       #{modifiedtime,jdbcType=TIMESTAMP})
   </insert>
@@ -133,8 +133,8 @@
       <if test="telephone != null" >
         telephone,
       </if>
-      <if test="cardType != null" >
-        card_type,
+      <if test="cardTypeId != null" >
+        card_type_id,
       </if>
       <if test="cardNum != null" >
         card_num,
@@ -165,8 +165,8 @@
       <if test="telephone != null" >
         #{telephone,jdbcType=VARCHAR},
       </if>
-      <if test="cardType != null" >
-        #{cardType,jdbcType=VARCHAR},
+      <if test="cardTypeId != null" >
+        #{cardTypeId,jdbcType=INTEGER},
       </if>
       <if test="cardNum != null" >
         #{cardNum,jdbcType=VARCHAR},
@@ -206,8 +206,8 @@
       <if test="record.telephone != null" >
         telephone = #{record.telephone,jdbcType=VARCHAR},
       </if>
-      <if test="record.cardType != null" >
-        card_type = #{record.cardType,jdbcType=VARCHAR},
+      <if test="record.cardTypeId != null" >
+        card_type_id = #{record.cardTypeId,jdbcType=INTEGER},
       </if>
       <if test="record.cardNum != null" >
         card_num = #{record.cardNum,jdbcType=VARCHAR},
@@ -233,7 +233,7 @@
       gender = #{record.gender,jdbcType=CHAR},
       country = #{record.country,jdbcType=VARCHAR},
       telephone = #{record.telephone,jdbcType=VARCHAR},
-      card_type = #{record.cardType,jdbcType=VARCHAR},
+      card_type_id = #{record.cardTypeId,jdbcType=INTEGER},
       card_num = #{record.cardNum,jdbcType=VARCHAR},
       operator = #{record.operator,jdbcType=VARCHAR},
       createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
@@ -257,8 +257,8 @@
       <if test="telephone != null" >
         telephone = #{telephone,jdbcType=VARCHAR},
       </if>
-      <if test="cardType != null" >
-        card_type = #{cardType,jdbcType=VARCHAR},
+      <if test="cardTypeId != null" >
+        card_type_id = #{cardTypeId,jdbcType=INTEGER},
       </if>
       <if test="cardNum != null" >
         card_num = #{cardNum,jdbcType=VARCHAR},
@@ -281,7 +281,7 @@
       gender = #{gender,jdbcType=CHAR},
       country = #{country,jdbcType=VARCHAR},
       telephone = #{telephone,jdbcType=VARCHAR},
-      card_type = #{cardType,jdbcType=VARCHAR},
+      card_type_id = #{cardTypeId,jdbcType=INTEGER},
       card_num = #{cardNum,jdbcType=VARCHAR},
       operator = #{operator,jdbcType=VARCHAR},
       createdTime = #{createdtime,jdbcType=TIMESTAMP},

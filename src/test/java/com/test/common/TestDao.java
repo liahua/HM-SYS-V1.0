@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.hm.sys.dao.OrderInfoMapper;
+import com.hm.sys.entity.CustomerInfo;
 import com.hm.sys.entity.OrderInfo;
 import com.hm.sys.entity.OrderInfoExample;
 import com.hm.sys.service.impl.SysCheckOutServiceImpl;
@@ -14,8 +15,10 @@ import com.hm.sys.service.impl.SysCheckOutServiceImpl;
 public class TestDao extends TestBase {
 	@Test
 	public void doTestDao() {
+		
 		SysCheckOutServiceImpl bean = ctx.getBean("sysCheckOutServiceImpl",SysCheckOutServiceImpl.class);
-		bean.checkOutDepencyRoomId("1101");
+		CustomerInfo findCustomerInfo = bean.findCustomerInfo(1, "4566887992545");
+		
 	}
 	
 	private Date initDate(Integer hour) {

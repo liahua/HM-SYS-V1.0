@@ -178,4 +178,49 @@
       price_up = #{priceUp,jdbcType=REAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  
+	<!-- 借助此元素对共性数据进行提取 -->
+	<sql id="queryWhereId">
+		<where>
+			<if test="rtName!=null and rtName!=''">
+				rtName like concat("%",#{rtName},"%")
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 基于日志记录好人删除操作 -->
+	<delete id="deleteRoomType">
+		delete from room_type
+		where id in
+		<foreach collection="ids" open="(" close=")" separator=","
+			item="item">
+			#{item}
+		</foreach>
+	</delete>
+	
+
+	<select id="getRowCount" resultType="int">
+
+		select count(*) from room_type
+		<include refid="queryWhereId" />
+	</select>
+
+
+	<select id="findPageObjects" resultType="com.hm.sys.entity.RoomType">
+
+		select * from room_type
+		<include refid="queryWhereId" />
+		order by createdTime desc
+		limit #{startIndex},#{pageSize}
+	</select>
+
+	<insert id="insertRoomType">
+		insert into room_type
+		(rt_name,price_up)
+		values
+		(#{rt_name},#{price_up})
+	</insert>
 </mapper>

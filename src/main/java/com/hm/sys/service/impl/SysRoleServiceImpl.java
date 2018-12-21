@@ -19,7 +19,7 @@ import com.hm.sys.entity.SysMenusExample;
 import com.hm.sys.entity.SysRoles;
 import com.hm.sys.entity.SysRolesExample;
 import com.hm.sys.service.SysDeptService;
-import com.hm.sys.service.SysMenuService;
+
 import com.hm.sys.service.SysRoleService;
 import com.hm.sys.vo.Node;
 @Service

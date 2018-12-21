@@ -22,4 +22,9 @@ public class PageController {
 	public String index(){
 		return "index";
 	}
+	
+	 @RequestMapping("doPageUI")
+	  public String doPageUI(){
+		  return "customer/page";//page.html
+	  }
 }

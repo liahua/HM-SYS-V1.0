@@ -128,7 +128,7 @@
 						<div class="collapse" id="customer" role="navigation"
 							aria-expanded="false" style="height: 0px;">
 							<ul class="nav">
-								<li><a href="#">普通</a></li>
+								<li><a id="load-common-id">普通</a></li>
 								<li><a href="#">贵宾</a></li>
 							</ul>
 						</div></li>
@@ -344,6 +344,8 @@ $(function(){//页面加载完成执行
 	doLoadUI("load-role-id","role/doRoleUI.do")
 	doLoadUI("load-user-id","user/doUserUI.do")
 	doLoadUI("load-log-id","room/doLogUI.do")
+	//客户管理
+	doLoadUI("load-common-id","common/doCommonUI.do")
 	
 });
 function doLoadUI(id,url){

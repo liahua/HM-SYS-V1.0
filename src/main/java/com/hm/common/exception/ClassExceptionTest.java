@@ -16,5 +16,30 @@ public class ClassExceptionTest extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 4128212794713955236L;
 
+	public ClassExceptionTest() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ClassExceptionTest(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+		// TODO Auto-generated constructor stub
+	}
+
+	public ClassExceptionTest(String message, Throwable cause) {
+		super(message, cause);
+		// TODO Auto-generated constructor stub
+	}
+
+	public ClassExceptionTest(String message) {
+		super(message);
+		// TODO Auto-generated constructor stub
+	}
+
+	public ClassExceptionTest(Throwable cause) {
+		super(cause);
+		// TODO Auto-generated constructor stub
+	}
+
 
 }

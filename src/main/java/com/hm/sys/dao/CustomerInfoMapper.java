@@ -15,7 +15,11 @@ public interface CustomerInfoMapper {
     int insert(CustomerInfo record);
 
     int insertSelective(CustomerInfo record);
-
+/**
+ * list集合查询封装
+ * @param 
+ * @return
+ */
     List<CustomerInfo> selectByExample(CustomerInfoExample example);
 
     CustomerInfo selectByPrimaryKey(Integer id);

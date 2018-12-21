@@ -12,44 +12,40 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 public interface RoomInfoMapper {
-    int countByExample(RoomInfoExample example);
+	int countByExample(RoomInfoExample example);
 
-    int deleteByExample(RoomInfoExample example);
+	int deleteByExample(RoomInfoExample example);
 
-    int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Integer id);
 
-    int insert(RoomInfo record);
+	int insert(RoomInfo record);
 
-    int insertSelective(RoomInfo record);
+	int insertSelective(RoomInfo record);
 
-    List<RoomInfo> selectByExample(RoomInfoExample example);
+	List<RoomInfo> selectByExample(RoomInfoExample example);
 
-    RoomInfo selectByPrimaryKey(Integer id);
+	RoomInfo selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") RoomInfo record, @Param("example") RoomInfoExample example);
+	int updateByExampleSelective(@Param("record") RoomInfo record, @Param("example") RoomInfoExample example);
 
-    int updateByExample(@Param("record") RoomInfo record, @Param("example") RoomInfoExample example);
+	int updateByExample(@Param("record") RoomInfo record, @Param("example") RoomInfoExample example);
 
-    int updateByPrimaryKeySelective(RoomInfo record);
+	int updateByPrimaryKeySelective(RoomInfo record);
 
-    int updateByPrimaryKey(RoomInfo record);
+	int updateByPrimaryKey(RoomInfo record);
 
 	List<DynamicRoomInfo> findObjects();
 
 	List<Map<String, Object>> findRoomInfo();
-	
 
-		int deleteRoomInfo(@Param("ids")Integer... ids);
-		
+	int deleteRoomInfo(@Param("ids") Integer... ids);
 
-		 int getRowCount(@Param("roomName")String roomName);
-	
-		 List<RoomInfo> findPageObjects(
-				 @Param("roomName")String roomName,
-				 @Param("startIndex")Integer startIndex,
-				 @Param("pageSize")Integer pageSize);
-		 
-		 int insertRoomInfo(RoomInfo entity);
-		 
-		 List<RoomInfo> findObjectsInfo(RoomInfoExample example);
+	int getRowCount(@Param("roomName") String roomName);
+
+	List<RoomInfo> findPageObjects(@Param("roomName") String roomName, @Param("startIndex") Integer startIndex,
+			@Param("pageSize") Integer pageSize);
+
+	int insertRoomInfo(RoomInfo entity);
+
+	List<RoomInfo> findObjectsInfo(RoomInfoExample example);
 }

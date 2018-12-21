@@ -12,8 +12,8 @@ import com.hm.common.utils.ListUtil;
 import com.hm.common.vo.DayAccount;
 import com.hm.common.vo.DynamicRoomInfo;
 import com.hm.sys.dao.CheckInfoMapper;
+import com.hm.sys.dao.DynamicRoomMapper;
 import com.hm.sys.dao.OrderInfoMapper;
-import com.hm.sys.dao.RoomInfoMapper;
 import com.hm.sys.dao.StayInfoMapper;
 import com.hm.sys.entity.CheckInfo;
 import com.hm.sys.entity.CheckInfoExample;
@@ -34,7 +34,7 @@ import com.hm.sys.service.SysAccountService;
 public class SysAccountServiceImpl implements SysAccountService {
 
 	@Autowired
-	private RoomInfoMapper roomInfoMapper;
+	private DynamicRoomMapper roomInfoMapper;
 
 	@Autowired
 	private StayInfoMapper stayInfoMapper;

@@ -34,8 +34,6 @@ public interface RoomInfoMapper {
 
 	int updateByPrimaryKey(RoomInfo record);
 
-	List<DynamicRoomInfo> findObjects();
-
 	List<Map<String, Object>> findRoomInfo();
 
 	int deleteRoomInfo(@Param("ids") Integer... ids);

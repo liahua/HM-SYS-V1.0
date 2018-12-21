@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hm.sys.dao.RoomInfoMapper" >
+<mapper namespace="com.hm.sys.dao.DynamicRoomMapper" >
 	<select id="findObjects" resultType="com.hm.common.vo.DynamicRoomInfo">
 	SELECT 
 		i.id, t.rt_name, room_name, room_add, bed_num, stat,price_up 

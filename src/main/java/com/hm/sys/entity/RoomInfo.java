@@ -60,4 +60,11 @@ public class RoomInfo {
     public void setStatId(Integer statId) {
         this.statId = statId;
     }
+
+	@Override
+	public String toString() {
+		return "RoomInfo [id=" + id + ", rtId=" + rtId + ", roomName=" + roomName + ", roomAdd=" + roomAdd + ", bedNum="
+				+ bedNum + ", statId=" + statId + "]";
+	}
+    
 }

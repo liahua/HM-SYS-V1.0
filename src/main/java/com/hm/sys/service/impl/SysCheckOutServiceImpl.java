@@ -1,24 +1,13 @@
 package com.hm.sys.service.impl;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import com.github.pagehelper.StringUtil;
 import com.hm.common.exception.ServiceException;
-
-import com.hm.common.utils.ListUtil;
-
 import com.hm.common.vo.CheckOutVoDetails;
-import com.hm.sys.dao.CustomerInfoMapper;
-import com.hm.sys.dao.RoomInfoMapper;
-import com.hm.sys.dao.StayInfoMapper;
 import com.hm.sys.entity.CustomerInfo;
-
 import com.hm.sys.entity.RoomInfo;
-import com.hm.sys.entity.RoomInfoExample;
 import com.hm.sys.entity.StayInfo;
 import com.hm.sys.service.SysCheckOutService;
 import com.hm.sys.service.SysCustomerService;
@@ -59,6 +48,7 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 		
 		checkOutVoDetail.setRoomInfo(roomInfo);
 		checkOutVoDetail.setCustomerInfo(customerInfo);
+		System.out.println(checkOutVoDetail);
 		return null;
 	}
 

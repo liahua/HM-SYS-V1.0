@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hm.common.vo.CustomerAllInfo;
+import com.hm.common.vo.PageObject;
 import com.hm.sys.dao.CustomerInfoMapper;
 import com.hm.sys.entity.CustomerInfo;
 import com.hm.sys.entity.CustomerInfoExample;
@@ -32,6 +34,17 @@ public class SysCustomerServiceImpl implements SysCustomerService{
 //		cri.andCreatedtimeBetween(value1, value2);
 		
 		return customerInfoMapper.selectByExample(new CustomerInfoExample());
+	}
+
+	@Override
+	public PageObject<CustomerAllInfo> findPageObjects(String name, Integer pageCurrent) {
+
+		
+		
+		
+		
+		
+		return null;
 	}
 
 }

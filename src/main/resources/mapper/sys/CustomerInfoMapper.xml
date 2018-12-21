@@ -76,18 +76,8 @@
     createdTime, modifiedTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.CustomerInfoExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from customer_info
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
+  SELECT i.id , customer_name , gender , country,telephone , card_type,card_num , operator,createdTime,modifiedTime
+FROM customer_info i LEFT JOIN customer_card_type c ON i.card_type_id = c.id;
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -288,4 +278,32 @@
       modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="">
+  
+          resultType="com.hm.common.vo.CustomerAllInfo">
+          select *
+          from customer_info
+          <include refid="queryWhereId"/>
+          order by createdTime desc
+limit #{startIndex},#{pageSize}
+  
+  
+  </select>
+  
+  <select id="getRowCount"
+            resultType="int">
+          select count(*)
+          from customer_info
+          <include refid="queryWhereId"/>
+</select>
+  
+  <sql id="queryWhereId">
+          <where>
+            <if test="name!=null and name!=''">
+               name like concat("%",#{name},"%")
+            </if>
+          </where>
+    </sql>
+  
+  
 </mapper>

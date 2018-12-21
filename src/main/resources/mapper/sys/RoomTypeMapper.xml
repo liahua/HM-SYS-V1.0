@@ -223,4 +223,13 @@
 		values
 		(#{rt_name},#{price_up})
 	</insert>
+	
+	
+	<select id="findObjectsType" resultType="com.hm.sys.entity.RoomType">
+
+		select * from room_type
+		
+	</select>
+	
+	
 </mapper>

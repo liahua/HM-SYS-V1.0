@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hm.common.vo.JsonResult;
 import com.hm.common.vo.PageObject;
 import com.hm.sys.entity.RoomState;
+import com.hm.sys.entity.RoomStateExample;
 import com.hm.sys.service.SysRoomStateService;
 
 
@@ -59,4 +60,10 @@ public class SysRoomStateController {
 		  e.printStackTrace();
 		  return new JsonResult(e);
 	  }
+	  
+	  @RequestMapping("doFindObjectsState")
+		@ResponseBody
+		public JsonResult doFindObjectsState(RoomStateExample example){
+			 return new JsonResult(sysRoomStateService.findObjectsState(example));
+}
 }

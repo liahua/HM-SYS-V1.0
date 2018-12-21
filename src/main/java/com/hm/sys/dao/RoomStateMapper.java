@@ -3,6 +3,7 @@ package com.hm.sys.dao;
 import com.hm.sys.entity.RoomState;
 import com.hm.sys.entity.RoomStateExample;
 import com.hm.sys.entity.RoomType;
+import com.hm.sys.entity.RoomTypeExample;
 
 import java.util.List;
 import java.util.Map;
@@ -60,5 +61,7 @@ public interface RoomStateMapper {
 			 @Param("pageSize")Integer pageSize);
 	 
 	 int insertRoomState(RoomState entity);
+	 
+	 List<RoomState> findObjectsState(RoomStateExample example);
 	 
 }

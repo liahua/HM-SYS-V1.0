@@ -1,8 +1,11 @@
 package com.hm.sys.service;
 
 
+import java.util.List;
+
 import com.hm.common.vo.PageObject;
 import com.hm.sys.entity.RoomInfo;
+import com.hm.sys.entity.RoomInfoExample;
 
 
 public interface SysRoomInfoService {
@@ -24,4 +27,6 @@ public interface SysRoomInfoService {
 	 PageObject<RoomInfo> findPageObjects(
 			 String roomName,
 			 Integer pageCurrent);
+	 
+	 List<RoomInfo> findObjectsInfo(RoomInfoExample example);
 }

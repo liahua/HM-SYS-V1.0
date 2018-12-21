@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hm.common.vo.JsonResult;
 import com.hm.common.vo.PageObject;
 import com.hm.sys.entity.RoomType;
+import com.hm.sys.entity.RoomTypeExample;
 import com.hm.sys.service.SysRoomTypeService;
 
 @Controller
@@ -39,6 +40,8 @@ public class SysRoomTypeController {
 		  sysRoomTypeService.deleteRoomType(ids);
 		return new JsonResult("delete ok");
 	}
+	  
+	  
 	  //../log/doFindPageObjects.do?pageCurrent=1
 	  @RequestMapping("doFindPageObjectsType")
 	  @ResponseBody
@@ -62,4 +65,10 @@ public class SysRoomTypeController {
 		  e.printStackTrace();
 		  return new JsonResult(e);
 	  }
+	  
+	  @RequestMapping("doFindObjectsType")
+		@ResponseBody
+		public JsonResult doFindObjectsType(RoomTypeExample example){
+			 return new JsonResult(sysRoomTypeService.findObjectsType(example));
+}
 }

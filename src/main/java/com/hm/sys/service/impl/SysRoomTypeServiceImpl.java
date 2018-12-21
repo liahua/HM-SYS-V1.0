@@ -11,6 +11,7 @@ import com.hm.common.exception.ServiceException;
 import com.hm.common.vo.PageObject;
 import com.hm.sys.dao.RoomTypeMapper;
 import com.hm.sys.entity.RoomType;
+import com.hm.sys.entity.RoomTypeExample;
 import com.hm.sys.service.SysRoomTypeService;
 
 @Service
@@ -83,5 +84,12 @@ public class SysRoomTypeServiceImpl implements SysRoomTypeService{
 		
 		return pageObject;
 	}
+
+	@Override
+	public List<RoomType> findObjectsType(RoomTypeExample example) {
+	
+		return roomTypeMapper.findObjectsType(example);
+	}
+
 
 }

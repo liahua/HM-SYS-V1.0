@@ -288,4 +288,10 @@
 		values
 		(#{rt_name},#{price_up})
 	</insert>
+	
+	<select id="findObjectsInfo" resultType="com.hm.sys.entity.RoomInfo">
+
+		select * from room_info
+		
+	</select>
 </mapper>

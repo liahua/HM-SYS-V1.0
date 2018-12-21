@@ -3,6 +3,9 @@ package com.hm.sys.dao;
 import com.hm.common.vo.DynamicRoomInfo;
 import com.hm.sys.entity.RoomInfo;
 import com.hm.sys.entity.RoomInfoExample;
+import com.hm.sys.entity.RoomType;
+import com.hm.sys.entity.RoomTypeExample;
+
 import java.util.List;
 import java.util.Map;
 
@@ -47,4 +50,6 @@ public interface RoomInfoMapper {
 				 @Param("pageSize")Integer pageSize);
 		 
 		 int insertRoomInfo(RoomInfo entity);
+		 
+		 List<RoomInfo> findObjectsInfo(RoomInfoExample example);
 }

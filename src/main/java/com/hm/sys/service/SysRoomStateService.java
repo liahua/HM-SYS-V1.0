@@ -1,7 +1,11 @@
 package com.hm.sys.service;
 
+import java.util.List;
+
 import com.hm.common.vo.PageObject;
 import com.hm.sys.entity.RoomState;
+import com.hm.sys.entity.RoomStateExample;
+
 
 
 
@@ -24,4 +28,6 @@ public interface SysRoomStateService {
 	 PageObject<RoomState> findPageObjects(
 			 String stat,
 			 Integer pageCurrent);
+	 
+	 List<RoomState> findObjectsState(RoomStateExample example);
 }

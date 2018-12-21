@@ -10,6 +10,7 @@ import com.hm.common.exception.ServiceException;
 import com.hm.common.vo.PageObject;
 import com.hm.sys.dao.RoomInfoMapper;
 import com.hm.sys.entity.RoomInfo;
+import com.hm.sys.entity.RoomInfoExample;
 import com.hm.sys.service.SysRoomInfoService;
 
 
@@ -83,5 +84,10 @@ public class SysRoomInfoServiceImpl implements SysRoomInfoService{
 		pageObject.setPageCount(pageCount);
 		
 		return pageObject;
+	}
+
+	@Override
+	public List<RoomInfo> findObjectsInfo(RoomInfoExample example) {
+		return roomInfoMapper.findObjectsInfo(example);
 	}
 }

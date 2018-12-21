@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hm.common.vo.JsonResult;
 import com.hm.common.vo.PageObject;
 import com.hm.sys.entity.RoomInfo;
+import com.hm.sys.entity.RoomInfoExample;
+import com.hm.sys.entity.RoomStateExample;
 import com.hm.sys.service.SysRoomInfoService;
 
 
@@ -59,4 +61,11 @@ public class SysRoomInfoController {
 		  e.printStackTrace();
 		  return new JsonResult(e);
 	  }
+	  
+	  @RequestMapping("doFindObjectsInfo")
+		@ResponseBody
+		public JsonResult doFindObjectsInfo(RoomInfoExample example){
+			 return new JsonResult(sysRoomInfoService.findObjectsInfo(example));
+}
+	  
 }

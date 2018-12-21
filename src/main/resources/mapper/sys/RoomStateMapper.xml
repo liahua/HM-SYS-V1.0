@@ -240,6 +240,12 @@
 		values
 		(#{rt_name},#{price_up})
 	</insert>
+	
+	<select id="findObjectsState" resultType="com.hm.sys.entity.RoomState">
+
+		select * from room_stat
+		
+	</select>
   
   
   

@@ -10,6 +10,7 @@ import com.hm.common.exception.ServiceException;
 import com.hm.common.vo.PageObject;
 import com.hm.sys.dao.RoomStateMapper;
 import com.hm.sys.entity.RoomState;
+import com.hm.sys.entity.RoomStateExample;
 import com.hm.sys.service.SysRoomStateService;
 
 
@@ -83,6 +84,11 @@ public class SysRoomStateServiceImpl implements SysRoomStateService{
 		pageObject.setPageCount(pageCount);
 		
 		return pageObject;
+	}
+
+	@Override
+	public List<RoomState> findObjectsState(RoomStateExample example) {
+		return roomStateMapper.findObjectsState(example);
 	}
 
 }

@@ -6,13 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface SysUsersMapper {
-	/**
-	 * 根据deptId查询部门人数
-	 * @param id
-	 * @return
-	 */
-	int getCountByDeptId(Integer id);
-	
     int countByExample(SysUsersExample example);
 
     int deleteByExample(SysUsersExample example);
@@ -34,4 +27,6 @@ public interface SysUsersMapper {
     int updateByPrimaryKeySelective(SysUsers record);
 
     int updateByPrimaryKey(SysUsers record);
+
+	int getCountByDeptId(Integer id);
 }

@@ -3,12 +3,7 @@ package com.hm.sys.dao;
 import com.hm.common.vo.DynamicRoomInfo;
 import com.hm.sys.entity.RoomInfo;
 import com.hm.sys.entity.RoomInfoExample;
-import com.hm.sys.entity.RoomType;
-import com.hm.sys.entity.RoomTypeExample;
-
 import java.util.List;
-import java.util.Map;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface RoomInfoMapper {
@@ -34,22 +29,13 @@ public interface RoomInfoMapper {
 
     int updateByPrimaryKey(RoomInfo record);
 
+	int deleteRoomInfo(Integer[] ids);
+
+	int getRowCount(String roomName);
+
 	List<DynamicRoomInfo> findObjects();
 
-	List<Map<String, Object>> findRoomInfo();
-	
+	List<RoomInfo> findPageObjects(String roomName, int startIndex, int pageSize);
 
-		int deleteRoomInfo(@Param("ids")Integer... ids);
-		
-
-		 int getRowCount(@Param("roomName")String roomName);
-	
-		 List<RoomInfo> findPageObjects(
-				 @Param("roomName")String roomName,
-				 @Param("startIndex")Integer startIndex,
-				 @Param("pageSize")Integer pageSize);
-		 
-		 int insertRoomInfo(RoomInfo entity);
-		 
-		 List<RoomInfo> findObjectsInfo(RoomInfoExample example);
+	List<RoomInfo> findObjectsInfo(RoomInfoExample example);
 }

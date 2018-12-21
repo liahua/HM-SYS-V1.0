@@ -33,7 +33,6 @@ public interface RoomTypeMapper {
 	int getRowCount(String rtName);
 
 	List<RoomType> findPageObjects(String rtName, int startIndex, int pageSize);
-	
+
 	List<RoomType> findObjectsType(RoomTypeExample example);
-	
 }

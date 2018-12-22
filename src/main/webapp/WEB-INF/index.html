@@ -3,6 +3,7 @@
 
 <head>
 <meta charset="utf-8">
+<script src="echarts.min.js"></script>
 <link rel="apple-touch-icon" sizes="76x76"
 	href="assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
@@ -59,7 +60,7 @@
 					<li><a id="load-room-id"> <i class="ti-home"></i>
 							<p>预览房间</p>
 					</a></li>
-					<li><a href="#"> <i class="ti-user"></i>
+					<li><a id="load-checkin-id"> <i class="ti-user"></i>
 							<p>入住登记</p>
 					</a></li>
 					<li><a data-toggle="collapse" href="#sys" class="collapsed"
@@ -337,13 +338,15 @@ $(function(){//页面加载完成执行
 	doLoadUI("load-rState-id","room/doRoomStateUI.do")
 	doLoadUI("load-rInfo-id","room/doRoomInfoUI.do")
 	
-
+	//入住登记
+	doLoadUI("load-checkin-id","stay/doCheckinUI.do")
+	
 	//系统管理
 	doLoadUI("load-dept-id","dept/doDeptUI.do")
 	doLoadUI("load-menu-id","menu/doMenuUI.do")
 	doLoadUI("load-role-id","role/doRoleUI.do")
 	doLoadUI("load-user-id","user/doUserUI.do")
-	doLoadUI("load-log-id","room/doLogUI.do")
+	doLoadUI("load-log-id","log/doLogUI.do")
 	//客户管理
 	doLoadUI("load-common-id","common/doCommonUI.do")
 	

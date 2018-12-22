@@ -1,56 +1,158 @@
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title">部门管理</h3>
+				
+				<div class="box-tools">
+					<div class="input-group input-group-sm" style="width: 100px;">
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default btn-delete">删除</button>
+							<button type="button" class="btn btn-default btn-add">添加</button>
+							<button type="button" class="btn btn-default btn-update">修改</button>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<!-- /.box-header -->
+		<div class="box-body table-responsive no-padding">
+          <table id="gridTreeTable" class="table table-hover">
+        	<thead>
+	        <tr>
+		      <th data-field="selectItem" data-checkbox="true"></th>
+	        </tr>
+	     </thead>
+         </table>
+        </div>
+		</div>
+		<!-- /.box -->
+	</div>
+</div>
+<script type="text/javascript"
+	src="assets/vendors/treegrid/jquery.treegrid.extension.js"></script>
+<script type="text/javascript"
+	src="assets/vendors/treegrid/jquery.treegrid.min.js"></script>
+<script type="text/javascript"
+	src="assets/vendors/treegrid/tree.table.js"></script>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="content">
-                                    <h4 class="title">部门管理</h4>
-                                    <div class="toolbar">
-                                        <!--        Here you can write extra buttons/actions for the toolbar              -->
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead class="text-primary">
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>名称</th>
-                                                    <th>上级部门</th>
-                                                    <th>排序号</th>
-                                                    <th class="text-right">操作</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>61</td>
-                                                    <td class="text-right">
-														<a href="#" class="btn btn-simple btn-info btn-icon"><i class="ti-write"></i></a>
-                                                        <a href="#" class="btn btn-simple btn-warning btn-icon"><i class="ti-pencil-alt"></i></a>
-                                                        <!-- ti-eye -->
-														<a href="#" class="btn btn-simple btn-danger btn-icon"><i class="ti-trash"></i></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot>
-
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- end content-->
-                            </div>
-                            <!--  end card  -->
-                        </div>
-                        <!-- end col-md-12 -->
-                    </div>
-<script type="text/javascript" src="assets/vendors/treegrid/jquery.treegrid.extension.js"></script>
-<script type="text/javascript" src="assets/vendors/treegrid/jquery.treegrid.min.js"></script>
-<script type="text/javascript" src="assets/vendors/treegrid/tree.table.js"></script>
-         
 <script type="text/javascript">
-    $(document).ready(function() {
-
-    });
+/**
+ * 初始化表格的列
+ */
+var columns = [
+{
+	field : 'selectItem',
+	radio : true
+},
+{
+	title : 'ID',
+	field : 'id',
+	visible : false,
+	align : 'center',
+	valign : 'middle',
+	width : '80px'
+},
+{
+	title : '名称',
+	field : 'name',
+	align : 'center',
+	valign : 'middle',
+	sortable : true,
+	width : '130px'
+},
+{
+	title : '上级机构',
+	field : 'parentName',
+	align : 'center',
+	valign : 'middle',
+	sortable : true,
+	width : '100px'
+},
+{
+	title : '排序号',
+	field : 'sort',
+	align : 'center',
+	valign : 'middle',
+	sortable : true,
+	width : '70px'
+}
+];
+	$(function() {
+	doGetObjects();
+	
+	$(".input-group-btn")
+	.on("click",".btn-delete",doDeleteObject)
+	.on("click",".btn-add",doAddDept);
+	
+	
+	});
+	
+	/*==========页面展示部门信息=========*/
+	function doGetObjects(){
+		//构建table对象
+		var table=new TreeTable(
+				"gridTreeTable",//tableId
+				"dept/dogetObjects.do",//url
+				columns);//tree表格名columns
+		//设置从那一列展开内容(默认是第一列)
+		table.setExpandColumn(2);//可以不写
+		//初始化table对象(底层发ajax异步请求)
+		table.init();
+	}
+	
+	/*=========执行删除操作==========*/
+	function doDeleteObject(){
+		//获取选中id
+		var id=doGetCheckedId();
+		if(!id){
+			alert("请选择");
+			return;
+		}
+		//异步提交请求删除数据
+		var url="dept/doDeleteObject.do";
+		var params={"id":id};
+		$.post(url,params,function(result){
+			if(result.state==1){
+				alert(result.message)
+				doGetObjects();
+			}else{
+				alert(result.message);
+			}
+		});
+	}
+	
+	/*========获取选中的id==========*/
+	function doGetCheckedId(){
+		//获取选中记录
+		var object=$("#gridTreeTable")
+		//bootstrapTreeTable是treeGrid插件内部定义的jquery扩展函数
+		//getSelections为扩展函数内部要调用的一个方法
+		.bootstrapTreeTable("getSelections");
+		//对记录进行判定
+		if(object.length==1)
+			return object[0].id;
+	}
+	
+	/*==========点击添加事件进入添加部门页面==========*/
+	function doAddDept(){
+		//构建标题
+		var title;
+		if($(this).hasClass("btn-add")){
+			title="添加部门";
+		}
+		//异步加载添加页面
+		var url="dept/doAddDept.do";
+		alert("1");
+		$("mainContentId").load(url,function(){
+			$("box-title").html(title);
+		});
+	}
+	
+	
+	
+	
+	
+	
 </script>
 

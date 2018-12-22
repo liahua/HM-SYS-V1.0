@@ -3,22 +3,34 @@ package com.hm.common.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 叶云彤
+ * @author tarena
+ *
+ */
 public class CustomerAllInfo implements Serializable{
-	    /**
+
+
+	/**
+	 *序列化
 	 * 
 	 */
-	private static final long serialVersionUID = -4930806210857479114L;
+	private static final long serialVersionUID = -2067857748398370764L;
 		private Integer id;
 	    private String customerName;
 	    private String gender;
 	    private String country;
 	    private String telephone;
-	    private String cardTypeId;
+	    private String cardType;
 		private String cardNum;
 	    private String operator;
-	    private Date createdtime;
-	    private Date modifiedtime;
-		public Integer getId() {
+	    private Date createdTime;
+	    private Date modifiedTime;
+		/**
+		 * 对印数据库的字段,封装数据表
+		 * @return
+		 */
+	    public Integer getId() {
 			return id;
 		}
 		public void setId(Integer id) {
@@ -48,11 +60,11 @@ public class CustomerAllInfo implements Serializable{
 		public void setTelephone(String telephone) {
 			this.telephone = telephone;
 		}
-		public String getCardTypeId() {
-			return cardTypeId;
+		public String getCardType() {
+			return cardType;
 		}
-		public void setCardTypeId(String cardTypeId) {
-			this.cardTypeId = cardTypeId;
+		public void setCardType(String cardType) {
+			this.cardType = cardType;
 		}
 		public String getCardNum() {
 			return cardNum;
@@ -66,17 +78,27 @@ public class CustomerAllInfo implements Serializable{
 		public void setOperator(String operator) {
 			this.operator = operator;
 		}
-		public Date getCreatedtime() {
-			return createdtime;
+	
+		public Date getCreatedTime() {
+			return createdTime;
 		}
-		public void setCreatedtime(Date createdtime) {
-			this.createdtime = createdtime;
+		public void setCreatedTime(Date createdTime) {
+			this.createdTime = createdTime;
 		}
-		public Date getModifiedtime() {
-			return modifiedtime;
+		public Date getModifiedTime() {
+			return modifiedTime;
 		}
-		public void setModifiedtime(Date modifiedtime) {
-			this.modifiedtime = modifiedtime;
+		public void setModifiedTime(Date modifiedTime) {
+			this.modifiedTime = modifiedTime;
 		}
+		@Override
+		public String toString() {
+			return "CustomerAllInfo [id=" + id + ", customerName=" + customerName + ", gender=" + gender + ", country="
+					+ country + ", telephone=" + telephone + ", cardType=" + cardType + ", cardNum=" + cardNum
+					+ ", operator=" + operator + ", createdTime=" + createdTime + ", modifiedTime=" + modifiedTime
+					+ "]";
+		}
+	
+		
 	   
 }

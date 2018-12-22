@@ -11,7 +11,6 @@ import com.hm.common.vo.JsonResultCustomer;
 import com.hm.common.vo.PageObject;
 import com.hm.sys.entity.CustomerTypeExample;
 import com.hm.sys.service.SysCommonService;
-import com.hm.sys.service.SysCustomerService;
 /**
  * 
  * 客户管理  
@@ -33,24 +32,27 @@ public class CommonController {
 	public String doCommonUI() {
 		return "customer/customer";
 	}
-	/**
-	 * 
-	 * 显示页面数据
-	 * @param example
-	 * @return 叶云彤
-	 */
+	
 	@RequestMapping("selectByExample")
 	@ResponseBody
 		public JsonResultCustomer selectByExample(CustomerTypeExample example) {
 			return new JsonResultCustomer(sysCommonService.selectByExample(example));
 		}
 	
+	/**
+	 * 
+	 * 交互前台传的数据
+	 * 
+	 * 
+	 * @param example
+	 * @return 叶云彤
+	 */
 	
 	@RequestMapping("doFindPageObjects")
 	@ResponseBody
 	public JsonResultCustomer doFindPageObjects(String name, Integer pageCurrent) {
 		CommonPageObject<CustomerAllInfo> pageObject =sysCommonService.findPageObjects(name, pageCurrent);
-			System.out.println(sysCommonService.findPageObjects(name, pageCurrent));
+		//System.out.println(sysCommonService.findPageObjects(name, pageCurrent));
 		return new JsonResultCustomer(pageObject);
 	}
 }

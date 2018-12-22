@@ -32,4 +32,13 @@
                     #{logid}
         </foreach>
     </delete>
+    
+     <insert id="insert" parameterType="com.hm.sys.entity.SysLogs" >
+    insert into sys_logs (id, username, operation, 
+      method, params, time, 
+      ip, createdTime)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR}, 
+      #{method,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{time,jdbcType=BIGINT}, 
+      #{ip,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP})
+  </insert>
 </mapper>

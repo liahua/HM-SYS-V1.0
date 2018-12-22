@@ -1,0 +1,108 @@
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title">客户</h3>
+
+				<div class="box-tools">
+					<div class="input-group input-group-sm" style="width: 300px;">
+						<input type="text" name="table_search" id="searchNameId"
+							class="form-control pull-right" placeholder="
+							客户">
+
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default btn-search">
+								<i class="fa fa-search"></i>
+							</button>
+							<button type="button" class="btn btn-default btn-add">添加</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.box-header -->
+
+
+
+			<div class="box-body table-responsive no-padding">
+				<form>
+					<div class="content">
+						<div class="table-responsive table-full-width">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>姓名</th>
+										<th>性别</th>
+										<th>国籍</th>
+										<th>电话</th>
+										<th>证件类型</th>
+										<th>证件号码</th>
+										<th>操作员</th>
+										<th>创建时间</th>
+										<th>修改时间</th>
+										<th class="td-actions text-left"><a href="#"
+											rel="tooltip" title="详情"
+											class="btn btn-success btn-simple btn-xs"> <i
+												class="ti-direction"></i>
+										</a></th>
+									</tr>
+								</thead>
+								<tbody id="tbodyId">
+								</tbody>
+
+							</table>
+						</div>
+					</div>
+					<!-- 查询表表头结束 -->
+
+				<div id="container" style="height: 100%"></div>
+				</form>
+
+
+				<div id="pageId" class="box-footer clearfix"></div>
+				<!-- 异步页脚 -->
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript"
+		src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+	<script type="text/javascript"
+		src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+	<script type="text/javascript"
+		src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+	<script type="text/javascript"
+		src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+	<script type="text/javascript"
+		src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+	<script type="text/javascript"
+		src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+	<script type="text/javascript"
+		src="https://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+	<script type="text/javascript"
+		src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+	<script type="text/javascript"
+		src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+
+	<script type="text/javascript">
+	var dom = document.getElementById("container");
+	var myChart = echarts.init(dom);
+	var app = {};
+	option = null;
+	option = {
+	    xAxis: {
+	        type: 'category',
+	        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+	    },
+	    yAxis: {
+	        type: 'value'
+	    },
+	    series: [{
+	        data: [820, 932, 901, 934, 1290, 1330, 1320],
+	        type: 'line'
+	    }]
+	};
+	;
+	if (option && typeof option === "object") {
+	    myChart.setOption(option, true);
+	}
+	</script>

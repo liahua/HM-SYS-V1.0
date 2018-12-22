@@ -7,23 +7,32 @@
   
   
   <!-- ============叶云彤============ -->
-  
-  
-  
+  <!-- =============↓=============== -->
+  <!-- =======多表连差,分页查询 ========-->
+  <!-- =============↓=============== -->
     <select id="findPageObjects"
-            resultType="com.hm.sys.vo.CommonAllInfo">
-          select *
-          from customer_info
-          <include refid="queryWhereId"/>
-          order by createdTime desc
-limit #{startIndex},#{pageSize}
+            resultType="com.hm.common.vo.CustomerAllInfo">
+         SELECT 
+         	b.id,b.customer_name,b.gender,b.country,b.telephone,a.card_type,b.card_num,b.operator,b.createdTime,b.modifiedTime 
+		 FROM 
+		 	customer_card_type a 
+		 JOIN 
+		 	customer_info b 
+		 ON 
+		 	a.id=b.id
+		  limit 
+		      #{startIndex},#{pageSize}
     </select>
+    
+    
     <select id="getRowCount"
             resultType="int">
           select count(*)
           from customer_info
           <include refid="queryWhereId"/>
 </select>
+
+
  <sql id="queryWhereId">
           <where>
             <if test="name!=null and name!=''">

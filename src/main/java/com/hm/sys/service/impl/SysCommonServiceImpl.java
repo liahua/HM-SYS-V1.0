@@ -13,7 +13,12 @@ import com.hm.sys.entity.CustomerInfo;
 import com.hm.sys.entity.CustomerInfoExample;
 import com.hm.sys.entity.CustomerTypeExample;
 import com.hm.sys.service.SysCommonService;
-
+/**
+ * 
+ * 叶云彤
+ * @author tarena
+ *
+ */
 @Service
 public class SysCommonServiceImpl implements SysCommonService {
 

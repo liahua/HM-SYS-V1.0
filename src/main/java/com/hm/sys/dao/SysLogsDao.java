@@ -14,7 +14,11 @@ public interface SysLogsDao {
      * @return
      */
     public List<SysLogs> getObjects(@Param("username")String username,@Param("startIndex")Integer startIndex, @Param("pageSize")Integer pageSize);
-    
+    /**
+     * 根据输入的username查询相关数据数量
+     * @param username
+     * @return
+     */
     int getRowCount(@Param("username")String username);
     /**
      * 根据选择id删除信息(多选)
@@ -22,4 +26,10 @@ public interface SysLogsDao {
      * @return
      */
     int deleteObjects(@Param("ids")Integer...ids);
+    /**
+     * 添加日志信息
+     * @param record
+     * @return
+     */
+    int insert(SysLogs record);
 }

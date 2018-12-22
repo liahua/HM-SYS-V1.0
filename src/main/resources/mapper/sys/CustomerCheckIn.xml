@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hm.sys.dao.CustomerCheckInMapper" >
+<!-- 客户入住 -->
+ <!-- 基于客户身份证信息查询客户以及客户对应的订单信息 -->
+  <select id="findCustomerOrderbyCardNum" resultMap="sysCustomerOrderV0">
+  		select * from customer_info where card_num=#{cardNum};
+  </select>
+  <resultMap type="com.hm.sys.vo.SysCustomerOrderResult" 
+               id="sysCustomerOrderV0">
+              <!-- many2one,one2one --> 
+              <collection property="orderInfo"
+              	column="id"
+                           select="com.hm.sys.dao.OrderInfoMapper.findById">
+              </collection>
+    </resultMap>
+</mapper>

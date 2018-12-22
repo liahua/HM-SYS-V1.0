@@ -5,8 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hm.common.vo.JsonResult;
+import com.hm.common.vo.CommonPageObject;
+import com.hm.common.vo.CustomerAllInfo;
+import com.hm.common.vo.JsonResultCustomer;
+import com.hm.common.vo.PageObject;
 import com.hm.sys.entity.CustomerTypeExample;
+import com.hm.sys.service.SysCommonService;
 import com.hm.sys.service.SysCustomerService;
 /**
  * 
@@ -19,11 +23,11 @@ import com.hm.sys.service.SysCustomerService;
 public class CommonController {
 
 	@Autowired
-	private SysCustomerService sysCustomerService;
+	private SysCommonService sysCommonService;
 	/**
 	 * 普通客户
 	 * 
-	 * @return
+	 * @return 叶云彤
 	 */
 	@RequestMapping("doCommonUI")
 	public String doCommonUI() {
@@ -33,12 +37,20 @@ public class CommonController {
 	 * 
 	 * 显示页面数据
 	 * @param example
-	 * @return
+	 * @return 叶云彤
 	 */
 	@RequestMapping("selectByExample")
 	@ResponseBody
-		public JsonResult selectByExample(CustomerTypeExample example) {
-			return new JsonResult(sysCustomerService.selectByExample(example));
+		public JsonResultCustomer selectByExample(CustomerTypeExample example) {
+			return new JsonResultCustomer(sysCommonService.selectByExample(example));
 		}
 	
+	
+	@RequestMapping("doFindPageObjects")
+	@ResponseBody
+	public JsonResultCustomer doFindPageObjects(String name, Integer pageCurrent) {
+		CommonPageObject<CustomerAllInfo> pageObject =sysCommonService.findPageObjects(name, pageCurrent);
+			System.out.println(sysCommonService.findPageObjects(name, pageCurrent));
+		return new JsonResultCustomer(pageObject);
+	}
 }

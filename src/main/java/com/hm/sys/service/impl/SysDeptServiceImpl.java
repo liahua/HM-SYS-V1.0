@@ -34,13 +34,15 @@ public class SysDeptServiceImpl implements SysDeptService {
 		System.out.println("1");
 		return selectByExample;
 	}
-
+	
 	@Override
 	public List<Node> findZtreeDeptNodes() {
 		List<Node> fZtree = sysDeptsMapper.findZtreeDeptNodes();
 		return fZtree;
 	}
-
+	/**
+	 * 修改部门信息
+	 */
 	@Override
 	public int updateObject(SysDepts entity) {
 		//验证
@@ -54,7 +56,9 @@ public class SysDeptServiceImpl implements SysDeptService {
 			throw new ServiceException("记录可能已经不存在");
 		return row;
 	}
-
+	/**
+	 * 添加部门信息
+	 */
 	@Override
 	public int insertObject(SysDepts entity) {
 		if(entity==null)

@@ -38,7 +38,9 @@ public class SysRoleServiceImpl implements SysRoleService {
 	private SysRoleMenusDao sysRoleMenusDao;
 	@Autowired
 	private SysUserRolesDao sysUserRolesDao;
-
+	/**
+	 * 将查询信息呈现至分页查询页面
+	 */
 	@Override
 	public PageObject<SysRoles> findPageObjects(String name, Integer pageCurrent) {
 		//检查当前查询页码合法性
@@ -68,7 +70,10 @@ public class SysRoleServiceImpl implements SysRoleService {
 		
 		return pageObject;
 	}
-
+	/**
+	 * 根据id删除角色信息
+	 * 并删除与菜单,用户相关关系
+	 */
 	@Override
 	public int deleteObject(Integer id) {
 		//检验id是否合法
@@ -98,7 +103,9 @@ public class SysRoleServiceImpl implements SysRoleService {
 		sysRoleMenusDao.insertObject(record.getId(), menuIds);
 		return insert;
 	}
-
+	/**
+	 * 根据id查询角色信息
+	 */
 	@Override
 	public Map<String, Object> getObjectById(Integer id) {
 		if(IntegerUtil.isIllegality(id))
@@ -112,7 +119,9 @@ public class SysRoleServiceImpl implements SysRoleService {
 		map.put("menusids", menuids);
 		return map;
 	}
-
+	/**
+	 * 更改操作
+	 */
 	@Override
 	public int update(SysRoles record, Integer[] menuIds) {
 		//验证修改内容

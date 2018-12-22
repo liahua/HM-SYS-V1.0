@@ -25,13 +25,19 @@ public class SysMenuServiceImpl implements SysMenuService {
 	private SysMenusMapper sysMenusMapper;
 	@Autowired
 	private SysRoleMenusMapper sysRoleMenusMapper;
-
+	
+	/**
+	 * 查询菜单信息
+	 */
 	@Override
 	public List<SysMenus> getObjects(SysMenusExample example) {
 		List<SysMenus> objects = sysMenusMapper.selectByExample(example);
 		return objects;
 	}
-
+	/**
+	 * 根据菜单id删除信息
+	 * 并删除角色与菜单关系
+	 */
 	@Override
 	public int deleteObject(Integer id) {
 		// 验证
@@ -53,7 +59,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 		List<Node> findZtreeMenuNodes = sysMenusMapper.findZtreeMenuNodes();
 		return findZtreeMenuNodes;
 	}
-
+	/**
+	 * 菜单添加操作
+	 */
 	@Override
 	public int insert(SysMenus record) {
 		// 验证
@@ -71,7 +79,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 		return row;
 	}
-
+	/**
+	 * 惨淡更改操作
+	 */
 	@Override
 	public int update(SysMenus record) {
 		if (record == null)

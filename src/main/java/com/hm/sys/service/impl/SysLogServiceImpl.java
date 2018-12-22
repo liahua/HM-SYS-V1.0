@@ -15,6 +15,10 @@ import com.hm.sys.service.SysLogService;
 public class SysLogServiceImpl implements SysLogService {
 	@Autowired
 	private SysLogsDao sysLogsDao; 
+	
+	/**
+	 * 将日志信息封装到pagaObject对象展现在分页查询页面
+	 */
 	@Override
 	public PageObject<SysLogs> getObjects(String username, Integer pageCurrent) {
 		if(IntegerUtil.isIllegality(pageCurrent))
@@ -38,7 +42,10 @@ public class SysLogServiceImpl implements SysLogService {
 
 		return pageObject;
 	}
-
+	
+	/**
+	 * 在分页查询页面选择删除日志信息
+	 */
 	@Override
 	public int deleteObjects(Integer... ids) {
 		if(ids==null||ids.length<0)

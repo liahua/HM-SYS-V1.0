@@ -1,0 +1,99 @@
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<h4 class="box-title">客户登记入住</h4>
+
+				<div class="box-tools">
+					<div class="input-group input-group-sm" style="width: 350px;">
+						<input type="text" name="table_search" id="searchNameId"
+							class="form-control pull-right" placeholder="客户名">
+
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default btn-search">
+                                <i class="fa fa-search"></i>
+							</button>
+							<button type="button" class="btn btn-default btn-add">输入清空</button>
+							<button type="button" class="btn btn-default btn-add">添加</button>
+							<button type="button" class="btn btn-default btn-update">修改</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.box-header -->
+			<form>
+			<div class="box-body table-responsive padding:2px">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+						<th><label for="orderId">已有订单?</label></th>
+						<td><input type="text" name="customer_id" id="orderId" ></td>
+						</tr>
+						<tr>
+							<th><label for="customer_nameId">用户名</label></th>
+							<td><input type="text" name="customer_name" id="customer_nameId" ></td>
+							<td><label for="genderId" >性别</label></td>
+							<td> <input type="text"  readonly="readonly"  id="genderId"  placeholder="选择">
+							</td>
+						<tr>
+							<th><label for="customer_typeId">客户类型</label></th>
+							<td>
+								<select name="customer_type">
+								<option>散户</option>
+								<option>组团</option>
+								<option>政府</option>
+								</select>
+								</td>
+							<th><label for="card_typeId">证件类型</label></th>
+							<td>
+								<select name="card_type">
+								<option>身份证</option>
+								<option>护照</option>
+								</select>
+								</td>
+						</tr>
+						<tr>	
+							<th><label for="card_numId">证件号</label></th>
+							<td><input type="text"  id="card_num" placeholder="请输入证件号码" /><td>
+							<th><label for="telephoneId">联系电话</label></th>
+							<td><input type="text"  id="telephone" placeholder="请联系电话" /><td>
+						</tr>
+						<tr>
+							<th><label for="roomId">客房号</label></th>
+							<td><input type="text" name="room_id" id="roomId "></td>
+							<th><label for="staydateId">入住日期</label></th>
+							<td><input type="text" name="stay_date" id=staydateId ></td>
+						</tr>
+						<tr>	
+							<th><label for="stay_date_countId">入住天数</label></th>
+							<td><input type="text" name="stay_date_count" id="stay_date_countId"></td>
+							<th><label for="cashId">押金</label></th>
+							<td><input type="text" name="cash" id="cashId" ></td>
+						</tr>
+					</thead>
+					<tbody id="tbodyId"></tbody>
+				</table>
+			</div>
+			<div id="pageId" class="box-footer clearfix">
+			</div>
+			<!-- /.box-body -->
+		</form>
+		<!-- /.box -->
+		<div class="layui-layer-btn layui-layer-btn-">
+			<a class="layui-layer-btn0 btn-confirm">确定</a>
+			<a class="layui-layer-btn1 btn-cancel">取消</a>
+	     </div>
+	</div>
+</div>
+<script type="text/javascript">
+
+   function doGetEditFormData(){
+		 //获取用户输入的数据
+		 var params={
+		    username:$("#customer_nameId").val(),
+		    password:$("#gender").val(),
+		    email:$("#customer_type").val(),
+		    mobile:$("#card_type").val(),
+		    deptId:$("#card_num").data()
+		 }
+   </script>

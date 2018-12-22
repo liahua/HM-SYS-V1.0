@@ -24,7 +24,7 @@
 
 
 			<div class="box-body table-responsive no-padding">
-				<form >
+				<form>
 					<div class="content">
 						<div class="table-responsive table-full-width">
 							<table class="table">
@@ -32,8 +32,8 @@
 									<tr>
 										<th>姓名</th>
 										<th>性别</th>
-										<th>国籍</th>
 										<th>电话</th>
+										<th>国籍</th>
 										<th>证件类型</th>
 										<th>证件号码</th>
 										<th>操作员</th>
@@ -46,9 +46,11 @@
 										</a></th>
 									</tr>
 								</thead>
-									<tbody id="tbodyId">
-						</tbody>
-								
+								<tbody id="tbodyId">
+
+
+								</tbody>
+
 							</table>
 						</div>
 					</div>
@@ -193,12 +195,16 @@
 		}
 	}
 	function doCreateTds(row, i) {
-		var tds = "<td>" + (parseInt(i) + 1) + "</td>" + "<td>" + row.name
-				+ "</td>" + "<td>" + row.note + "</td>" + "<td>"
-				+ new Date(row.createdTime).toLocaleString() + "</td>" + "<td>"
-				+ new Date(row.modifiedTime).toLocaleString() + "</td>"
-				+ "<td>" + row.createdUser + "</td>" + "<td>"
-				+ row.modifiedUser + "</td>"
+		var tds =
+				 "<td>" + row.customerName+ "</td>" 
+				+ "<td>"+row.gender+"</td>"
+				+ "<td>"+row.telephone+"</td>"
+				+ "<td>" + row.country + "</td>" 
+				+ "<td>"+row.cardType+"</td>"
+				+ "<td>"+row.cardNum+"</td>"
+				+ "<td>"+row.operator + "</td>"
+			    + "<td>"+new Date(row.createdTime).toLocaleString() +"</td>"
+			    + "<td>"+new Date(row.modifiedTime).toLocaleString()+"</td>"
 				+ "<td><a class='btn-delete'>delete</a>"
 				+ "&nbsp;<a class='btn-update'>update</a></td>";
 		return tds;

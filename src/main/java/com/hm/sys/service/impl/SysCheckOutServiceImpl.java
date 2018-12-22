@@ -1,6 +1,10 @@
 package com.hm.sys.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.github.pagehelper.StringUtil;
@@ -52,15 +56,21 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 		// 通过customerInfo查找入住信息
 		List<StayInfo> stayInfos = sysStayInfoService.findStayInfo(customerInfo,
 				checkOutVoDetail.getStayInfoQueryType());
-		// 通过customerInfo查询已确定订单信息
-		List<OrderInfo> orderInfos = sysOrderService.findOrderInfo(customerInfo,
-				checkOutVoDetail.getOrderInfoQueryType());
+		// 根据stayInfo查找OrderInfos
+		ArrayList<OrderInfo> orderInfos = new ArrayList<>();
+		Map<Integer, OrderInfo> stayAndOrderInfoMap = new HashMap<>();
+		for (StayInfo stayInfo : stayInfos) {
+			OrderInfo orderInfo=sysOrderService.findOrderInfo(stayInfo.getOrderId());
+			orderInfos.add(orderInfo);
+			stayAndOrderInfoMap.put(stayInfo.getId(), orderInfo);
+		}
+	
 		
 		checkOutVoDetail.setRoomInfo(roomInfo);
 		checkOutVoDetail.setCustomerInfo(customerInfo);
 		checkOutVoDetail.setStayInfos(stayInfos);
 		checkOutVoDetail.setOrderInfos(orderInfos);
-
+		checkOutVoDetail.setStayAndOrderInfoMap(stayAndOrderInfoMap);
 		return checkOutVoDetail;
 	}
 

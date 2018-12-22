@@ -1,7 +1,9 @@
 package com.hm.common.vo;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.hm.sys.entity.CustomerInfo;
 import com.hm.sys.entity.OrderInfo;
@@ -18,6 +20,13 @@ public class CheckOutVoDetails implements Serializable {
 	private List<StayInfo> stayInfos;
 	private CustomerInfo customerInfo;
 	private RoomInfo roomInfo;
+	/**
+	 * Integer应为stayInfo的id
+	 */
+	private Map<Integer,OrderInfo> stayAndOrderInfoMap;
+	
+	
+	
 	/**
 	 * 1.查询类型为已支付
 	 * 0.查询类型为未支付
@@ -82,12 +91,23 @@ public class CheckOutVoDetails implements Serializable {
 		this.orderInfoQueryType = orderInfoQueryType;
 	}
 
+
+	public Map<Integer, OrderInfo> getStayAndOrderInfoMap() {
+		return stayAndOrderInfoMap;
+	}
+
+	public void setStayAndOrderInfoMap(Map<Integer, OrderInfo> stayAndOrderInfoMap) {
+		this.stayAndOrderInfoMap = stayAndOrderInfoMap;
+	}
+
 	@Override
 	public String toString() {
 		return "CheckOutVoDetails [orderInfos=" + orderInfos + ", stayInfos=" + stayInfos + ", customerInfo="
-				+ customerInfo + ", roomInfo=" + roomInfo + ", stayInfoQueryType=" + stayInfoQueryType
-				+ ", orderInfoQueryType=" + orderInfoQueryType + "]";
+				+ customerInfo + ", roomInfo=" + roomInfo + ", stayAndOrderInfoMap=" + stayAndOrderInfoMap
+				+ ", stayInfoQueryType=" + stayInfoQueryType + ", orderInfoQueryType=" + orderInfoQueryType + "]";
 	}
+
+	
 	
 
 	

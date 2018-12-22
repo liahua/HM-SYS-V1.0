@@ -25,6 +25,9 @@ public class SysStayInfoServiceImpl implements SysStayInfoService{
 	private StayInfoMapper stayInfoMapper;
 	@Override
 	public List<StayInfo> findStayInfo(CustomerInfo customerInfo,Integer isCheckOut) {
+		if(isCheckOut!=null&&isCheckOut!=0&&isCheckOut!=1) {
+			throw new ServiceException("不合法的查询状态");
+		}
 		Integer id = customerInfo.getId();
 		if(IntegerUtil.isIllegality(id)) {
 			throw new ServiceException("无此用户信息");

@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 import com.hm.common.exception.ServiceException;
 import com.hm.common.utils.IntegerUtil;
 import com.hm.common.utils.ListUtil;
+import com.hm.common.utils.ObjectUtil;
 import com.hm.sys.dao.OrderInfoMapper;
 import com.hm.sys.dao.RoomStateMapper;
 import com.hm.sys.entity.CustomerInfo;
@@ -99,6 +100,18 @@ public class SysOrderServiceImpl implements SysOrderService {
 			}
 		}
 		return orderInfos;
+	}
+
+	@Override
+	public OrderInfo findOrderInfo(Integer orderId) {
+		if(IntegerUtil.isIllegality(orderId)) {
+			throw new ServiceException(orderId+":该orderId不合法");
+		}
+		OrderInfo orderInfo = orderInfoMapper.selectByPrimaryKey(orderId);
+		if(ObjectUtil.isEmpty(orderInfo)) {
+			throw new ServiceException("orderId"+orderId+"无法找到该订单");
+		}
+		return orderInfo;
 	}
 
 }

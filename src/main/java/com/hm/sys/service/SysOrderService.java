@@ -33,4 +33,28 @@ public interface SysOrderService {
 	 */
 	List<OrderInfo> findOrderInfo(CustomerInfo customerInfo, Integer orderInfoQueryType);
 
+	/**
+	 * 
+	* @Function: SysOrderService.java
+	* @Description: 该函数的功能描述
+	*
+	* @param orderId  orderInfo的主键
+	* @return OrderInfo
+	* @throws：异常描述 orderId不合法|无该orderId
+	*
+	* @version: v1.0.0
+	* @author: 李志学
+	* @date: 2018年12月22日 下午1:10:51 
+	*
+	* Modification History:
+	* Date         Author          Version            Description
+	*---------------------------------------------------------*
+	* 2018年12月22日     李志学          v1.0.0               修改原因
+	 */
+	OrderInfo findOrderInfo(Integer orderId);
+
+	
+	
+
+
 }

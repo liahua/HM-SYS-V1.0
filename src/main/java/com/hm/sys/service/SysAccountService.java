@@ -11,6 +11,11 @@ public interface SysAccountService {
 	/**
 	 * 日明细统计
 	 */
-	DayAccount doDayCheck(String date);
+	int doDayCheck(String date);
+	
+	/**
+	 *  查询
+	 */
+	DayAccount doFindDayAccounts(String start,String end);
 	
 }

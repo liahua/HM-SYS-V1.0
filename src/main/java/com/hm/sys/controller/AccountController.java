@@ -20,7 +20,14 @@ public class AccountController {
 	@ResponseBody
 	public JsonResult doDayAccount(String date) {
 		
-		DayAccount dayCheck = sysAccountService.doDayCheck(date);
-		return new JsonResult(dayCheck);
+		int row = sysAccountService.doDayCheck(date);
+		return new JsonResult(row);
+	}
+	
+	@RequestMapping("doFindAccounts")
+	@ResponseBody
+	public JsonResult doFindAccounts(String start,String end) {
+		DayAccount dayAccount = sysAccountService.doFindDayAccounts(start, end);
+		return new JsonResult(dayAccount);
 	}
 }

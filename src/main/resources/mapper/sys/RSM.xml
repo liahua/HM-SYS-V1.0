@@ -41,7 +41,6 @@
 
 		select * from room_Stat
 		<include refid="queryWhereId" />
-		order by createdTime desc
 		limit #{startIndex},#{pageSize}
 	</select>
 

@@ -23,7 +23,7 @@ public class SysRoomTypeServiceImpl implements SysRoomTypeService{
      * 注入的bean的名字
      */
 	@Autowired
-    //@Qualifier("rTM01")
+    @Qualifier("RTM01")
 	private RTM01 rTM01;
 	
 	@Override
@@ -90,6 +90,9 @@ public class SysRoomTypeServiceImpl implements SysRoomTypeService{
 	
 		return rTM01.findObjectsType(example);
 	}
+	
+	
+
 
 
 }

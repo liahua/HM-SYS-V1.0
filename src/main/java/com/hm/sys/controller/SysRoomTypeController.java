@@ -46,10 +46,10 @@ public class SysRoomTypeController {
 	  @RequestMapping("doFindPageObjectsType")
 	  @ResponseBody
 	  public JsonResult doFindPageObjectsType(   
-			  String username,
+			  String rtName,
 			  Integer pageCurrent){
 		  PageObject<RoomType> pageObject=
-				  sysRoomTypeService.findPageObjects(username,
+				  sysRoomTypeService.findPageObjects(rtName,
 							 pageCurrent);
 		  return new JsonResult(pageObject);		  
 }

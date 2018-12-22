@@ -17,14 +17,14 @@ public class DayAccount implements Serializable {
 
 	private static final long serialVersionUID = 6121991721354065815L;
 
-	private AccountInfo accountInfo;
+	private List<AccountInfo> accountInfo;
 	private List<AccountRoom> roomList;
 
-	public AccountInfo getAccountInfo() {
+	public List<AccountInfo> getAccountInfo() {
 		return accountInfo;
 	}
 
-	public void setAccountInfo(AccountInfo accountInfo) {
+	public void setAccountInfo(List<AccountInfo> accountInfo) {
 		this.accountInfo = accountInfo;
 	}
 

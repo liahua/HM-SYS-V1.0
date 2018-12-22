@@ -14,7 +14,7 @@ public class JsonResult implements Serializable {
 	/**
 	 * 状态码对应的消息
 	 */
-	private String message;
+	private String message = "OK";
 	/**
 	 * 要呈现到客户端的业务数据
 	 */

@@ -154,7 +154,7 @@
 						<div class="collapse" id="money" role="navigation"
 							aria-expanded="false" style="height: 0px;">
 							<ul class="nav">
-								<li><a href="#">报表</a></li>
+								<li><a id="load-account-id">报表</a></li>
 							</ul>
 						</div></li>
 					<li><a data-toggle="collapse" href="#docs" class="collapsed"
@@ -347,6 +347,8 @@ $(function(){//页面加载完成执行
 	//客户管理
 	doLoadUI("load-common-id","common/doCommonUI.do")
 	
+	//账单查询
+	doLoadUI("load-account-id","account/doAccountUI.do")
 });
 function doLoadUI(id,url){
 	//绑定id，点击函数

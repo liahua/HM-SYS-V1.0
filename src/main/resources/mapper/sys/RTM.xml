@@ -27,7 +27,6 @@
 
 		select * from room_type
 		<include refid="queryWhereId" />
-<!-- 		order by createdTime desc -->
 		limit #{startIndex},#{pageSize}
 	</select>
 

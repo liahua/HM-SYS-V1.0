@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.hm.common.exception.ServiceException;
 import com.hm.common.utils.ListUtil;
 import com.hm.common.vo.PageObject;
-import com.hm.sys.dao.RoomInfoMapper;
+import com.hm.sys.dao.RIM01;
 import com.hm.sys.entity.RoomInfo;
 import com.hm.sys.entity.RoomInfoExample;
 import com.hm.sys.service.SysRoomInfoService;
@@ -25,8 +25,8 @@ public class SysRoomInfoServiceImpl implements SysRoomInfoService{
      * 注入的bean的名字
      */
 	@Autowired
-    @Qualifier("roomInfoMapper")
-	private RoomInfoMapper roomInfoMapper;
+    @Qualifier("RIM01")
+	private RIM01 rIM01;
 	
 	@Override
 	public int deleteRoomInfo(Integer... ids) {
@@ -35,7 +35,7 @@ public class SysRoomInfoServiceImpl implements SysRoomInfoService{
 			//2.执行删除操作
 			int rows;
 			try{//此异常可以不在此处理
-			rows=roomInfoMapper.deleteRoomInfo(ids);
+			rows=rIM01.deleteRoomInfo(ids);
 			}catch(Throwable e){
 			e.printStackTrace();
 			//发出报警信息(例如给运维人员发短信)
@@ -56,7 +56,7 @@ public class SysRoomInfoServiceImpl implements SysRoomInfoService{
 		if(pageCurrent==null||pageCurrent<1)
 		throw new IllegalArgumentException("页码值不正确");
 		//2.依据条件查询总记录数
-		int rowCount=roomInfoMapper.getRowCount(roomName);
+		int rowCount=rIM01.getRowCount(roomName);
 		//3.对总记录数进行校验(等于0表示没有记录)
 		if(rowCount==0)
 		//throw new RuntimeException("记录不存在");//不够具体
@@ -66,7 +66,7 @@ public class SysRoomInfoServiceImpl implements SysRoomInfoService{
 		int pageSize=2;//页面大小
 		int startIndex=(pageCurrent-1)*pageSize;//起始位置
 		List<RoomInfo> records=
-				roomInfoMapper.findPageObjects(roomName,
+				rIM01.findPageObjects(roomName,
 						startIndex, pageSize);
 		//5.对查询结果进行封装并返回。
 		PageObject<RoomInfo> pageObject=new PageObject<>();
@@ -89,7 +89,7 @@ public class SysRoomInfoServiceImpl implements SysRoomInfoService{
 
 	@Override
 	public List<RoomInfo> findObjectsInfo(RoomInfoExample example) {
-		return roomInfoMapper.findObjectsInfo(example);
+		return rIM01.findObjectsInfo(example);
 	}
 
 	
@@ -97,7 +97,7 @@ public class SysRoomInfoServiceImpl implements SysRoomInfoService{
 	public RoomInfo findRoomFromRoomInfo(String roomNameId) {
 		RoomInfoExample roomInfoExample = new RoomInfoExample();
 		roomInfoExample.or().andRoomNameEqualTo(roomNameId);
-		List<RoomInfo> roomsInfo = roomInfoMapper.selectByExample(roomInfoExample);
+		List<RoomInfo> roomsInfo = rIM01.selectByExample(roomInfoExample);
 
 		if (ListUtil.isEmpty(roomsInfo)) {
 			throw new ServiceException("无此房间");

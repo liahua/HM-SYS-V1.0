@@ -19,7 +19,7 @@ public interface CommonDao {
 	 * @param 
 	 * @return
 	 */
-	    List<CustomerInfo> selectByExample(CustomerInfoExample example);
+	   List<CustomerInfo> selectByExample(CustomerInfoExample example);
 	    /**
 	     * 分页查询角色信息
 	     * @param startIndex 上一页的结束位置

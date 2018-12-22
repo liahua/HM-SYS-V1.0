@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.hm.common.exception.ServiceException;
 import com.hm.common.vo.PageObject;
-import com.hm.sys.dao.RoomTypeMapper;
+import com.hm.sys.dao.RTM01;
 import com.hm.sys.entity.RoomType;
 import com.hm.sys.entity.RoomTypeExample;
 import com.hm.sys.service.SysRoomTypeService;
@@ -23,8 +23,8 @@ public class SysRoomTypeServiceImpl implements SysRoomTypeService{
      * 注入的bean的名字
      */
 	@Autowired
-    @Qualifier("roomTypeMapper")
-	private RoomTypeMapper roomTypeMapper;
+    //@Qualifier("rTM01")
+	private RTM01 rTM01;
 	
 	@Override
 	public int deleteRoomType(Integer... ids) {
@@ -33,7 +33,7 @@ public class SysRoomTypeServiceImpl implements SysRoomTypeService{
 			//2.执行删除操作
 			int rows;
 			try{//此异常可以不在此处理
-			rows=roomTypeMapper.deleteRoomType(ids);
+			rows=rTM01.deleteRoomType(ids);
 			}catch(Throwable e){
 			e.printStackTrace();
 			//发出报警信息(例如给运维人员发短信)
@@ -54,7 +54,7 @@ public class SysRoomTypeServiceImpl implements SysRoomTypeService{
 		if(pageCurrent==null||pageCurrent<1)
 		throw new IllegalArgumentException("页码值不正确");
 		//2.依据条件查询总记录数
-		int rowCount=roomTypeMapper.getRowCount(rtName);
+		int rowCount=rTM01.getRowCount(rtName);
 		//3.对总记录数进行校验(等于0表示没有记录)
 		if(rowCount==0)
 		//throw new RuntimeException("记录不存在");//不够具体
@@ -64,7 +64,7 @@ public class SysRoomTypeServiceImpl implements SysRoomTypeService{
 		int pageSize=2;//页面大小
 		int startIndex=(pageCurrent-1)*pageSize;//起始位置
 		List<RoomType> records=
-				roomTypeMapper.findPageObjects(rtName,
+				rTM01.findPageObjects(rtName,
 						startIndex, pageSize);
 		//5.对查询结果进行封装并返回。
 		PageObject<RoomType> pageObject=new PageObject<>();
@@ -88,7 +88,7 @@ public class SysRoomTypeServiceImpl implements SysRoomTypeService{
 	@Override
 	public List<RoomType> findObjectsType(RoomTypeExample example) {
 	
-		return roomTypeMapper.findObjectsType(example);
+		return rTM01.findObjectsType(example);
 	}
 
 

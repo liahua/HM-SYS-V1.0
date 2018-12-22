@@ -27,4 +27,11 @@ public class PageController {
 	  public String doPageUI(){
 		  return "customer/page";//page.html
 	  }
+	 
+
+		//分页加载
+		@RequestMapping("doPageUIyl")
+		public String doPageUIyl(){
+			 return "room/page";
+		 }
 }

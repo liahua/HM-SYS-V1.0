@@ -1,5 +1,8 @@
 package com.hm.sys.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,6 +26,7 @@ import com.hm.sys.dao.StayInfoMapper;
 import com.hm.sys.entity.AccountInfo;
 import com.hm.sys.entity.AccountInfoExample;
 import com.hm.sys.entity.AccountRoom;
+import com.hm.sys.entity.AccountRoomExample;
 import com.hm.sys.entity.CheckInfo;
 import com.hm.sys.entity.CheckInfoExample;
 import com.hm.sys.entity.OrderInfo;
@@ -63,51 +67,52 @@ public class SysAccountServiceImpl implements SysAccountService {
 
 	private Date endTime = null;
 
-	@Override
-	public DayAccount doFindDayAccount(String date) {
-		if(StringUtil.isEmpty(date)) {
-			throw new ServiceException("日期不能为空");
-		}
-		
-		AccountInfoExample infoExample = new AccountInfoExample();
-		
-		
-		return null;
-	}
-	
-	
+	private Date date = null;
+
 	/**
 	 * 日明细统计
 	 */
 	@Override
-	public int doDayCheck() {
-		resetTime();
+	public synchronized DayAccount doDayCheck(String date) {
+		resetTime(date);
+
+		DayAccount da = doFindAccountByDate();
+
+		if (da != null) {
+			return da;
+		}
+		
+		da = new DayAccount();
+		
 		// 各种房间状态统计
 		HashMap<Integer, Integer> filledMap = new HashMap<>();
 		HashMap<Integer, Integer> unFilledMap = new HashMap<>();
 		statAccount(filledMap, unFilledMap);
 
 		// 写入数据库
+		List<AccountRoom> arList = new ArrayList<>();
 		for (int i = 1; i <= 4; i++) {
 			AccountRoom ar = new AccountRoom();
-			ar.setDay(new Date());
+			ar.setDay(this.date);
 			ar.setRoomTypeId(i);
 
 			Integer fillNum = filledMap.get(i);
-			System.out.println("fillNum"+fillNum);
+			// System.out.println("fillNum"+fillNum);
 			ar.setFilledNum(fillNum != null ? fillNum : 0);
-			
+
 			Integer unFilledNum = unFilledMap.get(i);
-			System.out.println("unFilledNum"+unFilledNum);
+			// System.out.println("unFilledNum"+unFilledNum);
 			ar.setUnfilledNum(unFilledNum != null ? unFilledNum : 0);
 
+			arList.add(ar);
 			accountRoomMapper.insert(ar);
 		}
+		da.setRoomList(arList);
 
 		// 日账单统计
 		AccountInfo accountInfo = new AccountInfo();
-		
-		accountInfo.setDay(new Date());
+
+		accountInfo.setDay(this.date);
 		// 入住人数统计
 		accountInfo.setManCount(stayManAccount());
 
@@ -120,12 +125,49 @@ public class SysAccountServiceImpl implements SysAccountService {
 		// 结算统计
 		accountInfo.setCheckinCount(checkinAccount());
 
-		int row = accountInfoMapper.insert(accountInfo);
+		da.setAccountInfo(accountInfo);
+		accountInfoMapper.insert(accountInfo);
 
-		return row;
+		return da;
 	}
 
-	private void resetTime() {
+	private DayAccount doFindAccountByDate() {
+		AccountInfoExample infoExample = new AccountInfoExample();
+		com.hm.sys.entity.AccountInfoExample.Criteria icriteria = infoExample.createCriteria();
+		icriteria.andDayEqualTo(this.date);
+
+		List<AccountInfo> info = accountInfoMapper.selectByExample(infoExample);
+		if(info.size()==0) {
+			return null;
+		}
+		
+		AccountRoomExample roomExample = new AccountRoomExample();
+		com.hm.sys.entity.AccountRoomExample.Criteria rcriterria = roomExample.createCriteria();
+		rcriterria.andDayEqualTo(this.date);
+		
+		List<AccountRoom> room = accountRoomMapper.selectByExample(roomExample);
+		if(room.size()==0) {
+			return null;
+		}
+		
+		DayAccount dayAccount = new DayAccount();
+		dayAccount.setAccountInfo(info.get(0));
+		dayAccount.setRoomList(room);
+		return dayAccount;
+	}
+
+	private void resetTime(String date) {
+		if (!StringUtil.isEmpty(date)) {
+			try {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				this.date = sdf.parse(date);
+			} catch (ParseException e) {
+				throw new ServiceException("日期格式有误");
+			}
+
+		} else {
+			this.date = new Date();
+		}
 		startTime = initDate(0);
 		endTime = initDate(24);
 	}
@@ -138,6 +180,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 		List<CheckInfo> checkList = checkInfoMapper.selectByExample(checkInfoExample);
 		double checkinCount = 0d;
 
+		// System.out.println("checkinCount" + checkinCount);
 		if (ListUtil.isEmpty(checkList)) {
 			return checkinCount;
 		}
@@ -148,6 +191,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 			if (checkinMoney != null)
 				checkinCount += checkinMoney;
 		}
+		// System.out.println("checkinCount" + checkinCount);
 		return checkinCount;
 	}
 
@@ -168,6 +212,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 			if (cash != null)
 				cashCount += cash;
 		}
+		// System.out.println("cashCount" + cashCount);
 		return cashCount;
 	}
 
@@ -176,21 +221,29 @@ public class SysAccountServiceImpl implements SysAccountService {
 		com.hm.sys.entity.OrderInfoExample.Criteria criteria = orderInfoExample.createCriteria();
 		criteria.andCreatedtimeBetween(startTime, endTime);
 		List<OrderInfo> orderInfoList = orderInfoMapper.selectByExample(orderInfoExample);
-		if (ListUtil.isEmpty(orderInfoList)) {
-			return;
-		}
-		
+
 		Integer orderCount = 0;
 		Double orderMoney = 0d;
+
+		if (ListUtil.isEmpty(orderInfoList)) {
+			accountInfo.setOrderCount(orderCount);
+			accountInfo.setOrderMoney(orderMoney);
+			return;
+		}
+
 		for (OrderInfo oi : orderInfoList) {
 			Float om = oi.getOrderMoney();
 			if (om != null)
 				orderMoney += om;
 		}
 		orderCount = orderInfoList.size();
-		
+
+//		System.out.println("orderCount" + orderCount);
+//		System.out.println("orderMoney" + orderMoney);
+
 		accountInfo.setOrderCount(orderCount);
 		accountInfo.setOrderMoney(orderMoney);
+		return;
 	}
 
 	/**
@@ -218,7 +271,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 			return manCount;
 		}
 
-		Long now = System.currentTimeMillis();
+		Long now = this.date.getTime();
 		for (StayInfo si : stayList) {
 			if (now > si.getStayDate().getTime() && now < si.getLeaveDate().getTime()) {
 				Integer stayManCount = si.getStayManCount();
@@ -226,7 +279,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 					manCount += stayManCount;
 			}
 		}
-		//System.out.println("manCount" + manCount);
+		// System.out.println("manCount" + manCount);
 		return manCount;
 	}
 
@@ -236,7 +289,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 			return;
 		}
 
-		System.out.println("房间数："+roomList.size());
+		// System.out.println("房间数："+roomList.size());
 		for (DynamicRoomInfo dri : roomList) {
 			String stat = dri.getStat();
 			Integer rtId = dri.getRtId();

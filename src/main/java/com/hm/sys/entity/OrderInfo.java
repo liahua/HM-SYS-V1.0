@@ -112,4 +112,6 @@ public class OrderInfo {
     public void setModifiedtime(Date modifiedtime) {
         this.modifiedtime = modifiedtime;
     }
+    
+    
 }

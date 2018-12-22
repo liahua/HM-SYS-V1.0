@@ -3,11 +3,16 @@ package com.hm.common.vo;
 import java.io.Serializable;
 import java.util.Date;
 
-
+/**
+ * 叶云彤
+ * @author tarena
+ *
+ */
 public class CustomerAllInfo implements Serializable{
 
 
-		/**
+	/**
+	 *序列化
 	 * 
 	 */
 	private static final long serialVersionUID = -2067857748398370764L;
@@ -21,7 +26,11 @@ public class CustomerAllInfo implements Serializable{
 	    private String operator;
 	    private Date createdTime;
 	    private Date modifiedTime;
-		public Integer getId() {
+		/**
+		 * 对印数据库的字段,封装数据表
+		 * @return
+		 */
+	    public Integer getId() {
 			return id;
 		}
 		public void setId(Integer id) {

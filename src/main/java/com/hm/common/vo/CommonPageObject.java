@@ -2,7 +2,12 @@ package com.hm.common.vo;
 
 import java.io.Serializable;
 import java.util.List;
-
+/**
+ *   叶云彤
+ * @author tarena
+ *
+ * @param <T>
+ */
 public class CommonPageObject<T> implements Serializable{
 	/**
 	 * 

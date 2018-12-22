@@ -41,7 +41,9 @@ public class CommonController {
 	
 	/**
 	 * 
-	 * 显示页面数据
+	 * 交互前台传的数据
+	 * 
+	 * 
 	 * @param example
 	 * @return 叶云彤
 	 */
@@ -50,7 +52,7 @@ public class CommonController {
 	@ResponseBody
 	public JsonResultCustomer doFindPageObjects(String name, Integer pageCurrent) {
 		CommonPageObject<CustomerAllInfo> pageObject =sysCommonService.findPageObjects(name, pageCurrent);
-		System.out.println(sysCommonService.findPageObjects(name, pageCurrent));
+		//System.out.println(sysCommonService.findPageObjects(name, pageCurrent));
 		return new JsonResultCustomer(pageObject);
 	}
 }

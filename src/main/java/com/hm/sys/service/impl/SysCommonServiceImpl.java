@@ -46,7 +46,7 @@ public class SysCommonServiceImpl implements SysCommonService {
 					throw new ServiceException("记录不存在");
 				// 3.基于条件查询当前页记录(pageSize定义为2)
 				// 3.1)定义pageSize
-				int pageSize = 3;
+				int pageSize = 15;
 				// 3.2)计算startIndex
 				int startIndex = (pageCurrent - 1) * pageSize;
 				// 3.3)执行当前数据的查询操作

@@ -16,9 +16,9 @@
          	b.id,b.customer_name,b.gender,b.country,b.telephone,a.card_type,b.card_num,b.operator,b.createdTime,b.modifiedTime 
 		 FROM 
 		 	customer_card_type a 
-		 JOIN 
+		 ,
 		 	customer_info b 
-		 ON 
+		 where 
 		 	a.id=b.id
 		  limit 
 		      #{startIndex},#{pageSize}

@@ -11,9 +11,9 @@ import com.alibaba.druid.util.StringUtils;
 import com.hm.common.exception.ClassExceptionTest;
 import com.hm.common.exception.ServiceException;
 import com.hm.common.utils.IntegerUtil;
-import com.hm.sys.dao.SysDeptsMapper;
+import com.hm.sys.dao.SysDeptsDao;
 
-import com.hm.sys.dao.SysUsersMapper;
+import com.hm.sys.dao.SysUsersDao;
 
 import com.hm.sys.entity.SysDepts;
 import com.hm.sys.entity.SysDeptsExample;
@@ -22,22 +22,22 @@ import com.hm.sys.vo.Node;
 @Service
 public class SysDeptServiceImpl implements SysDeptService {
 	@Autowired
-	private SysDeptsMapper sysDeptsMapper;
+	private SysDeptsDao sysDeptsDao;
 	@Autowired
-	private SysUsersMapper sysUsersMapper;
+	private SysUsersDao sysUsersDao;
 	@Override
 	/**
 	 * 查询sys_depts表内容
 	 */
 	public List<SysDepts> getObjects(SysDeptsExample example) {
-		List<SysDepts> selectByExample = sysDeptsMapper.selectByExample(example);
+		List<SysDepts> selectByExample = sysDeptsDao.selectByExample(example);
 		System.out.println("1");
 		return selectByExample;
 	}
 	
 	@Override
 	public List<Node> findZtreeDeptNodes() {
-		List<Node> fZtree = sysDeptsMapper.findZtreeDeptNodes();
+		List<Node> fZtree = sysDeptsDao.findZtreeDeptNodes();
 		return fZtree;
 	}
 	/**
@@ -51,7 +51,7 @@ public class SysDeptServiceImpl implements SysDeptService {
 		if(StringUtils.isEmpty(entity.getName()))
 			throw new ServiceException("部门名称不能为空");
 		//更新数据
-		int row = sysDeptsMapper.updateByPrimaryKey(entity);
+		int row = sysDeptsDao.updateByPrimaryKey(entity);
 		if(row==0)
 			throw new ServiceException("记录可能已经不存在");
 		return row;
@@ -67,7 +67,7 @@ public class SysDeptServiceImpl implements SysDeptService {
 			throw new ServiceException("部门名称不能为空");
 		int row;
 		try {
-			row = sysDeptsMapper.insert(entity);
+			row = sysDeptsDao.insert(entity);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new  ServiceException("保存失败");
@@ -84,13 +84,13 @@ public class SysDeptServiceImpl implements SysDeptService {
 		//检测id是否正确
 		if(IntegerUtil.isIllegality(id)) 
 			throw new ServiceException("id不合法");
-		int cCount = sysDeptsMapper.getChildCount(id);
+		int cCount = sysDeptsDao.getChildCount(id);
 		if(cCount>0)
 			throw new ServiceException("存在子部门，不能删除");
-		int userCount = sysUsersMapper.getCountByDeptId(id);
+		int userCount = sysUsersDao.getCountByDeptId(id);
 		if(userCount>0)
 			throw new ServiceException("该部门还有"+userCount+"个员工，请妥善处理");
-		int row = sysDeptsMapper.deleteByPrimaryKey(id);
+		int row = sysDeptsDao.deleteByPrimaryKey(id);
 		if(row==0)
 			throw new ServiceException("不存在该部门");
 		return row;

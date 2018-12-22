@@ -10,9 +10,9 @@ import com.alibaba.druid.util.StringUtils;
 
 
 import com.hm.common.exception.ServiceException;
-import com.hm.sys.dao.SysMenusMapper;
+import com.hm.sys.dao.SysMenusDao;
 
-import com.hm.sys.dao.SysRoleMenusMapper;
+import com.hm.sys.dao.SysRoleMenusDao;
 
 import com.hm.sys.entity.SysMenus;
 import com.hm.sys.entity.SysMenusExample;
@@ -22,16 +22,16 @@ import com.hm.sys.vo.Node;
 @Service
 public class SysMenuServiceImpl implements SysMenuService {
 	@Autowired
-	private SysMenusMapper sysMenusMapper;
+	private SysMenusDao sysMenusDao;
 	@Autowired
-	private SysRoleMenusMapper sysRoleMenusMapper;
+	private SysRoleMenusDao sysRoleMenusDao;
 	
 	/**
 	 * 查询菜单信息
 	 */
 	@Override
 	public List<SysMenus> getObjects(SysMenusExample example) {
-		List<SysMenus> objects = sysMenusMapper.selectByExample(example);
+		List<SysMenus> objects = sysMenusDao.selectByExample(example);
 		return objects;
 	}
 	/**
@@ -43,20 +43,20 @@ public class SysMenuServiceImpl implements SysMenuService {
 		// 验证
 		if (id == null || id < 0)
 			throw new ServiceException("请选择需要删除的对象");
-		int cCount = sysMenusMapper.getChildCount(id);
+		int cCount = sysMenusDao.getChildCount(id);
 		if (cCount > 0)
 			throw new ServiceException("请先删除子菜单");
-		int row = sysMenusMapper.deleteByPrimaryKey(id);
+		int row = sysMenusDao.deleteByPrimaryKey(id);
 		if (row == 0)
 			throw new ServiceException("该选项可能已经不存在了");
 		// 删除菜单关系数据
-		sysRoleMenusMapper.deleteObjectByMenuId(id);
+		sysRoleMenusDao.deleteObjectByMenuId(id);
 		return row;
 	}
 
 	@Override
 	public List<Node> findZtreeMenuNodes() {
-		List<Node> findZtreeMenuNodes = sysMenusMapper.findZtreeMenuNodes();
+		List<Node> findZtreeMenuNodes = sysMenusDao.findZtreeMenuNodes();
 		return findZtreeMenuNodes;
 	}
 	/**
@@ -71,7 +71,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 			throw new ServiceException("菜单名不能为空");
 		int row;
 		try {
-			row = sysMenusMapper.insert(record);
+			row = sysMenusDao.insert(record);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServiceException("保存失败");
@@ -88,7 +88,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 			throw new ServiceException("修改选项不能为空");
 		if (StringUtils.isEmpty(record.getName()))
 			throw new ServiceException("菜单名不能为空");
-		int row = sysMenusMapper.updateByPrimaryKey(record);
+		int row = sysMenusDao.updateByPrimaryKey(record);
 		if (row == 0)
 			throw new ServiceException("该选项可能已经不存在了");
 		return row;

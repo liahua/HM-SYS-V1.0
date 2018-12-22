@@ -1,26 +1,36 @@
 package com.hm.sys.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.github.pagehelper.StringUtil;
 import com.hm.common.exception.ServiceException;
 import com.hm.common.vo.CheckOutVoDetails;
 import com.hm.sys.entity.CustomerInfo;
+import com.hm.sys.entity.OrderInfo;
 import com.hm.sys.entity.RoomInfo;
 import com.hm.sys.entity.StayInfo;
 import com.hm.sys.service.SysCheckOutService;
 import com.hm.sys.service.SysCustomerService;
+import com.hm.sys.service.SysOrderService;
 import com.hm.sys.service.SysRoomInfoService;
+import com.hm.sys.service.SysStayInfoService;
 
 @Service
 public class SysCheckOutServiceImpl implements SysCheckOutService {
-
 
 	@Autowired
 	private SysCustomerService sysCustomerService;
 	@Autowired
 	private SysRoomInfoService sysRoomInfoService;
+	@Autowired
+	private SysStayInfoService sysStayInfoService;
+	@Autowired
+	private SysOrderService sysOrderService;
 
 	@Override
 	public CheckOutVoDetails checkOutDepencyRoomNameIdCustomerInfo(CheckOutVoDetails checkOutVoDetail) {
@@ -44,27 +54,25 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 //		通过id查找CustomerInfo
 		CustomerInfo customerInfo = sysCustomerService.findCustomerInfo(checkOutVoDetail.getCustomerInfo());
 		// 通过customerInfo查找入住信息
-		List<StayInfo> stayInfo=findStayInfo(customerInfo);
+		List<StayInfo> stayInfos = sysStayInfoService.findStayInfo(customerInfo,
+				checkOutVoDetail.getStayInfoQueryType());
+		// 根据stayInfo查找OrderInfos
+		ArrayList<OrderInfo> orderInfos = new ArrayList<>();
+		Map<Integer, OrderInfo> stayAndOrderInfoMap = new HashMap<>();
+		for (StayInfo stayInfo : stayInfos) {
+			OrderInfo orderInfo=sysOrderService.findOrderInfo(stayInfo.getOrderId());
+			orderInfos.add(orderInfo);
+			stayAndOrderInfoMap.put(stayInfo.getId(), orderInfo);
+		}
+	
 		
 		checkOutVoDetail.setRoomInfo(roomInfo);
 		checkOutVoDetail.setCustomerInfo(customerInfo);
-		System.out.println(checkOutVoDetail);
-		return null;
+		checkOutVoDetail.setStayInfos(stayInfos);
+		checkOutVoDetail.setOrderInfos(orderInfos);
+		checkOutVoDetail.setStayAndOrderInfoMap(stayAndOrderInfoMap);
+		return checkOutVoDetail;
 	}
-
-	private List<StayInfo> findStayInfo(CustomerInfo customerInfo) {
-		
-		return null;
-	}
-
-	
-
-	
-
-
-
-
-
 
 	@Override
 	public CheckOutVoDetails checkOutDepencyOrderInfo(CheckOutVoDetails CheckOutVoDetails) {

@@ -112,4 +112,15 @@ public class OrderInfo {
     public void setModifiedtime(Date modifiedtime) {
         this.modifiedtime = modifiedtime;
     }
+
+	@Override
+	public String toString() {
+		return "OrderInfo [id=" + id + ", roomId=" + roomId + ", customerId=" + customerId + ", checkinDate="
+				+ checkinDate + ", checkoutDate=" + checkoutDate + ", customerType=" + customerType + ", orderStatId="
+				+ orderStatId + ", orderMoney=" + orderMoney + ", operator=" + operator + ", createdtime=" + createdtime
+				+ ", modifiedtime=" + modifiedtime + "]";
+	}
+    
+    
+    
 }

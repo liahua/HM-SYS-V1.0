@@ -1,12 +1,11 @@
 package com.hm.common.utils;
 
-import com.hm.sys.entity.CustomerInfo;
 
 public class ObjectUtil {
 
-	public static boolean isEmpty(CustomerInfo customerInfoReal) {
+	public static boolean isEmpty(Object object) {
 		
-		return customerInfoReal==null;
+		return object==null;
 	}
 
 }

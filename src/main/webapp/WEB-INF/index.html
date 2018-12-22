@@ -53,7 +53,7 @@
 			</div>
 			<div class="sidebar-wrapper">
 				<ul class="nav">
-					<li class="active"><a href="index.do"> <i class="ti-panel"></i>
+					<li><a href="index.do"> <i class="ti-panel"></i>
 							<p>首页</p>
 					</a></li>
 					<li><a id="load-room-id"> <i class="ti-home"></i>
@@ -87,8 +87,8 @@
 						<div class="collapse" id="ui-elements" role="navigation"
 							aria-expanded="false" style="height: 0px;">
 							<ul class="nav">
-								<li><a href="#">预定</a></li>
-								<li><a href="#">取消预定</a></li>
+								<li><a id="load-order-id">预定</a></li>
+								<li><a id="#">取消预定</a></li>
 							</ul>
 						</div></li>
 					<li><a data-toggle="collapse" href="#forms" class="collapsed"
@@ -154,8 +154,7 @@
 						<div class="collapse" id="money" role="navigation"
 							aria-expanded="false" style="height: 0px;">
 							<ul class="nav">
-								<li><a href="#">月度</a></li>
-								<li><a href="#">季度</a></li>
+								<li><a href="#">报表</a></li>
 							</ul>
 						</div></li>
 					<li><a data-toggle="collapse" href="#docs" class="collapsed"
@@ -192,7 +191,7 @@
 								class="icon-bar"></span> <span class="icon-bar"></span> <span
 								class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="#"> 首页 </a>
+<!-- 						<a class="navbar-brand" href="#"> 首页 </a> -->
 					</div>
 					<div class="collapse navbar-collapse">
 						<ul class="nav navbar-nav navbar-right">
@@ -331,13 +330,14 @@
 	<script type="text/javascript">
 //说明，在此位置添加js，使用load函数加载页面
 $(function(){//页面加载完成执行
+	doLoadUI("load-order-id","order/doOrderListUI.do")
 	//房间预览
 	doLoadUI("load-room-id","view/doRoomViewUI.do")
-	
 	doLoadUI("load-rType-id","room/doRoomTypeUI.do")
 	doLoadUI("load-rState-id","room/doRoomStateUI.do")
 	doLoadUI("load-rInfo-id","room/doRoomInfoUI.do")
 	
+
 	//系统管理
 	doLoadUI("load-dept-id","dept/doDeptUI.do")
 	doLoadUI("load-menu-id","menu/doMenuUI.do")
@@ -349,8 +349,10 @@ $(function(){//页面加载完成执行
 	
 });
 function doLoadUI(id,url){
+	//绑定id，点击函数
 	$("#"+id).click(function(){
-	  $("#mainContentId").load(url);
+		//click点击，mainContentTd 重要的内容id，load 加载到URL
+	  $("#mainContentId").load(url);  
 	});
 }
 </script>

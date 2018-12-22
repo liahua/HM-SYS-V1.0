@@ -10,13 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hm.common.vo.JsonResult;
 import com.hm.common.vo.PageObject;
-import com.hm.sys.entity.SysDepts;
-import com.hm.sys.entity.SysDeptsExample;
 import com.hm.sys.entity.SysRoles;
-import com.hm.sys.entity.SysRolesExample;
-import com.hm.sys.service.SysDeptService;
 import com.hm.sys.service.SysRoleService;
-import com.hm.sys.vo.Node;
 
 @Controller
 @RequestMapping("/role/")

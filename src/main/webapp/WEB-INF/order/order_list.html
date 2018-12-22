@@ -1,44 +1,83 @@
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="content">
-                                    <h4 class="title">¿Í»§Ô¤¶¨ ¿Í»§Èë×¡ ¿Í·¿¸ü¸Ä ¿Í»§¹ÜÀí ¿Í·¿²éÑ¯ ¿Í·¿×´Ì¬ ¿Í·¿ÀàĞÍ ¿Í»§½áËã °ïÖú</h4>
-                                   
-                                    <div class="toolbar">
-                                        <!--        Here you can write extra buttons/actions for the toolbar              -->
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead class="text-primary">
-                                                <tr>
-     <th>¿Í·¿ĞÅÏ¢<br/><br/>²éÑ¯<br/><br/><br/><br/>ÊäÈëÇå¿Õ<br/><br/>ĞŞ¸Ä<br/><br/>Ô¤¶¨<br/><br/>Èë×¡<br/><br/>È¡ÏûÔ¤¶¨<br/><br/>ÍË³ö</th>
-                                                   
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            
-                                            </tbody>
-                                            <tfoot>
+<div class="box-body table-responsive no-padding">
+				<form>
+		<div class="border:1px solid #000">
+		<h3 class="box-title">è¾“å…¥é¢„å®šä¿¡æ¯</h3>
+		</div>
+				  <table class="table table-hover">
+					<thead>
+						<tr>
+						 <span class="kv-label">
+             <label class="tsl" for="name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;è®¢å•å·&nbsp;</label>
+              </span>
+		<input type="text"  autofocus size="15" title="integerId" >
+			 <span class="kv-label">
+             <label class="tsl" for="name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;æˆ¿é—´å·&nbsp;</label>
+              </span>
+              <input type="text"  autofocus size="15" title="roomId" >
+               <span class="kv-label">
+             <label class="tsl" for="name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;å§“å&nbsp;</label>
+              </span>
+		<input type="text"  autofocus size="15" title="integerId" >		
+							</tr>
+							
+							<br><br><br>
+							 <span class="kv-label">
+             <label class="tsl" for="name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ç”µè¯&nbsp;</label>
+              </span>
+		<input type="text"  autofocus size="15" title="integerId" >
+							 <span class="kv-label">
+             <label class="tsl" for="name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ç™»è®°æ—¥æœŸ&nbsp;</label>
+              </span>
+		<input type="text"  autofocus size="15" title="integerId" >
+                            <span class="kv-label">
+             <label class="tsl" for="name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ç»“ç®—æ—¥æœŸ&nbsp;</label>
+                            </span>
+		<input type="text"  autofocus size="15" title="integerId" >
+							</br></br></br>
+							 <span class="kv-label">
+             <label class="tsl" for="name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;åœç•™å¤©æ•°&nbsp;</label>
+              </span>
+		<input type="text"  autofocus size="15" title="integerId" >
+							 <span class="kv-label">
+             <label class="tsl" for="name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;é¢„å®šé‡‘é¢&nbsp;</label>
+              </span>
+		<input type="text"  autofocus size="15" title="integerId" >
+                            <span class="kv-label">
+             <label class="tsl" for="name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;æ“ä½œå‘˜&nbsp;</label>
+                            </span>
+		<input type="text"  autofocus size="15" title="integerId" >
+                             
+                             <br><br><br>
+							 <span class="kv-label">
+             <label class="tsl" for="name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;åˆ›å»ºæ—¶é—´&nbsp;</label>
+              </span>
+		<input type="text"  autofocus size="15" title="integerId" >
+							 <span class="kv-label">
+             <label class="tsl" for="name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ç¦»å¼€æ—¶é—´&nbsp;</label>
+              </span>
+		<input type="text"  autofocus size="15" title="integerId" >
+	
+				<div class="input-group-btn">
+			
+					
+		                  
+							<button type="button" class="btn btn-default btn-add">ç¡®å®šé¢„å®š</button>
+							
+						
+					</div>
+			
+					</thead>
+				
+					</tbody>
+				  </table>
+				</form>
+			</div>
+			
+			
+			$(document).ready(function(){
+	doGetObjects();
+	$(".input-group-btn")
 
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- end content-->
-                            </div>
-                            <!--  end card  -->
-                        </div>
-                        <!-- end col-md-12 -->
-                    </div>
-
-                </div>
-            </div><!-- ÄÚÈİ½áÊø -->
-<script type="text/javascript">
-    $(document).ready(function() {
-    	 $("#pageId").load("doPageUI.do");
-    	
-    });
-</script>
-
+    .on("click",'.btn-add,.btn-update',doLoadEditUI);
+    å¦ˆçš„
+    

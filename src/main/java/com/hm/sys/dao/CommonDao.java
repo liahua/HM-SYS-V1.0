@@ -8,7 +8,11 @@ import com.hm.common.vo.CustomerAllInfo;
 import com.hm.sys.entity.CustomerInfo;
 import com.hm.sys.entity.CustomerInfoExample;
 
-
+/**
+ * 
+ * @author 叶云彤
+ *
+ */
 public interface CommonDao {
 	/**
 	 * list集合查询封装

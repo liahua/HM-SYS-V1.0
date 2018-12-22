@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.hm.common.exception.ServiceException;
+import com.hm.common.utils.DictionarySetData;
 import com.hm.common.utils.IntegerUtil;
 import com.hm.common.utils.ListUtil;
 import com.hm.sys.dao.StayInfoMapper;
@@ -19,13 +20,16 @@ import com.hm.sys.service.SysStayInfoService;
 
 
 @Service
-public class SysStayInfoServiceImpl implements SysStayInfoService{
+public class SysStayInfoServiceImpl implements SysStayInfoService,DictionarySetData{
 
 	@Autowired
 	private StayInfoMapper stayInfoMapper;
 	@Override
 	public List<StayInfo> findStayInfo(CustomerInfo customerInfo,Integer isCheckOut) {
-		if(isCheckOut!=null&&isCheckOut!=0&&isCheckOut!=1) {
+		
+		
+		
+		if(isCheckOut!=ALL_STAYINFO&&isCheckOut!=UNPAID&&isCheckOut!=PAID) {
 			throw new ServiceException("不合法的查询状态");
 		}
 		Integer id = customerInfo.getId();
@@ -36,16 +40,16 @@ public class SysStayInfoServiceImpl implements SysStayInfoService{
 		Criteria criteria = stayInfoExample.createCriteria();
 		criteria.andCustomerIdEqualTo(id);
 		if(isCheckOut!=null) {
-			criteria.andIsCheckoutEqualTo(id);
+			criteria.andIsCheckoutEqualTo(isCheckOut);
 		}
 		List<StayInfo> stayInfos = stayInfoMapper.selectByExample(stayInfoExample);
 		if(ListUtil.isEmpty(stayInfos)) {
-			if(isCheckOut==null) {
+			if(isCheckOut==ALL_STAYINFO) {
 				throw new ServiceException("无入住信息");
-			}else if(isCheckOut==1) {
-				throw new ServiceException("无已支付的入住信息");
-			}else if(isCheckOut==0) {
-				throw new ServiceException("无需支付的入住信息");
+			}else if(isCheckOut==PAID) {
+				throw new ServiceException("所有账单都未支付");
+			}else if(isCheckOut==UNPAID) {
+				throw new ServiceException("入住账单都已支付");
 			}
 		}
 		return stayInfos;

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hm.sys.dao.SysRoomInfoViewDao">
+	<resultMap id="BRM" type="com.hm.sys.entity.RoomInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="rt_id" property="rtId" jdbcType="INTEGER" />
+		<result column="room_name" property="roomName"
+			jdbcType="VARCHAR" />
+		<result column="room_add" property="roomAdd" jdbcType="VARCHAR" />
+		<result column="bed_num" property="bedNum" jdbcType="INTEGER" />
+		<result column="stat_id" property="statId" jdbcType="INTEGER" />
+	</resultMap>
+
+
+
+	<!-- 借助此元素对共性数据进行提取 -->
+	<sql id="queryWhereId">
+		<where>
+			<if test="roomName!=null and roomName!=''">
+				roomName like concat("%",#{roomName},"%")
+			</if>
+		</where>
+	</sql>
+
+
+	<select id="getRowCount" resultType="int">
+
+		select count(*) from room_info
+		<include refid="queryWhereId" />
+	</select>
+
+
+	<select id="findPageObjects"
+		resultType="com.hm.sys.entity.RoomInfo">
+
+		select * from room_info
+		<include refid="queryWhereId" />
+		limit #{startIndex},#{pageSize}
+	</select>
+
+
+	<select id="findObjectsInfo"
+		resultType="com.hm.sys.entity.RoomInfo">
+
+		select * from room_info
+
+	</select>
+
+	<select id="findObjectById"
+		resultType="com.hm.sys.entity.RoomInfo">
+
+		select * from room_info where id=#{id}
+
+	</select>
+</mapper>

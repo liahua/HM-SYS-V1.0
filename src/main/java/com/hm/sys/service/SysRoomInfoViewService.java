@@ -1,6 +1,7 @@
 package com.hm.sys.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.hm.common.vo.PageObject;
 import com.hm.sys.entity.RoomInfo;
@@ -30,4 +31,23 @@ public interface SysRoomInfoViewService {
 	 PageObject<RoomInfo> findPageObjects(
 			 String roomName,
 			 Integer pageCurrent);
+	 /**
+	  * 
+	 * @Function: SysRoomInfoViewService.java
+	 * @Description: 该函数的功能描述
+	 *
+	 * @param:描述1描述
+	 * @return：返回结果描述
+	 * @throws：异常描述
+	 *
+	 * @version: v1.0.0
+	 * @author: lord
+	 * @date: Dec 22, 2018 5:41:09 AM 
+	 *
+	 * Modification History:
+	 * Date         Author          Version            Description
+	 *---------------------------------------------------------*
+	 * Dec 22, 2018     lord           v1.0.0               修改原因
+	  */
+	 public Map<String, Object> findObjectById(Integer id);
 }

@@ -13,6 +13,9 @@
     <result column="operator" property="operator" jdbcType="VARCHAR" />
     <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
     <result column="modifiedTime" property="modifiedtime" jdbcType="TIMESTAMP" />
+    <result column="cash_pledge" property="cashPledge" jdbcType="REAL" />
+    <result column="late_arrival_need_pay" property="lateArrivalNeedPay" jdbcType="REAL" />
+    <result column="early_leave-need_pay" property="earlyLeaveNeedPay" jdbcType="REAL" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,7 +77,8 @@
   </sql>
   <sql id="Base_Column_List" >
     id, stay_id, due_money, order_money, discount_type, discount_rate, paid_up_money, 
-    check_date, operator, createdTime, modifiedTime
+    check_date, operator, createdTime, modifiedTime, cash_pledge, late_arrival_need_pay, 
+    early_leave-need_pay
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.CheckInfoExample" >
     select
@@ -110,11 +114,13 @@
     insert into check_info (id, stay_id, due_money, 
       order_money, discount_type, discount_rate, 
       paid_up_money, check_date, operator, 
-      createdTime, modifiedTime)
+      createdTime, modifiedTime, cash_pledge, 
+      late_arrival_need_pay, early_leave-need_pay)
     values (#{id,jdbcType=INTEGER}, #{stayId,jdbcType=INTEGER}, #{dueMoney,jdbcType=REAL}, 
       #{orderMoney,jdbcType=REAL}, #{discountType,jdbcType=VARCHAR}, #{discountRate,jdbcType=REAL}, 
       #{paidUpMoney,jdbcType=REAL}, #{checkDate,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, 
-      #{createdtime,jdbcType=TIMESTAMP}, #{modifiedtime,jdbcType=TIMESTAMP})
+      #{createdtime,jdbcType=TIMESTAMP}, #{modifiedtime,jdbcType=TIMESTAMP}, #{cashPledge,jdbcType=REAL}, 
+      #{lateArrivalNeedPay,jdbcType=REAL}, #{earlyLeaveNeedPay,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="com.hm.sys.entity.CheckInfo" >
     insert into check_info
@@ -152,6 +158,15 @@
       <if test="modifiedtime != null" >
         modifiedTime,
       </if>
+      <if test="cashPledge != null" >
+        cash_pledge,
+      </if>
+      <if test="lateArrivalNeedPay != null" >
+        late_arrival_need_pay,
+      </if>
+      <if test="earlyLeaveNeedPay != null" >
+        early_leave-need_pay,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -186,6 +201,15 @@
       </if>
       <if test="modifiedtime != null" >
         #{modifiedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cashPledge != null" >
+        #{cashPledge,jdbcType=REAL},
+      </if>
+      <if test="lateArrivalNeedPay != null" >
+        #{lateArrivalNeedPay,jdbcType=REAL},
+      </if>
+      <if test="earlyLeaveNeedPay != null" >
+        #{earlyLeaveNeedPay,jdbcType=REAL},
       </if>
     </trim>
   </insert>
@@ -231,6 +255,15 @@
       <if test="record.modifiedtime != null" >
         modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.cashPledge != null" >
+        cash_pledge = #{record.cashPledge,jdbcType=REAL},
+      </if>
+      <if test="record.lateArrivalNeedPay != null" >
+        late_arrival_need_pay = #{record.lateArrivalNeedPay,jdbcType=REAL},
+      </if>
+      <if test="record.earlyLeaveNeedPay != null" >
+        early_leave-need_pay = #{record.earlyLeaveNeedPay,jdbcType=REAL},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -248,7 +281,10 @@
       check_date = #{record.checkDate,jdbcType=TIMESTAMP},
       operator = #{record.operator,jdbcType=VARCHAR},
       createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
-      modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP}
+      modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP},
+      cash_pledge = #{record.cashPledge,jdbcType=REAL},
+      late_arrival_need_pay = #{record.lateArrivalNeedPay,jdbcType=REAL},
+      early_leave-need_pay = #{record.earlyLeaveNeedPay,jdbcType=REAL}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -286,6 +322,15 @@
       <if test="modifiedtime != null" >
         modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP},
       </if>
+      <if test="cashPledge != null" >
+        cash_pledge = #{cashPledge,jdbcType=REAL},
+      </if>
+      <if test="lateArrivalNeedPay != null" >
+        late_arrival_need_pay = #{lateArrivalNeedPay,jdbcType=REAL},
+      </if>
+      <if test="earlyLeaveNeedPay != null" >
+        early_leave-need_pay = #{earlyLeaveNeedPay,jdbcType=REAL},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -300,7 +345,10 @@
       check_date = #{checkDate,jdbcType=TIMESTAMP},
       operator = #{operator,jdbcType=VARCHAR},
       createdTime = #{createdtime,jdbcType=TIMESTAMP},
-      modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP}
+      modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP},
+      cash_pledge = #{cashPledge,jdbcType=REAL},
+      late_arrival_need_pay = #{lateArrivalNeedPay,jdbcType=REAL},
+      early_leave-need_pay = #{earlyLeaveNeedPay,jdbcType=REAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

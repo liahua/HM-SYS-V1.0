@@ -25,6 +25,12 @@ public class CheckInfo {
 
     private Date modifiedtime;
 
+    private Float cashPledge;
+
+    private Float lateArrivalNeedPay;
+
+    private Float earlyLeaveNeedPay;
+
     public Integer getId() {
         return id;
     }
@@ -111,5 +117,29 @@ public class CheckInfo {
 
     public void setModifiedtime(Date modifiedtime) {
         this.modifiedtime = modifiedtime;
+    }
+
+    public Float getCashPledge() {
+        return cashPledge;
+    }
+
+    public void setCashPledge(Float cashPledge) {
+        this.cashPledge = cashPledge;
+    }
+
+    public Float getLateArrivalNeedPay() {
+        return lateArrivalNeedPay;
+    }
+
+    public void setLateArrivalNeedPay(Float lateArrivalNeedPay) {
+        this.lateArrivalNeedPay = lateArrivalNeedPay;
+    }
+
+    public Float getEarlyLeaveNeedPay() {
+        return earlyLeaveNeedPay;
+    }
+
+    public void setEarlyLeaveNeedPay(Float earlyLeaveNeedPay) {
+        this.earlyLeaveNeedPay = earlyLeaveNeedPay;
     }
 }

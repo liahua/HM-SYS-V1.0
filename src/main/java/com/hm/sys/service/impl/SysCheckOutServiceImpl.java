@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.StringUtil;
 import com.hm.common.exception.ServiceException;
 import com.hm.common.vo.CheckOutVoDetails;
+import com.hm.common.vo.CheckoutSettlementVoDetail;
 import com.hm.sys.entity.CustomerInfo;
 import com.hm.sys.entity.OrderInfo;
 import com.hm.sys.entity.RoomInfo;
@@ -76,6 +77,12 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 
 	@Override
 	public CheckOutVoDetails checkOutDepencyOrderInfo(CheckOutVoDetails CheckOutVoDetails) {
+		
+		return null;
+	}
+
+	@Override
+	public CheckoutSettlementVoDetail CheckoutSettlement(CheckOutVoDetails checkOutVoDetail) {
 		// TODO Auto-generated method stub
 		return null;
 	}

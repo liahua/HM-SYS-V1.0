@@ -784,6 +784,186 @@ public class CheckInfoExample {
             addCriterion("modifiedTime not between", value1, value2, "modifiedtime");
             return (Criteria) this;
         }
+
+        public Criteria andCashPledgeIsNull() {
+            addCriterion("cash_pledge is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashPledgeIsNotNull() {
+            addCriterion("cash_pledge is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashPledgeEqualTo(Float value) {
+            addCriterion("cash_pledge =", value, "cashPledge");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashPledgeNotEqualTo(Float value) {
+            addCriterion("cash_pledge <>", value, "cashPledge");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashPledgeGreaterThan(Float value) {
+            addCriterion("cash_pledge >", value, "cashPledge");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashPledgeGreaterThanOrEqualTo(Float value) {
+            addCriterion("cash_pledge >=", value, "cashPledge");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashPledgeLessThan(Float value) {
+            addCriterion("cash_pledge <", value, "cashPledge");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashPledgeLessThanOrEqualTo(Float value) {
+            addCriterion("cash_pledge <=", value, "cashPledge");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashPledgeIn(List<Float> values) {
+            addCriterion("cash_pledge in", values, "cashPledge");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashPledgeNotIn(List<Float> values) {
+            addCriterion("cash_pledge not in", values, "cashPledge");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashPledgeBetween(Float value1, Float value2) {
+            addCriterion("cash_pledge between", value1, value2, "cashPledge");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashPledgeNotBetween(Float value1, Float value2) {
+            addCriterion("cash_pledge not between", value1, value2, "cashPledge");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalNeedPayIsNull() {
+            addCriterion("late_arrival_need_pay is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalNeedPayIsNotNull() {
+            addCriterion("late_arrival_need_pay is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalNeedPayEqualTo(Float value) {
+            addCriterion("late_arrival_need_pay =", value, "lateArrivalNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalNeedPayNotEqualTo(Float value) {
+            addCriterion("late_arrival_need_pay <>", value, "lateArrivalNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalNeedPayGreaterThan(Float value) {
+            addCriterion("late_arrival_need_pay >", value, "lateArrivalNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalNeedPayGreaterThanOrEqualTo(Float value) {
+            addCriterion("late_arrival_need_pay >=", value, "lateArrivalNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalNeedPayLessThan(Float value) {
+            addCriterion("late_arrival_need_pay <", value, "lateArrivalNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalNeedPayLessThanOrEqualTo(Float value) {
+            addCriterion("late_arrival_need_pay <=", value, "lateArrivalNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalNeedPayIn(List<Float> values) {
+            addCriterion("late_arrival_need_pay in", values, "lateArrivalNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalNeedPayNotIn(List<Float> values) {
+            addCriterion("late_arrival_need_pay not in", values, "lateArrivalNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalNeedPayBetween(Float value1, Float value2) {
+            addCriterion("late_arrival_need_pay between", value1, value2, "lateArrivalNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalNeedPayNotBetween(Float value1, Float value2) {
+            addCriterion("late_arrival_need_pay not between", value1, value2, "lateArrivalNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveNeedPayIsNull() {
+            addCriterion("early_leave-need_pay is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveNeedPayIsNotNull() {
+            addCriterion("early_leave-need_pay is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveNeedPayEqualTo(Float value) {
+            addCriterion("early_leave-need_pay =", value, "earlyLeaveNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveNeedPayNotEqualTo(Float value) {
+            addCriterion("early_leave-need_pay <>", value, "earlyLeaveNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveNeedPayGreaterThan(Float value) {
+            addCriterion("early_leave-need_pay >", value, "earlyLeaveNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveNeedPayGreaterThanOrEqualTo(Float value) {
+            addCriterion("early_leave-need_pay >=", value, "earlyLeaveNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveNeedPayLessThan(Float value) {
+            addCriterion("early_leave-need_pay <", value, "earlyLeaveNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveNeedPayLessThanOrEqualTo(Float value) {
+            addCriterion("early_leave-need_pay <=", value, "earlyLeaveNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveNeedPayIn(List<Float> values) {
+            addCriterion("early_leave-need_pay in", values, "earlyLeaveNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveNeedPayNotIn(List<Float> values) {
+            addCriterion("early_leave-need_pay not in", values, "earlyLeaveNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveNeedPayBetween(Float value1, Float value2) {
+            addCriterion("early_leave-need_pay between", value1, value2, "earlyLeaveNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveNeedPayNotBetween(Float value1, Float value2) {
+            addCriterion("early_leave-need_pay not between", value1, value2, "earlyLeaveNeedPay");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

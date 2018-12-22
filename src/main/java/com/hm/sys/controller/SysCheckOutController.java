@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hm.common.vo.CheckOutVoDetails;
-
+import com.hm.common.vo.CheckoutSettlementVoDetail;
 import com.hm.common.vo.JsonResult;
 import com.hm.sys.entity.CustomerInfo;
 import com.hm.sys.entity.RoomInfo;
 import com.hm.sys.service.SysCheckOutService;
+import com.sun.org.apache.regexp.internal.recompile;
 
 
 @Controller
@@ -24,12 +25,12 @@ public class SysCheckOutController {
 
 	/**
 	 * 
-	 * @param checkOutVoDetail 应包含roomNameId CustomerId
+	 * @param checkOutVoDetail 应包含roomNameId CustomerNameTelephone|id|cardTypecardNum
 	 * @return
 	 */
 	@RequestMapping("checkOutDepencyRoomNameIdCustomerInfo")
 	@ResponseBody
-	public JsonResult checkOutDepencyRoomNameIdCustomerInfo(CheckOutVoDetails checkOutVoDetail) {
+	public JsonResult checkOutDepencyRoomNameIdCustomerInfo(@RequestBody CheckOutVoDetails checkOutVoDetail) {
 		
 	/*	CheckOutVoDetails checkOutVoDetails1 = new CheckOutVoDetails();
 		RoomInfo roomInfo = new RoomInfo();
@@ -43,4 +44,11 @@ public class SysCheckOutController {
 		CheckOutVoDetails checkOutVoDetails=sysCheckOutService.checkOutDepencyRoomNameIdCustomerInfo(checkOutVoDetail);
 		return new JsonResult(checkOutVoDetails);
 	}
+	public JsonResult CheckoutSettlement(@RequestBody CheckOutVoDetails checkOutVoDetail) {
+		CheckoutSettlementVoDetail checkoutSettlementVoDetail=sysCheckOutService.CheckoutSettlement(checkOutVoDetail);
+		return new JsonResult(checkoutSettlementVoDetail);
+	}
+	
+	
+	
 }

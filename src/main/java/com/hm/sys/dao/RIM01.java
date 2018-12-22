@@ -29,4 +29,7 @@ public interface RIM01 {
 		 int insertRoomInfo(RoomInfo entity);
 		 
 		 List<RoomInfo> findObjectsInfo(RoomInfoExample example);
+
+
+		List<RoomInfo> selectByExample(RoomInfoExample roomInfoExample);
 }

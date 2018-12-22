@@ -24,12 +24,9 @@
 					<thead>
 						<tr>
 						    <th><input type="checkbox" id="checkAll">全选</th>
-							<th>用户名</th>
-							<th>操作</th>
-							<th>请求方法</th>
-							<th>请求参数</th>
-							<th>IP地址</th>
-							<th>执行时间</th>
+							                            <th>类型ID</th>
+                                                        <th>类型</th>
+                                                        <th>房价系数</th>                                                      
 						</tr>
 					</thead>
 					<tbody id="tbodyId">
@@ -120,7 +117,7 @@
    function doDeleteObjects(){
 	   if(!confirm("您确认删除吗"))return;
 	   //1.定义请求的url
-	   var url="log/doDeleteObjects.do";
+	   var url="room/doDeleteObjects.do";
 	   //2.定义请求的参数
 	   var ids=doGetCheckedIds();//array
 	   if(ids.length==0){
@@ -217,12 +214,9 @@
    function doCreateTds(row){
 	   var tds=
         "<td><input type='checkbox' class='cBox' value='"+row.id+"'></td>"+
-		"<td>"+row.username+"</td>"+
-		"<td>"+row.operation+"</td>"+
-		"<td>"+row.method+"</td>"+
-		"<td>"+row.params+"</td>"+
-		"<td>"+row.ip+"</td>"+
-		"<td>"+new Date(row.createdTime).toLocaleString()+"</td>";
+        "<td>"+row.id+"</td>"+
+	     "<td>"+row.rtName+"</td>"+
+	     "<td>"+row.priceUp+"</td>";
 	   return tds;
   }
 </script>

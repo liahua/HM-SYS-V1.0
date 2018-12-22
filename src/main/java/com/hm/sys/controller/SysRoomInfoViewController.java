@@ -64,6 +64,12 @@ public class SysRoomInfoViewController {
 	public JsonResult doRoomView(RoomInfoExample room){
 		return new JsonResult(sysRoomInfoViewService.findObjectsInfo(room));
 	}
+	//根据id去查找相关房间的信息
+    @RequestMapping("doFindObjectById")
+    @ResponseBody
+    public JsonResult doFindObjectById(Integer id){
+   	 return new JsonResult(sysRoomInfoViewService.findObjectById(id));
+    }
 	//查找分页信息
 	@RequestMapping("doFindPageObjectsInfo")
 	@ResponseBody

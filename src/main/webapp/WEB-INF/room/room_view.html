@@ -31,45 +31,50 @@
 	   $("#pageId").load("doPageUI.do",function(){
 		   doGetObjects();
 	   });
-	   $("tbody").on("click",".btn-detail",doLoadDetail);
+	   $("tbody")
+	   .on("click",".btn-order,.btn-checkIn",doLoadPage);
    });
-   function doLoadDetail(){
+   //加载添加预订页面
+   //加载入住登记页面
+   function doLoadPage(){
 	   //1.判定点击的对象
-	   var title;
-	   if($(this).hasClass("btn-detail")){
-		   title="房间信息详情";
-		   var id=doGetCheckedId();
+		   var id=$(this).parents("tr").data("idJump");
 		   console.log("id="+id)
 		   if(!id){
 			  alert("请先选择");
 			  return;
 		   }
 		   //基于id进行查询并加载编辑页面
-		   doFindObjectById(id,title);
+		   doFindObjectById(id);
+		   //
+		   if($(this).hasClass("btn-order")){
+				  doLoadOrder();
+			 }else if($(this).hasClass("btn-checkIn")){
+				doLoadStay();
+		 }
 	   }
-   }
-   function doFindObjectById(id,title){
-	   //1.params
-	   var params={"id":id};
-	   //2.url
-	   var url="user/doFindObjectById.do";
-	   //3.ajax request
-	   $.getJSON(url,params,function(result){//JsonResult
-		   if(result.state==1){
-			  $("#mainContentId").data("rowData",result.data); 
-	          doLoadPage(title);
-		   }else{
-			  alert(result.message);
-		   }
-	   });
-   }
-   
-   function doLoadPage(title){
-	   var url="user/doUserEditUI.do"
-	   $("#mainContentId").load(url,function(){
-		   $(".box-title").html(title);
-	   }) 
-   }
+	   function doFindObjectById(id){
+		   //1.params
+		   var params={"id":id};
+		   //2.url
+		   var url="view/doFindObjectById.do";
+		   //3.ajax request
+		   $.getJSON(url,params,function(result){//JsonResult
+			   if(result.state==1){
+				  $("#mainContentId").data("rowData",result.data);
+			   }else{
+				  alert(result.message);
+			   }
+		   });
+	   }  
+	   function doLoadOrder(){
+		   var url="order/doUserEditUI.do"
+		   $("#mainContentId").load(url)
+	   }
+	   function doLoadStay(){
+		   var url="stay/doUserEditUI.do"
+		   $("#mainContentId").load(url)
+	   }
    //页面加载完成异步加载当前页数据
    function doGetObjects(){
 	   var url="view/doFindPageObjectsInfo.do";
@@ -99,6 +104,7 @@
 	  for(var i in data){
 		  var tr=$("<tr></tr>");
 		  tr.data("rowData",data[i]);
+		  tr.data("idJump",data[i].id);
 		  var tds=doCreateTds(data[i]);
 		  tr.append(tds);
 		  tBody.append(tr);
@@ -112,9 +118,12 @@
 	     "<td>"+row.roomName+"</td>"+
 	     "<td>"+row.roomAdd+"</td>"+
 	     "<td>"+row.statId+"</td>"+
-		 "<td class='td-actions text-left'>"+
-		 "<a id='btn-detail' rel='tooltip' class='btn btn-success btn-simple btn-xs'>"+
-         "<i class='ti-direction'></i>"+
+		 "<td class='td-actions '>"+
+		 "<a rel='tooltip' class='btn btn-order btn-info btn-simple btn-xs'>"+
+         "预订"+
+         "</a>"+
+		 "<a rel='tooltip' class='btn btn-checkIn btn-warning btn-simple btn-xs'>"+
+         "入住登记"+
          "</a>"+
          "</td>"; 
        return tds;

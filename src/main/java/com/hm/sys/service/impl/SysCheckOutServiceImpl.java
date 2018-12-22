@@ -1,28 +1,18 @@
 package com.hm.sys.service.impl;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import com.github.pagehelper.StringUtil;
 import com.hm.common.exception.ServiceException;
-
-import com.hm.common.utils.ListUtil;
-
 import com.hm.common.vo.CheckOutVoDetails;
-import com.hm.sys.dao.CustomerInfoMapper;
-import com.hm.sys.dao.RoomInfoMapper;
-import com.hm.sys.dao.StayInfoMapper;
 import com.hm.sys.entity.CustomerInfo;
-
 import com.hm.sys.entity.RoomInfo;
-import com.hm.sys.entity.RoomInfoExample;
 import com.hm.sys.entity.StayInfo;
 import com.hm.sys.service.SysCheckOutService;
 import com.hm.sys.service.SysCustomerService;
 import com.hm.sys.service.SysRoomInfoService;
+import com.hm.sys.service.SysStayInfoService;
 
 @Service
 public class SysCheckOutServiceImpl implements SysCheckOutService {
@@ -32,6 +22,8 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 	private SysCustomerService sysCustomerService;
 	@Autowired
 	private SysRoomInfoService sysRoomInfoService;
+	@Autowired
+	private SysStayInfoService sysStayInfoService;
 
 	@Override
 	public CheckOutVoDetails checkOutDepencyRoomNameIdCustomerInfo(CheckOutVoDetails checkOutVoDetail) {
@@ -54,18 +46,16 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 //		通过CustomerNameTelephone查找CustomerInfo
 //		通过id查找CustomerInfo
 		CustomerInfo customerInfo = sysCustomerService.findCustomerInfo(checkOutVoDetail.getCustomerInfo());
-		// 通过customerInfo查找入住信息
-		List<StayInfo> stayInfo=findStayInfo(customerInfo);
+		// 通过customerInfo查找需支付的入住信息
+		List<StayInfo> stayInfo=sysStayInfoService.findStayInfo(customerInfo, 0);
 		
 		checkOutVoDetail.setRoomInfo(roomInfo);
 		checkOutVoDetail.setCustomerInfo(customerInfo);
-		return null;
-	}
-
-	private List<StayInfo> findStayInfo(CustomerInfo customerInfo) {
 		
 		return null;
 	}
+
+	
 
 	
 

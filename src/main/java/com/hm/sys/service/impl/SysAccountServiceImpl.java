@@ -2,7 +2,6 @@ package com.hm.sys.service.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -73,16 +72,14 @@ public class SysAccountServiceImpl implements SysAccountService {
 	 * 日明细统计
 	 */
 	@Override
-	public synchronized DayAccount doDayCheck(String date) {
+	public synchronized int doDayCheck(String date) {
 		resetTime(date);
 
-		DayAccount da = doFindAccountByDate();
 
-		if (da != null) {
-			return da;
+		if (doFindAccountByDate() == 0) {
+			return 0;
 		}
 		
-		da = new DayAccount();
 		
 		// 各种房间状态统计
 		HashMap<Integer, Integer> filledMap = new HashMap<>();
@@ -90,7 +87,6 @@ public class SysAccountServiceImpl implements SysAccountService {
 		statAccount(filledMap, unFilledMap);
 
 		// 写入数据库
-		List<AccountRoom> arList = new ArrayList<>();
 		for (int i = 1; i <= 4; i++) {
 			AccountRoom ar = new AccountRoom();
 			ar.setDay(this.date);
@@ -104,10 +100,8 @@ public class SysAccountServiceImpl implements SysAccountService {
 			// System.out.println("unFilledNum"+unFilledNum);
 			ar.setUnfilledNum(unFilledNum != null ? unFilledNum : 0);
 
-			arList.add(ar);
 			accountRoomMapper.insert(ar);
 		}
-		da.setRoomList(arList);
 
 		// 日账单统计
 		AccountInfo accountInfo = new AccountInfo();
@@ -125,20 +119,63 @@ public class SysAccountServiceImpl implements SysAccountService {
 		// 结算统计
 		accountInfo.setCheckinCount(checkinAccount());
 
-		da.setAccountInfo(accountInfo);
-		accountInfoMapper.insert(accountInfo);
+		int row = accountInfoMapper.insert(accountInfo);
 
-		return da;
+		return row;
+	}
+	
+	/**
+	 *  一个时间段的日明细
+	 */
+	@Override
+	public DayAccount doFindDayAccounts(String start, String end) {
+		if(StringUtil.isEmpty(start)||StringUtil.isEmpty(end)) {
+			throw new ServiceException("起始日期和终止日期不能为空");
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDay;
+		Date endDay;
+		try {
+			startDay = sdf.parse(start);
+			endDay = sdf.parse(end);
+		} catch (ParseException e) {
+			throw new ServiceException("日期错误，查询失败");
+		}
+		//查询每日账单
+		AccountInfoExample infoExample = new AccountInfoExample();
+		com.hm.sys.entity.AccountInfoExample.Criteria icriteria = infoExample.createCriteria();
+		icriteria.andDayBetween(startDay, endDay);
+		
+		List<AccountInfo> info = accountInfoMapper.selectByExample(infoExample);
+		if(info.size()==0) {
+			throw new ServiceException("暂无数据，查询失败");
+		}
+		//查询每日房夜数
+		AccountRoomExample roomExample = new AccountRoomExample();
+		com.hm.sys.entity.AccountRoomExample.Criteria rcriterria = roomExample.createCriteria();
+		rcriterria.andDayBetween(startDay, endDay);
+		
+		List<AccountRoom> room = accountRoomMapper.selectByExample(roomExample);
+		if(room.size()==0) {
+			throw new ServiceException("暂无数据，查询失败");
+		}
+		
+		DayAccount dayAccount = new DayAccount();
+		dayAccount.setAccountInfo(info);
+		dayAccount.setRoomList(room);
+		
+		return dayAccount;
 	}
 
-	private DayAccount doFindAccountByDate() {
+	private int doFindAccountByDate() {
 		AccountInfoExample infoExample = new AccountInfoExample();
 		com.hm.sys.entity.AccountInfoExample.Criteria icriteria = infoExample.createCriteria();
 		icriteria.andDayEqualTo(this.date);
 
 		List<AccountInfo> info = accountInfoMapper.selectByExample(infoExample);
 		if(info.size()==0) {
-			return null;
+			return 0;
 		}
 		
 		AccountRoomExample roomExample = new AccountRoomExample();
@@ -147,13 +184,10 @@ public class SysAccountServiceImpl implements SysAccountService {
 		
 		List<AccountRoom> room = accountRoomMapper.selectByExample(roomExample);
 		if(room.size()==0) {
-			return null;
+			return 0;
 		}
 		
-		DayAccount dayAccount = new DayAccount();
-		dayAccount.setAccountInfo(info.get(0));
-		dayAccount.setRoomList(room);
-		return dayAccount;
+		return 1;
 	}
 
 	private void resetTime(String date) {
@@ -253,6 +287,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 	 */
 	private Date initDate(Integer hour) {
 		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
 		calendar.set(Calendar.HOUR_OF_DAY, hour);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
@@ -303,5 +338,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 		}
 
 	}
+
+	
 
 }

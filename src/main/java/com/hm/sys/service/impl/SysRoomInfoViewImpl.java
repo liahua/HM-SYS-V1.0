@@ -58,7 +58,7 @@ public class SysRoomInfoViewImpl implements SysRoomInfoViewService{
 		if(rowCount==0)
 	    throw new ServiceException("记录不存在");
 		//4.依据条件查询当前页要显示的记录
-		int pageSize=10;//页面大小
+		int pageSize=2;//页面大小
 		int startIndex=(pageCurrent-1)*pageSize;//起始位置
 		List<RoomInfo> records=
 				rIM01.findPageObjects(roomName,

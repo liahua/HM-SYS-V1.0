@@ -11,6 +11,7 @@
                                                         <th>金额</th>
                                                         <th>状态</th>
                                                         <th>详情</th>
+                                                        <th>详情</th>
                                                         <th>操作</th>
                                                 </tr>
                                             </thead>
@@ -81,7 +82,6 @@
 	   var pageCurrent=$("#pageId").data("pageCurrent");
 	   if(!pageCurrent)pageCurrent=1;
 	   var params={"pageCurrent":pageCurrent}
-	   params.username=$("#searchNameId").val().trim();
 	   console.log(params);
 	   $.getJSON(url,params,function(result){
 		   console.log(result);
@@ -113,11 +113,12 @@
 
    function doCreateTds(row){
 	   console.log(row);
-	   var tds="<td><input type='radio' name='radioId' value='"+row.id+"' ></td>"+
+	   var tds="<td>"+row.id+"</td>"+
+	     "<td>"+row.rtId+"</td>"+
 	     "<td>"+row.roomName+"</td>"+
 	     "<td>"+row.roomAdd+"</td>"+
 	     "<td>"+row.bedNum+"</td>"+
-	     "<td>"+row.RoomState.id+"</td>"; 
+	     "<td>"+row.statId+"</td>"; 
        return tds;
    }
 </script>               

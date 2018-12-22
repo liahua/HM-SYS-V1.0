@@ -16,6 +16,11 @@ public class AccountController {
 	@Autowired
 	private SysAccountService sysAccountService;
 	
+	@RequestMapping("doAccountUI")
+	public String doAccountUI() {
+		return "account/account";
+	}
+	
 	@RequestMapping("doDayAccount")
 	@ResponseBody
 	public JsonResult doDayAccount(String date) {

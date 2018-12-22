@@ -12,6 +12,7 @@ import com.hm.sys.entity.StayInfo;
 import com.hm.sys.service.SysCheckOutService;
 import com.hm.sys.service.SysCustomerService;
 import com.hm.sys.service.SysRoomInfoService;
+import com.hm.sys.service.SysStayInfoService;
 
 @Service
 public class SysCheckOutServiceImpl implements SysCheckOutService {
@@ -21,6 +22,8 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 	private SysCustomerService sysCustomerService;
 	@Autowired
 	private SysRoomInfoService sysRoomInfoService;
+	@Autowired
+	private SysStayInfoService sysStayInfoService;
 
 	@Override
 	public CheckOutVoDetails checkOutDepencyRoomNameIdCustomerInfo(CheckOutVoDetails checkOutVoDetail) {
@@ -43,19 +46,16 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 //		通过CustomerNameTelephone查找CustomerInfo
 //		通过id查找CustomerInfo
 		CustomerInfo customerInfo = sysCustomerService.findCustomerInfo(checkOutVoDetail.getCustomerInfo());
-		// 通过customerInfo查找入住信息
-		List<StayInfo> stayInfo=findStayInfo(customerInfo);
+		// 通过customerInfo查找需支付的入住信息
+		List<StayInfo> stayInfo=sysStayInfoService.findStayInfo(customerInfo, 0);
 		
 		checkOutVoDetail.setRoomInfo(roomInfo);
 		checkOutVoDetail.setCustomerInfo(customerInfo);
-		System.out.println(checkOutVoDetail);
-		return null;
-	}
-
-	private List<StayInfo> findStayInfo(CustomerInfo customerInfo) {
 		
 		return null;
 	}
+
+	
 
 	
 

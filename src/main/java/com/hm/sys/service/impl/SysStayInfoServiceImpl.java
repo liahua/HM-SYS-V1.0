@@ -2,11 +2,8 @@ package com.hm.sys.service.impl;
 
 
 import java.util.List;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.hm.common.exception.ServiceException;
 import com.hm.common.utils.IntegerUtil;
 import com.hm.common.utils.ListUtil;
@@ -16,6 +13,10 @@ import com.hm.sys.entity.StayInfo;
 import com.hm.sys.entity.StayInfoExample;
 import com.hm.sys.entity.StayInfoExample.Criteria;
 import com.hm.sys.service.SysStayInfoService;
+
+
+
+
 
 @Service
 public class SysStayInfoServiceImpl implements SysStayInfoService{

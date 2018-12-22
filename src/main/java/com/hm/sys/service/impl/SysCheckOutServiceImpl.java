@@ -7,16 +7,17 @@ import com.github.pagehelper.StringUtil;
 import com.hm.common.exception.ServiceException;
 import com.hm.common.vo.CheckOutVoDetails;
 import com.hm.sys.entity.CustomerInfo;
+import com.hm.sys.entity.OrderInfo;
 import com.hm.sys.entity.RoomInfo;
 import com.hm.sys.entity.StayInfo;
 import com.hm.sys.service.SysCheckOutService;
 import com.hm.sys.service.SysCustomerService;
+import com.hm.sys.service.SysOrderService;
 import com.hm.sys.service.SysRoomInfoService;
 import com.hm.sys.service.SysStayInfoService;
 
 @Service
 public class SysCheckOutServiceImpl implements SysCheckOutService {
-
 
 	@Autowired
 	private SysCustomerService sysCustomerService;
@@ -24,6 +25,8 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 	private SysRoomInfoService sysRoomInfoService;
 	@Autowired
 	private SysStayInfoService sysStayInfoService;
+	@Autowired
+	private SysOrderService sysOrderService;
 
 	@Override
 	public CheckOutVoDetails checkOutDepencyRoomNameIdCustomerInfo(CheckOutVoDetails checkOutVoDetail) {
@@ -46,25 +49,20 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 //		通过CustomerNameTelephone查找CustomerInfo
 //		通过id查找CustomerInfo
 		CustomerInfo customerInfo = sysCustomerService.findCustomerInfo(checkOutVoDetail.getCustomerInfo());
-		// 通过customerInfo查找需支付的入住信息
-		List<StayInfo> stayInfo=sysStayInfoService.findStayInfo(customerInfo, 0);
+		// 通过customerInfo查找入住信息
+		List<StayInfo> stayInfos = sysStayInfoService.findStayInfo(customerInfo,
+				checkOutVoDetail.getStayInfoQueryType());
+		// 通过customerInfo查询已确定订单信息
+		List<OrderInfo> orderInfos = sysOrderService.findOrderInfo(customerInfo,
+				checkOutVoDetail.getOrderInfoQueryType());
 		
 		checkOutVoDetail.setRoomInfo(roomInfo);
 		checkOutVoDetail.setCustomerInfo(customerInfo);
-		
-		return null;
+		checkOutVoDetail.setStayInfos(stayInfos);
+		checkOutVoDetail.setOrderInfos(orderInfos);
+
+		return checkOutVoDetail;
 	}
-
-	
-
-	
-
-	
-
-
-
-
-
 
 	@Override
 	public CheckOutVoDetails checkOutDepencyOrderInfo(CheckOutVoDetails CheckOutVoDetails) {

@@ -4,7 +4,9 @@
   <resultMap id="BaseResultMap" type="com.hm.sys.entity.CustomerType" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="customer_type" property="customerType" jdbcType="VARCHAR" />
-    <result column="discount_per" property="discountPer" jdbcType="REAL" />
+    <result column="discount_per" property="discountPer" jdbcType="DOUBLE" />
+    <result column="late_arrive_per" property="lateArrivePer" jdbcType="DOUBLE" />
+    <result column="early_leave_per" property="earlyLeavePer" jdbcType="DOUBLE" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, customer_type, discount_per
+    id, customer_type, discount_per, late_arrive_per, early_leave_per
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.CustomerTypeExample" >
     select
@@ -98,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.hm.sys.entity.CustomerType" >
-    insert into customer_type (id, customer_type, discount_per
-      )
-    values (#{id,jdbcType=INTEGER}, #{customerType,jdbcType=VARCHAR}, #{discountPer,jdbcType=REAL}
-      )
+    insert into customer_type (id, customer_type, discount_per, 
+      late_arrive_per, early_leave_per)
+    values (#{id,jdbcType=INTEGER}, #{customerType,jdbcType=VARCHAR}, #{discountPer,jdbcType=DOUBLE}, 
+      #{lateArrivePer,jdbcType=DOUBLE}, #{earlyLeavePer,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.hm.sys.entity.CustomerType" >
     insert into customer_type
@@ -115,6 +117,12 @@
       <if test="discountPer != null" >
         discount_per,
       </if>
+      <if test="lateArrivePer != null" >
+        late_arrive_per,
+      </if>
+      <if test="earlyLeavePer != null" >
+        early_leave_per,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -124,7 +132,13 @@
         #{customerType,jdbcType=VARCHAR},
       </if>
       <if test="discountPer != null" >
-        #{discountPer,jdbcType=REAL},
+        #{discountPer,jdbcType=DOUBLE},
+      </if>
+      <if test="lateArrivePer != null" >
+        #{lateArrivePer,jdbcType=DOUBLE},
+      </if>
+      <if test="earlyLeavePer != null" >
+        #{earlyLeavePer,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -144,7 +158,13 @@
         customer_type = #{record.customerType,jdbcType=VARCHAR},
       </if>
       <if test="record.discountPer != null" >
-        discount_per = #{record.discountPer,jdbcType=REAL},
+        discount_per = #{record.discountPer,jdbcType=DOUBLE},
+      </if>
+      <if test="record.lateArrivePer != null" >
+        late_arrive_per = #{record.lateArrivePer,jdbcType=DOUBLE},
+      </if>
+      <if test="record.earlyLeavePer != null" >
+        early_leave_per = #{record.earlyLeavePer,jdbcType=DOUBLE},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -155,7 +175,9 @@
     update customer_type
     set id = #{record.id,jdbcType=INTEGER},
       customer_type = #{record.customerType,jdbcType=VARCHAR},
-      discount_per = #{record.discountPer,jdbcType=REAL}
+      discount_per = #{record.discountPer,jdbcType=DOUBLE},
+      late_arrive_per = #{record.lateArrivePer,jdbcType=DOUBLE},
+      early_leave_per = #{record.earlyLeavePer,jdbcType=DOUBLE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -167,7 +189,13 @@
         customer_type = #{customerType,jdbcType=VARCHAR},
       </if>
       <if test="discountPer != null" >
-        discount_per = #{discountPer,jdbcType=REAL},
+        discount_per = #{discountPer,jdbcType=DOUBLE},
+      </if>
+      <if test="lateArrivePer != null" >
+        late_arrive_per = #{lateArrivePer,jdbcType=DOUBLE},
+      </if>
+      <if test="earlyLeavePer != null" >
+        early_leave_per = #{earlyLeavePer,jdbcType=DOUBLE},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -175,7 +203,9 @@
   <update id="updateByPrimaryKey" parameterType="com.hm.sys.entity.CustomerType" >
     update customer_type
     set customer_type = #{customerType,jdbcType=VARCHAR},
-      discount_per = #{discountPer,jdbcType=REAL}
+      discount_per = #{discountPer,jdbcType=DOUBLE},
+      late_arrive_per = #{lateArrivePer,jdbcType=DOUBLE},
+      early_leave_per = #{earlyLeavePer,jdbcType=DOUBLE}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

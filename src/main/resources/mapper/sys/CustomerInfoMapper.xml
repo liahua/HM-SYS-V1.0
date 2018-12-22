@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
     <result column="gender" property="gender" jdbcType="CHAR" />
+    <result column="vip_level" property="vipLevel" jdbcType="INTEGER" />
     <result column="country" property="country" jdbcType="VARCHAR" />
     <result column="telephone" property="telephone" jdbcType="VARCHAR" />
     <result column="card_type_id" property="cardTypeId" jdbcType="INTEGER" />
@@ -72,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, customer_name, gender, country, telephone, card_type_id, card_num, operator, 
-    createdTime, modifiedTime
+    id, customer_name, gender, vip_level, country, telephone, card_type_id, card_num, 
+    operator, createdTime, modifiedTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.CustomerInfoExample" >
     select
@@ -107,13 +108,13 @@
   </delete>
   <insert id="insert" parameterType="com.hm.sys.entity.CustomerInfo" >
     insert into customer_info (id, customer_name, gender, 
-      country, telephone, card_type_id, 
-      card_num, operator, createdTime, 
-      modifiedTime)
+      vip_level, country, telephone, 
+      card_type_id, card_num, operator, 
+      createdTime, modifiedTime)
     values (#{id,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, 
-      #{country,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{cardTypeId,jdbcType=INTEGER}, 
-      #{cardNum,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, 
-      #{modifiedtime,jdbcType=TIMESTAMP})
+      #{vipLevel,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{cardTypeId,jdbcType=INTEGER}, #{cardNum,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
+      #{createdtime,jdbcType=TIMESTAMP}, #{modifiedtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hm.sys.entity.CustomerInfo" >
     insert into customer_info
@@ -126,6 +127,9 @@
       </if>
       <if test="gender != null" >
         gender,
+      </if>
+      <if test="vipLevel != null" >
+        vip_level,
       </if>
       <if test="country != null" >
         country,
@@ -158,6 +162,9 @@
       </if>
       <if test="gender != null" >
         #{gender,jdbcType=CHAR},
+      </if>
+      <if test="vipLevel != null" >
+        #{vipLevel,jdbcType=INTEGER},
       </if>
       <if test="country != null" >
         #{country,jdbcType=VARCHAR},
@@ -200,6 +207,9 @@
       <if test="record.gender != null" >
         gender = #{record.gender,jdbcType=CHAR},
       </if>
+      <if test="record.vipLevel != null" >
+        vip_level = #{record.vipLevel,jdbcType=INTEGER},
+      </if>
       <if test="record.country != null" >
         country = #{record.country,jdbcType=VARCHAR},
       </if>
@@ -231,6 +241,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       customer_name = #{record.customerName,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=CHAR},
+      vip_level = #{record.vipLevel,jdbcType=INTEGER},
       country = #{record.country,jdbcType=VARCHAR},
       telephone = #{record.telephone,jdbcType=VARCHAR},
       card_type_id = #{record.cardTypeId,jdbcType=INTEGER},
@@ -250,6 +261,9 @@
       </if>
       <if test="gender != null" >
         gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="vipLevel != null" >
+        vip_level = #{vipLevel,jdbcType=INTEGER},
       </if>
       <if test="country != null" >
         country = #{country,jdbcType=VARCHAR},
@@ -279,6 +293,7 @@
     update customer_info
     set customer_name = #{customerName,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=CHAR},
+      vip_level = #{vipLevel,jdbcType=INTEGER},
       country = #{country,jdbcType=VARCHAR},
       telephone = #{telephone,jdbcType=VARCHAR},
       card_type_id = #{cardTypeId,jdbcType=INTEGER},

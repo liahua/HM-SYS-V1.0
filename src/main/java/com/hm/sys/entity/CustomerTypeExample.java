@@ -244,53 +244,173 @@ public class CustomerTypeExample {
             return (Criteria) this;
         }
 
-        public Criteria andDiscountPerEqualTo(Float value) {
+        public Criteria andDiscountPerEqualTo(Double value) {
             addCriterion("discount_per =", value, "discountPer");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountPerNotEqualTo(Float value) {
+        public Criteria andDiscountPerNotEqualTo(Double value) {
             addCriterion("discount_per <>", value, "discountPer");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountPerGreaterThan(Float value) {
+        public Criteria andDiscountPerGreaterThan(Double value) {
             addCriterion("discount_per >", value, "discountPer");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountPerGreaterThanOrEqualTo(Float value) {
+        public Criteria andDiscountPerGreaterThanOrEqualTo(Double value) {
             addCriterion("discount_per >=", value, "discountPer");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountPerLessThan(Float value) {
+        public Criteria andDiscountPerLessThan(Double value) {
             addCriterion("discount_per <", value, "discountPer");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountPerLessThanOrEqualTo(Float value) {
+        public Criteria andDiscountPerLessThanOrEqualTo(Double value) {
             addCriterion("discount_per <=", value, "discountPer");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountPerIn(List<Float> values) {
+        public Criteria andDiscountPerIn(List<Double> values) {
             addCriterion("discount_per in", values, "discountPer");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountPerNotIn(List<Float> values) {
+        public Criteria andDiscountPerNotIn(List<Double> values) {
             addCriterion("discount_per not in", values, "discountPer");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountPerBetween(Float value1, Float value2) {
+        public Criteria andDiscountPerBetween(Double value1, Double value2) {
             addCriterion("discount_per between", value1, value2, "discountPer");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountPerNotBetween(Float value1, Float value2) {
+        public Criteria andDiscountPerNotBetween(Double value1, Double value2) {
             addCriterion("discount_per not between", value1, value2, "discountPer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivePerIsNull() {
+            addCriterion("late_arrive_per is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivePerIsNotNull() {
+            addCriterion("late_arrive_per is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivePerEqualTo(Double value) {
+            addCriterion("late_arrive_per =", value, "lateArrivePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivePerNotEqualTo(Double value) {
+            addCriterion("late_arrive_per <>", value, "lateArrivePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivePerGreaterThan(Double value) {
+            addCriterion("late_arrive_per >", value, "lateArrivePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivePerGreaterThanOrEqualTo(Double value) {
+            addCriterion("late_arrive_per >=", value, "lateArrivePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivePerLessThan(Double value) {
+            addCriterion("late_arrive_per <", value, "lateArrivePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivePerLessThanOrEqualTo(Double value) {
+            addCriterion("late_arrive_per <=", value, "lateArrivePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivePerIn(List<Double> values) {
+            addCriterion("late_arrive_per in", values, "lateArrivePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivePerNotIn(List<Double> values) {
+            addCriterion("late_arrive_per not in", values, "lateArrivePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivePerBetween(Double value1, Double value2) {
+            addCriterion("late_arrive_per between", value1, value2, "lateArrivePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivePerNotBetween(Double value1, Double value2) {
+            addCriterion("late_arrive_per not between", value1, value2, "lateArrivePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeavePerIsNull() {
+            addCriterion("early_leave_per is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeavePerIsNotNull() {
+            addCriterion("early_leave_per is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeavePerEqualTo(Double value) {
+            addCriterion("early_leave_per =", value, "earlyLeavePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeavePerNotEqualTo(Double value) {
+            addCriterion("early_leave_per <>", value, "earlyLeavePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeavePerGreaterThan(Double value) {
+            addCriterion("early_leave_per >", value, "earlyLeavePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeavePerGreaterThanOrEqualTo(Double value) {
+            addCriterion("early_leave_per >=", value, "earlyLeavePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeavePerLessThan(Double value) {
+            addCriterion("early_leave_per <", value, "earlyLeavePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeavePerLessThanOrEqualTo(Double value) {
+            addCriterion("early_leave_per <=", value, "earlyLeavePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeavePerIn(List<Double> values) {
+            addCriterion("early_leave_per in", values, "earlyLeavePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeavePerNotIn(List<Double> values) {
+            addCriterion("early_leave_per not in", values, "earlyLeavePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeavePerBetween(Double value1, Double value2) {
+            addCriterion("early_leave_per between", value1, value2, "earlyLeavePer");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeavePerNotBetween(Double value1, Double value2) {
+            addCriterion("early_leave_per not between", value1, value2, "earlyLeavePer");
             return (Criteria) this;
         }
     }

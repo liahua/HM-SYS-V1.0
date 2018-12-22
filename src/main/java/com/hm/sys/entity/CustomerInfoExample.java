@@ -305,6 +305,66 @@ public class CustomerInfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andVipLevelIsNull() {
+            addCriterion("vip_level is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVipLevelIsNotNull() {
+            addCriterion("vip_level is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVipLevelEqualTo(Integer value) {
+            addCriterion("vip_level =", value, "vipLevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andVipLevelNotEqualTo(Integer value) {
+            addCriterion("vip_level <>", value, "vipLevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andVipLevelGreaterThan(Integer value) {
+            addCriterion("vip_level >", value, "vipLevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andVipLevelGreaterThanOrEqualTo(Integer value) {
+            addCriterion("vip_level >=", value, "vipLevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andVipLevelLessThan(Integer value) {
+            addCriterion("vip_level <", value, "vipLevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andVipLevelLessThanOrEqualTo(Integer value) {
+            addCriterion("vip_level <=", value, "vipLevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andVipLevelIn(List<Integer> values) {
+            addCriterion("vip_level in", values, "vipLevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andVipLevelNotIn(List<Integer> values) {
+            addCriterion("vip_level not in", values, "vipLevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andVipLevelBetween(Integer value1, Integer value2) {
+            addCriterion("vip_level between", value1, value2, "vipLevel");
+            return (Criteria) this;
+        }
+
+        public Criteria andVipLevelNotBetween(Integer value1, Integer value2) {
+            addCriterion("vip_level not between", value1, value2, "vipLevel");
+            return (Criteria) this;
+        }
+
         public Criteria andCountryIsNull() {
             addCriterion("country is null");
             return (Criteria) this;

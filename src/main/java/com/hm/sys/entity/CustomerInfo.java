@@ -9,6 +9,8 @@ public class CustomerInfo {
 
     private String gender;
 
+    private Integer vipLevel;
+
     private String country;
 
     private String telephone;
@@ -45,6 +47,14 @@ public class CustomerInfo {
 
     public void setGender(String gender) {
         this.gender = gender == null ? null : gender.trim();
+    }
+
+    public Integer getVipLevel() {
+        return vipLevel;
+    }
+
+    public void setVipLevel(Integer vipLevel) {
+        this.vipLevel = vipLevel;
     }
 
     public String getCountry() {
@@ -102,12 +112,4 @@ public class CustomerInfo {
     public void setModifiedtime(Date modifiedtime) {
         this.modifiedtime = modifiedtime;
     }
-
-	@Override
-	public String toString() {
-		return "CustomerInfo [id=" + id + ", customerName=" + customerName + ", gender=" + gender + ", country="
-				+ country + ", telephone=" + telephone + ", cardTypeId=" + cardTypeId + ", cardNum=" + cardNum
-				+ ", operator=" + operator + ", createdtime=" + createdtime + ", modifiedtime=" + modifiedtime + "]";
-	}
-    
 }

@@ -5,7 +5,11 @@ public class CustomerType {
 
     private String customerType;
 
-    private Float discountPer;
+    private Double discountPer;
+
+    private Double lateArrivePer;
+
+    private Double earlyLeavePer;
 
     public Integer getId() {
         return id;
@@ -23,11 +27,27 @@ public class CustomerType {
         this.customerType = customerType == null ? null : customerType.trim();
     }
 
-    public Float getDiscountPer() {
+    public Double getDiscountPer() {
         return discountPer;
     }
 
-    public void setDiscountPer(Float discountPer) {
+    public void setDiscountPer(Double discountPer) {
         this.discountPer = discountPer;
+    }
+
+    public Double getLateArrivePer() {
+        return lateArrivePer;
+    }
+
+    public void setLateArrivePer(Double lateArrivePer) {
+        this.lateArrivePer = lateArrivePer;
+    }
+
+    public Double getEarlyLeavePer() {
+        return earlyLeavePer;
+    }
+
+    public void setEarlyLeavePer(Double earlyLeavePer) {
+        this.earlyLeavePer = earlyLeavePer;
     }
 }

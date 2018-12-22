@@ -1,6 +1,7 @@
 package com.hm.sys.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.StringUtil;
 import com.hm.common.exception.ServiceException;
 import com.hm.common.vo.CheckOutVoDetails;
-import com.hm.common.vo.CheckoutSettlementVoDetail;
+import com.hm.sys.entity.CheckInfo;
 import com.hm.sys.entity.CustomerInfo;
 import com.hm.sys.entity.OrderInfo;
 import com.hm.sys.entity.RoomInfo;
@@ -20,6 +21,7 @@ import com.hm.sys.service.SysCustomerService;
 import com.hm.sys.service.SysOrderService;
 import com.hm.sys.service.SysRoomInfoService;
 import com.hm.sys.service.SysStayInfoService;
+import com.mysql.fabric.xmlrpc.base.Data;
 
 @Service
 public class SysCheckOutServiceImpl implements SysCheckOutService {
@@ -75,16 +77,50 @@ public class SysCheckOutServiceImpl implements SysCheckOutService {
 		return checkOutVoDetail;
 	}
 
+	
+
 	@Override
-	public CheckOutVoDetails checkOutDepencyOrderInfo(CheckOutVoDetails CheckOutVoDetails) {
+	public List<CheckInfo> CalculateBillDetails(CheckOutVoDetails checkOutVoDetail) {
+	
+//	  1.假定本次stayInfo的离店时间为now();
+		Date leaveTime=getCurrentTime();
+//	  2.根据折扣比率计算每日房价
+		
+//	  3.根据orderInfo,stayInfo计算lateArrivalDay,stayDay,earlyLeaveDay
+//	  4.根据lateArrivalDay,stayDay,earlyLeaveDay分别计算lateArrivalNeedPay,stayDayNeedPay,earlyLeaveNeedPay
+//	  5.根据lateArrivalNeedPay,stayDayNeedPay,earlyLeaveNeedPay计算dueMoney
+//	  6.根据dueMoney-(orderMoney+cashPledge)计算paidUpMoney
+//	  7.存入CheckInfo
+//	  8.根据stayInfo列表中其他stayInfo,获取checkInfo
+//	  9.将checkInfo放入list集合中
+//	  8.回显
+		
+		
+		
+		
 		
 		return null;
 	}
 
-	@Override
-	public CheckoutSettlementVoDetail CheckoutSettlement(CheckOutVoDetails checkOutVoDetail) {
+
+
+	private Date getCurrentTime() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+	@Override
+	public CheckOutVoDetails checkOutDepencyOrderInfo(CheckOutVoDetails CheckOutVoDetails) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	
+
+
 
 }

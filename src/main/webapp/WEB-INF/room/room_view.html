@@ -6,22 +6,16 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                        <th>房号</th>
-                                                        <th>类型</th>
-                                                        <th>金额</th>
+                                                        <th>房间编号</th>
+                                                        <th>房间类型</th>
+                                                        <th>房间号</th>
+                                                        <th>楼层</th>
                                                         <th>状态</th>
-                                                        <th>详情</th>
-                                                        <th>详情</th>
                                                         <th>操作</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbodyId">
-                                            
-											   <td class="td-actions text-left">
-											           <a id="btn-detail" rel="tooltip" title="详情" class="btn btn-success btn-simple btn-xs">
-											               <i class="ti-direction"></i>
-											           </a>
-											   </td>
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -117,8 +111,12 @@
 	     "<td>"+row.rtId+"</td>"+
 	     "<td>"+row.roomName+"</td>"+
 	     "<td>"+row.roomAdd+"</td>"+
-	     "<td>"+row.bedNum+"</td>"+
-	     "<td>"+row.statId+"</td>"; 
+	     "<td>"+row.statId+"</td>"+
+		 "<td class='td-actions text-left'>"+
+		 "<a id='btn-detail' rel='tooltip' class='btn btn-success btn-simple btn-xs'>"+
+         "<i class='ti-direction'></i>"+
+         "</a>"+
+         "</td>"; 
        return tds;
    }
 </script>               

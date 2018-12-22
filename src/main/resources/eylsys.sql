@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2018-12-22 15:50:24
+Date: 2018-12-22 16:04:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,18 +58,22 @@ DROP TABLE IF EXISTS `check_info`;
 CREATE TABLE `check_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `stay_id` int(11) DEFAULT NULL,
-  `due_money` float DEFAULT NULL,
-  `order_money` float DEFAULT NULL,
+  `due_money` double DEFAULT NULL,
+  `order_money` double DEFAULT NULL,
   `discount_type` varchar(20) DEFAULT NULL,
-  `discount_rate` float DEFAULT NULL,
-  `paid_up_money` float DEFAULT NULL,
+  `discount_rate` double DEFAULT NULL,
+  `paid_up_money` double DEFAULT NULL,
   `check_date` datetime DEFAULT NULL,
   `operator` varchar(20) DEFAULT NULL,
   `createdTime` datetime DEFAULT NULL,
   `modifiedTime` datetime DEFAULT NULL,
-  `cash_pledge` float DEFAULT NULL,
-  `late_arrival_need_pay` float DEFAULT NULL,
-  `early_leave-need_pay` float DEFAULT NULL,
+  `cash_pledge` double DEFAULT NULL,
+  `late_arrival_need_pay` double DEFAULT NULL,
+  `early_leave-need_pay` double DEFAULT NULL,
+  `stay_day_need_pay` double DEFAULT NULL,
+  `late_arrival_day` int(20) DEFAULT NULL,
+  `early_leave_day` int(20) DEFAULT NULL,
+  `stay_day` int(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `check_info_ibfk_1` FOREIGN KEY (`id`) REFERENCES `stay_info` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -77,7 +81,7 @@ CREATE TABLE `check_info` (
 -- ----------------------------
 -- Records of check_info
 -- ----------------------------
-INSERT INTO `check_info` VALUES ('1', '1', null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `check_info` VALUES ('1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for customer_card_type

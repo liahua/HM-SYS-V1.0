@@ -186,7 +186,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 		}
 
 		for (CheckInfo ci : checkList) {
-			Float checkinMoney = ci.getPaidUpMoney();
+			Double checkinMoney = ci.getPaidUpMoney();
 
 			if (checkinMoney != null)
 				checkinCount += checkinMoney;

@@ -235,52 +235,52 @@ public class CheckInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andDueMoneyEqualTo(Float value) {
+        public Criteria andDueMoneyEqualTo(Double value) {
             addCriterion("due_money =", value, "dueMoney");
             return (Criteria) this;
         }
 
-        public Criteria andDueMoneyNotEqualTo(Float value) {
+        public Criteria andDueMoneyNotEqualTo(Double value) {
             addCriterion("due_money <>", value, "dueMoney");
             return (Criteria) this;
         }
 
-        public Criteria andDueMoneyGreaterThan(Float value) {
+        public Criteria andDueMoneyGreaterThan(Double value) {
             addCriterion("due_money >", value, "dueMoney");
             return (Criteria) this;
         }
 
-        public Criteria andDueMoneyGreaterThanOrEqualTo(Float value) {
+        public Criteria andDueMoneyGreaterThanOrEqualTo(Double value) {
             addCriterion("due_money >=", value, "dueMoney");
             return (Criteria) this;
         }
 
-        public Criteria andDueMoneyLessThan(Float value) {
+        public Criteria andDueMoneyLessThan(Double value) {
             addCriterion("due_money <", value, "dueMoney");
             return (Criteria) this;
         }
 
-        public Criteria andDueMoneyLessThanOrEqualTo(Float value) {
+        public Criteria andDueMoneyLessThanOrEqualTo(Double value) {
             addCriterion("due_money <=", value, "dueMoney");
             return (Criteria) this;
         }
 
-        public Criteria andDueMoneyIn(List<Float> values) {
+        public Criteria andDueMoneyIn(List<Double> values) {
             addCriterion("due_money in", values, "dueMoney");
             return (Criteria) this;
         }
 
-        public Criteria andDueMoneyNotIn(List<Float> values) {
+        public Criteria andDueMoneyNotIn(List<Double> values) {
             addCriterion("due_money not in", values, "dueMoney");
             return (Criteria) this;
         }
 
-        public Criteria andDueMoneyBetween(Float value1, Float value2) {
+        public Criteria andDueMoneyBetween(Double value1, Double value2) {
             addCriterion("due_money between", value1, value2, "dueMoney");
             return (Criteria) this;
         }
 
-        public Criteria andDueMoneyNotBetween(Float value1, Float value2) {
+        public Criteria andDueMoneyNotBetween(Double value1, Double value2) {
             addCriterion("due_money not between", value1, value2, "dueMoney");
             return (Criteria) this;
         }
@@ -295,52 +295,52 @@ public class CheckInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyEqualTo(Float value) {
+        public Criteria andOrderMoneyEqualTo(Double value) {
             addCriterion("order_money =", value, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyNotEqualTo(Float value) {
+        public Criteria andOrderMoneyNotEqualTo(Double value) {
             addCriterion("order_money <>", value, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyGreaterThan(Float value) {
+        public Criteria andOrderMoneyGreaterThan(Double value) {
             addCriterion("order_money >", value, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyGreaterThanOrEqualTo(Float value) {
+        public Criteria andOrderMoneyGreaterThanOrEqualTo(Double value) {
             addCriterion("order_money >=", value, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyLessThan(Float value) {
+        public Criteria andOrderMoneyLessThan(Double value) {
             addCriterion("order_money <", value, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyLessThanOrEqualTo(Float value) {
+        public Criteria andOrderMoneyLessThanOrEqualTo(Double value) {
             addCriterion("order_money <=", value, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyIn(List<Float> values) {
+        public Criteria andOrderMoneyIn(List<Double> values) {
             addCriterion("order_money in", values, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyNotIn(List<Float> values) {
+        public Criteria andOrderMoneyNotIn(List<Double> values) {
             addCriterion("order_money not in", values, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyBetween(Float value1, Float value2) {
+        public Criteria andOrderMoneyBetween(Double value1, Double value2) {
             addCriterion("order_money between", value1, value2, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyNotBetween(Float value1, Float value2) {
+        public Criteria andOrderMoneyNotBetween(Double value1, Double value2) {
             addCriterion("order_money not between", value1, value2, "orderMoney");
             return (Criteria) this;
         }
@@ -425,52 +425,52 @@ public class CheckInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andDiscountRateEqualTo(Float value) {
+        public Criteria andDiscountRateEqualTo(Double value) {
             addCriterion("discount_rate =", value, "discountRate");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountRateNotEqualTo(Float value) {
+        public Criteria andDiscountRateNotEqualTo(Double value) {
             addCriterion("discount_rate <>", value, "discountRate");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountRateGreaterThan(Float value) {
+        public Criteria andDiscountRateGreaterThan(Double value) {
             addCriterion("discount_rate >", value, "discountRate");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountRateGreaterThanOrEqualTo(Float value) {
+        public Criteria andDiscountRateGreaterThanOrEqualTo(Double value) {
             addCriterion("discount_rate >=", value, "discountRate");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountRateLessThan(Float value) {
+        public Criteria andDiscountRateLessThan(Double value) {
             addCriterion("discount_rate <", value, "discountRate");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountRateLessThanOrEqualTo(Float value) {
+        public Criteria andDiscountRateLessThanOrEqualTo(Double value) {
             addCriterion("discount_rate <=", value, "discountRate");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountRateIn(List<Float> values) {
+        public Criteria andDiscountRateIn(List<Double> values) {
             addCriterion("discount_rate in", values, "discountRate");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountRateNotIn(List<Float> values) {
+        public Criteria andDiscountRateNotIn(List<Double> values) {
             addCriterion("discount_rate not in", values, "discountRate");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountRateBetween(Float value1, Float value2) {
+        public Criteria andDiscountRateBetween(Double value1, Double value2) {
             addCriterion("discount_rate between", value1, value2, "discountRate");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountRateNotBetween(Float value1, Float value2) {
+        public Criteria andDiscountRateNotBetween(Double value1, Double value2) {
             addCriterion("discount_rate not between", value1, value2, "discountRate");
             return (Criteria) this;
         }
@@ -485,52 +485,52 @@ public class CheckInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andPaidUpMoneyEqualTo(Float value) {
+        public Criteria andPaidUpMoneyEqualTo(Double value) {
             addCriterion("paid_up_money =", value, "paidUpMoney");
             return (Criteria) this;
         }
 
-        public Criteria andPaidUpMoneyNotEqualTo(Float value) {
+        public Criteria andPaidUpMoneyNotEqualTo(Double value) {
             addCriterion("paid_up_money <>", value, "paidUpMoney");
             return (Criteria) this;
         }
 
-        public Criteria andPaidUpMoneyGreaterThan(Float value) {
+        public Criteria andPaidUpMoneyGreaterThan(Double value) {
             addCriterion("paid_up_money >", value, "paidUpMoney");
             return (Criteria) this;
         }
 
-        public Criteria andPaidUpMoneyGreaterThanOrEqualTo(Float value) {
+        public Criteria andPaidUpMoneyGreaterThanOrEqualTo(Double value) {
             addCriterion("paid_up_money >=", value, "paidUpMoney");
             return (Criteria) this;
         }
 
-        public Criteria andPaidUpMoneyLessThan(Float value) {
+        public Criteria andPaidUpMoneyLessThan(Double value) {
             addCriterion("paid_up_money <", value, "paidUpMoney");
             return (Criteria) this;
         }
 
-        public Criteria andPaidUpMoneyLessThanOrEqualTo(Float value) {
+        public Criteria andPaidUpMoneyLessThanOrEqualTo(Double value) {
             addCriterion("paid_up_money <=", value, "paidUpMoney");
             return (Criteria) this;
         }
 
-        public Criteria andPaidUpMoneyIn(List<Float> values) {
+        public Criteria andPaidUpMoneyIn(List<Double> values) {
             addCriterion("paid_up_money in", values, "paidUpMoney");
             return (Criteria) this;
         }
 
-        public Criteria andPaidUpMoneyNotIn(List<Float> values) {
+        public Criteria andPaidUpMoneyNotIn(List<Double> values) {
             addCriterion("paid_up_money not in", values, "paidUpMoney");
             return (Criteria) this;
         }
 
-        public Criteria andPaidUpMoneyBetween(Float value1, Float value2) {
+        public Criteria andPaidUpMoneyBetween(Double value1, Double value2) {
             addCriterion("paid_up_money between", value1, value2, "paidUpMoney");
             return (Criteria) this;
         }
 
-        public Criteria andPaidUpMoneyNotBetween(Float value1, Float value2) {
+        public Criteria andPaidUpMoneyNotBetween(Double value1, Double value2) {
             addCriterion("paid_up_money not between", value1, value2, "paidUpMoney");
             return (Criteria) this;
         }
@@ -795,52 +795,52 @@ public class CheckInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andCashPledgeEqualTo(Float value) {
+        public Criteria andCashPledgeEqualTo(Double value) {
             addCriterion("cash_pledge =", value, "cashPledge");
             return (Criteria) this;
         }
 
-        public Criteria andCashPledgeNotEqualTo(Float value) {
+        public Criteria andCashPledgeNotEqualTo(Double value) {
             addCriterion("cash_pledge <>", value, "cashPledge");
             return (Criteria) this;
         }
 
-        public Criteria andCashPledgeGreaterThan(Float value) {
+        public Criteria andCashPledgeGreaterThan(Double value) {
             addCriterion("cash_pledge >", value, "cashPledge");
             return (Criteria) this;
         }
 
-        public Criteria andCashPledgeGreaterThanOrEqualTo(Float value) {
+        public Criteria andCashPledgeGreaterThanOrEqualTo(Double value) {
             addCriterion("cash_pledge >=", value, "cashPledge");
             return (Criteria) this;
         }
 
-        public Criteria andCashPledgeLessThan(Float value) {
+        public Criteria andCashPledgeLessThan(Double value) {
             addCriterion("cash_pledge <", value, "cashPledge");
             return (Criteria) this;
         }
 
-        public Criteria andCashPledgeLessThanOrEqualTo(Float value) {
+        public Criteria andCashPledgeLessThanOrEqualTo(Double value) {
             addCriterion("cash_pledge <=", value, "cashPledge");
             return (Criteria) this;
         }
 
-        public Criteria andCashPledgeIn(List<Float> values) {
+        public Criteria andCashPledgeIn(List<Double> values) {
             addCriterion("cash_pledge in", values, "cashPledge");
             return (Criteria) this;
         }
 
-        public Criteria andCashPledgeNotIn(List<Float> values) {
+        public Criteria andCashPledgeNotIn(List<Double> values) {
             addCriterion("cash_pledge not in", values, "cashPledge");
             return (Criteria) this;
         }
 
-        public Criteria andCashPledgeBetween(Float value1, Float value2) {
+        public Criteria andCashPledgeBetween(Double value1, Double value2) {
             addCriterion("cash_pledge between", value1, value2, "cashPledge");
             return (Criteria) this;
         }
 
-        public Criteria andCashPledgeNotBetween(Float value1, Float value2) {
+        public Criteria andCashPledgeNotBetween(Double value1, Double value2) {
             addCriterion("cash_pledge not between", value1, value2, "cashPledge");
             return (Criteria) this;
         }
@@ -855,52 +855,52 @@ public class CheckInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andLateArrivalNeedPayEqualTo(Float value) {
+        public Criteria andLateArrivalNeedPayEqualTo(Double value) {
             addCriterion("late_arrival_need_pay =", value, "lateArrivalNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andLateArrivalNeedPayNotEqualTo(Float value) {
+        public Criteria andLateArrivalNeedPayNotEqualTo(Double value) {
             addCriterion("late_arrival_need_pay <>", value, "lateArrivalNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andLateArrivalNeedPayGreaterThan(Float value) {
+        public Criteria andLateArrivalNeedPayGreaterThan(Double value) {
             addCriterion("late_arrival_need_pay >", value, "lateArrivalNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andLateArrivalNeedPayGreaterThanOrEqualTo(Float value) {
+        public Criteria andLateArrivalNeedPayGreaterThanOrEqualTo(Double value) {
             addCriterion("late_arrival_need_pay >=", value, "lateArrivalNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andLateArrivalNeedPayLessThan(Float value) {
+        public Criteria andLateArrivalNeedPayLessThan(Double value) {
             addCriterion("late_arrival_need_pay <", value, "lateArrivalNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andLateArrivalNeedPayLessThanOrEqualTo(Float value) {
+        public Criteria andLateArrivalNeedPayLessThanOrEqualTo(Double value) {
             addCriterion("late_arrival_need_pay <=", value, "lateArrivalNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andLateArrivalNeedPayIn(List<Float> values) {
+        public Criteria andLateArrivalNeedPayIn(List<Double> values) {
             addCriterion("late_arrival_need_pay in", values, "lateArrivalNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andLateArrivalNeedPayNotIn(List<Float> values) {
+        public Criteria andLateArrivalNeedPayNotIn(List<Double> values) {
             addCriterion("late_arrival_need_pay not in", values, "lateArrivalNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andLateArrivalNeedPayBetween(Float value1, Float value2) {
+        public Criteria andLateArrivalNeedPayBetween(Double value1, Double value2) {
             addCriterion("late_arrival_need_pay between", value1, value2, "lateArrivalNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andLateArrivalNeedPayNotBetween(Float value1, Float value2) {
+        public Criteria andLateArrivalNeedPayNotBetween(Double value1, Double value2) {
             addCriterion("late_arrival_need_pay not between", value1, value2, "lateArrivalNeedPay");
             return (Criteria) this;
         }
@@ -915,53 +915,293 @@ public class CheckInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andEarlyLeaveNeedPayEqualTo(Float value) {
+        public Criteria andEarlyLeaveNeedPayEqualTo(Double value) {
             addCriterion("early_leave-need_pay =", value, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andEarlyLeaveNeedPayNotEqualTo(Float value) {
+        public Criteria andEarlyLeaveNeedPayNotEqualTo(Double value) {
             addCriterion("early_leave-need_pay <>", value, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andEarlyLeaveNeedPayGreaterThan(Float value) {
+        public Criteria andEarlyLeaveNeedPayGreaterThan(Double value) {
             addCriterion("early_leave-need_pay >", value, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andEarlyLeaveNeedPayGreaterThanOrEqualTo(Float value) {
+        public Criteria andEarlyLeaveNeedPayGreaterThanOrEqualTo(Double value) {
             addCriterion("early_leave-need_pay >=", value, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andEarlyLeaveNeedPayLessThan(Float value) {
+        public Criteria andEarlyLeaveNeedPayLessThan(Double value) {
             addCriterion("early_leave-need_pay <", value, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andEarlyLeaveNeedPayLessThanOrEqualTo(Float value) {
+        public Criteria andEarlyLeaveNeedPayLessThanOrEqualTo(Double value) {
             addCriterion("early_leave-need_pay <=", value, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andEarlyLeaveNeedPayIn(List<Float> values) {
+        public Criteria andEarlyLeaveNeedPayIn(List<Double> values) {
             addCriterion("early_leave-need_pay in", values, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andEarlyLeaveNeedPayNotIn(List<Float> values) {
+        public Criteria andEarlyLeaveNeedPayNotIn(List<Double> values) {
             addCriterion("early_leave-need_pay not in", values, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andEarlyLeaveNeedPayBetween(Float value1, Float value2) {
+        public Criteria andEarlyLeaveNeedPayBetween(Double value1, Double value2) {
             addCriterion("early_leave-need_pay between", value1, value2, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
-        public Criteria andEarlyLeaveNeedPayNotBetween(Float value1, Float value2) {
+        public Criteria andEarlyLeaveNeedPayNotBetween(Double value1, Double value2) {
             addCriterion("early_leave-need_pay not between", value1, value2, "earlyLeaveNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNeedPayIsNull() {
+            addCriterion("stay_day_need_pay is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNeedPayIsNotNull() {
+            addCriterion("stay_day_need_pay is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNeedPayEqualTo(Double value) {
+            addCriterion("stay_day_need_pay =", value, "stayDayNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNeedPayNotEqualTo(Double value) {
+            addCriterion("stay_day_need_pay <>", value, "stayDayNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNeedPayGreaterThan(Double value) {
+            addCriterion("stay_day_need_pay >", value, "stayDayNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNeedPayGreaterThanOrEqualTo(Double value) {
+            addCriterion("stay_day_need_pay >=", value, "stayDayNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNeedPayLessThan(Double value) {
+            addCriterion("stay_day_need_pay <", value, "stayDayNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNeedPayLessThanOrEqualTo(Double value) {
+            addCriterion("stay_day_need_pay <=", value, "stayDayNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNeedPayIn(List<Double> values) {
+            addCriterion("stay_day_need_pay in", values, "stayDayNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNeedPayNotIn(List<Double> values) {
+            addCriterion("stay_day_need_pay not in", values, "stayDayNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNeedPayBetween(Double value1, Double value2) {
+            addCriterion("stay_day_need_pay between", value1, value2, "stayDayNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNeedPayNotBetween(Double value1, Double value2) {
+            addCriterion("stay_day_need_pay not between", value1, value2, "stayDayNeedPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalDayIsNull() {
+            addCriterion("late_arrival_day is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalDayIsNotNull() {
+            addCriterion("late_arrival_day is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalDayEqualTo(Integer value) {
+            addCriterion("late_arrival_day =", value, "lateArrivalDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalDayNotEqualTo(Integer value) {
+            addCriterion("late_arrival_day <>", value, "lateArrivalDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalDayGreaterThan(Integer value) {
+            addCriterion("late_arrival_day >", value, "lateArrivalDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalDayGreaterThanOrEqualTo(Integer value) {
+            addCriterion("late_arrival_day >=", value, "lateArrivalDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalDayLessThan(Integer value) {
+            addCriterion("late_arrival_day <", value, "lateArrivalDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalDayLessThanOrEqualTo(Integer value) {
+            addCriterion("late_arrival_day <=", value, "lateArrivalDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalDayIn(List<Integer> values) {
+            addCriterion("late_arrival_day in", values, "lateArrivalDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalDayNotIn(List<Integer> values) {
+            addCriterion("late_arrival_day not in", values, "lateArrivalDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalDayBetween(Integer value1, Integer value2) {
+            addCriterion("late_arrival_day between", value1, value2, "lateArrivalDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andLateArrivalDayNotBetween(Integer value1, Integer value2) {
+            addCriterion("late_arrival_day not between", value1, value2, "lateArrivalDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveDayIsNull() {
+            addCriterion("early_leave_day is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveDayIsNotNull() {
+            addCriterion("early_leave_day is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveDayEqualTo(Integer value) {
+            addCriterion("early_leave_day =", value, "earlyLeaveDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveDayNotEqualTo(Integer value) {
+            addCriterion("early_leave_day <>", value, "earlyLeaveDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveDayGreaterThan(Integer value) {
+            addCriterion("early_leave_day >", value, "earlyLeaveDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveDayGreaterThanOrEqualTo(Integer value) {
+            addCriterion("early_leave_day >=", value, "earlyLeaveDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveDayLessThan(Integer value) {
+            addCriterion("early_leave_day <", value, "earlyLeaveDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveDayLessThanOrEqualTo(Integer value) {
+            addCriterion("early_leave_day <=", value, "earlyLeaveDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveDayIn(List<Integer> values) {
+            addCriterion("early_leave_day in", values, "earlyLeaveDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveDayNotIn(List<Integer> values) {
+            addCriterion("early_leave_day not in", values, "earlyLeaveDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveDayBetween(Integer value1, Integer value2) {
+            addCriterion("early_leave_day between", value1, value2, "earlyLeaveDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andEarlyLeaveDayNotBetween(Integer value1, Integer value2) {
+            addCriterion("early_leave_day not between", value1, value2, "earlyLeaveDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayIsNull() {
+            addCriterion("stay_day is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayIsNotNull() {
+            addCriterion("stay_day is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayEqualTo(Integer value) {
+            addCriterion("stay_day =", value, "stayDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNotEqualTo(Integer value) {
+            addCriterion("stay_day <>", value, "stayDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayGreaterThan(Integer value) {
+            addCriterion("stay_day >", value, "stayDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayGreaterThanOrEqualTo(Integer value) {
+            addCriterion("stay_day >=", value, "stayDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayLessThan(Integer value) {
+            addCriterion("stay_day <", value, "stayDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayLessThanOrEqualTo(Integer value) {
+            addCriterion("stay_day <=", value, "stayDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayIn(List<Integer> values) {
+            addCriterion("stay_day in", values, "stayDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNotIn(List<Integer> values) {
+            addCriterion("stay_day not in", values, "stayDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayBetween(Integer value1, Integer value2) {
+            addCriterion("stay_day between", value1, value2, "stayDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayDayNotBetween(Integer value1, Integer value2) {
+            addCriterion("stay_day not between", value1, value2, "stayDay");
             return (Criteria) this;
         }
     }

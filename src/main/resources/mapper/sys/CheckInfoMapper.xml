@@ -4,18 +4,22 @@
   <resultMap id="BaseResultMap" type="com.hm.sys.entity.CheckInfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="stay_id" property="stayId" jdbcType="INTEGER" />
-    <result column="due_money" property="dueMoney" jdbcType="REAL" />
-    <result column="order_money" property="orderMoney" jdbcType="REAL" />
+    <result column="due_money" property="dueMoney" jdbcType="DOUBLE" />
+    <result column="order_money" property="orderMoney" jdbcType="DOUBLE" />
     <result column="discount_type" property="discountType" jdbcType="VARCHAR" />
-    <result column="discount_rate" property="discountRate" jdbcType="REAL" />
-    <result column="paid_up_money" property="paidUpMoney" jdbcType="REAL" />
+    <result column="discount_rate" property="discountRate" jdbcType="DOUBLE" />
+    <result column="paid_up_money" property="paidUpMoney" jdbcType="DOUBLE" />
     <result column="check_date" property="checkDate" jdbcType="TIMESTAMP" />
     <result column="operator" property="operator" jdbcType="VARCHAR" />
     <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
     <result column="modifiedTime" property="modifiedtime" jdbcType="TIMESTAMP" />
-    <result column="cash_pledge" property="cashPledge" jdbcType="REAL" />
-    <result column="late_arrival_need_pay" property="lateArrivalNeedPay" jdbcType="REAL" />
-    <result column="early_leave-need_pay" property="earlyLeaveNeedPay" jdbcType="REAL" />
+    <result column="cash_pledge" property="cashPledge" jdbcType="DOUBLE" />
+    <result column="late_arrival_need_pay" property="lateArrivalNeedPay" jdbcType="DOUBLE" />
+    <result column="early_leave-need_pay" property="earlyLeaveNeedPay" jdbcType="DOUBLE" />
+    <result column="stay_day_need_pay" property="stayDayNeedPay" jdbcType="DOUBLE" />
+    <result column="late_arrival_day" property="lateArrivalDay" jdbcType="INTEGER" />
+    <result column="early_leave_day" property="earlyLeaveDay" jdbcType="INTEGER" />
+    <result column="stay_day" property="stayDay" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -78,7 +82,7 @@
   <sql id="Base_Column_List" >
     id, stay_id, due_money, order_money, discount_type, discount_rate, paid_up_money, 
     check_date, operator, createdTime, modifiedTime, cash_pledge, late_arrival_need_pay, 
-    early_leave-need_pay
+    early_leave-need_pay, stay_day_need_pay, late_arrival_day, early_leave_day, stay_day
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.CheckInfoExample" >
     select
@@ -115,12 +119,16 @@
       order_money, discount_type, discount_rate, 
       paid_up_money, check_date, operator, 
       createdTime, modifiedTime, cash_pledge, 
-      late_arrival_need_pay, early_leave-need_pay)
-    values (#{id,jdbcType=INTEGER}, #{stayId,jdbcType=INTEGER}, #{dueMoney,jdbcType=REAL}, 
-      #{orderMoney,jdbcType=REAL}, #{discountType,jdbcType=VARCHAR}, #{discountRate,jdbcType=REAL}, 
-      #{paidUpMoney,jdbcType=REAL}, #{checkDate,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, 
-      #{createdtime,jdbcType=TIMESTAMP}, #{modifiedtime,jdbcType=TIMESTAMP}, #{cashPledge,jdbcType=REAL}, 
-      #{lateArrivalNeedPay,jdbcType=REAL}, #{earlyLeaveNeedPay,jdbcType=REAL})
+      late_arrival_need_pay, early_leave-need_pay, stay_day_need_pay, 
+      late_arrival_day, early_leave_day, stay_day
+      )
+    values (#{id,jdbcType=INTEGER}, #{stayId,jdbcType=INTEGER}, #{dueMoney,jdbcType=DOUBLE}, 
+      #{orderMoney,jdbcType=DOUBLE}, #{discountType,jdbcType=VARCHAR}, #{discountRate,jdbcType=DOUBLE}, 
+      #{paidUpMoney,jdbcType=DOUBLE}, #{checkDate,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, 
+      #{createdtime,jdbcType=TIMESTAMP}, #{modifiedtime,jdbcType=TIMESTAMP}, #{cashPledge,jdbcType=DOUBLE}, 
+      #{lateArrivalNeedPay,jdbcType=DOUBLE}, #{earlyLeaveNeedPay,jdbcType=DOUBLE}, #{stayDayNeedPay,jdbcType=DOUBLE}, 
+      #{lateArrivalDay,jdbcType=INTEGER}, #{earlyLeaveDay,jdbcType=INTEGER}, #{stayDay,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.hm.sys.entity.CheckInfo" >
     insert into check_info
@@ -167,6 +175,18 @@
       <if test="earlyLeaveNeedPay != null" >
         early_leave-need_pay,
       </if>
+      <if test="stayDayNeedPay != null" >
+        stay_day_need_pay,
+      </if>
+      <if test="lateArrivalDay != null" >
+        late_arrival_day,
+      </if>
+      <if test="earlyLeaveDay != null" >
+        early_leave_day,
+      </if>
+      <if test="stayDay != null" >
+        stay_day,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -176,19 +196,19 @@
         #{stayId,jdbcType=INTEGER},
       </if>
       <if test="dueMoney != null" >
-        #{dueMoney,jdbcType=REAL},
+        #{dueMoney,jdbcType=DOUBLE},
       </if>
       <if test="orderMoney != null" >
-        #{orderMoney,jdbcType=REAL},
+        #{orderMoney,jdbcType=DOUBLE},
       </if>
       <if test="discountType != null" >
         #{discountType,jdbcType=VARCHAR},
       </if>
       <if test="discountRate != null" >
-        #{discountRate,jdbcType=REAL},
+        #{discountRate,jdbcType=DOUBLE},
       </if>
       <if test="paidUpMoney != null" >
-        #{paidUpMoney,jdbcType=REAL},
+        #{paidUpMoney,jdbcType=DOUBLE},
       </if>
       <if test="checkDate != null" >
         #{checkDate,jdbcType=TIMESTAMP},
@@ -203,13 +223,25 @@
         #{modifiedtime,jdbcType=TIMESTAMP},
       </if>
       <if test="cashPledge != null" >
-        #{cashPledge,jdbcType=REAL},
+        #{cashPledge,jdbcType=DOUBLE},
       </if>
       <if test="lateArrivalNeedPay != null" >
-        #{lateArrivalNeedPay,jdbcType=REAL},
+        #{lateArrivalNeedPay,jdbcType=DOUBLE},
       </if>
       <if test="earlyLeaveNeedPay != null" >
-        #{earlyLeaveNeedPay,jdbcType=REAL},
+        #{earlyLeaveNeedPay,jdbcType=DOUBLE},
+      </if>
+      <if test="stayDayNeedPay != null" >
+        #{stayDayNeedPay,jdbcType=DOUBLE},
+      </if>
+      <if test="lateArrivalDay != null" >
+        #{lateArrivalDay,jdbcType=INTEGER},
+      </if>
+      <if test="earlyLeaveDay != null" >
+        #{earlyLeaveDay,jdbcType=INTEGER},
+      </if>
+      <if test="stayDay != null" >
+        #{stayDay,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -229,19 +261,19 @@
         stay_id = #{record.stayId,jdbcType=INTEGER},
       </if>
       <if test="record.dueMoney != null" >
-        due_money = #{record.dueMoney,jdbcType=REAL},
+        due_money = #{record.dueMoney,jdbcType=DOUBLE},
       </if>
       <if test="record.orderMoney != null" >
-        order_money = #{record.orderMoney,jdbcType=REAL},
+        order_money = #{record.orderMoney,jdbcType=DOUBLE},
       </if>
       <if test="record.discountType != null" >
         discount_type = #{record.discountType,jdbcType=VARCHAR},
       </if>
       <if test="record.discountRate != null" >
-        discount_rate = #{record.discountRate,jdbcType=REAL},
+        discount_rate = #{record.discountRate,jdbcType=DOUBLE},
       </if>
       <if test="record.paidUpMoney != null" >
-        paid_up_money = #{record.paidUpMoney,jdbcType=REAL},
+        paid_up_money = #{record.paidUpMoney,jdbcType=DOUBLE},
       </if>
       <if test="record.checkDate != null" >
         check_date = #{record.checkDate,jdbcType=TIMESTAMP},
@@ -256,13 +288,25 @@
         modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.cashPledge != null" >
-        cash_pledge = #{record.cashPledge,jdbcType=REAL},
+        cash_pledge = #{record.cashPledge,jdbcType=DOUBLE},
       </if>
       <if test="record.lateArrivalNeedPay != null" >
-        late_arrival_need_pay = #{record.lateArrivalNeedPay,jdbcType=REAL},
+        late_arrival_need_pay = #{record.lateArrivalNeedPay,jdbcType=DOUBLE},
       </if>
       <if test="record.earlyLeaveNeedPay != null" >
-        early_leave-need_pay = #{record.earlyLeaveNeedPay,jdbcType=REAL},
+        early_leave-need_pay = #{record.earlyLeaveNeedPay,jdbcType=DOUBLE},
+      </if>
+      <if test="record.stayDayNeedPay != null" >
+        stay_day_need_pay = #{record.stayDayNeedPay,jdbcType=DOUBLE},
+      </if>
+      <if test="record.lateArrivalDay != null" >
+        late_arrival_day = #{record.lateArrivalDay,jdbcType=INTEGER},
+      </if>
+      <if test="record.earlyLeaveDay != null" >
+        early_leave_day = #{record.earlyLeaveDay,jdbcType=INTEGER},
+      </if>
+      <if test="record.stayDay != null" >
+        stay_day = #{record.stayDay,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -273,18 +317,22 @@
     update check_info
     set id = #{record.id,jdbcType=INTEGER},
       stay_id = #{record.stayId,jdbcType=INTEGER},
-      due_money = #{record.dueMoney,jdbcType=REAL},
-      order_money = #{record.orderMoney,jdbcType=REAL},
+      due_money = #{record.dueMoney,jdbcType=DOUBLE},
+      order_money = #{record.orderMoney,jdbcType=DOUBLE},
       discount_type = #{record.discountType,jdbcType=VARCHAR},
-      discount_rate = #{record.discountRate,jdbcType=REAL},
-      paid_up_money = #{record.paidUpMoney,jdbcType=REAL},
+      discount_rate = #{record.discountRate,jdbcType=DOUBLE},
+      paid_up_money = #{record.paidUpMoney,jdbcType=DOUBLE},
       check_date = #{record.checkDate,jdbcType=TIMESTAMP},
       operator = #{record.operator,jdbcType=VARCHAR},
       createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
       modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP},
-      cash_pledge = #{record.cashPledge,jdbcType=REAL},
-      late_arrival_need_pay = #{record.lateArrivalNeedPay,jdbcType=REAL},
-      early_leave-need_pay = #{record.earlyLeaveNeedPay,jdbcType=REAL}
+      cash_pledge = #{record.cashPledge,jdbcType=DOUBLE},
+      late_arrival_need_pay = #{record.lateArrivalNeedPay,jdbcType=DOUBLE},
+      early_leave-need_pay = #{record.earlyLeaveNeedPay,jdbcType=DOUBLE},
+      stay_day_need_pay = #{record.stayDayNeedPay,jdbcType=DOUBLE},
+      late_arrival_day = #{record.lateArrivalDay,jdbcType=INTEGER},
+      early_leave_day = #{record.earlyLeaveDay,jdbcType=INTEGER},
+      stay_day = #{record.stayDay,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -296,19 +344,19 @@
         stay_id = #{stayId,jdbcType=INTEGER},
       </if>
       <if test="dueMoney != null" >
-        due_money = #{dueMoney,jdbcType=REAL},
+        due_money = #{dueMoney,jdbcType=DOUBLE},
       </if>
       <if test="orderMoney != null" >
-        order_money = #{orderMoney,jdbcType=REAL},
+        order_money = #{orderMoney,jdbcType=DOUBLE},
       </if>
       <if test="discountType != null" >
         discount_type = #{discountType,jdbcType=VARCHAR},
       </if>
       <if test="discountRate != null" >
-        discount_rate = #{discountRate,jdbcType=REAL},
+        discount_rate = #{discountRate,jdbcType=DOUBLE},
       </if>
       <if test="paidUpMoney != null" >
-        paid_up_money = #{paidUpMoney,jdbcType=REAL},
+        paid_up_money = #{paidUpMoney,jdbcType=DOUBLE},
       </if>
       <if test="checkDate != null" >
         check_date = #{checkDate,jdbcType=TIMESTAMP},
@@ -323,13 +371,25 @@
         modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP},
       </if>
       <if test="cashPledge != null" >
-        cash_pledge = #{cashPledge,jdbcType=REAL},
+        cash_pledge = #{cashPledge,jdbcType=DOUBLE},
       </if>
       <if test="lateArrivalNeedPay != null" >
-        late_arrival_need_pay = #{lateArrivalNeedPay,jdbcType=REAL},
+        late_arrival_need_pay = #{lateArrivalNeedPay,jdbcType=DOUBLE},
       </if>
       <if test="earlyLeaveNeedPay != null" >
-        early_leave-need_pay = #{earlyLeaveNeedPay,jdbcType=REAL},
+        early_leave-need_pay = #{earlyLeaveNeedPay,jdbcType=DOUBLE},
+      </if>
+      <if test="stayDayNeedPay != null" >
+        stay_day_need_pay = #{stayDayNeedPay,jdbcType=DOUBLE},
+      </if>
+      <if test="lateArrivalDay != null" >
+        late_arrival_day = #{lateArrivalDay,jdbcType=INTEGER},
+      </if>
+      <if test="earlyLeaveDay != null" >
+        early_leave_day = #{earlyLeaveDay,jdbcType=INTEGER},
+      </if>
+      <if test="stayDay != null" >
+        stay_day = #{stayDay,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -337,18 +397,22 @@
   <update id="updateByPrimaryKey" parameterType="com.hm.sys.entity.CheckInfo" >
     update check_info
     set stay_id = #{stayId,jdbcType=INTEGER},
-      due_money = #{dueMoney,jdbcType=REAL},
-      order_money = #{orderMoney,jdbcType=REAL},
+      due_money = #{dueMoney,jdbcType=DOUBLE},
+      order_money = #{orderMoney,jdbcType=DOUBLE},
       discount_type = #{discountType,jdbcType=VARCHAR},
-      discount_rate = #{discountRate,jdbcType=REAL},
-      paid_up_money = #{paidUpMoney,jdbcType=REAL},
+      discount_rate = #{discountRate,jdbcType=DOUBLE},
+      paid_up_money = #{paidUpMoney,jdbcType=DOUBLE},
       check_date = #{checkDate,jdbcType=TIMESTAMP},
       operator = #{operator,jdbcType=VARCHAR},
       createdTime = #{createdtime,jdbcType=TIMESTAMP},
       modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP},
-      cash_pledge = #{cashPledge,jdbcType=REAL},
-      late_arrival_need_pay = #{lateArrivalNeedPay,jdbcType=REAL},
-      early_leave-need_pay = #{earlyLeaveNeedPay,jdbcType=REAL}
+      cash_pledge = #{cashPledge,jdbcType=DOUBLE},
+      late_arrival_need_pay = #{lateArrivalNeedPay,jdbcType=DOUBLE},
+      early_leave-need_pay = #{earlyLeaveNeedPay,jdbcType=DOUBLE},
+      stay_day_need_pay = #{stayDayNeedPay,jdbcType=DOUBLE},
+      late_arrival_day = #{lateArrivalDay,jdbcType=INTEGER},
+      early_leave_day = #{earlyLeaveDay,jdbcType=INTEGER},
+      stay_day = #{stayDay,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

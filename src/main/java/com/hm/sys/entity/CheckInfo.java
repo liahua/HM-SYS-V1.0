@@ -7,15 +7,15 @@ public class CheckInfo {
 
     private Integer stayId;
 
-    private Float dueMoney;
+    private Double dueMoney;
 
-    private Float orderMoney;
+    private Double orderMoney;
 
     private String discountType;
 
-    private Float discountRate;
+    private Double discountRate;
 
-    private Float paidUpMoney;
+    private Double paidUpMoney;
 
     private Date checkDate;
 
@@ -25,11 +25,19 @@ public class CheckInfo {
 
     private Date modifiedtime;
 
-    private Float cashPledge;
+    private Double cashPledge;
 
-    private Float lateArrivalNeedPay;
+    private Double lateArrivalNeedPay;
 
-    private Float earlyLeaveNeedPay;
+    private Double earlyLeaveNeedPay;
+
+    private Double stayDayNeedPay;
+
+    private Integer lateArrivalDay;
+
+    private Integer earlyLeaveDay;
+
+    private Integer stayDay;
 
     public Integer getId() {
         return id;
@@ -47,19 +55,19 @@ public class CheckInfo {
         this.stayId = stayId;
     }
 
-    public Float getDueMoney() {
+    public Double getDueMoney() {
         return dueMoney;
     }
 
-    public void setDueMoney(Float dueMoney) {
+    public void setDueMoney(Double dueMoney) {
         this.dueMoney = dueMoney;
     }
 
-    public Float getOrderMoney() {
+    public Double getOrderMoney() {
         return orderMoney;
     }
 
-    public void setOrderMoney(Float orderMoney) {
+    public void setOrderMoney(Double orderMoney) {
         this.orderMoney = orderMoney;
     }
 
@@ -71,19 +79,19 @@ public class CheckInfo {
         this.discountType = discountType == null ? null : discountType.trim();
     }
 
-    public Float getDiscountRate() {
+    public Double getDiscountRate() {
         return discountRate;
     }
 
-    public void setDiscountRate(Float discountRate) {
+    public void setDiscountRate(Double discountRate) {
         this.discountRate = discountRate;
     }
 
-    public Float getPaidUpMoney() {
+    public Double getPaidUpMoney() {
         return paidUpMoney;
     }
 
-    public void setPaidUpMoney(Float paidUpMoney) {
+    public void setPaidUpMoney(Double paidUpMoney) {
         this.paidUpMoney = paidUpMoney;
     }
 
@@ -119,27 +127,59 @@ public class CheckInfo {
         this.modifiedtime = modifiedtime;
     }
 
-    public Float getCashPledge() {
+    public Double getCashPledge() {
         return cashPledge;
     }
 
-    public void setCashPledge(Float cashPledge) {
+    public void setCashPledge(Double cashPledge) {
         this.cashPledge = cashPledge;
     }
 
-    public Float getLateArrivalNeedPay() {
+    public Double getLateArrivalNeedPay() {
         return lateArrivalNeedPay;
     }
 
-    public void setLateArrivalNeedPay(Float lateArrivalNeedPay) {
+    public void setLateArrivalNeedPay(Double lateArrivalNeedPay) {
         this.lateArrivalNeedPay = lateArrivalNeedPay;
     }
 
-    public Float getEarlyLeaveNeedPay() {
+    public Double getEarlyLeaveNeedPay() {
         return earlyLeaveNeedPay;
     }
 
-    public void setEarlyLeaveNeedPay(Float earlyLeaveNeedPay) {
+    public void setEarlyLeaveNeedPay(Double earlyLeaveNeedPay) {
         this.earlyLeaveNeedPay = earlyLeaveNeedPay;
+    }
+
+    public Double getStayDayNeedPay() {
+        return stayDayNeedPay;
+    }
+
+    public void setStayDayNeedPay(Double stayDayNeedPay) {
+        this.stayDayNeedPay = stayDayNeedPay;
+    }
+
+    public Integer getLateArrivalDay() {
+        return lateArrivalDay;
+    }
+
+    public void setLateArrivalDay(Integer lateArrivalDay) {
+        this.lateArrivalDay = lateArrivalDay;
+    }
+
+    public Integer getEarlyLeaveDay() {
+        return earlyLeaveDay;
+    }
+
+    public void setEarlyLeaveDay(Integer earlyLeaveDay) {
+        this.earlyLeaveDay = earlyLeaveDay;
+    }
+
+    public Integer getStayDay() {
+        return stayDay;
+    }
+
+    public void setStayDay(Integer stayDay) {
+        this.stayDay = stayDay;
     }
 }

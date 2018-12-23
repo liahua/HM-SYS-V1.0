@@ -9,6 +9,7 @@
 package com.hm.common.vo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**   
 * Copyright: Copyright (c) 2018 lord
@@ -107,7 +108,7 @@ public class SysRoomInfoViewResult implements Serializable {
 	 * @return the priceUp
 	 */
 	public Double getPriceUp() {
-		this.priceUp=priceUp*100;
+		this.priceUp= new BigDecimal(priceUp*100).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 		return priceUp;
 	}
 	/**

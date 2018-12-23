@@ -17,7 +17,7 @@ public class OrderInfo {
 
     private Integer orderStatId;
 
-    private Float orderMoney;
+    private Double orderMoney;
 
     private String operator;
 
@@ -81,11 +81,11 @@ public class OrderInfo {
         this.orderStatId = orderStatId;
     }
 
-    public Float getOrderMoney() {
+    public Double getOrderMoney() {
         return orderMoney;
     }
 
-    public void setOrderMoney(Float orderMoney) {
+    public void setOrderMoney(Double orderMoney) {
         this.orderMoney = orderMoney;
     }
 
@@ -112,15 +112,4 @@ public class OrderInfo {
     public void setModifiedtime(Date modifiedtime) {
         this.modifiedtime = modifiedtime;
     }
-
-	@Override
-	public String toString() {
-		return "OrderInfo [id=" + id + ", roomId=" + roomId + ", customerId=" + customerId + ", checkinDate="
-				+ checkinDate + ", checkoutDate=" + checkoutDate + ", customerType=" + customerType + ", orderStatId="
-				+ orderStatId + ", orderMoney=" + orderMoney + ", operator=" + operator + ", createdtime=" + createdtime
-				+ ", modifiedtime=" + modifiedtime + "]";
-	}
-    
-    
-    
 }

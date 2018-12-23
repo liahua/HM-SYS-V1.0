@@ -535,52 +535,52 @@ public class StayInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andCashEqualTo(Float value) {
+        public Criteria andCashEqualTo(Double value) {
             addCriterion("cash =", value, "cash");
             return (Criteria) this;
         }
 
-        public Criteria andCashNotEqualTo(Float value) {
+        public Criteria andCashNotEqualTo(Double value) {
             addCriterion("cash <>", value, "cash");
             return (Criteria) this;
         }
 
-        public Criteria andCashGreaterThan(Float value) {
+        public Criteria andCashGreaterThan(Double value) {
             addCriterion("cash >", value, "cash");
             return (Criteria) this;
         }
 
-        public Criteria andCashGreaterThanOrEqualTo(Float value) {
+        public Criteria andCashGreaterThanOrEqualTo(Double value) {
             addCriterion("cash >=", value, "cash");
             return (Criteria) this;
         }
 
-        public Criteria andCashLessThan(Float value) {
+        public Criteria andCashLessThan(Double value) {
             addCriterion("cash <", value, "cash");
             return (Criteria) this;
         }
 
-        public Criteria andCashLessThanOrEqualTo(Float value) {
+        public Criteria andCashLessThanOrEqualTo(Double value) {
             addCriterion("cash <=", value, "cash");
             return (Criteria) this;
         }
 
-        public Criteria andCashIn(List<Float> values) {
+        public Criteria andCashIn(List<Double> values) {
             addCriterion("cash in", values, "cash");
             return (Criteria) this;
         }
 
-        public Criteria andCashNotIn(List<Float> values) {
+        public Criteria andCashNotIn(List<Double> values) {
             addCriterion("cash not in", values, "cash");
             return (Criteria) this;
         }
 
-        public Criteria andCashBetween(Float value1, Float value2) {
+        public Criteria andCashBetween(Double value1, Double value2) {
             addCriterion("cash between", value1, value2, "cash");
             return (Criteria) this;
         }
 
-        public Criteria andCashNotBetween(Float value1, Float value2) {
+        public Criteria andCashNotBetween(Double value1, Double value2) {
             addCriterion("cash not between", value1, value2, "cash");
             return (Criteria) this;
         }

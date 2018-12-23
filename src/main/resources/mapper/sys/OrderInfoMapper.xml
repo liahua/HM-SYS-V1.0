@@ -9,7 +9,7 @@
     <result column="checkout_date" property="checkoutDate" jdbcType="TIMESTAMP" />
     <result column="customer_type" property="customerType" jdbcType="VARCHAR" />
     <result column="order_stat_id" property="orderStatId" jdbcType="INTEGER" />
-    <result column="order_money" property="orderMoney" jdbcType="REAL" />
+    <result column="order_money" property="orderMoney" jdbcType="DOUBLE" />
     <result column="operator" property="operator" jdbcType="VARCHAR" />
     <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />
     <result column="modifiedTime" property="modifiedtime" jdbcType="TIMESTAMP" />
@@ -113,7 +113,7 @@
       createdTime, modifiedTime)
     values (#{id,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, 
       #{checkinDate,jdbcType=TIMESTAMP}, #{checkoutDate,jdbcType=TIMESTAMP}, #{customerType,jdbcType=VARCHAR}, 
-      #{orderStatId,jdbcType=INTEGER}, #{orderMoney,jdbcType=REAL}, #{operator,jdbcType=VARCHAR}, 
+      #{orderStatId,jdbcType=INTEGER}, #{orderMoney,jdbcType=DOUBLE}, #{operator,jdbcType=VARCHAR}, 
       #{createdtime,jdbcType=TIMESTAMP}, #{modifiedtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hm.sys.entity.OrderInfo" >
@@ -176,7 +176,7 @@
         #{orderStatId,jdbcType=INTEGER},
       </if>
       <if test="orderMoney != null" >
-        #{orderMoney,jdbcType=REAL},
+        #{orderMoney,jdbcType=DOUBLE},
       </if>
       <if test="operator != null" >
         #{operator,jdbcType=VARCHAR},
@@ -220,7 +220,7 @@
         order_stat_id = #{record.orderStatId,jdbcType=INTEGER},
       </if>
       <if test="record.orderMoney != null" >
-        order_money = #{record.orderMoney,jdbcType=REAL},
+        order_money = #{record.orderMoney,jdbcType=DOUBLE},
       </if>
       <if test="record.operator != null" >
         operator = #{record.operator,jdbcType=VARCHAR},
@@ -245,7 +245,7 @@
       checkout_date = #{record.checkoutDate,jdbcType=TIMESTAMP},
       customer_type = #{record.customerType,jdbcType=VARCHAR},
       order_stat_id = #{record.orderStatId,jdbcType=INTEGER},
-      order_money = #{record.orderMoney,jdbcType=REAL},
+      order_money = #{record.orderMoney,jdbcType=DOUBLE},
       operator = #{record.operator,jdbcType=VARCHAR},
       createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
       modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP}
@@ -275,7 +275,7 @@
         order_stat_id = #{orderStatId,jdbcType=INTEGER},
       </if>
       <if test="orderMoney != null" >
-        order_money = #{orderMoney,jdbcType=REAL},
+        order_money = #{orderMoney,jdbcType=DOUBLE},
       </if>
       <if test="operator != null" >
         operator = #{operator,jdbcType=VARCHAR},
@@ -297,7 +297,7 @@
       checkout_date = #{checkoutDate,jdbcType=TIMESTAMP},
       customer_type = #{customerType,jdbcType=VARCHAR},
       order_stat_id = #{orderStatId,jdbcType=INTEGER},
-      order_money = #{orderMoney,jdbcType=REAL},
+      order_money = #{orderMoney,jdbcType=DOUBLE},
       operator = #{operator,jdbcType=VARCHAR},
       createdTime = #{createdtime,jdbcType=TIMESTAMP},
       modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP}

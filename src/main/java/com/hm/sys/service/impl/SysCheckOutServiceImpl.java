@@ -1,5 +1,6 @@
 package com.hm.sys.service.impl;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +32,8 @@ import com.hm.sys.service.SysCustomerService;
 import com.hm.sys.service.SysOrderService;
 
 import com.hm.sys.service.SysStayInfoService;
+
+import sun.nio.cs.ext.Big5;
 
 @Service
 public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySetData {
@@ -125,15 +128,97 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 		int lateArrivalDay = getDaysCountInfo(thisTimeOrderInfo.getCheckinDate(), stayDateVirtual);
 		int stayDay = getDaysCountInfo(stayDateVirtual, leaveDateVirtual);
 		int earlyLeaveDay = getDaysCountInfo(leaveDateVirtual, thisTimeOrderInfo.getCheckoutDate());
+	
 //	  4.根据lateArrivalDay,stayDay,earlyLeaveDay分别计算lateArrivalNeedPay,stayDayNeedPay,earlyLeaveNeedPay
+		double lateArrivalNeedPay=getLateArrivalNeedPay(lateArrivalDay,aveDailyRate);
+		double stayDayNeedPay=getStayDayNeedPay(stayDay,aveDailyRate);
+		double earlyLeaveNeedPay=getEarlyLeaveNeedPay(earlyLeaveDay,aveDailyRate);
+			
 //	  5.根据lateArrivalNeedPay,stayDayNeedPay,earlyLeaveNeedPay计算dueMoney
+		double dueMoney=lateArrivalNeedPay+stayDayNeedPay+earlyLeaveNeedPay;
 //	  6.根据dueMoney-(orderMoney+cashPledge)计算paidUpMoney
+		Double orderMoney = thisTimeOrderInfo.getOrderMoney();
+		Double cashPledge = thisTimeStayInfo.getCash();
+		double paidUpMoney=dueMoney-(orderMoney+cashPledge);
 //	  7.存入CheckInfo
+		CheckInfo checkInfo = new CheckInfo();
 //	  8.根据stayInfo列表中其他stayInfo,获取checkInfo
 //	  9.将checkInfo放入list集合中
 //	  8.回显
 
 		return null;
+	}
+
+	/**
+	 * 
+	* @Function: SysCheckOutServiceImpl.java
+	* @Description: 计算金额  加入切面
+	*
+	* @param earlyLeaveDay
+	* @param aveDailyRate
+	* @return
+	* @throws：异常描述
+	*
+	* @version: v1.0.0
+	* @author: 李志学
+	* @date: 2018年12月23日 下午2:17:43 
+	*
+	* Modification History:
+	* Date         Author          Version            Description
+	*---------------------------------------------------------*
+	* 2018年12月23日     李志学          v1.0.0               修改原因
+	 */
+	private double getEarlyLeaveNeedPay(int earlyLeaveDay, Double aveDailyRate) {
+		
+		return earlyLeaveDay*aveDailyRate;
+	}
+
+	/**
+	 * 
+	* @Function: SysCheckOutServiceImpl.java
+	* @Description: 计算金额,加入切面
+	*
+	* @param stayDay
+	* @param aveDailyRate
+	* @return
+	* @throws：异常描述
+	*
+	* @version: v1.0.0
+	* @author: 李志学
+	* @date: 2018年12月23日 下午2:18:02 
+	*
+	* Modification History:
+	* Date         Author          Version            Description
+	*---------------------------------------------------------*
+	* 2018年12月23日     李志学          v1.0.0               修改原因
+	 */
+	private Double getStayDayNeedPay(int stayDay, Double aveDailyRate) {
+		
+		return stayDay*aveDailyRate;
+	}
+
+	/**
+	 * 
+	* @Function: SysCheckOutServiceImpl.java
+	* @Description: 计算金额,加入切面
+	*
+	* @param lateArrivalDay
+	* @param aveDailyRate
+	* @return
+	* @throws：异常描述
+	*
+	* @version: v1.0.0
+	* @author: 李志学
+	* @date: 2018年12月23日 下午2:18:22 
+	*
+	* Modification History:
+	* Date         Author          Version            Description
+	*---------------------------------------------------------*
+	* 2018年12月23日     李志学          v1.0.0               修改原因
+	 */
+	private Double getLateArrivalNeedPay(int lateArrivalDay, Double aveDailyRate) {
+		
+		return lateArrivalDay*aveDailyRate;
 	}
 
 	/**
@@ -203,11 +288,6 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 		nextTime = parseStandardDate(nextTime);
 		lastTime = parseStandardDate(lastTime);
 		Date todayTime = parseStandardDate(stayDate);
-
-		System.out.println("nextTime" + nextTime);
-		System.out.println("lastTime" + lastTime);
-		System.out.println("todayTime" + todayTime);
-		System.out.println("date" + stayDate);
 
 		long dateTime = stayDate.getTime();
 		long nextDateTime = nextTime.getTime();
@@ -282,8 +362,17 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 	 *        李志学 v1.0.0 修改原因
 	 */
 	private int getDaysCountInfo(Date checkinDate, Date stayDate) {
-
-		return 0;
+		int daysCount=0;
+		Calendar calendar = Calendar.getInstance();
+		Date temp=checkinDate;
+		while(temp.before(stayDate)) {
+			calendar.setTime(temp);
+			calendar.add(Calendar.DAY_OF_MONTH, 1);
+			temp=calendar.getTime();
+			daysCount++;
+		}
+		
+		return daysCount;
 	}
 
 	/**
@@ -343,7 +432,9 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 		if (length <= 0) {
 			throw new ServiceException("julyPriceList长度异常");
 		}
-		Double avePrice = ((double) sum) / length;
+		BigDecimal sumBig = new BigDecimal(sum);
+		BigDecimal lengthBig = new BigDecimal(length);
+		double avePrice = sumBig.divide(lengthBig, 2, BigDecimal.ROUND_HALF_UP).doubleValue();
 		return avePrice;
 	}
 

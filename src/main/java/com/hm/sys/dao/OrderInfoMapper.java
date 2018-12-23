@@ -13,7 +13,7 @@ public interface OrderInfoMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(OrderInfo record);
-//
+
     int insertSelective(OrderInfo record);
 
     List<OrderInfo> selectByExample(OrderInfoExample example);

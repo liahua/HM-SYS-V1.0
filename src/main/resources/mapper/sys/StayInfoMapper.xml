@@ -9,7 +9,7 @@
     <result column="stay_date" property="stayDate" jdbcType="TIMESTAMP" />
     <result column="stay_day_count" property="stayDayCount" jdbcType="INTEGER" />
     <result column="stay_man_count" property="stayManCount" jdbcType="INTEGER" />
-    <result column="cash" property="cash" jdbcType="REAL" />
+    <result column="cash" property="cash" jdbcType="DOUBLE" />
     <result column="leave_date" property="leaveDate" jdbcType="TIMESTAMP" />
     <result column="is_checkout" property="isCheckout" jdbcType="INTEGER" />
     <result column="operator" property="operator" jdbcType="VARCHAR" />
@@ -116,7 +116,7 @@
       modifiedTime)
     values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, 
       #{customerId,jdbcType=INTEGER}, #{stayDate,jdbcType=TIMESTAMP}, #{stayDayCount,jdbcType=INTEGER}, 
-      #{stayManCount,jdbcType=INTEGER}, #{cash,jdbcType=REAL}, #{leaveDate,jdbcType=TIMESTAMP}, 
+      #{stayManCount,jdbcType=INTEGER}, #{cash,jdbcType=DOUBLE}, #{leaveDate,jdbcType=TIMESTAMP}, 
       #{isCheckout,jdbcType=INTEGER}, #{operator,jdbcType=VARCHAR}, #{createdtime,jdbcType=TIMESTAMP}, 
       #{modifiedtime,jdbcType=TIMESTAMP})
   </insert>
@@ -186,7 +186,7 @@
         #{stayManCount,jdbcType=INTEGER},
       </if>
       <if test="cash != null" >
-        #{cash,jdbcType=REAL},
+        #{cash,jdbcType=DOUBLE},
       </if>
       <if test="leaveDate != null" >
         #{leaveDate,jdbcType=TIMESTAMP},
@@ -236,7 +236,7 @@
         stay_man_count = #{record.stayManCount,jdbcType=INTEGER},
       </if>
       <if test="record.cash != null" >
-        cash = #{record.cash,jdbcType=REAL},
+        cash = #{record.cash,jdbcType=DOUBLE},
       </if>
       <if test="record.leaveDate != null" >
         leave_date = #{record.leaveDate,jdbcType=TIMESTAMP},
@@ -267,7 +267,7 @@
       stay_date = #{record.stayDate,jdbcType=TIMESTAMP},
       stay_day_count = #{record.stayDayCount,jdbcType=INTEGER},
       stay_man_count = #{record.stayManCount,jdbcType=INTEGER},
-      cash = #{record.cash,jdbcType=REAL},
+      cash = #{record.cash,jdbcType=DOUBLE},
       leave_date = #{record.leaveDate,jdbcType=TIMESTAMP},
       is_checkout = #{record.isCheckout,jdbcType=INTEGER},
       operator = #{record.operator,jdbcType=VARCHAR},
@@ -299,7 +299,7 @@
         stay_man_count = #{stayManCount,jdbcType=INTEGER},
       </if>
       <if test="cash != null" >
-        cash = #{cash,jdbcType=REAL},
+        cash = #{cash,jdbcType=DOUBLE},
       </if>
       <if test="leaveDate != null" >
         leave_date = #{leaveDate,jdbcType=TIMESTAMP},
@@ -327,7 +327,7 @@
       stay_date = #{stayDate,jdbcType=TIMESTAMP},
       stay_day_count = #{stayDayCount,jdbcType=INTEGER},
       stay_man_count = #{stayManCount,jdbcType=INTEGER},
-      cash = #{cash,jdbcType=REAL},
+      cash = #{cash,jdbcType=DOUBLE},
       leave_date = #{leaveDate,jdbcType=TIMESTAMP},
       is_checkout = #{isCheckout,jdbcType=INTEGER},
       operator = #{operator,jdbcType=VARCHAR},

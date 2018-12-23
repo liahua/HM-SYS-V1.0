@@ -545,52 +545,52 @@ public class OrderInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyEqualTo(Float value) {
+        public Criteria andOrderMoneyEqualTo(Double value) {
             addCriterion("order_money =", value, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyNotEqualTo(Float value) {
+        public Criteria andOrderMoneyNotEqualTo(Double value) {
             addCriterion("order_money <>", value, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyGreaterThan(Float value) {
+        public Criteria andOrderMoneyGreaterThan(Double value) {
             addCriterion("order_money >", value, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyGreaterThanOrEqualTo(Float value) {
+        public Criteria andOrderMoneyGreaterThanOrEqualTo(Double value) {
             addCriterion("order_money >=", value, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyLessThan(Float value) {
+        public Criteria andOrderMoneyLessThan(Double value) {
             addCriterion("order_money <", value, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyLessThanOrEqualTo(Float value) {
+        public Criteria andOrderMoneyLessThanOrEqualTo(Double value) {
             addCriterion("order_money <=", value, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyIn(List<Float> values) {
+        public Criteria andOrderMoneyIn(List<Double> values) {
             addCriterion("order_money in", values, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyNotIn(List<Float> values) {
+        public Criteria andOrderMoneyNotIn(List<Double> values) {
             addCriterion("order_money not in", values, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyBetween(Float value1, Float value2) {
+        public Criteria andOrderMoneyBetween(Double value1, Double value2) {
             addCriterion("order_money between", value1, value2, "orderMoney");
             return (Criteria) this;
         }
 
-        public Criteria andOrderMoneyNotBetween(Float value1, Float value2) {
+        public Criteria andOrderMoneyNotBetween(Double value1, Double value2) {
             addCriterion("order_money not between", value1, value2, "orderMoney");
             return (Criteria) this;
         }

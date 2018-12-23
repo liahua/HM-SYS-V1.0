@@ -9,18 +9,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.hm.common.exception.ServiceException;
 import com.hm.common.utils.DictionarySetData;
 import com.hm.common.utils.IntegerUtil;
 import com.hm.common.utils.ObjectUtil;
 import com.hm.common.vo.CheckOutVoDetails;
+import com.hm.sys.dao.CheckInfoMapper;
 import com.hm.sys.dao.JulyPriceMapper;
 import com.hm.sys.dao.OrderInfoMapper;
 import com.hm.sys.entity.CheckInfo;
+import com.hm.sys.entity.CheckInfoExample;
 import com.hm.sys.entity.CustomerInfo;
 import com.hm.sys.entity.JulyPrice;
 import com.hm.sys.entity.JulyPriceExample;
@@ -33,14 +33,13 @@ import com.hm.sys.service.SysOrderService;
 
 import com.hm.sys.service.SysStayInfoService;
 
-import sun.nio.cs.ext.Big5;
+
 
 @Service
 public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySetData {
 
 	@Autowired
 	private SysCustomerService sysCustomerService;
-
 	@Autowired
 	private SysStayInfoService sysStayInfoService;
 	@Autowired
@@ -49,6 +48,8 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 	private OrderInfoMapper orderInfoMapper;
 	@Autowired
 	private JulyPriceMapper julyPriceMapper;
+	@Autowired
+	private CheckInfoMapper checkInfoMapper;
 
 	@Override
 	public CheckOutVoDetails checkOutDepencyCustomerInfo(CheckOutVoDetails checkOutVoDetail) {
@@ -87,7 +88,7 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 	}
 
 	@Override
-	public List<CheckInfo> CalculateUnpayBillDetails(CheckOutVoDetails checkOutVoDetail) {
+	public List<CheckInfo> CalculateBillDetails(CheckOutVoDetails checkOutVoDetail) {
 		if (ObjectUtil.isEmpty(checkOutVoDetail)) {
 			new ServiceException("checkOutVoDetail为空");
 		}
@@ -96,8 +97,15 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 		CustomerInfo customerInfo = checkOutVoDetail.getCustomerInfo();
 		RoomInfo roomInfo = checkOutVoDetail.getRoomInfo();
 		Map<Integer, OrderInfo> stayAndOrderInfoMap = checkOutVoDetail.getStayAndOrderInfoMap();
-		if (ObjectUtil.isEmpty(orderInfos, stayInfos, customerInfo, roomInfo, stayAndOrderInfoMap)) {
+		if (ObjectUtil.isEmpty(orderInfos, stayInfos, customerInfo, stayAndOrderInfoMap)) {
 			new ServiceException("checkOutVoDetail传入参数不全,请检查");
+		}
+		
+		
+		//如果查询的类型为已支付类型
+		if(checkOutVoDetail.getStayInfoQueryType()==PAID) {
+			List<CheckInfo> findHistroyCheckInfo = findHistroyCheckInfo(checkOutVoDetail.getStayInfos());
+			return findHistroyCheckInfo;
 		}
 
 //		1.查找无leaveDate的stayInfo,即未支付的当前账单,将临时将此刻系统时间赋值给未支付账单的leaveDate
@@ -109,8 +117,10 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 				thisTimeStayInfo = stayInfo;
 			}
 		}
-		OrderInfo thisTimeOrderInfo = stayAndOrderInfoMap.get(thisTimeStayInfo.getId());
+//将本次未结账stayInfo从stayInfos中移除
+		stayInfos.remove(thisTimeStayInfo);
 
+		OrderInfo thisTimeOrderInfo = stayAndOrderInfoMap.get(thisTimeStayInfo.getId());
 //	  2.根据折扣比率计算每日房价
 		Double aveDailyRate = getDailyRate(thisTimeOrderInfo);
 //	  3.根据orderInfo,stayInfo计算lateArrivalDay,stayDay,earlyLeaveDay	
@@ -128,97 +138,119 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 		int lateArrivalDay = getDaysCountInfo(thisTimeOrderInfo.getCheckinDate(), stayDateVirtual);
 		int stayDay = getDaysCountInfo(stayDateVirtual, leaveDateVirtual);
 		int earlyLeaveDay = getDaysCountInfo(leaveDateVirtual, thisTimeOrderInfo.getCheckoutDate());
-	
+
 //	  4.根据lateArrivalDay,stayDay,earlyLeaveDay分别计算lateArrivalNeedPay,stayDayNeedPay,earlyLeaveNeedPay
-		double lateArrivalNeedPay=getLateArrivalNeedPay(lateArrivalDay,aveDailyRate);
-		double stayDayNeedPay=getStayDayNeedPay(stayDay,aveDailyRate);
-		double earlyLeaveNeedPay=getEarlyLeaveNeedPay(earlyLeaveDay,aveDailyRate);
-			
+		double lateArrivalNeedPay = getLateArrivalNeedPay(lateArrivalDay, aveDailyRate);
+		double stayDayNeedPay = getStayDayNeedPay(stayDay, aveDailyRate);
+		double earlyLeaveNeedPay = getEarlyLeaveNeedPay(earlyLeaveDay, aveDailyRate);
+
 //	  5.根据lateArrivalNeedPay,stayDayNeedPay,earlyLeaveNeedPay计算dueMoney
-		double dueMoney=lateArrivalNeedPay+stayDayNeedPay+earlyLeaveNeedPay;
+		double dueMoney = lateArrivalNeedPay + stayDayNeedPay + earlyLeaveNeedPay;
 //	  6.根据dueMoney-(orderMoney+cashPledge)计算paidUpMoney
 		Double orderMoney = thisTimeOrderInfo.getOrderMoney();
 		Double cashPledge = thisTimeStayInfo.getCash();
-		double paidUpMoney=dueMoney-(orderMoney+cashPledge);
+		double paidUpMoney = dueMoney - (orderMoney + cashPledge);
 //	  7.存入CheckInfo
 		CheckInfo checkInfo = new CheckInfo();
+		checkInfo.setStayId(thisTimeStayInfo.getId());
+		checkInfo.setDueMoney(dueMoney);
+		checkInfo.setOrderMoney(orderMoney);
+		checkInfo.setPaidUpMoney(paidUpMoney);
+		checkInfo.setCashPledge(cashPledge);
+		checkInfo.setLateArrivalDay(lateArrivalDay);
+		checkInfo.setEarlyLeaveNeedPay(earlyLeaveNeedPay);
+		checkInfo.setStayDayNeedPay(stayDayNeedPay);
+		checkInfo.setLateArrivalDay(lateArrivalDay);
+		checkInfo.setEarlyLeaveDay(earlyLeaveDay);
+		checkInfo.setStayDay(stayDay);
+		checkInfo.setCreatedtime(thisTimeStayInfo.getLeaveDate());
 //	  8.根据stayInfo列表中其他stayInfo,获取checkInfo
+		List<CheckInfo> historyCheckInfo = findHistroyCheckInfo(stayInfos);
 //	  9.将checkInfo放入list集合中
+		historyCheckInfo.add(checkInfo);
 //	  8.回显
+		return historyCheckInfo;
+	}
 
-		return null;
+	public List<CheckInfo> findHistroyCheckInfo(List<StayInfo> stayInfos) {	
+		ArrayList<Integer> stayInfosIdList =new ArrayList<>();
+		for (StayInfo stayInfo : stayInfos) {
+			Integer id = stayInfo.getId();
+			stayInfosIdList.add(id);
+		}
+		CheckInfoExample checkInfoExample = new CheckInfoExample();
+		checkInfoExample.or().andStayIdIn(stayInfosIdList);
+		List<CheckInfo> histroyCheckInfo = checkInfoMapper.selectByExample(checkInfoExample);
+		return histroyCheckInfo;
 	}
 
 	/**
 	 * 
-	* @Function: SysCheckOutServiceImpl.java
-	* @Description: 计算金额  加入切面
-	*
-	* @param earlyLeaveDay
-	* @param aveDailyRate
-	* @return
-	* @throws：异常描述
-	*
-	* @version: v1.0.0
-	* @author: 李志学
-	* @date: 2018年12月23日 下午2:17:43 
-	*
-	* Modification History:
-	* Date         Author          Version            Description
-	*---------------------------------------------------------*
-	* 2018年12月23日     李志学          v1.0.0               修改原因
+	 * @Function: SysCheckOutServiceImpl.java
+	 * @Description: 计算金额 加入切面
+	 *
+	 * @param earlyLeaveDay
+	 * @param aveDailyRate
+	 * @return
+	 * @throws：异常描述
+	 *
+	 * @version: v1.0.0
+	 * @author: 李志学
+	 * @date: 2018年12月23日 下午2:17:43
+	 *
+	 *        Modification History: Date Author Version Description
+	 *        ---------------------------------------------------------* 2018年12月23日
+	 *        李志学 v1.0.0 修改原因
 	 */
 	private double getEarlyLeaveNeedPay(int earlyLeaveDay, Double aveDailyRate) {
-		
-		return earlyLeaveDay*aveDailyRate;
+
+		return earlyLeaveDay * aveDailyRate;
 	}
 
 	/**
 	 * 
-	* @Function: SysCheckOutServiceImpl.java
-	* @Description: 计算金额,加入切面
-	*
-	* @param stayDay
-	* @param aveDailyRate
-	* @return
-	* @throws：异常描述
-	*
-	* @version: v1.0.0
-	* @author: 李志学
-	* @date: 2018年12月23日 下午2:18:02 
-	*
-	* Modification History:
-	* Date         Author          Version            Description
-	*---------------------------------------------------------*
-	* 2018年12月23日     李志学          v1.0.0               修改原因
+	 * @Function: SysCheckOutServiceImpl.java
+	 * @Description: 计算金额,加入切面
+	 *
+	 * @param stayDay
+	 * @param aveDailyRate
+	 * @return
+	 * @throws：异常描述
+	 *
+	 * @version: v1.0.0
+	 * @author: 李志学
+	 * @date: 2018年12月23日 下午2:18:02
+	 *
+	 *        Modification History: Date Author Version Description
+	 *        ---------------------------------------------------------* 2018年12月23日
+	 *        李志学 v1.0.0 修改原因
 	 */
 	private Double getStayDayNeedPay(int stayDay, Double aveDailyRate) {
-		
-		return stayDay*aveDailyRate;
+
+		return stayDay * aveDailyRate;
 	}
 
 	/**
 	 * 
-	* @Function: SysCheckOutServiceImpl.java
-	* @Description: 计算金额,加入切面
-	*
-	* @param lateArrivalDay
-	* @param aveDailyRate
-	* @return
-	* @throws：异常描述
-	*
-	* @version: v1.0.0
-	* @author: 李志学
-	* @date: 2018年12月23日 下午2:18:22 
-	*
-	* Modification History:
-	* Date         Author          Version            Description
-	*---------------------------------------------------------*
-	* 2018年12月23日     李志学          v1.0.0               修改原因
+	 * @Function: SysCheckOutServiceImpl.java
+	 * @Description: 计算金额,加入切面
+	 *
+	 * @param lateArrivalDay
+	 * @param aveDailyRate
+	 * @return
+	 * @throws：异常描述
+	 *
+	 * @version: v1.0.0
+	 * @author: 李志学
+	 * @date: 2018年12月23日 下午2:18:22
+	 *
+	 *        Modification History: Date Author Version Description
+	 *        ---------------------------------------------------------* 2018年12月23日
+	 *        李志学 v1.0.0 修改原因
 	 */
 	private Double getLateArrivalNeedPay(int lateArrivalDay, Double aveDailyRate) {
-		
-		return lateArrivalDay*aveDailyRate;
+
+		return lateArrivalDay * aveDailyRate;
 	}
 
 	/**
@@ -257,9 +289,8 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 	/**
 	 * 
 	 * @Function: SysCheckOutServiceImpl.java
-	 * @Description: 将当前date转成酒店入店/离店标准时间 Map 
-	 * 12-23 12:53 ------> 12-23 12:00||12-24 12:00
-	 * 该函数的功能描述 Calendar在高并发情况下 需要做LocalThread
+	 * @Description: 将当前date转成酒店入店/离店标准时间 Map 12-23 12:53 ------> 12-23 12:00||12-24
+	 *               12:00 该函数的功能描述 Calendar在高并发情况下 需要做LocalThread
 	 *
 	 * @param stayDate
 	 * @return
@@ -362,16 +393,16 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 	 *        李志学 v1.0.0 修改原因
 	 */
 	private int getDaysCountInfo(Date checkinDate, Date stayDate) {
-		int daysCount=0;
+		int daysCount = 0;
 		Calendar calendar = Calendar.getInstance();
-		Date temp=checkinDate;
-		while(temp.before(stayDate)) {
+		Date temp = checkinDate;
+		while (temp.before(stayDate)) {
 			calendar.setTime(temp);
 			calendar.add(Calendar.DAY_OF_MONTH, 1);
-			temp=calendar.getTime();
+			temp = calendar.getTime();
 			daysCount++;
 		}
-		
+
 		return daysCount;
 	}
 

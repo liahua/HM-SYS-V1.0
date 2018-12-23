@@ -182,4 +182,16 @@ public class CheckInfo {
     public void setStayDay(Integer stayDay) {
         this.stayDay = stayDay;
     }
+
+	@Override
+	public String toString() {
+		return "CheckInfo [id=" + id + ", stayId=" + stayId + ", dueMoney=" + dueMoney + ", orderMoney=" + orderMoney
+				+ ", discountType=" + discountType + ", discountRate=" + discountRate + ", paidUpMoney=" + paidUpMoney
+				+ ", checkDate=" + checkDate + ", operator=" + operator + ", createdtime=" + createdtime
+				+ ", modifiedtime=" + modifiedtime + ", cashPledge=" + cashPledge + ", lateArrivalNeedPay="
+				+ lateArrivalNeedPay + ", earlyLeaveNeedPay=" + earlyLeaveNeedPay + ", stayDayNeedPay=" + stayDayNeedPay
+				+ ", lateArrivalDay=" + lateArrivalDay + ", earlyLeaveDay=" + earlyLeaveDay + ", stayDay=" + stayDay
+				+ "]";
+	}
+    
 }

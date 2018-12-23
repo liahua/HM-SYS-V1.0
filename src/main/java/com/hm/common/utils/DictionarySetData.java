@@ -9,4 +9,9 @@ public interface DictionarySetData {
 	public static final Integer COMMIT=1;
 	public static final Integer CANCEL=2;
 	public static final Integer ALL_ORDERINFO=null;
+	
+	public static final Integer PAY_FOR_STAYINFOS = 1;
+	public static final Integer OTHER_PAY_FOR_STAYINFOS=0;
+	
+	
 }

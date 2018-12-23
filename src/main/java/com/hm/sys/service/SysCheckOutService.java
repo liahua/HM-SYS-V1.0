@@ -51,10 +51,10 @@ public interface SysCheckOutService {
 	/**
 	 * 
 	* @Function: SysCheckOutService.java
-	* @Description: 通过checkOutVoDetail 计算所有未支付stayInfo付款金额,以及生成checkInfo明细,存入数据库,并返回明细表
+	* @Description: 通过checkOutVoDetail 计算所需查询类型stayInfo付款金额,以及生成checkInfo明细,存入数据库,并返回明细表
 	*
 	* @param checkOutVoDetail 包含所有未支付stayInfo
-	* @return
+	* @return List 列尾为本次未支付账单的checkInfo
 	* @throws：异常描述
 	*
 	* @version: v1.0.0
@@ -66,6 +66,6 @@ public interface SysCheckOutService {
 	*---------------------------------------------------------*
 	* 2018年12月22日     李志学          v1.0.0               修改原因
 	 */
-	List<CheckInfo> CalculateUnpayBillDetails(CheckOutVoDetails checkOutVoDetail);
+	List<CheckInfo> CalculateBillDetails(CheckOutVoDetails checkOutVoDetail);
 
 }

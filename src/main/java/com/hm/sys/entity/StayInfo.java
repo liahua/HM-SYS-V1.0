@@ -132,4 +132,14 @@ public class StayInfo {
     public void setModifiedtime(Date modifiedtime) {
         this.modifiedtime = modifiedtime;
     }
+
+	@Override
+	public String toString() {
+		return "StayInfo [id=" + id + ", orderId=" + orderId + ", roomId=" + roomId + ", customerId=" + customerId
+				+ ", stayDate=" + stayDate + ", stayDayCount=" + stayDayCount + ", stayManCount=" + stayManCount
+				+ ", cash=" + cash + ", leaveDate=" + leaveDate + ", isCheckout=" + isCheckout + ", operator="
+				+ operator + ", createdtime=" + createdtime + ", modifiedtime=" + modifiedtime + "]";
+	}
+    
+    
 }

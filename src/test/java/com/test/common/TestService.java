@@ -46,9 +46,9 @@ public class TestService extends TestBase{
 			ai.setDay(a.getDay());
 			ai.setManCount(a.getManCount());
 			ai.setOrderCount(new Random().nextInt(100));
-			ai.setOrderMoney(BigDecimal.valueOf(1000d+new Random().nextDouble()).setScale(2,BigDecimal.ROUND_HALF_DOWN).doubleValue());
-			ai.setCashCount(BigDecimal.valueOf(1000d+new Random().nextDouble()).setScale(2,BigDecimal.ROUND_HALF_DOWN).doubleValue());
-			ai.setCheckinCount(BigDecimal.valueOf(1000d+new Random().nextDouble()).setScale(2,BigDecimal.ROUND_HALF_DOWN).doubleValue());
+			ai.setOrderMoney(BigDecimal.valueOf(10000*new Random().nextDouble()).setScale(2,BigDecimal.ROUND_HALF_DOWN).doubleValue());
+			ai.setCashCount(BigDecimal.valueOf(10000*new Random().nextDouble()).setScale(2,BigDecimal.ROUND_HALF_DOWN).doubleValue());
+			ai.setCheckinCount(BigDecimal.valueOf(10000*new Random().nextDouble()).setScale(2,BigDecimal.ROUND_HALF_DOWN).doubleValue());
 			
 			bean.updateByExample(ai, aie1);
 		}

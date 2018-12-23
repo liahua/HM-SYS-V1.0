@@ -76,7 +76,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 		resetTime(date);
 
 
-		if (doFindAccountByDate() == 0) {
+		if (doFindAccountByDate() != 0) {
 			return 0;
 		}
 		
@@ -115,9 +115,13 @@ public class SysAccountServiceImpl implements SysAccountService {
 
 		// 订单统计
 		orderAccount(accountInfo);
-
+		
 		// 结算统计
+		try {
 		accountInfo.setCheckinCount(checkinAccount());
+		}catch (Exception e) {
+			
+		}
 
 		int row = accountInfoMapper.insert(accountInfo);
 
@@ -225,6 +229,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 			if (checkinMoney != null)
 				checkinCount += checkinMoney;
 		}
+
 		// System.out.println("checkinCount" + checkinCount);
 		return checkinCount;
 	}
@@ -308,7 +313,13 @@ public class SysAccountServiceImpl implements SysAccountService {
 
 		Long now = this.date.getTime();
 		for (StayInfo si : stayList) {
-			if (now > si.getStayDate().getTime() && now < si.getLeaveDate().getTime()) {
+			Date stayDate = si.getStayDate();
+			Date leaveDate = si.getLeaveDate();
+			if(stayDate==null||leaveDate==null) {
+				continue;
+			}
+			
+			if (now > stayDate.getTime() && now < leaveDate.getTime()) {
 				Integer stayManCount = si.getStayManCount();
 				if (stayManCount != null)
 					manCount += stayManCount;

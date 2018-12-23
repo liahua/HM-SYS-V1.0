@@ -32,6 +32,7 @@ public class AccountController {
 	@RequestMapping("doFindAccounts")
 	@ResponseBody
 	public JsonResult doFindAccounts(String start,String end) {
+		System.out.println(start+end);
 		DayAccount dayAccount = sysAccountService.doFindDayAccounts(start, end);
 		return new JsonResult(dayAccount);
 	}

@@ -1,5 +1,6 @@
 package com.hm.sys.service.impl;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -213,22 +214,22 @@ public class SysAccountServiceImpl implements SysAccountService {
 		criteria.andCheckDateBetween(startTime, endTime);
 
 		List<CheckInfo> checkList = checkInfoMapper.selectByExample(checkInfoExample);
-		double checkinCount = 0d;
+		BigDecimal checkinCount = BigDecimal.valueOf(0);
 
 		// System.out.println("checkinCount" + checkinCount);
 		if (ListUtil.isEmpty(checkList)) {
-			return checkinCount;
+			return checkinCount.doubleValue();
 		}
 
 		for (CheckInfo ci : checkList) {
-			Double checkinMoney = ci.getPaidUpMoney();
+			BigDecimal checkinMoney = BigDecimal.valueOf(ci.getPaidUpMoney());
 
 			if (checkinMoney != null)
-				checkinCount += checkinMoney;
+				checkinCount.add(checkinMoney);
 		}
 
 		// System.out.println("checkinCount" + checkinCount);
-		return checkinCount;
+		return checkinCount.doubleValue();
 	}
 
 	private Double cashAccount() {
@@ -237,19 +238,19 @@ public class SysAccountServiceImpl implements SysAccountService {
 		Criteria criteria = stayInfoExample.createCriteria();
 		criteria.andStayDateBetween(startTime, endTime);
 
-		double cashCount = 0d;
+		BigDecimal cashCount =BigDecimal.valueOf(0);
 		List<StayInfo> stayList = stayInfoMapper.selectByExample(stayInfoExample);
 
 		if (ListUtil.isEmpty(stayList)) {
-			return cashCount;
+			return cashCount.doubleValue();
 		}
 		for (StayInfo si : stayList) {
-			Double cash = si.getCash();
+			BigDecimal cash = BigDecimal.valueOf(si.getCash());
 			if (cash != null)
-				cashCount += cash;
+				cashCount.add(cash);
 		}
 		// System.out.println("cashCount" + cashCount);
-		return cashCount;
+		return cashCount.doubleValue();
 	}
 
 	private void orderAccount(AccountInfo accountInfo) {
@@ -259,18 +260,18 @@ public class SysAccountServiceImpl implements SysAccountService {
 		List<OrderInfo> orderInfoList = orderInfoMapper.selectByExample(orderInfoExample);
 
 		Integer orderCount = 0;
-		Double orderMoney = 0d;
+		BigDecimal orderMoney = BigDecimal.valueOf(0d);
 
 		if (ListUtil.isEmpty(orderInfoList)) {
 			accountInfo.setOrderCount(orderCount);
-			accountInfo.setOrderMoney(orderMoney);
+			accountInfo.setOrderMoney(orderMoney.doubleValue());
 			return;
 		}
 
 		for (OrderInfo oi : orderInfoList) {
-			Double om = oi.getOrderMoney();
+			BigDecimal om = BigDecimal.valueOf(oi.getOrderMoney());
 			if (om != null)
-				orderMoney += om;
+				orderMoney.add(om);
 		}
 		orderCount = orderInfoList.size();
 
@@ -278,7 +279,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 //		System.out.println("orderMoney" + orderMoney);
 
 		accountInfo.setOrderCount(orderCount);
-		accountInfo.setOrderMoney(orderMoney);
+		accountInfo.setOrderMoney(orderMoney.doubleValue());
 		return;
 	}
 

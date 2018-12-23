@@ -14,6 +14,8 @@
                                 <i class="fa fa-search"></i>
 							</button>
 							<button type="button" class="btn btn-default btn-delete">删除</button>
+							<button type="button" class="btn btn-default btn-add">添加</button>
+							<button type="button" class="btn btn-default btn-update">修改</button>
 						</div>
 					</div>
 				</div>
@@ -56,6 +58,7 @@
      $(".input-group-btn")
      .on("click",".btn-search",doQueryObjects)
      .on("click",".btn-delete",doDeleteObjects)
+     .on("click",".btn-add,.btn-update",doLoadEditUI);
      
      //设置thead中checkbox对象的状态监听
      //$("#checkAll").change(doChangeTBodyCheckBoxState);

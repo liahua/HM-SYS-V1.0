@@ -36,5 +36,28 @@ public interface CommonDao {
 		 * @return
 		 */
 		int getRowCount(@Param("name")String name);
-
+		/**
+		 * 删除模块
+		 * @param id
+		 * @return
+		 */
+		int deleteObject(Integer id);
+		int deleteObjectsByCardId(Integer customered);
+		/**
+		 * 修改模块(电话号码,身份证件类型,国籍等)
+		 */
+		CustomerAllInfo findObjectById(Integer id);
+		
+		/**
+		 * 叶云彤
+		 * 将角色信息写入到数据库
+		 */
+		int insertObject(CustomerAllInfo entity);
+		/**
+		 * 叶云彤
+		 * 修改
+		 * @param entity
+		 * @return
+		 */
+		int updateObject(CustomerAllInfo entity);
 }

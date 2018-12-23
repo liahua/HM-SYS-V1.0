@@ -8,13 +8,12 @@
 					<div class="input-group input-group-sm" style="width: 300px;">
 						<input type="text" name="table_search" id="searchNameId"
 							class="form-control pull-right" placeholder="
-							客户">
+							请输入名字">
 
 						<div class="input-group-btn">
 							<button type="button" class="btn btn-default btn-search">
 								<i class="fa fa-search"></i>
 							</button>
-							<button type="button" class="btn btn-default btn-add">添加</button>
 						</div>
 					</div>
 				</div>
@@ -209,8 +208,8 @@
 				+ "<td>"+row.operator + "</td>"
 			    + "<td>"+new Date(row.createdTime).toLocaleString() +"</td>"
 			    + "<td>"+new Date(row.modifiedTime).toLocaleString()+"</td>"
-				+ "<td><a class='btn-delete'>delete</a>"
-				+ "&nbsp;<a class='btn-update'>update</a></td>";
+				+ "<td><a class='btn-delete'>删除</a>";
+				
 		return tds;
 	}
 </script>

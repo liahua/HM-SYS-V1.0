@@ -8,9 +8,7 @@ public class CheckInfo {
     private Integer stayId;
 
     private Double dueMoney;
-/**
- * 预定付款
- */
+
     private Double orderMoney;
 
     private String discountType;
@@ -26,9 +24,7 @@ public class CheckInfo {
     private Date createdtime;
 
     private Date modifiedtime;
-/**
- * 押金
- */
+
     private Double cashPledge;
 
     private Double lateArrivalNeedPay;

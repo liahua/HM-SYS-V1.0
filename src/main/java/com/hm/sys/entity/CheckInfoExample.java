@@ -906,62 +906,62 @@ public class CheckInfoExample {
         }
 
         public Criteria andEarlyLeaveNeedPayIsNull() {
-            addCriterion("early_leave-need_pay is null");
+            addCriterion("early_leave_need_pay is null");
             return (Criteria) this;
         }
 
         public Criteria andEarlyLeaveNeedPayIsNotNull() {
-            addCriterion("early_leave-need_pay is not null");
+            addCriterion("early_leave_need_pay is not null");
             return (Criteria) this;
         }
 
         public Criteria andEarlyLeaveNeedPayEqualTo(Double value) {
-            addCriterion("early_leave-need_pay =", value, "earlyLeaveNeedPay");
+            addCriterion("early_leave_need_pay =", value, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
         public Criteria andEarlyLeaveNeedPayNotEqualTo(Double value) {
-            addCriterion("early_leave-need_pay <>", value, "earlyLeaveNeedPay");
+            addCriterion("early_leave_need_pay <>", value, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
         public Criteria andEarlyLeaveNeedPayGreaterThan(Double value) {
-            addCriterion("early_leave-need_pay >", value, "earlyLeaveNeedPay");
+            addCriterion("early_leave_need_pay >", value, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
         public Criteria andEarlyLeaveNeedPayGreaterThanOrEqualTo(Double value) {
-            addCriterion("early_leave-need_pay >=", value, "earlyLeaveNeedPay");
+            addCriterion("early_leave_need_pay >=", value, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
         public Criteria andEarlyLeaveNeedPayLessThan(Double value) {
-            addCriterion("early_leave-need_pay <", value, "earlyLeaveNeedPay");
+            addCriterion("early_leave_need_pay <", value, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
         public Criteria andEarlyLeaveNeedPayLessThanOrEqualTo(Double value) {
-            addCriterion("early_leave-need_pay <=", value, "earlyLeaveNeedPay");
+            addCriterion("early_leave_need_pay <=", value, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
         public Criteria andEarlyLeaveNeedPayIn(List<Double> values) {
-            addCriterion("early_leave-need_pay in", values, "earlyLeaveNeedPay");
+            addCriterion("early_leave_need_pay in", values, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
         public Criteria andEarlyLeaveNeedPayNotIn(List<Double> values) {
-            addCriterion("early_leave-need_pay not in", values, "earlyLeaveNeedPay");
+            addCriterion("early_leave_need_pay not in", values, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
         public Criteria andEarlyLeaveNeedPayBetween(Double value1, Double value2) {
-            addCriterion("early_leave-need_pay between", value1, value2, "earlyLeaveNeedPay");
+            addCriterion("early_leave_need_pay between", value1, value2, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 
         public Criteria andEarlyLeaveNeedPayNotBetween(Double value1, Double value2) {
-            addCriterion("early_leave-need_pay not between", value1, value2, "earlyLeaveNeedPay");
+            addCriterion("early_leave_need_pay not between", value1, value2, "earlyLeaveNeedPay");
             return (Criteria) this;
         }
 

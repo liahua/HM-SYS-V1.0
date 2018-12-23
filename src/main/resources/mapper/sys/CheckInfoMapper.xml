@@ -15,7 +15,7 @@
     <result column="modifiedTime" property="modifiedtime" jdbcType="TIMESTAMP" />
     <result column="cash_pledge" property="cashPledge" jdbcType="DOUBLE" />
     <result column="late_arrival_need_pay" property="lateArrivalNeedPay" jdbcType="DOUBLE" />
-    <result column="early_leave-need_pay" property="earlyLeaveNeedPay" jdbcType="DOUBLE" />
+    <result column="early_leave_need_pay" property="earlyLeaveNeedPay" jdbcType="DOUBLE" />
     <result column="stay_day_need_pay" property="stayDayNeedPay" jdbcType="DOUBLE" />
     <result column="late_arrival_day" property="lateArrivalDay" jdbcType="INTEGER" />
     <result column="early_leave_day" property="earlyLeaveDay" jdbcType="INTEGER" />
@@ -82,7 +82,7 @@
   <sql id="Base_Column_List" >
     id, stay_id, due_money, order_money, discount_type, discount_rate, paid_up_money, 
     check_date, operator, createdTime, modifiedTime, cash_pledge, late_arrival_need_pay, 
-    early_leave-need_pay, stay_day_need_pay, late_arrival_day, early_leave_day, stay_day
+    early_leave_need_pay, stay_day_need_pay, late_arrival_day, early_leave_day, stay_day
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hm.sys.entity.CheckInfoExample" >
     select
@@ -119,7 +119,7 @@
       order_money, discount_type, discount_rate, 
       paid_up_money, check_date, operator, 
       createdTime, modifiedTime, cash_pledge, 
-      late_arrival_need_pay, early_leave-need_pay, stay_day_need_pay, 
+      late_arrival_need_pay, early_leave_need_pay, stay_day_need_pay, 
       late_arrival_day, early_leave_day, stay_day
       )
     values (#{id,jdbcType=INTEGER}, #{stayId,jdbcType=INTEGER}, #{dueMoney,jdbcType=DOUBLE}, 
@@ -173,7 +173,7 @@
         late_arrival_need_pay,
       </if>
       <if test="earlyLeaveNeedPay != null" >
-        early_leave-need_pay,
+        early_leave_need_pay,
       </if>
       <if test="stayDayNeedPay != null" >
         stay_day_need_pay,
@@ -294,7 +294,7 @@
         late_arrival_need_pay = #{record.lateArrivalNeedPay,jdbcType=DOUBLE},
       </if>
       <if test="record.earlyLeaveNeedPay != null" >
-        early_leave-need_pay = #{record.earlyLeaveNeedPay,jdbcType=DOUBLE},
+        early_leave_need_pay = #{record.earlyLeaveNeedPay,jdbcType=DOUBLE},
       </if>
       <if test="record.stayDayNeedPay != null" >
         stay_day_need_pay = #{record.stayDayNeedPay,jdbcType=DOUBLE},
@@ -328,7 +328,7 @@
       modifiedTime = #{record.modifiedtime,jdbcType=TIMESTAMP},
       cash_pledge = #{record.cashPledge,jdbcType=DOUBLE},
       late_arrival_need_pay = #{record.lateArrivalNeedPay,jdbcType=DOUBLE},
-      early_leave-need_pay = #{record.earlyLeaveNeedPay,jdbcType=DOUBLE},
+      early_leave_need_pay = #{record.earlyLeaveNeedPay,jdbcType=DOUBLE},
       stay_day_need_pay = #{record.stayDayNeedPay,jdbcType=DOUBLE},
       late_arrival_day = #{record.lateArrivalDay,jdbcType=INTEGER},
       early_leave_day = #{record.earlyLeaveDay,jdbcType=INTEGER},
@@ -377,7 +377,7 @@
         late_arrival_need_pay = #{lateArrivalNeedPay,jdbcType=DOUBLE},
       </if>
       <if test="earlyLeaveNeedPay != null" >
-        early_leave-need_pay = #{earlyLeaveNeedPay,jdbcType=DOUBLE},
+        early_leave_need_pay = #{earlyLeaveNeedPay,jdbcType=DOUBLE},
       </if>
       <if test="stayDayNeedPay != null" >
         stay_day_need_pay = #{stayDayNeedPay,jdbcType=DOUBLE},
@@ -408,7 +408,7 @@
       modifiedTime = #{modifiedtime,jdbcType=TIMESTAMP},
       cash_pledge = #{cashPledge,jdbcType=DOUBLE},
       late_arrival_need_pay = #{lateArrivalNeedPay,jdbcType=DOUBLE},
-      early_leave-need_pay = #{earlyLeaveNeedPay,jdbcType=DOUBLE},
+      early_leave_need_pay = #{earlyLeaveNeedPay,jdbcType=DOUBLE},
       stay_day_need_pay = #{stayDayNeedPay,jdbcType=DOUBLE},
       late_arrival_day = #{lateArrivalDay,jdbcType=INTEGER},
       early_leave_day = #{earlyLeaveDay,jdbcType=INTEGER},

@@ -117,11 +117,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 		orderAccount(accountInfo);
 		
 		// 结算统计
-		try {
 		accountInfo.setCheckinCount(checkinAccount());
-		}catch (Exception e) {
-			
-		}
 
 		int row = accountInfoMapper.insert(accountInfo);
 

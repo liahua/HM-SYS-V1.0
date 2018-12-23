@@ -89,7 +89,7 @@
 
 			$("#btn-search").on("click", doQueryObjects)
 			$("#pageId").on("click", ".first,.pre,.next,.last", doJumpToPage)
-			 .on("click",".btn-add",doLoadEditUI)
+					.on("click", ".btn-add", doLoadEditUI)
 
 			//  $("#tbodyId")
 			//.on("click",".btn-delete",doDeleteObject)
@@ -146,7 +146,6 @@
 
 		}
 		function doQueryObjects() {
-			console.log(111);
 			$("#pageId").data("pageCurrent", 1);
 			doGetObjects();
 		}
@@ -178,19 +177,22 @@
 			if (result.state == 1) {
 				doSetTableBodyRows(result.data.accountInfo);
 				doSetRoomInfo(result.data.roomList);
-				//doSetPagination(result.data);
+				doSetPagination(result.data);
 			} else {
 				doSetTableBodyErrors(result.message);
 			}
 		}
-		function doSetRoomInfo(data){
-			for(var i in data){
-				var td = $("#"+new Date(data.day).toLocaleDateString()).next("td");
+		function doSetRoomInfo(data) {
+			for ( var i in data) {
+				var td = $("#" + escapeJquery(new Date(data[i].day).toLocaleDateString())).next("td");
 				
-				var roomNum = td.val();
-				if(!roomNum) roomNum = 0;
-				
-				td.val() = roomNum+data.filedNum;
+				var roomNum = td.text();
+				if (!roomNum)
+					roomNum = 0;
+				//console.log(data[i].filledNum);
+				//console.log(parseInt(roomNum));
+				//console.log(parseInt(roomNum) + data.filledNum)
+				td.html(parseInt(roomNum) + data[i].filledNum);
 			}
 		}
 		function doSetTableBodyErrors(message) {
@@ -220,7 +222,7 @@
 			for ( var i in records) {
 				//2.1构建tr对象
 				var tr = $("<tr id='"+key+"'></tr>");
-				key = key+1;
+				key = key + 1;
 				tr.data("id", records[i].id);
 				//2.2构建tds对象
 				var tds = doCreateTds(records[i], i);
@@ -228,17 +230,18 @@
 				tr.append(tds);
 				//2.4将tr追加到tbody中
 				tBody.append(tr);
-				
+
 				$(tr).hide();
 			}
-			
-			for(var i = (pageCurrent-1)*8;i<pageCurrent*8;i++){
-				$("#"+i).show();
+
+			for (var i = (pageCurrent - 1) * 8; i < pageCurrent * 8; i++) {
+				$("#" + i).show();
 			}
 		}
 		function doCreateTds(row, i) {
-			var tds = "<td id='"+new Date(row.day).toLocaleDateString()+"'>" + new Date(row.day).toLocaleDateString() + "</td>"
-					+ "<td>" + "</td>" + "<td>" + row.manCount + "</td>"
+			var tds = "<td id='" + new Date(row.day).toLocaleDateString()
+					+ "'>" + new Date(row.day).toLocaleDateString() + "</td>"
+					+ "<td>" + 0 + "</td>" + "<td>" + row.manCount + "</td>"
 					+ "<td>" + row.orderCount + "</td>" + "<td>"
 					+ row.orderMoney + "</td>" + "<td>" + row.cashCount
 					+ "</td>" + "<td>" + row.checkinCount + "</td>" + "<td>"
@@ -253,7 +256,8 @@
 			$(".pageCount").html("总页数(" + Math.ceil((data.size / 8)) + ")")
 			//3.初始化当前页码值
 			var pageCurrent = $("#pageId").data("pageCurrent");
-			if(!pageCurrent) pageCurrent = 1; 
+			if (!pageCurrent)
+				pageCurrent = 1;
 			$(".pageCurrent").html("当前页(" + pageCurrent + ")")
 			//4.将当前页码值以及总页数进行存储
 			$("#pageId").data("pageCurrent", pageCurrent);
@@ -284,4 +288,27 @@
 			//4.重新执行查询操作
 			doGetObjects();
 		}
+		
+		function escapeJquery(srcString)
+		{
+		    // 转义之后的结果
+		    var escapseResult = srcString;
+		    // javascript正则表达式中的特殊字符
+		    var jsSpecialChars = ["\\", "^", "$", "*", "?", ".", "+", "(", ")", "[",
+		            "]", "|", "{", "}"];
+		    // jquery中的特殊字符,不是正则表达式中的特殊字符
+		    var jquerySpecialChars = ["~", "`", "@", "#", "%", "&", "=", "'", "\"",
+		            ":", ";", "<", ">", ",", "/"];
+		    for (var i = 0; i < jsSpecialChars.length; i++) {
+		        escapseResult = escapseResult.replace(new RegExp("\\"
+		                                + jsSpecialChars[i], "g"), "\\"
+		                        + jsSpecialChars[i]);
+		    }
+		    for (var i = 0; i < jquerySpecialChars.length; i++) {
+		        escapseResult = escapseResult.replace(new RegExp(jquerySpecialChars[i],
+		                        "g"), "\\" + jquerySpecialChars[i]);
+		    }
+		    return escapseResult;
+		}
+
 	</script>

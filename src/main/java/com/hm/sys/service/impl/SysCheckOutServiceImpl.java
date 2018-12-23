@@ -1,5 +1,6 @@
 package com.hm.sys.service.impl;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -109,8 +110,21 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 
 //	  2.根据折扣比率计算每日房价
 		Double aveDailyRate = getDailyRate(thisTimeOrderInfo);
-//	  3.根据orderInfo,stayInfo计算lateArrivalDay,stayDay,earlyLeaveDay
-		Double[] stayDaysInfo = getStayDaysInfo(thisTimeOrderInfo, thisTimeStayInfo);
+//	  3.根据orderInfo,stayInfo计算lateArrivalDay,stayDay,earlyLeaveDay	
+		// 需要对stayInfo中的StayDate,LeaveDate向前一天,后一天取整
+		Date stayDateVirtual = null;
+		Date leaveDateVirtual = null;
+		try {
+			stayDateVirtual = getStayDateVirtual(thisTimeStayInfo.getStayDate());
+			leaveDateVirtual = getLeaveDateVirtual(thisTimeStayInfo.getLeaveDate());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		int lateArrivalDay = getDaysCountInfo(thisTimeOrderInfo.getCheckinDate(), stayDateVirtual);
+		int stayDay = getDaysCountInfo(stayDateVirtual, leaveDateVirtual);
+		int earlyLeaveDay = getDaysCountInfo(leaveDateVirtual, thisTimeOrderInfo.getCheckoutDate());
 //	  4.根据lateArrivalDay,stayDay,earlyLeaveDay分别计算lateArrivalNeedPay,stayDayNeedPay,earlyLeaveNeedPay
 //	  5.根据lateArrivalNeedPay,stayDayNeedPay,earlyLeaveNeedPay计算dueMoney
 //	  6.根据dueMoney-(orderMoney+cashPledge)计算paidUpMoney
@@ -122,12 +136,154 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 		return null;
 	}
 
-	private Double[] getStayDaysInfo(OrderInfo thisTimeOrderInfo, StayInfo thisTimeStayInfo) {
-		Date checkinDate = thisTimeOrderInfo.getCheckinDate();
-		Date checkoutDate = thisTimeOrderInfo.getCheckoutDate();
-		Date stayDate = thisTimeStayInfo.getStayDate();
-		Date leaveDate = thisTimeStayInfo.getLeaveDate();
-		return null;
+	/**
+	 * 
+	 * @Function: SysCheckOutServiceImpl.java
+	 * @Description: 向前取整 [12-22 12:00,12-23 12:00) [12-23 12:00,12-24 12:00) 12-23
+	 *               2:00 ---------->12-22 12:00 12-23 13:00 --------->12-23 12:00
+	 *               12-23 12:00---------->12-23 12:00
+	 *
+	 * @param stayDate
+	 * @return
+	 * @throws：异常描述
+	 *
+	 * @version: v1.0.0
+	 * @author: 李志学
+	 * @throws ParseException
+	 * @date: 2018年12月23日 上午11:37:18
+	 *
+	 *        Modification History: Date Author Version Description
+	 *        ---------------------------------------------------------* 2018年12月23日
+	 *        李志学 v1.0.0 修改原因
+	 */
+	private Date getStayDateVirtual(Date stayDate) throws ParseException {
+
+		Map<String, Long> standardDateMap = getStandardDateMap(stayDate);
+		Long dateTime = standardDateMap.get("dateTime");
+		Long lastDateTime = standardDateMap.get("lastDateTime");
+		Long todayDateTime = standardDateMap.get("todayDateTime");
+		if (dateTime >= lastDateTime && dateTime < todayDateTime) {
+			return new Date(lastDateTime);
+		} else {
+			return new Date(todayDateTime);
+		}
+	}
+
+	/**
+	 * 
+	 * @Function: SysCheckOutServiceImpl.java
+	 * @Description: 将当前date转成酒店入店/离店标准时间 Map 
+	 * 12-23 12:53 ------> 12-23 12:00||12-24 12:00
+	 * 该函数的功能描述 Calendar在高并发情况下 需要做LocalThread
+	 *
+	 * @param stayDate
+	 * @return
+	 * @throws ParseException
+	 * @throws：异常描述
+	 *
+	 * @version: v1.0.0
+	 * @author: 李志学
+	 * @date: 2018年12月23日 下午12:35:31
+	 *
+	 *        Modification History: Date Author Version Description
+	 *        ---------------------------------------------------------* 2018年12月23日
+	 *        李志学 v1.0.0 修改原因
+	 */
+	private Map<String, Long> getStandardDateMap(Date stayDate) throws ParseException {
+		Calendar instance = Calendar.getInstance();
+
+		instance.setTime(stayDate);
+		instance.add(Calendar.DAY_OF_MONTH, 1);
+		Date nextTime = instance.getTime();
+
+		instance.setTime(stayDate);
+		instance.add(Calendar.DAY_OF_MONTH, -1);
+		Date lastTime = instance.getTime();
+
+		nextTime = parseStandardDate(nextTime);
+		lastTime = parseStandardDate(lastTime);
+		Date todayTime = parseStandardDate(stayDate);
+
+		System.out.println("nextTime" + nextTime);
+		System.out.println("lastTime" + lastTime);
+		System.out.println("todayTime" + todayTime);
+		System.out.println("date" + stayDate);
+
+		long dateTime = stayDate.getTime();
+		long nextDateTime = nextTime.getTime();
+		long lastDateTime = lastTime.getTime();
+		long todayDateTime = todayTime.getTime();
+
+		HashMap<String, Long> standardDateMap = new HashMap<>();
+		standardDateMap.put("dateTime", dateTime);
+		standardDateMap.put("nextDateTime", nextDateTime);
+		standardDateMap.put("lastDateTime", lastDateTime);
+		standardDateMap.put("todayDateTime", todayDateTime);
+
+		return standardDateMap;
+	}
+
+	private Date parseStandardDate(Date date) throws ParseException {
+		SimpleDateFormat sdfStart = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdfEnd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String time = sdfStart.format(date);
+		time = time + " " + "12:00:00";
+		Date standardDate = sdfEnd.parse(time);
+		return standardDate;
+	}
+
+	/**
+	 * 
+	 * @Function: SysCheckOutServiceImpl.java
+	 * @Description: 向后取整 [12-22 12:00,12-23 12:00) [12-23 12:00,12-24 12:00)
+	 *
+	 * @param leaveDate
+	 * @return
+	 * @throws：异常描述
+	 *
+	 * @version: v1.0.0
+	 * @author: 李志学
+	 * @throws ParseException
+	 * @date: 2018年12月23日 上午11:37:32
+	 *
+	 *        Modification History: Date Author Version Description
+	 *        ---------------------------------------------------------* 2018年12月23日
+	 *        李志学 v1.0.0 修改原因
+	 */
+	private Date getLeaveDateVirtual(Date leaveDate) throws ParseException {
+		Map<String, Long> standardDateMap = getStandardDateMap(leaveDate);
+		Long dateTime = standardDateMap.get("dateTime");
+		Long lastDateTime = standardDateMap.get("lastDateTime");
+		Long todayDateTime = standardDateMap.get("todayDateTime");
+		Long nextDateTime = standardDateMap.get("nextDateTime");
+		if (dateTime >= lastDateTime && dateTime < todayDateTime) {
+			return new Date(todayDateTime);
+		} else {
+			return new Date(nextDateTime);
+		}
+	}
+
+	/**
+	 * 
+	 * @Function: SysCheckOutServiceImpl.java
+	 * @Description: 该函数的功能描述 [12-22 12:00,12-23 12:00) [12-23 12:00,12-24 12:00)
+	 * 
+	 * @param checkinDate 此时间向当前时间
+	 * @param stayDate
+	 * @return
+	 * @throws：异常描述
+	 *
+	 * @version: v1.0.0
+	 * @author: 李志学
+	 * @date: 2018年12月23日 上午11:16:16
+	 *
+	 *        Modification History: Date Author Version Description
+	 *        ---------------------------------------------------------* 2018年12月23日
+	 *        李志学 v1.0.0 修改原因
+	 */
+	private int getDaysCountInfo(Date checkinDate, Date stayDate) {
+
+		return 0;
 	}
 
 	/**

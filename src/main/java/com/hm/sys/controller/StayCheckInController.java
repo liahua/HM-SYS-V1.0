@@ -25,4 +25,10 @@ public class StayCheckInController {
 		return new JsonResult(
 				sysStayCheckInService.findCustomerOrderbyCardNum(cardNum));
 	}
+	@RequestMapping("doStayCheckIn")
+	@ResponseBody
+	public JsonResult doStayCheckIn(Integer cardNum) {
+		return new JsonResult(
+				sysStayCheckInService.insertStayInfo(cardNum, null, null));
+	}
 }

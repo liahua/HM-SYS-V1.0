@@ -30,15 +30,14 @@ public class SysDeptController {
 	
 	@RequestMapping("doAddDept")
 	public String doAddDept() {
+		System.out.println("doAddDept");
 		return "dept/dept_add";
 	}
 	
 	@RequestMapping("dogetObjects")
 	@ResponseBody
-	public JsonResult dogetObjects(SysDeptsExample example) {
-		System.out.println("getObjects");
-		System.out.println("dogetObjects");
-		List<SysDepts> objects = sysDeptService.getObjects(example);
+	public JsonResult dogetObjects() {
+		List<Map<String, Object>> objects = sysDeptService.getObjects();
 		return new JsonResult(objects);
 	}
 	
@@ -63,7 +62,7 @@ public class SysDeptController {
 		return new JsonResult(DeptNodes);
 	}
 	
-	@RequestMapping()
+	@RequestMapping("doUpdateObject")
 	@ResponseBody
 	public JsonResult doUpdateObject(SysDepts entity) {
 		sysDeptService.updateObject(entity);

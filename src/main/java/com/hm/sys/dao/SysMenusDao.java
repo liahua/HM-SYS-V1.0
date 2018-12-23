@@ -5,11 +5,13 @@ import com.hm.sys.entity.SysMenusExample;
 import com.hm.sys.vo.Node;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface SysMenusDao {
 	
-	List<SysMenus> selectByExample(SysMenusExample example);
+	public List<Map<String, Object>> getObjects();
 	
 	int deleteByPrimaryKey(Integer id);
 	

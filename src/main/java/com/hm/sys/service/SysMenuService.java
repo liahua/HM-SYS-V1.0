@@ -1,6 +1,7 @@
 package com.hm.sys.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.hm.sys.entity.SysMenus;
 import com.hm.sys.entity.SysMenusExample;
@@ -8,7 +9,7 @@ import com.hm.sys.vo.Node;
 
 public interface SysMenuService {
 
-	List<SysMenus> getObjects(SysMenusExample example);
+	public List<Map<String, Object>> getObjects();
 
 	int deleteObject(Integer id);
 

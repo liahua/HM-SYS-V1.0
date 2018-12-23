@@ -19,6 +19,7 @@ public class DayAccount implements Serializable {
 
 	private List<AccountInfo> accountInfo;
 	private List<AccountRoom> roomList;
+	private Integer size;
 
 	public List<AccountInfo> getAccountInfo() {
 		return accountInfo;
@@ -36,13 +37,22 @@ public class DayAccount implements Serializable {
 		this.roomList = roomList;
 	}
 
+	public Integer getSize() {
+		return size;
+	}
+
+	public void setSize(Integer size) {
+		this.size = size;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "DayAccount [accountInfo=" + accountInfo + ", roomList=" + roomList + "]";
+		return "DayAccount [accountInfo=" + accountInfo + ", roomList=" + roomList + ", size=" + size + "]";
 	}
 
+	
 }

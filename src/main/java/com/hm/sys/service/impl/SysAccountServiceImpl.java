@@ -168,6 +168,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 		DayAccount dayAccount = new DayAccount();
 		dayAccount.setAccountInfo(info);
 		dayAccount.setRoomList(room);
+		dayAccount.setSize(info.size());
 		
 		return dayAccount;
 	}
@@ -247,7 +248,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 			return cashCount;
 		}
 		for (StayInfo si : stayList) {
-			Float cash = si.getCash();
+			Double cash = si.getCash();
 			if (cash != null)
 				cashCount += cash;
 		}
@@ -271,7 +272,7 @@ public class SysAccountServiceImpl implements SysAccountService {
 		}
 
 		for (OrderInfo oi : orderInfoList) {
-			Float om = oi.getOrderMoney();
+			Double om = oi.getOrderMoney();
 			if (om != null)
 				orderMoney += om;
 		}

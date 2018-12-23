@@ -10,8 +10,14 @@ public class RoomInfo {
     private String roomAdd;
 
     private Integer bedNum;
+    //房间类型
+    private String rtName;
+    //房间价格
+    private Double priceUp;
 
     private Integer statId;
+    //房间状态
+    private String stat;
 
     public Integer getId() {
         return id;
@@ -25,7 +31,31 @@ public class RoomInfo {
         return rtId;
     }
 
-    public void setRtId(Integer rtId) {
+    public String getRtName() {
+		return rtName;
+	}
+
+	public void setRtName(String rtName) {
+		this.rtName = rtName;
+	}
+
+	public Double getPriceUp() {
+		return priceUp;
+	}
+
+	public void setPriceUp(Double priceUp) {
+		this.priceUp = priceUp;
+	}
+
+	public String getStat() {
+		return stat;
+	}
+
+	public void setStat(String stat) {
+		this.stat = stat;
+	}
+
+	public void setRtId(Integer rtId) {
         this.rtId = rtId;
     }
 

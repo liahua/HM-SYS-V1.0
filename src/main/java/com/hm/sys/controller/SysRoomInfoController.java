@@ -10,7 +10,6 @@ import com.hm.common.vo.JsonResult;
 import com.hm.common.vo.PageObject;
 import com.hm.sys.entity.RoomInfo;
 import com.hm.sys.entity.RoomInfoExample;
-import com.hm.sys.entity.RoomStateExample;
 import com.hm.sys.service.SysRoomInfoService;
 
 

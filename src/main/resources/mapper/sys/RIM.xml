@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hm.sys.dao.RIM01">
-	<resultMap id="BRM"
+	<resultMap id="BRM01"
 		type="com.hm.sys.entity.RoomInfo">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="rt_id" property="rtId" jdbcType="INTEGER" />
@@ -57,7 +57,11 @@
 	
 	<select id="findObjectsInfo" resultType="com.hm.sys.entity.RoomInfo">
 
-		select * from room_info
+		select r.id,r.room_name,r.room_add,t.rt_name,r.bed_num,t.price_up,s.stat 
+		from room_info r 
+		left join 
+		room_type t on r.rt_id=t.id 
+		left join room_stat s on r.stat_id = s.id
 		
 	</select>
 </mapper>

@@ -24,11 +24,14 @@
 					<thead>
 						<tr>
 						    <th><input type="checkbox" id="checkAll">全选</th>
-							                            <th>ID</th>
+							                            <th>房间编号</th>
                                                         <th>房间号</th>
-                                                        <th>楼层</th>
-                                                        <th>床数</th>
-                                                        <th>状态</th>
+                                                        <th>房间楼层</th>
+                                                        <th>床位数</th>
+                                                        <th>房间类型</th>
+                                                        <th>房间价格</th>
+                                                        <th>房间状态</th>
+                                                        <th>操作</th>
 						</tr>
 					</thead>
 					<tbody id="tbodyId">
@@ -214,14 +217,22 @@
    }
    //创建多个tds对象
    function doCreateTds(row){
-	   var tds=
-        "<td><input type='checkbox' class='cBox' value='"+row.id+"'></td>"+
-        "<td>"+row.rtId+"</td>"+
+	   var tds="<td><input type='checkbox' class='cBox' value='"+row.id+"'></td>"+
 	     "<td>"+row.roomName+"</td>"+
 	     "<td>"+row.roomAdd+"</td>"+
 	     "<td>"+row.bedNum+"</td>"+
-	     "<td>"+row.statId+"</td>"; 
-	   return tds;
+	     "<td>"+row.rtName+"</td>"+
+	     "<td>"+row.priceUp+"</td>"+
+	     "<td>"+row.stat+"</td>"+
+		 "<td class='td-actions '>"+
+		 "<a rel='tooltip' class='btn btn-order btn-info btn-simple btn-xs'>"+
+       "预订"+
+       "</a>"+
+		 "<a rel='tooltip' class='btn btn-checkIn btn-warning btn-simple btn-xs'>"+
+       "入住登记"+
+       "</a>"+
+       "</td>"; 
+     return tds;
   }
 </script>
 

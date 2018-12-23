@@ -6,7 +6,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hm.sys.dao.CheckInMapper;
 import com.hm.sys.dao.CustomerCheckInMapper;
+import com.hm.sys.dao.CustomerInfoMapper;
+import com.hm.sys.dao.OrderInfoMapper;
+import com.hm.sys.entity.CustomerInfo;
+import com.hm.sys.entity.OrderInfo;
 import com.hm.sys.service.SysStayCheckInService;
 import com.hm.sys.vo.SysCustomerOrderResult;
 
@@ -17,6 +22,12 @@ import com.hm.sys.vo.SysCustomerOrderResult;
 public class SysStayCheckInServiceImpl implements SysStayCheckInService{
 	@Autowired
 	private CustomerCheckInMapper customerCheckInMapper;
+	@Autowired
+	private CheckInMapper checkInMapper;
+	@Autowired
+	CustomerInfoMapper customerInfoMapper;
+	@Autowired
+	OrderInfoMapper orderInfoMapper;
 	
 	public Map<String, Object> findCustomerOrderbyCardNum(Integer cardNum) {
 		//1.对参数进行校验
@@ -29,6 +40,18 @@ public class SysStayCheckInServiceImpl implements SysStayCheckInService{
 				Map<String,Object> map=new HashMap<>();
 				map.put("customer", result);
 				return map;
+	}
+
+	@Override
+	public int insertStayInfo(Integer cardNum,CustomerInfo record,OrderInfo record0) {
+		Map<String, Object> map = findCustomerOrderbyCardNum(cardNum);
+		if(map!=null) {
+			checkInMapper.insertStayInfo();
+		}else {
+			customerInfoMapper.insertSelective(record);
+			orderInfoMapper.insert(record0);
+		}
+		return 1;	
 	}
 
 }

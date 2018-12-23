@@ -5,7 +5,7 @@
 				<h3 class="box-title">部门管理</h3>
 				
 				<div class="box-tools">
-					<div class="input-group input-group-sm" style="width: 100px;">
+					<div class="input-group input-group-sm" style="width: 100px;float:right;">
 						<div class="input-group-btn">
 							<button type="button" class="btn btn-default btn-delete">删除</button>
 							<button type="button" class="btn btn-default btn-add">添加</button>
@@ -83,7 +83,7 @@ var columns = [
 	
 	$(".input-group-btn")
 	.on("click",".btn-delete",doDeleteObject)
-	.on("click",".btn-add",doAddDept);
+	.on("click",".btn-add,.btn-update",doAddDept);
 	
 	
 	});
@@ -140,16 +140,30 @@ var columns = [
 		var title;
 		if($(this).hasClass("btn-add")){
 			title="添加部门";
+		}else if($(this).hasClass("btn-update")){
+			title="修改部门"
+			//获取选中的数据
+			var rowData=doGetMessage();
+			if(!rowData){
+				alert("请选择需要修改的数据");
+				return;
+			}
+			$("#mainContentId").data("rowData",rowData);
 		}
 		//异步加载添加页面
 		var url="dept/doAddDept.do";
-		alert("1");
-		$("mainContentId").load(url,function(){
-			$("box-title").html(title);
+		$("#mainContentId").load(url,function(){
+			$(".box-title").html(title);
 		});
 	}
 	
-	
+	/*=========获取选中的信息============*/
+	function doGetMessage(){
+		var tr=$("tbody input[type='radio']:checked").parents("tr");
+		var rowData=tr.data("rowData");
+		console.log(rowData);
+		return rowData;
+	}
 	
 	
 	

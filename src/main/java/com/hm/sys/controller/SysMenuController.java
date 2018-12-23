@@ -30,8 +30,8 @@ public class SysMenuController {
 	
 	@RequestMapping("doGetObjects")
 	@ResponseBody
-	public JsonResult doGetObjects(SysMenusExample example) {
-		return new JsonResult(sysMenuService.getObjects(example));
+	public JsonResult doGetObjects() {
+		return new JsonResult(sysMenuService.getObjects());
 	}
 	@RequestMapping("doDeleteObject")
 	@ResponseBody
@@ -52,7 +52,8 @@ public class SysMenuController {
 		sysMenuService.insert(record);
 		return new JsonResult("insert is ok ");
 	}
-	
+	@RequestMapping("doUpdateObject")
+	 @ResponseBody
 	public JsonResult doUpdateObject(SysMenus record) {
 		sysMenuService.update(record);
 		return new JsonResult("update is OK");

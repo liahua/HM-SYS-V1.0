@@ -9,7 +9,7 @@ import com.hm.sys.vo.Node;
 
 public interface SysDeptService {
 	
-	public  List<SysDepts> getObjects(SysDeptsExample example);
+	List<Map<String,Object>> getObjects();
 	
 		
 	int deleteObject(Integer id);

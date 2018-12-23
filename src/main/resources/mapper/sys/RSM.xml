@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hm.sys.dao.RSM01" >
-  <resultMap id="BRM" type="com.hm.sys.entity.RoomState" >
+  <resultMap id="BRM01" type="com.hm.sys.entity.RoomState" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="stat" property="stat" jdbcType="VARCHAR" />
     <result column="createdTime" property="createdtime" jdbcType="TIMESTAMP" />

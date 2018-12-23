@@ -2,6 +2,9 @@ package com.hm.sys.service;
 
 import java.util.Map;
 
+import com.hm.sys.entity.CustomerInfo;
+import com.hm.sys.entity.OrderInfo;
+
 public interface SysStayCheckInService {
 	/**
 	 * 查询客户以及客户对应的订单关联信息
@@ -9,4 +12,6 @@ public interface SysStayCheckInService {
 	 * @author Xianggc
 	 */
 	Map<String,Object> findCustomerOrderbyCardNum(Integer CardNum);
+	
+	int insertStayInfo(Integer cardNum, CustomerInfo record, OrderInfo record0);
 }

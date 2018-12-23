@@ -24,7 +24,7 @@
 		      #{startIndex},#{pageSize}
     </select>
     
-    
+    <!-- 获取行数 -->
     <select id="getRowCount"
             resultType="int">
           select count(*)
@@ -36,9 +36,23 @@
  <sql id="queryWhereId">
           <where>
             <if test="name!=null and name!=''">
-               name like concat("%",#{name},"%")
+         name LIKE concat("%",#{customer_name},"%")
             </if>
           </where>
     </sql>
-  
+    
+    <delete id="deleteObject" parameterType="int">
+			
+			delete 
+			from customer_info
+			where
+			id=#{id}
+    
+    </delete>
+  <select id="findObjectById"
+            resultType="com.hm.common.vo.CustomerAllInfo">
+         select *
+         from customer_info
+         where id=#{id}
+    </select>
   </mapper>

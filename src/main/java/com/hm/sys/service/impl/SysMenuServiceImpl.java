@@ -1,7 +1,7 @@
 package com.hm.sys.service.impl;
 
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +30,8 @@ public class SysMenuServiceImpl implements SysMenuService {
 	 * 查询菜单信息
 	 */
 	@Override
-	public List<SysMenus> getObjects(SysMenusExample example) {
-		List<SysMenus> objects = sysMenusDao.selectByExample(example);
+	public List<Map<String, Object>> getObjects() {
+		List<Map<String, Object>> objects = sysMenusDao.getObjects();
 		return objects;
 	}
 	/**

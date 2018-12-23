@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hm.sys.dao.CommonCardDao" >
+  
+  <delete id="deleteObjectsByCardId" parameterType="int">
+  
+  delete
+  	from
+  	customer_card_type
+  	where 
+  	id=#{id}
+  </delete>
+  	
+  <select id="findMenuIdsByCardId"
+              resultType="String">
+           
+           select 
+           card_type
+           from
+           customer_card_type
+           where id=#{id}
+           
+      </select>
+      
+      <insert id="insertObject">
+		insert into customer_card_type
+		(card_type)
+		values
+			(#{commonid},#{item})
+		
+	</insert>
+  
+  	<select id="findCardIdsByCustomerIds" resultType="int">
+		select card_type
+		from customer_card_type
+		where id in
+		<foreach collection="commonids" open="(" close=")" separator=","
+			item="item">
+			#{item}
+		</foreach>
+	</select>
+  
+  </mapper>
+  
+  

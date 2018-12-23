@@ -29,10 +29,9 @@ public class SysDeptServiceImpl implements SysDeptService {
 	/**
 	 * 查询sys_depts表内容
 	 */
-	public List<SysDepts> getObjects(SysDeptsExample example) {
-		List<SysDepts> selectByExample = sysDeptsDao.selectByExample(example);
-		System.out.println("1");
-		return selectByExample;
+	public List<Map<String, Object>> getObjects() {
+		List<Map<String, Object>> objects = sysDeptsDao.getObjects();
+		return objects;
 	}
 	
 	@Override

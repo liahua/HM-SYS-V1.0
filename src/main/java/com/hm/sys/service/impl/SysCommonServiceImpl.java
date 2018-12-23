@@ -37,7 +37,7 @@ public class SysCommonServiceImpl implements SysCommonService {
 	}
 
 	@Override
-	public CommonPageObject<CustomerAllInfo> findPageObjects(String name, Integer pageCurrent) {
+	public CommonPageObject<CustomerAllInfo> findPageObjects(String a, Integer pageCurrent) {
 		// 1.验证参数合法性
 		// 1.1验证pageCurrent的合法性，
 		// 不合法抛出IllegalArgumentException异常
@@ -45,7 +45,7 @@ public class SysCommonServiceImpl implements SysCommonService {
 			throw new IllegalArgumentException("当前页码不正确");
 		// 2.基于条件查询总记录数
 		// 2.1) 执行查询
-		int rowCount = commonDao.getRowCount(name);
+		int rowCount = commonDao.getRowCount(a);
 		// 2.2) 验证查询结果，假如结果为0不再执行如下操作
 		if (rowCount == 0)
 			throw new ServiceException("记录不存在");
@@ -55,7 +55,7 @@ public class SysCommonServiceImpl implements SysCommonService {
 		// 3.2)计算startIndex
 		int startIndex = (pageCurrent - 1) * pageSize;
 		// 3.3)执行当前数据的查询操作
-		List<CustomerAllInfo> records =commonDao.findPageObjects(name, startIndex, pageSize);
+		List<CustomerAllInfo> records =commonDao.findPageObjects(a, startIndex, pageSize);
 		// 4.对分页信息以及当前页记录进行封装
 		// 4.1)构建PageObject对象
 		CommonPageObject<CustomerAllInfo> pageObject = new CommonPageObject<>();

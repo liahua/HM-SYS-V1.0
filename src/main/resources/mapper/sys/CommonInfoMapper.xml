@@ -36,7 +36,7 @@
  <sql id="queryWhereId">
           <where>
             <if test="name!=null and name!=''">
-         NAME LIKE ("%",#{name},"%")
+         name LIKE concat("%",#{customer_name},"%")
             </if>
           </where>
     </sql>

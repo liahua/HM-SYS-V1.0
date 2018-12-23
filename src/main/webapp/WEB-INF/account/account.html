@@ -184,8 +184,11 @@
 		}
 		function doSetRoomInfo(data) {
 			for ( var i in data) {
-				var td = $("#" + escapeJquery(new Date(data[i].day).toLocaleDateString())).next("td");
-				
+				var td = $(
+						"#"
+								+ escapeJquery(new Date(data[i].day)
+										.toLocaleDateString())).next("td");
+
 				var roomNum = td.text();
 				if (!roomNum)
 					roomNum = 0;
@@ -239,14 +242,16 @@
 			}
 		}
 		function doCreateTds(row, i) {
+			var num = row.checkinCount + row.cashCount + row.orderMoney;
+			num = num.toFixed(2);
+			//console.log(num);
 			var tds = "<td id='" + new Date(row.day).toLocaleDateString()
 					+ "'>" + new Date(row.day).toLocaleDateString() + "</td>"
 					+ "<td>" + 0 + "</td>" + "<td>" + row.manCount + "</td>"
 					+ "<td>" + row.orderCount + "</td>" + "<td>"
 					+ row.orderMoney + "</td>" + "<td>" + row.cashCount
 					+ "</td>" + "<td>" + row.checkinCount + "</td>" + "<td>"
-					+ (row.checkinCount + row.cashCount + row.orderMoney)
-					+ "</td>"
+					+ num + "</td>"
 			return tds;
 		}
 		function doSetPagination(data) {
@@ -288,27 +293,25 @@
 			//4.重新执行查询操作
 			doGetObjects();
 		}
-		
-		function escapeJquery(srcString)
-		{
-		    // 转义之后的结果
-		    var escapseResult = srcString;
-		    // javascript正则表达式中的特殊字符
-		    var jsSpecialChars = ["\\", "^", "$", "*", "?", ".", "+", "(", ")", "[",
-		            "]", "|", "{", "}"];
-		    // jquery中的特殊字符,不是正则表达式中的特殊字符
-		    var jquerySpecialChars = ["~", "`", "@", "#", "%", "&", "=", "'", "\"",
-		            ":", ";", "<", ">", ",", "/"];
-		    for (var i = 0; i < jsSpecialChars.length; i++) {
-		        escapseResult = escapseResult.replace(new RegExp("\\"
-		                                + jsSpecialChars[i], "g"), "\\"
-		                        + jsSpecialChars[i]);
-		    }
-		    for (var i = 0; i < jquerySpecialChars.length; i++) {
-		        escapseResult = escapseResult.replace(new RegExp(jquerySpecialChars[i],
-		                        "g"), "\\" + jquerySpecialChars[i]);
-		    }
-		    return escapseResult;
-		}
 
+		function escapeJquery(srcString) {
+			// 转义之后的结果
+			var escapseResult = srcString;
+			// javascript正则表达式中的特殊字符
+			var jsSpecialChars = [ "\\", "^", "$", "*", "?", ".", "+", "(",
+					")", "[", "]", "|", "{", "}" ];
+			// jquery中的特殊字符,不是正则表达式中的特殊字符
+			var jquerySpecialChars = [ "~", "`", "@", "#", "%", "&", "=", "'",
+					"\"", ":", ";", "<", ">", ",", "/" ];
+			for (var i = 0; i < jsSpecialChars.length; i++) {
+				escapseResult = escapseResult.replace(new RegExp("\\"
+						+ jsSpecialChars[i], "g"), "\\" + jsSpecialChars[i]);
+			}
+			for (var i = 0; i < jquerySpecialChars.length; i++) {
+				escapseResult = escapseResult.replace(new RegExp(
+						jquerySpecialChars[i], "g"), "\\"
+						+ jquerySpecialChars[i]);
+			}
+			return escapseResult;
+		}
 	</script>

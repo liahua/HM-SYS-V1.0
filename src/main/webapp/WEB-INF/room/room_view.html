@@ -7,10 +7,12 @@
                                             <thead>
                                                 <tr>
                                                         <th>房间编号</th>
-                                                        <th>房间类型</th>
                                                         <th>房间号</th>
-                                                        <th>楼层</th>
-                                                        <th>状态</th>
+                                                        <th>房间楼层</th>
+                                                        <th>床位数</th>
+                                                        <th>房间类型</th>
+                                                        <th>房间价格</th>
+                                                        <th>房间状态</th>
                                                         <th>操作</th>
                                                 </tr>
                                             </thead>
@@ -46,7 +48,7 @@
 		   }
 		   //基于id进行查询并加载编辑页面
 		   doFindObjectById(id);
-		   //
+		   //判断并取加载页面
 		   if($(this).hasClass("btn-order")){
 				  doLoadOrder();
 			 }else if($(this).hasClass("btn-checkIn")){
@@ -114,10 +116,12 @@
    function doCreateTds(row){
 	   console.log(row);
 	   var tds="<td>"+row.id+"</td>"+
-	     "<td>"+row.rtId+"</td>"+
 	     "<td>"+row.roomName+"</td>"+
 	     "<td>"+row.roomAdd+"</td>"+
-	     "<td>"+row.statId+"</td>"+
+	     "<td>"+row.bedNum+"</td>"+
+	     "<td>"+row.rtName+"</td>"+
+	     "<td>"+row.priceUp+"</td>"+
+	     "<td>"+row.stat+"</td>"+
 		 "<td class='td-actions '>"+
 		 "<a rel='tooltip' class='btn btn-order btn-info btn-simple btn-xs'>"+
          "预订"+

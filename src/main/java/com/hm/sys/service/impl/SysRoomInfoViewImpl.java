@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.hm.common.exception.ServiceException;
 import com.hm.common.vo.PageObject;
+import com.hm.common.vo.SysRoomInfoViewResult;
 import com.hm.sys.dao.SysRoomInfoViewDao;
 import com.hm.sys.entity.RoomInfo;
 import com.hm.sys.entity.RoomInfoExample;
@@ -41,7 +42,7 @@ public class SysRoomInfoViewImpl implements SysRoomInfoViewService{
 	 * 查找房间信息
 	 */
 	@Override
-	public List<RoomInfo> findObjectsInfo(RoomInfoExample room) {
+	public List<SysRoomInfoViewResult> findObjectsInfo(RoomInfoExample room) {
 		
 		return sysRoomInfoViewDao.findObjectsInfo(room);
 	}
@@ -49,7 +50,7 @@ public class SysRoomInfoViewImpl implements SysRoomInfoViewService{
 	 * 基于房间名称做分页查询
 	 */
 	@Override
-	public PageObject<RoomInfo> findPageObjects(String roomName, Integer pageCurrent) {
+	public PageObject<SysRoomInfoViewResult> findPageObjects(String roomName, Integer pageCurrent) {
 		//1.对方法参数进行校验
 		if(pageCurrent==null||pageCurrent<1)
 		throw new IllegalArgumentException("页码值不正确");
@@ -59,13 +60,13 @@ public class SysRoomInfoViewImpl implements SysRoomInfoViewService{
 		if(rowCount==0)
 	    throw new ServiceException("记录不存在");
 		//4.依据条件查询当前页要显示的记录
-		int pageSize=2;//页面大小
+		int pageSize=4;//页面大小
 		int startIndex=(pageCurrent-1)*pageSize;//起始位置
-		List<RoomInfo> records=
+		List<SysRoomInfoViewResult> records=
 				sysRoomInfoViewDao.findPageObjects(roomName,
 						startIndex, pageSize);
 		//5.对查询结果进行封装并返回。
-		PageObject<RoomInfo> pageObject=new PageObject<>();
+		PageObject<SysRoomInfoViewResult> pageObject=new PageObject<>();
 		pageObject.setRowCount(rowCount);
 		pageObject.setRecords(records);
 		pageObject.setPageCurrent(pageCurrent);
@@ -76,14 +77,14 @@ public class SysRoomInfoViewImpl implements SysRoomInfoViewService{
 		
 		return pageObject;
 	}
-	
+	//根据房间编号查询房间
 	@Override
 	public Map<String, Object> findObjectById(Integer id) {
 		//1.对参数进行校验
 		if(id==null)
 		throw new IllegalArgumentException("参数值无效");
 		//2.查询房间信息
-		RoomInfo result = sysRoomInfoViewDao.findObjectById(id);
+		SysRoomInfoViewResult result = sysRoomInfoViewDao.findObjectById(id);
 		//4.查询结果进行封装
 		Map<String,Object> map=new HashMap<>();
 		map.put("room", result);//key要与页面取值方式保持一致

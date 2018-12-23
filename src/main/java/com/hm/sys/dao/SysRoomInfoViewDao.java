@@ -9,10 +9,10 @@
 package com.hm.sys.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.hm.common.vo.SysRoomInfoViewResult;
 import com.hm.sys.entity.RoomInfo;
 import com.hm.sys.entity.RoomInfoExample;
 
@@ -52,12 +52,12 @@ public interface SysRoomInfoViewDao {
 	 */
 	 int getRowCount(@Param("roomName")String roomName);
 
-	 List<RoomInfo> findPageObjects(
+	 List<SysRoomInfoViewResult> findPageObjects(
 			 @Param("roomName")String roomName,
 			 @Param("startIndex")Integer startIndex,
 			 @Param("pageSize")Integer pageSize);	 
 	 
-	 List<RoomInfo> findObjectsInfo(RoomInfoExample example);
+	 List<SysRoomInfoViewResult> findObjectsInfo(RoomInfoExample example);
 	 /**
 	  * 
 	 * @Function: SysRoomInfoViewDao.java
@@ -76,5 +76,5 @@ public interface SysRoomInfoViewDao {
 	 *---------------------------------------------------------*
 	 * Dec 22, 2018     lord           v1.0.0               修改原因
 	  */
-	 RoomInfo findObjectById(Integer id);
+	 SysRoomInfoViewResult findObjectById(Integer id);
 }

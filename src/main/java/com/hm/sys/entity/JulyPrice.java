@@ -32,4 +32,10 @@ public class JulyPrice {
     public void setPriceStd(Integer priceStd) {
         this.priceStd = priceStd;
     }
+
+	@Override
+	public String toString() {
+		return "JulyPrice [id=" + id + ", day=" + day + ", priceStd=" + priceStd + "]";
+	}
+    
 }

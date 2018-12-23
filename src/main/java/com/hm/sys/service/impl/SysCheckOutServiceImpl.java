@@ -8,28 +8,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.github.pagehelper.StringUtil;
+
 import com.hm.common.exception.ServiceException;
 import com.hm.common.utils.DictionarySetData;
+import com.hm.common.utils.IntegerUtil;
 import com.hm.common.utils.ObjectUtil;
 import com.hm.common.vo.CheckOutVoDetails;
 import com.hm.sys.dao.JulyPriceMapper;
+import com.hm.sys.dao.OrderInfoMapper;
 import com.hm.sys.entity.CheckInfo;
 import com.hm.sys.entity.CustomerInfo;
+import com.hm.sys.entity.JulyPrice;
+import com.hm.sys.entity.JulyPriceExample;
 import com.hm.sys.entity.OrderInfo;
 import com.hm.sys.entity.RoomInfo;
 import com.hm.sys.entity.StayInfo;
 import com.hm.sys.service.SysCheckOutService;
 import com.hm.sys.service.SysCustomerService;
 import com.hm.sys.service.SysOrderService;
-import com.hm.sys.service.SysRoomInfoService;
-import com.hm.sys.service.SysStayInfoService;
-import com.mysql.fabric.xmlrpc.base.Data;
 
-import sun.print.resources.serviceui;
+import com.hm.sys.service.SysStayInfoService;
 
 @Service
 public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySetData {
@@ -41,6 +41,10 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 	private SysStayInfoService sysStayInfoService;
 	@Autowired
 	private SysOrderService sysOrderService;
+	@Autowired
+	private OrderInfoMapper orderInfoMapper;
+	@Autowired
+	private JulyPriceMapper julyPriceMapper;
 
 	@Override
 	public CheckOutVoDetails checkOutDepencyCustomerInfo(CheckOutVoDetails checkOutVoDetail) {
@@ -101,12 +105,12 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 				thisTimeStayInfo = stayInfo;
 			}
 		}
-		OrderInfo orderInfo = stayAndOrderInfoMap.get(thisTimeStayInfo.getId());
+		OrderInfo thisTimeOrderInfo = stayAndOrderInfoMap.get(thisTimeStayInfo.getId());
 
 //	  2.根据折扣比率计算每日房价
-		Map<Date, Double> dailyRateMap = getDailyRate(orderInfo);
-
+		Double aveDailyRate = getDailyRate(thisTimeOrderInfo);
 //	  3.根据orderInfo,stayInfo计算lateArrivalDay,stayDay,earlyLeaveDay
+		Double[] stayDaysInfo = getStayDaysInfo(thisTimeOrderInfo, thisTimeStayInfo);
 //	  4.根据lateArrivalDay,stayDay,earlyLeaveDay分别计算lateArrivalNeedPay,stayDayNeedPay,earlyLeaveNeedPay
 //	  5.根据lateArrivalNeedPay,stayDayNeedPay,earlyLeaveNeedPay计算dueMoney
 //	  6.根据dueMoney-(orderMoney+cashPledge)计算paidUpMoney
@@ -118,20 +122,79 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 		return null;
 	}
 
-	private Map<Date, Double> getDailyRate(OrderInfo orderInfo) {
-		// 订单进店时间
-		Date checkinDate = orderInfo.getCheckinDate();
-		// 订单离店时间
-		Date checkoutDate = orderInfo.getCheckoutDate();
-		List<Date> daysList = getDays(checkinDate, checkoutDate);
-
+	private Double[] getStayDaysInfo(OrderInfo thisTimeOrderInfo, StayInfo thisTimeStayInfo) {
+		Date checkinDate = thisTimeOrderInfo.getCheckinDate();
+		Date checkoutDate = thisTimeOrderInfo.getCheckoutDate();
+		Date stayDate = thisTimeStayInfo.getStayDate();
+		Date leaveDate = thisTimeStayInfo.getLeaveDate();
 		return null;
 	}
 
 	/**
 	 * 
 	 * @Function: SysCheckOutServiceImpl.java
-	 * @Description: 遍历获得两个Date之间的所有日期
+	 * @Description: 通过orderInfo计算每日平均房价 可通过AOP实现打折计算
+	 *
+	 * @param orderInfo
+	 * @return
+	 * @throws：异常描述
+	 *
+	 * @version: v1.0.0
+	 * @author: 李志学
+	 * @date: 2018年12月23日 上午10:39:34
+	 *
+	 *        Modification History: Date Author Version Description
+	 *        ---------------------------------------------------------* 2018年12月23日
+	 *        李志学 v1.0.0 修改原因
+	 */
+	private Double getDailyRate(OrderInfo orderInfo) {
+		// 订单进店时间
+		Date checkinDate = orderInfo.getCheckinDate();
+		// 订单离店时间
+		Date checkoutDate = orderInfo.getCheckoutDate();
+		List<JulyPrice> julyPriceList = getDays(checkinDate, checkoutDate);
+		Double dailyRate = getAvePrice(julyPriceList);
+		return dailyRate;
+	}
+
+	/**
+	 * 
+	 * @Function: SysCheckOutServiceImpl.java
+	 * @Description: 计算每日平均房价 可通过AOP实现根据orderInfo的客户类型进行打折计算
+	 *
+	 * @param julyPriceList
+	 * @return
+	 * @throws：异常描述
+	 *
+	 * @version: v1.0.0
+	 * @author: 李志学
+	 * @date: 2018年12月23日 上午10:41:23
+	 *
+	 *        Modification History: Date Author Version Description
+	 *        ---------------------------------------------------------* 2018年12月23日
+	 *        李志学 v1.0.0 修改原因
+	 */
+	private Double getAvePrice(List<JulyPrice> julyPriceList) {
+		int sum = 0;
+		for (JulyPrice julyPrice : julyPriceList) {
+			Integer priceStd = julyPrice.getPriceStd();
+			if (IntegerUtil.isIllegality(priceStd)) {
+				throw new ServiceException("日期基准价异常,日期Id:" + julyPrice.getId());
+			}
+			sum = sum + priceStd;
+		}
+		int length = julyPriceList.size();
+		if (length <= 0) {
+			throw new ServiceException("julyPriceList长度异常");
+		}
+		Double avePrice = ((double) sum) / length;
+		return avePrice;
+	}
+
+	/**
+	 * 
+	 * @Function: SysCheckOutServiceImpl.java
+	 * @Description: 遍历获得两个Date之间的所有julyPrice Entity
 	 *
 	 * @param checkinDate
 	 * @param checkoutDate
@@ -146,16 +209,16 @@ public class SysCheckOutServiceImpl implements SysCheckOutService, DictionarySet
 	 *        ---------------------------------------------------------* 2018年12月22日
 	 *        李志学 v1.0.0 修改原因
 	 */
-	private List<Date> getDays(Date checkinDate, Date checkoutDate) {
+	private List<JulyPrice> getDays(Date checkinDate, Date checkoutDate) {
 		ArrayList<Date> daysList = new ArrayList<>();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-		String format = simpleDateFormat.format(checkinDate);
-		System.out.println(format);
-		
-		
-		
-		
-		return null;
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(checkoutDate);
+		calendar.add(Calendar.DATE, -1);
+		checkoutDate = calendar.getTime();
+		JulyPriceExample julyPriceExample = new JulyPriceExample();
+		julyPriceExample.or().andDayBetween(checkinDate, checkoutDate);
+		List<JulyPrice> julyPrice = julyPriceMapper.selectByExample(julyPriceExample);
+		return julyPrice;
 	}
 
 	@Override

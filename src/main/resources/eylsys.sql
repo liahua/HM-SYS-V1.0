@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2018-12-22 16:04:44
+Date: 2018-12-23 11:04:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -107,6 +107,7 @@ CREATE TABLE `customer_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_name` varchar(20) DEFAULT NULL,
   `gender` char(2) DEFAULT NULL,
+  `vip_level` int(10) DEFAULT NULL COMMENT 'null表示不是vip,4,5,6,7为等级',
   `country` varchar(50) DEFAULT NULL,
   `telephone` varchar(20) DEFAULT NULL,
   `card_type_id` int(20) DEFAULT NULL,
@@ -120,9 +121,9 @@ CREATE TABLE `customer_info` (
 -- ----------------------------
 -- Records of customer_info
 -- ----------------------------
-INSERT INTO `customer_info` VALUES ('1', '李菲菲', '女', '中国', '13036985274', '1', '4566887992545', '54654', '2018-12-27 09:02:38', '2018-12-20 09:02:42');
-INSERT INTO `customer_info` VALUES ('2', '刘帅帅', '男', '越南', '17025689345', '2', '54661646456', '465464', '2018-12-26 09:02:46', '2018-12-20 09:02:50');
-INSERT INTO `customer_info` VALUES ('3', '刘帅帅', null, null, '17025689345', null, null, null, null, null);
+INSERT INTO `customer_info` VALUES ('1', '李菲菲', '女', '2', '中国', '13036985274', '1', '4566887992545', '54654', '2018-12-27 09:02:38', '2018-12-20 09:02:42');
+INSERT INTO `customer_info` VALUES ('2', '刘帅帅', '男', null, '越南', '17025689345', '2', '54661646456', '465464', '2018-12-26 09:02:46', '2018-12-20 09:02:50');
+INSERT INTO `customer_info` VALUES ('3', '刘帅帅', null, null, null, '17025657899', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for customer_type
@@ -131,31 +132,72 @@ DROP TABLE IF EXISTS `customer_type`;
 CREATE TABLE `customer_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_type` varchar(20) DEFAULT NULL COMMENT '顾客类型',
-  `discount_per` float DEFAULT NULL COMMENT '打折比例',
+  `discount_per` double DEFAULT NULL COMMENT '打折比例',
+  `late_arrive_per` double DEFAULT NULL COMMENT '晚到收费比例',
+  `early_leave_per` double DEFAULT NULL COMMENT '提前离开收费比例',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of customer_type
 -- ----------------------------
-INSERT INTO `customer_type` VALUES ('1', '散户', '1');
-INSERT INTO `customer_type` VALUES ('2', '组团', '0.9');
-INSERT INTO `customer_type` VALUES ('3', '政府', '0.8');
+INSERT INTO `customer_type` VALUES ('1', '散户', '1', '1', '1');
+INSERT INTO `customer_type` VALUES ('2', '组团', '0.9', '1', '1');
+INSERT INTO `customer_type` VALUES ('3', '政府', '0.8', '0.9', '0.8');
+INSERT INTO `customer_type` VALUES ('4', 'VIP1', '0.85', '0.8', '0.8');
+INSERT INTO `customer_type` VALUES ('5', 'VIP2', '0.8', '0.7', '0.6');
+INSERT INTO `customer_type` VALUES ('6', 'VIP3', '0.75', '0.7', '0.5');
+INSERT INTO `customer_type` VALUES ('7', 'VIP4', '0.7', '0.6', '0.4');
 
 -- ----------------------------
 -- Table structure for july_price
 -- ----------------------------
 DROP TABLE IF EXISTS `july_price`;
 CREATE TABLE `july_price` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `day` datetime DEFAULT NULL COMMENT '当天日期',
   `price_std` int(11) DEFAULT NULL COMMENT '每日基准价格',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of july_price
 -- ----------------------------
+INSERT INTO `july_price` VALUES ('1', '2018-12-02 12:00:00', '200');
+INSERT INTO `july_price` VALUES ('2', '2018-12-03 12:00:00', '201');
+INSERT INTO `july_price` VALUES ('3', '2018-12-04 12:00:00', '202');
+INSERT INTO `july_price` VALUES ('4', '2018-12-05 12:00:00', '204');
+INSERT INTO `july_price` VALUES ('5', '2018-12-06 12:00:00', '210');
+INSERT INTO `july_price` VALUES ('6', '2018-12-07 12:00:00', '205');
+INSERT INTO `july_price` VALUES ('7', '2018-12-08 12:00:00', '220');
+INSERT INTO `july_price` VALUES ('8', '2018-12-09 12:00:00', '270');
+INSERT INTO `july_price` VALUES ('9', '2018-12-10 12:00:00', '230');
+INSERT INTO `july_price` VALUES ('10', '2018-12-11 12:00:00', '250');
+INSERT INTO `july_price` VALUES ('11', '2018-12-12 12:00:00', '215');
+INSERT INTO `july_price` VALUES ('12', '2018-12-13 12:00:00', '221');
+INSERT INTO `july_price` VALUES ('13', '2018-12-14 12:00:00', '223');
+INSERT INTO `july_price` VALUES ('14', '2018-12-15 12:00:00', '225');
+INSERT INTO `july_price` VALUES ('15', '2018-12-16 12:00:00', '276');
+INSERT INTO `july_price` VALUES ('16', '2018-12-17 12:00:00', '277');
+INSERT INTO `july_price` VALUES ('17', '2018-12-18 12:00:00', '256');
+INSERT INTO `july_price` VALUES ('18', '2018-12-19 12:00:00', '248');
+INSERT INTO `july_price` VALUES ('19', '2018-12-20 12:00:00', '498');
+INSERT INTO `july_price` VALUES ('20', '2018-12-21 12:00:00', '487');
+INSERT INTO `july_price` VALUES ('21', '2018-12-22 12:00:00', '126');
+INSERT INTO `july_price` VALUES ('22', '2018-12-23 12:00:00', '489');
+INSERT INTO `july_price` VALUES ('23', '2018-12-24 12:00:00', '551');
+INSERT INTO `july_price` VALUES ('24', '2018-12-25 12:00:00', '125');
+INSERT INTO `july_price` VALUES ('25', '2018-12-26 12:00:00', '260');
+INSERT INTO `july_price` VALUES ('26', '2018-12-27 12:00:00', '270');
+INSERT INTO `july_price` VALUES ('27', '2018-12-28 12:00:00', '280');
+INSERT INTO `july_price` VALUES ('28', '2018-12-29 12:00:00', '290');
+INSERT INTO `july_price` VALUES ('29', '2018-12-30 12:00:00', '310');
+INSERT INTO `july_price` VALUES ('30', '2018-12-31 12:00:00', '321');
+INSERT INTO `july_price` VALUES ('31', '2019-01-01 12:00:00', '322');
+INSERT INTO `july_price` VALUES ('32', '2019-01-02 12:00:00', '235');
+INSERT INTO `july_price` VALUES ('33', '2019-01-03 12:00:00', '445');
+INSERT INTO `july_price` VALUES ('34', '2019-01-04 12:00:00', '440');
+INSERT INTO `july_price` VALUES ('35', '2019-01-04 12:00:00', '450');
 
 -- ----------------------------
 -- Table structure for order_info
@@ -179,11 +221,11 @@ CREATE TABLE `order_info` (
 -- ----------------------------
 -- Records of order_info
 -- ----------------------------
-INSERT INTO `order_info` VALUES ('1', '1', '2', '2018-12-25 08:55:16', '2018-12-28 08:55:45', '1', '1', '200', 'zha', '2018-12-28 08:57:50', '2018-12-29 08:57:54');
-INSERT INTO `order_info` VALUES ('2', '2', '1', '2018-12-04 08:55:30', '2018-12-15 08:55:56', '1', '1', '200', '的好方法', '2018-12-20 08:57:58', '2018-12-27 08:58:01');
-INSERT INTO `order_info` VALUES ('3', '2', '1', '2018-12-21 09:40:59', '2018-12-22 09:41:04', '1', '0', null, null, null, null);
-INSERT INTO `order_info` VALUES ('4', '1', '1', '2018-12-21 09:54:26', '2018-12-22 09:54:28', '1', '1', '200', null, null, null);
-INSERT INTO `order_info` VALUES ('5', '2', '1', '2018-12-26 13:53:31', '2018-12-27 13:53:36', null, '0', '200', null, null, null);
+INSERT INTO `order_info` VALUES ('1', '1', '2', '2018-12-25 12:00:00', '2018-12-28 12:00:00', '1', '1', '200', 'zha', '2018-12-28 08:57:50', '2018-12-29 08:57:54');
+INSERT INTO `order_info` VALUES ('2', '2', '1', '2018-12-04 12:00:00', '2018-12-15 12:00:00', '1', '1', '200', '的好方法', '2018-12-20 08:57:58', '2018-12-27 08:58:01');
+INSERT INTO `order_info` VALUES ('3', '2', '1', '2018-12-21 12:00:00', '2018-12-22 12:00:00', '1', '0', null, null, null, null);
+INSERT INTO `order_info` VALUES ('4', '1', '1', '2018-12-21 12:00:00', '2019-01-03 12:00:00', '1', '1', '200', null, null, null);
+INSERT INTO `order_info` VALUES ('5', '2', '1', '2018-12-26 12:00:00', '2018-12-27 12:00:00', null, '0', '200', null, null, null);
 
 -- ----------------------------
 -- Table structure for order_stat
@@ -290,7 +332,7 @@ INSERT INTO `stay_info` VALUES ('1', '1', '1', '2', '2018-12-26 08:55:01', null,
 INSERT INTO `stay_info` VALUES ('2', '2', '2', '1', '2018-12-04 08:55:30', null, null, null, '2018-12-15 08:55:56', '0', null, null, null);
 INSERT INTO `stay_info` VALUES ('3', '3', '2', '1', '2018-12-21 09:40:59', null, null, null, '2018-12-22 09:41:04', '0', null, null, null);
 INSERT INTO `stay_info` VALUES ('4', '4', '1', '1', '2018-12-21 10:12:24', null, null, null, '2018-12-26 10:12:26', '0', null, null, null);
-INSERT INTO `stay_info` VALUES ('5', '5', '2', '1', '2018-12-20 10:13:19', null, null, null, '2018-12-25 10:13:21', '0', null, null, null);
+INSERT INTO `stay_info` VALUES ('5', '5', '2', '1', '2018-12-20 10:13:19', null, null, null, null, '0', null, null, null);
 INSERT INTO `stay_info` VALUES ('6', '6', '2', '2', '2018-12-22 10:13:53', null, null, null, '2018-12-25 10:13:56', '0', null, null, null);
 
 -- ----------------------------
@@ -658,19 +700,3 @@ CREATE TABLE `sys_user_roles` (
 INSERT INTO `sys_user_roles` VALUES ('1', '19', '46');
 INSERT INTO `sys_user_roles` VALUES ('2', '1', '47');
 INSERT INTO `sys_user_roles` VALUES ('3', '3', '46');
-
--- ----------------------------
--- Table structure for vip_info
--- ----------------------------
-DROP TABLE IF EXISTS `vip_info`;
-CREATE TABLE `vip_info` (
-  `id` int(11) NOT NULL,
-  `vip_name` varchar(20) DEFAULT NULL,
-  `vip_tel` int(50) DEFAULT NULL,
-  `gender` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of vip_info
--- ----------------------------

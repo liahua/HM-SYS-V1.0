@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hm.common.vo.JsonResult;
 import com.hm.common.vo.PageObject;
-import com.hm.sys.entity.RoomInfo;
+import com.hm.common.vo.SysRoomInfoViewResult;
 import com.hm.sys.entity.RoomInfoExample;
 import com.hm.sys.service.SysRoomInfoViewService;
 /**
@@ -76,7 +76,7 @@ public class SysRoomInfoViewController {
 	public JsonResult doFindPageObjectsInfo(   
 			String roomName,
 			Integer pageCurrent){
-		PageObject<RoomInfo> pageObject=
+		PageObject<SysRoomInfoViewResult> pageObject=
 				sysRoomInfoViewService.findPageObjects(roomName,
 						pageCurrent);
 		return new JsonResult(pageObject);		  

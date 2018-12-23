@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.hm.common.vo.PageObject;
-import com.hm.sys.entity.RoomInfo;
+import com.hm.common.vo.SysRoomInfoViewResult;
 import com.hm.sys.entity.RoomInfoExample;
 /**
  * 
@@ -17,7 +17,7 @@ public interface SysRoomInfoViewService {
 	 * @param room 房间信息
 	 * @return
 	 */
-	List<RoomInfo> findObjectsInfo(RoomInfoExample room);
+	List<SysRoomInfoViewResult> findObjectsInfo(RoomInfoExample room);
     /**
      * 通过此方法执行日志分页查询
      * 1)获取总记录数
@@ -28,7 +28,7 @@ public interface SysRoomInfoViewService {
      * @param pageCurrent 分页条件(当前页的页码值)
      * @return
      */
-	 PageObject<RoomInfo> findPageObjects(
+	 PageObject<SysRoomInfoViewResult> findPageObjects(
 			 String roomName,
 			 Integer pageCurrent);
 	 /**

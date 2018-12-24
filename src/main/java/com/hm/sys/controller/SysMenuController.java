@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hm.common.vo.JsonResult;
 import com.hm.sys.entity.SysMenus;
-import com.hm.sys.entity.SysMenusExample;
 import com.hm.sys.service.SysMenuService;
 
 

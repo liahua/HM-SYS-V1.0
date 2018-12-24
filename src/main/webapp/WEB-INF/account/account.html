@@ -8,15 +8,11 @@
 					<div class="input-group input-group-sm"
 						style="width: 200px; float: right;">
 						<div>
-							<input size="16" type="text" name="table_search" id="searchStart"
-								class="form-control pull-right" placeholder="
-							开始时间">
+							起始日期：<input size="16" type="button" id="searchStart" style="width: 200px;"/>
 						</div>
 
 						<div>
-							<input size="16" type="text" name="table_search" id="searchEnd"
-								class="form-control pull-right" placeholder="
-							结束时间">
+							结束日期：<input size="16" type="button" id="searchEnd" style="width: 200px;"/>
 						</div>
 
 						<div class="input-group-btn">
@@ -90,9 +86,9 @@
 	<script type="text/javascript">
 		$(function() {
 			doInitDate();
-			
+
 			doGetObjects();
-			
+
 			$("#btn-search").on("click", doQueryObjects)
 			$("#pageId").on("click", ".first,.pre,.next,.last", doJumpToPage)
 					.on("click", ".btn-add", doLoadEditUI)
@@ -106,7 +102,7 @@
 				format : 'yyyy-mm-dd',
 				minView : 'month',
 				language : 'zh-CN',
-				autoclose : true,
+				autoclose : true
 			}).on(
 					"click",
 					function() {
@@ -117,12 +113,12 @@
 				format : 'yyyy-mm-dd',
 				minView : 'month',
 				language : 'zh-CN',
-				autoclose : true,
+				autoclose : true
 			}).on(
 					"click",
 					function() {
-						$("#searchEnd").datetimepicker("setStartDate",
-								$("#searchStart").val())
+						$("#datetimeEnd").datetimepicker("setStartDate",
+								$("#datetimeStart").val())
 					});
 		}
 		function doLoadEditUI() {
@@ -189,15 +185,17 @@
 			//获取查询时用户输入的名字
 			var params = {};
 			var start = $("#searchStart").val();
-			if (start)
+			if (!start) {
+				params.start = getNowFormatDate(7);
+			} else {
 				params.start = start;
-			if(!start)
-				params.start = getNowFormatDate(8);
+			}
 			var end = $("#searchEnd").val();
-			if (end)
-				params.end = end;
-			if(!end)
+			if (!end) {
 				params.end = getNowFormatDate(1);
+			} else {
+				params.end = end;
+			}
 			//2.url
 			var url = "account/doFindAccounts.do";
 			//3.ajax request
@@ -256,7 +254,7 @@
 			var tBody = $("#tbodyId");
 			tBody.empty();
 			var pageCurrent = $("#pageId").data("pageCurrent");
-			if(!pageCurrent)
+			if (!pageCurrent)
 				pageCurrent = 1;
 			var key = 0;
 			//2.迭代数据,并追加到tBody
@@ -353,19 +351,18 @@
 			return escapseResult;
 		}
 		function getNowFormatDate(num) {
-            var date = new Date();
-            var seperator1 = "-";
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            var strDate = date.getDate()-num;
-            if (month >= 1 && month <= 9) {
-                month = "0" + month;
-            }
-            if (strDate >= 0 && strDate <= 9) {
-                strDate = "0" + strDate;
-            }
-            var currentdate = year + seperator1 + month + seperator1 + strDate;
-            console.log(currentdate);
-            return currentdate;
-        }
+			var date = new Date();
+			var seperator1 = "-";
+			var year = date.getFullYear();
+			var month = date.getMonth() + 1;
+			var strDate = date.getDate() - num;
+			if (month >= 1 && month <= 9) {
+				month = "0" + month;
+			}
+			if (strDate >= 0 && strDate <= 9) {
+				strDate = "0" + strDate;
+			}
+			var currentdate = year + seperator1 + month + seperator1 + strDate;
+			return currentdate;
+		}
 	</script>

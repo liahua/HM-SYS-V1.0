@@ -23,7 +23,7 @@ public class SysMenuController {
 		return "menu/menu";
 	}
 	
-	@RequestMapping()
+	@RequestMapping("doMenuAddUI")
 	public String doMenuAddUI() {
 		return "menu/menu_add";
 	}

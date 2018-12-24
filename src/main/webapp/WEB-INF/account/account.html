@@ -6,13 +6,13 @@
 
 				<div class="box-tools">
 					<div class="input-group input-group-sm"
-						style="width: 200px; float: right;">
+						style="width: 350px; float: right;">
 						<div>
-							起始日期：<input size="16" type="button" id="searchStart" style="width: 200px;"/>
+							起始日期：<input size="16" type="button" class="btn btn-default btn-search" id="searchStart" style="width: 200px;"/>
 						</div>
 
 						<div>
-							结束日期：<input size="16" type="button" id="searchEnd" style="width: 200px;"/>
+							结束日期：<input size="16" type="button" class="btn btn-default btn-search" id="searchEnd" style="width: 200px;"/>
 						</div>
 
 						<div class="input-group-btn">
@@ -117,8 +117,8 @@
 			}).on(
 					"click",
 					function() {
-						$("#datetimeEnd").datetimepicker("setStartDate",
-								$("#datetimeStart").val())
+						$("#searchEnd").datetimepicker("setStartDate",
+								$("#searchStart").val())
 					});
 		}
 		function doLoadEditUI() {
